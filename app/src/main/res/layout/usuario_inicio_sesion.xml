@@ -29,42 +29,61 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
+            android:elevation="10dp"
             android:layout_marginTop="25dp"
             android:background="@drawable/cuadro_blancoredondo"
             android:orientation="vertical">
 
-            <EditText
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="3dp"
+                android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+
                 android:id="@+id/edtCorreo"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
+                android:layout_marginBottom="5dp"
                 android:textColorHint="@android:color/darker_gray"
                 android:ems="10"
+                android:layout_marginEnd="3dp"
                 android:hint="Email"
                 android:inputType="textEmailAddress" />
 
+            </android.support.design.widget.TextInputLayout>
+
             <View
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"/>
 
-            <EditText
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="3dp"
+                android:layout_height="wrap_content">
+
+
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/editContrasena"
                 android:hint="Contraseña"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="3dp"
                 android:textColorHint="@android:color/darker_gray"
                 android:textColor="@android:color/black"
                 android:layout_width="match_parent"
+                android:layout_marginBottom="5dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPassword" />
+
+            </android.support.design.widget.TextInputLayout>
 
 
         </LinearLayout>

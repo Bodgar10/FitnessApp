@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -40,7 +41,7 @@ public class IniciarSesion extends AppCompatActivity {
 
     String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
-    EditText edtCorreo,edtContrasena;
+    TextInputEditText edtCorreo,edtContrasena;
     LinearLayout btnIniciarSesion,btnRegistrar;
 
 

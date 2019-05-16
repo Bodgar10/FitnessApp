@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/imgPostPersona"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="5dp"
+            android:src="@mipmap/ic_launcher"
+            app:civ_border_color="#EEEEEE"
+            app:civ_border_width="1dp" />
+
+        <TextView
+            android:id="@+id/txtNombrePost"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Nombre Persona"
+            android:layout_marginStart="5dp"
+            android:textAlignment="textStart"
+            android:textSize="13sp"
+            android:textColor="@color/negro"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/txtTiempoPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hace 23 horas"
+            android:layout_marginEnd="5dp"
+            android:textSize="12sp"
+            android:textAlignment="textEnd" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="7dp"
+        android:background="@drawable/cuadro_blancoredondo"
+        android:elevation="10dp"
+        android:orientation="vertical">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imagPostU"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+            <Button
+                android:id="@+id/btnPostTipo"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="128dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/boton_negro_redondo"
+                android:gravity="center"
+                android:text="PDF"
+                android:textAllCaps="true"
+                android:textColor="@color/blanco"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTipoPostPrecio"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:padding="3dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="2dp"
+                android:text="Gratis"
+                android:textAlignment="center"
+                android:background="@drawable/boton_blanco_item"
+                android:textSize="12sp"
+                android:textColor="@color/blanco"
+                app:layout_constraintBottom_toBottomOf="@+id/imagPostU"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/imagPostU"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.975" />
+
+            <TextView
+                android:id="@+id/txtDescripcionPost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="8dp"
+                android:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis venenatis velit et metus."
+                android:textAlignment="textStart"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnPostTipo" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/txtTituloPostDe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:textColor="@color/negro"
+            android:textStyle="bold"
+            android:text="Titulo"
+            android:textAlignment="textStart"
+            android:textSize="15sp" />
+
+
+
+        <TextView
+            android:id="@+id/txtDescripcionPostDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/negro"
+            android:text="Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis venenatis velit et metus. Duis lacinia leo in velit. Sed tristique. Sed id turpis malesuada nulla bibendum iaculis. In nec velit. Fusce augue diam, sollicitudin eu, porttitor vel, euismod vel, nisl. Aenean venenatis quam eu massa. Pellentesque non lorem non tortor placerat vulputate. Maecenas eleifend nibh ut lectus. Morbi eget eros. Sed luctus porta justo. Fusce eget est eu elit suscipit cursus. Duis a arcu et diam suscipit facilisis. Pellentesque lobortis libero et metus consectetuer adipiscing elit. Duis venenatis velit et metus."
+            android:textAlignment="textStart"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+
+    </ScrollView>
+
+
+
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/linearCancelarPost"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:background="@android:color/white"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:textColor="@android:color/black"
+                android:text="Cancelar"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearComprarPost"
+            android:gravity="center"
+            android:background="@android:color/black"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comprar"
+                android:textColor="@color/blanco"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:textAllCaps="true"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>
