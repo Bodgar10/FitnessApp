@@ -27,9 +27,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".Login.IniciarSesion"/>
-        <activity android:name=".Login.Registro" />
+        <activity android:name=".Login.Registro"
+            android:parentActivityName=".Login.IniciarSesion" />
         <activity android:name=".Usuario.MenuUsuario" />
         <activity android:name=".viewPdf"></activity>
+        <activity android:name=".video"></activity>
+        <activity android:name=".Usuario.DetallePost"></activity>
     </application>
 
 </manifest>

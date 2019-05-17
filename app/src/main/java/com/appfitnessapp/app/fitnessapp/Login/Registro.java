@@ -89,6 +89,7 @@ public class Registro extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Registro.this, IniciarSesion.class);
                 startActivity(intent);
+                finish();
             }
         });
 

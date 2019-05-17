@@ -17,7 +17,7 @@ public class MenuUsuario extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.usuario_detalle_item);
+        setContentView(R.layout.usuario_diseno_items_principal);
 
 
     }

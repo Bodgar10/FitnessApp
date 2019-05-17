@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.video;
 
 public class SplashPantalla extends AppCompatActivity {
 
@@ -45,6 +46,7 @@ public class SplashPantalla extends AppCompatActivity {
         btnOmitir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
             }
         });
