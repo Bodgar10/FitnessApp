@@ -10,7 +10,7 @@ import com.appfitnessapp.app.fitnessapp.R;
 
 public class UsuarioChat  extends AppCompatActivity {
 
-    ImageButton imgHome,imgPlan,imgPerfil,imgChat;
+    ImageButton imgHome,imgPlan,imgPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

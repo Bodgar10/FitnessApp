@@ -66,7 +66,7 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
     @Override
     public AdapterFeed.FeedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.usuario_02_diseno,null,false);
+        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.usuario_14_diseno,null,false);
         v.setOnClickListener(this);
 
         AdapterFeed.FeedViewHolder holder=new AdapterFeed.FeedViewHolder(v);

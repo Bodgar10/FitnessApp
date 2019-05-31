@@ -30,7 +30,7 @@ public class Video extends AppCompatActivity {
 
 
 
-        setContentView(R.layout.usuario_02_feed_video);
+        setContentView(R.layout.usuario_14_feed_video);
         this.setRequestedOrientation(
                 ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 

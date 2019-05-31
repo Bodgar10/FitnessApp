@@ -15,7 +15,6 @@ import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
-import com.appfitnessapp.app.fitnessapp.Usuario.MenuUsuario;
 import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.Objects;
+
 
 public class Registro extends AppCompatActivity {
 

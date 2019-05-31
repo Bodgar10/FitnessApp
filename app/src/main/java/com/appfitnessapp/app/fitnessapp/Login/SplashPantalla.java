@@ -15,6 +15,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.DetallePdf;
+import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.HomeSinRegistro;
 import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -84,7 +85,7 @@ public class SplashPantalla extends AppCompatActivity {
         btnOmitir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SplashPantalla.this, UsuarioHome.class);
+                Intent intent = new Intent(SplashPantalla.this, HomeSinRegistro.class);
                 startActivity(intent);
 
 

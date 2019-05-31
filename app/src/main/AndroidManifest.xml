@@ -42,7 +42,8 @@
         <activity android:name=".Usuario.MetodoPago"></activity>
         <activity android:name=".Usuario.DatosUsuario"></activity>
         <activity android:name=".Usuario.Tarjeta"></activity>
-
+        <activity android:name=".Usuario.FeedSinRegistro.HomeSinRegistro"></activity>
+        <activity android:name=".Usuario.Asesoria"></activity>
 
 
 

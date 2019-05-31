@@ -24,7 +24,7 @@ public class DetallePdf extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.usuario_02_feed_pdf_detalle);
+        setContentView(R.layout.usuario_14_feed_pdf_detalle);
 
 
         btnComprar=findViewById(R.id.linearComprarPDF);

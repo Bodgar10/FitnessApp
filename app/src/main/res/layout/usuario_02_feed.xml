@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -10,18 +10,30 @@
         layout="@layout/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="49dp"
-        >
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="49dp">
 
     </include>
 
 
+
+
     <LinearLayout
-        android:layout_gravity="bottom"
-        android:gravity="bottom"
-        android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="@android:color/white"
+        android:gravity="bottom"
         android:orientation="vertical">
 
         <View
@@ -41,11 +53,11 @@
                 android:id="@+id/btnHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/home_background_oval"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
-                android:layout_weight="1.5"
-                android:background="@drawable/home_background_oval"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -86,15 +98,13 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/imgPlan"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginBottom="3dp"
                     android:background="@null"
                     android:scaleType="centerCrop"
-                    android:tint="@android:color/darker_gray"
-                    app:srcCompat="@drawable/ic_restaurant" />
+                    android:tint="@android:color/darker_gray" />
 
                 <TextView
                     android:id="@+id/txtPlan"
@@ -117,20 +127,18 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="3dp"
                 android:layout_marginBottom="4dp"
-                android:layout_weight="1.5"
+                android:layout_weight=".5"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/imgPerfil"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginBottom="3dp"
                     android:background="@null"
                     android:scaleType="centerCrop"
-                    android:tint="@android:color/darker_gray"
-                    app:srcCompat="@drawable/ic_person" />
+                    android:tint="@android:color/darker_gray" />
 
                 <TextView
                     android:id="@+id/txtPerfil"
@@ -145,19 +153,18 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/btnChat"
+                android:id="@+id/imgPerfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="3dp"
                 android:layout_marginBottom="4dp"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/imgChat"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="3dp"
@@ -165,7 +172,7 @@
                     android:background="@null"
                     android:scaleType="centerCrop"
                     android:tint="@android:color/darker_gray"
-                    app:srcCompat="@drawable/ic_search" />
+                    app:srcCompat="@drawable/ic_person" />
 
                 <TextView
                     android:id="@+id/txtChat"
@@ -185,7 +192,48 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="136dp"
+        android:layout_marginEnd="136dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:id="@+id/btnAsesoria"
+            android:layout_width="90dp"
+            android:layout_height="55dp"
+            android:background="@drawable/boton_gris_redondo"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="3dp"
+                android:background="@null"
+                android:scaleType="centerCrop"
+                android:tint="@android:color/white"
+                app:srcCompat="@drawable/ic_home" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Asesoria"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
 
+    </LinearLayout>
 
-</FrameLayout>
+
+</RelativeLayout>

@@ -13,7 +13,7 @@ public class Imagen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.usuario_02_feed_imagen);
+        setContentView(R.layout.usuario_14_feed_imagen);
 
         imgImagen=findViewById(R.id.imgImagen);
 

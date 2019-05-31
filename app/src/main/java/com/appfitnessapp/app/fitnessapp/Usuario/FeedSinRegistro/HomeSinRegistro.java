@@ -1,4 +1,4 @@
-package com.appfitnessapp.app.fitnessapp.Usuario;
+package com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,24 +9,31 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterFeed;
 import com.appfitnessapp.app.fitnessapp.Arrays.Feed;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
-import com.appfitnessapp.app.fitnessapp.Login.Registro;
-import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.Usuario.DetallePdf;
+import com.appfitnessapp.app.fitnessapp.Usuario.Imagen;
+import com.appfitnessapp.app.fitnessapp.Usuario.PantallaPDF;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioChat;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioPerfil;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioPlan;
+import com.appfitnessapp.app.fitnessapp.Usuario.Video;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class UsuarioHome  extends AppCompatActivity {
+public class HomeSinRegistro  extends AppCompatActivity  {
 
-    ImageButton imgPlan,imgPerfil,imgChat;
+    LinearLayout imgAsesoria,imgPerfil ;
 
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
@@ -41,41 +48,31 @@ public class UsuarioHome  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.usuario_14_feed);
+        setContentView(R.layout.usuario_02_feed);
 
         dbProvider = new DBProvider();
         bajarInfo = new BajarInfo();
 
-        imgPlan=findViewById(R.id.imgPlan);
+        imgAsesoria=findViewById(R.id.btnAsesoria);
         imgPerfil=findViewById(R.id.imgPerfil);
-        imgChat=findViewById(R.id.imgChat);
 
-        imgPlan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Intent intent = new Intent(UsuarioHome.this, UsuarioPlan.class);
-                startActivity(intent);
-
-            }
-        });
 
         imgPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UsuarioHome.this, UsuarioPerfil.class);
+                Intent intent = new Intent(HomeSinRegistro.this, UsuarioPerfil.class);
                 startActivity(intent);
             }
         });
 
-        imgChat.setOnClickListener(new View.OnClickListener() {
+        imgAsesoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UsuarioHome.this, UsuarioChat.class);
-                startActivity(intent);
 
             }
         });
+
 
 
         recyclerView=findViewById(R.id.recyclerview);
@@ -136,18 +133,18 @@ public class UsuarioHome  extends AppCompatActivity {
                         Feed feed = snapshot.getValue(Feed.class);
 
                         if (feed.getTipo_feed().equals(Contants.VIDEO)) {
-                            Intent intent = new Intent(UsuarioHome.this, Video.class);
+                            Intent intent = new Intent(HomeSinRegistro.this, Video.class);
                             startActivity(intent);
 
                         } else if (feed.getTipo_feed().equals(Contants.IMAGEN)) {
-                            Intent intent = new Intent(UsuarioHome.this, Imagen.class);
+                            Intent intent = new Intent(HomeSinRegistro.this, Imagen.class);
                             startActivity(intent);
                         } else if (!feed.is_grati) {
-                            Intent intent = new Intent(UsuarioHome.this, DetallePdf.class);
+                            Intent intent = new Intent(HomeSinRegistro.this, DetallePdf.class);
                             startActivity(intent);
 
                             if (feed.is_grati) {
-                                Intent intent1 = new Intent(UsuarioHome.this, PantallaPDF.class);
+                                Intent intent1 = new Intent(HomeSinRegistro.this, PantallaPDF.class);
                                 intent1.putExtra("ViewType","internet");
                                 startActivity(intent1);
 
@@ -160,8 +157,8 @@ public class UsuarioHome  extends AppCompatActivity {
                 }
 
                 else{
-                        Log.e(TAG, "Usuarios 3: ");
-                    }
+                    Log.e(TAG, "Usuarios 3: ");
+                }
 
 
 
@@ -174,4 +171,5 @@ public class UsuarioHome  extends AppCompatActivity {
         });
 
     }
+
 }

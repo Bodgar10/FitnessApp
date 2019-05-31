@@ -9,17 +9,19 @@
     <include
         layout="@layout/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="1158dp"></include>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="49dp"
+        >
 
+    </include>
 
 
     <LinearLayout
         android:layout_gravity="bottom"
         android:gravity="bottom"
+        android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
         android:orientation="vertical">
 
         <View
