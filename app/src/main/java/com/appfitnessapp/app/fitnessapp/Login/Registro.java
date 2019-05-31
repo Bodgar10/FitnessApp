@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -17,6 +16,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.MenuUsuario;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,6 +26,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.util.Objects;
 
 public class Registro extends AppCompatActivity {
 
@@ -47,7 +49,7 @@ public class Registro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.usuario_05_registro);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
@@ -66,11 +68,10 @@ public class Registro extends AppCompatActivity {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String correo = edtCorreo.getText().toString();
-                String contrasena = edtContrasena.getText().toString();
-                String nombre = edtNombre.getText().toString();
-                String telefono = edtTelefono.getText().toString();
-
+                String correo = Objects.requireNonNull(edtCorreo.getText()).toString();
+                String contrasena = Objects.requireNonNull(edtContrasena.getText()).toString();
+                String nombre = Objects.requireNonNull(edtNombre.getText()).toString();
+                String telefono = Objects.requireNonNull(edtTelefono.getText()).toString();
 
                 if (!correo.isEmpty() && !contrasena.isEmpty() && !nombre.isEmpty() && !telefono.isEmpty()) {
                     progressDialog.setMessage("Creando cuenta...");
@@ -115,7 +116,7 @@ public class Registro extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     FirebaseUser user = task.getResult().getUser();
                     dbProvider.createUser(email,user.getUid(),name,pass,phone,photo,token,type);
-                    Intent intent = new Intent(Registro.this, MenuUsuario.class);
+                    Intent intent = new Intent(Registro.this, UsuarioHome.class);
                     startActivity(intent);
                     finish();
                 }
@@ -125,6 +126,7 @@ public class Registro extends AppCompatActivity {
 
 
     /*
+
     public void bajarUsuarios(){
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Log.e(TAG,"Usuarios 2: ");
@@ -150,7 +152,7 @@ public class Registro extends AppCompatActivity {
 
                             if (usuarios.getTipo_usuario().equals(Contants.USUARIO)){
                                 progressDialog.dismiss();
-                                Intent intent = new Intent(Registro.this, MenuUsuario.class);
+                                Intent intent = new Intent(Registro.this, UsuarioHome.class);
                                 startActivity(intent);
                                 Registro.this.finish();
                             }
@@ -174,6 +176,7 @@ public class Registro extends AppCompatActivity {
         }
     }
 
-
 */
+
+
 }

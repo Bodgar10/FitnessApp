@@ -1,21 +1,19 @@
-package com.appfitnessapp.app.fitnessapp;
+package com.appfitnessapp.app.fitnessapp.Usuario;
 
-import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
-public class video extends AppCompatActivity {
+import com.appfitnessapp.app.fitnessapp.R;
+
+public class Video extends AppCompatActivity {
 
     VideoView videoView;
 
@@ -32,7 +30,7 @@ public class video extends AppCompatActivity {
 
 
 
-        setContentView(R.layout.video);
+        setContentView(R.layout.usuario_02_feed_video);
         this.setRequestedOrientation(
                 ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
@@ -122,6 +120,7 @@ public class video extends AppCompatActivity {
         position = savedInstanceState.getInt("Position");
         videoView.seekTo(position);
     }
+
 
 
 }

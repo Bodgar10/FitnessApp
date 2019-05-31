@@ -22,4 +22,20 @@ public class Contants {
     final public static String USUARIO = "usuario";
     final public static String MESSAGE_OK = "ok";
     final public static String MESSAGE_FAIL = "fail";
+
+    //Feed
+
+    final public static String  TABLA_FEED = "tabla_feed";
+    final public static String  TIPO_FEED = "tipo_feed";
+    final public static String  IS_GRATIS = "is_gratis";
+    final public static String  IMAGEN_FEED = "imagen_feed";
+    final public static String  COSTO_PDF = "costo_pdf";
+    final public static String  URL_TIPO = "url_tipo";
+    final public static String  TIMESTAMP = "timestamp";
+    final public static String  DESCRIPCION = "descripcion";
+
+    final public static String  VIDEO = "video";
+    final public static String  PDF = "pdf";
+    final public static String  IMAGEN = "imagen";
+
 }

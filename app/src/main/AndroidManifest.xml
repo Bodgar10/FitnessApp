@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -29,10 +30,23 @@
         <activity android:name=".Login.IniciarSesion"/>
         <activity android:name=".Login.Registro"
             android:parentActivityName=".Login.IniciarSesion" />
-        <activity android:name=".Usuario.MenuUsuario" />
-        <activity android:name=".viewPdf"></activity>
-        <activity android:name=".video"></activity>
-        <activity android:name=".Usuario.DetallePost"></activity>
+
+        <activity android:name=".Usuario.DetallePdf"></activity>
+        <activity android:name=".Usuario.UsuarioHome"></activity>
+        <activity android:name=".Usuario.UsuarioPlan"></activity>
+        <activity android:name=".Usuario.UsuarioPerfil"></activity>
+        <activity android:name=".Usuario.UsuarioChat"></activity>
+        <activity android:name=".Usuario.PantallaPDF"></activity>
+        <activity android:name=".Usuario.Imagen"></activity>
+        <activity android:name=".Usuario.Video"></activity>
+        <activity android:name=".Usuario.MetodoPago"></activity>
+        <activity android:name=".Usuario.DatosUsuario"></activity>
+        <activity android:name=".Usuario.Tarjeta"></activity>
+
+
+
+
+
     </application>
 
 </manifest>

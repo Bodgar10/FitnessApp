@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:gravity="center"
+        android:gravity="center|start"
         android:layout_height="wrap_content">
 
         <com.mikhaellopez.circularimageview.CircularImageView
@@ -26,12 +26,12 @@
             android:id="@+id/txtNombrePost"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Nombre Persona"
             android:layout_marginStart="5dp"
             android:textAlignment="textStart"
             android:textSize="13sp"
             android:textColor="@color/negro"
-            android:layout_weight="1"
             />
 
         <TextView
@@ -39,6 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hace 23 horas"
+            android:gravity="center|end"
             android:layout_marginEnd="5dp"
             android:textSize="12sp"
             android:textAlignment="textEnd" />
@@ -52,6 +53,7 @@
         android:layout_marginStart="7dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="7dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/cuadro_blancoredondo"
         android:elevation="10dp"
         android:orientation="vertical">

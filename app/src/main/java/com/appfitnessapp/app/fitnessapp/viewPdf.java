@@ -31,7 +31,7 @@ public class viewPdf extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_pdf);
+        setContentView(R.layout.usuario_02_feed_pdf_vista);
 
         pdfView=findViewById(R.id.pdf_view);
         progressBar=findViewById(R.id.progress_);
