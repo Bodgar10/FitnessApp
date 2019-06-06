@@ -1,5 +1,6 @@
 package com.appfitnessapp.app.fitnessapp.Adapters;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appfitnessapp.app.fitnessapp.Arrays.Feed;
+import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.Usuario.DetallePdf;
+import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.HomeSinRegistro;
+import com.appfitnessapp.app.fitnessapp.Usuario.Imagen;
+import com.appfitnessapp.app.fitnessapp.Usuario.PantallaPDF;
+import com.appfitnessapp.app.fitnessapp.Usuario.Video;
 import com.squareup.picasso.Picasso;
 
 import java.net.HttpURLConnection;
@@ -39,7 +46,7 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
 
         ImageView imgAdmin,imgFeed;
         TextView txtNombreAdmin,txtDescripcion,txtPrecio,txtHora,txtTipoFeed,urlTipo;
-        Boolean isGratis=false;
+        Boolean isGratis;
 
         public FeedViewHolder (View itemView) {
             super(itemView);
@@ -52,6 +59,7 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
             txtPrecio=itemView.findViewById(R.id.txtTipoPostPrecio);
             txtHora=itemView.findViewById(R.id.txtTiempoPost);
             txtTipoFeed=itemView.findViewById(R.id.btnPostTipo);
+            isGratis=false;
 
 
         }
@@ -85,6 +93,40 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
         holder.txtPrecio.setText(feed.getCosto_pdf());
         holder.txtHora.setText(feed.getTimestamp());
         holder.txtTipoFeed.setText(feed.getTipo_feed());
+
+
+
+
+            if (feed.getTipo_feed().equals(Contants.VIDEO)) {
+                holder.txtPrecio.setVisibility(View.GONE);
+              //  Intent intent = new Intent(HomeSinRegistro.this, Video.class);
+                //startActivity(intent);
+
+            } else if (feed.getTipo_feed().equals(Contants.IMAGEN)) {
+                holder.txtPrecio.setVisibility(View.GONE);
+                holder.txtTipoFeed.setVisibility(View.GONE);
+
+                //Intent intent = new Intent(HomeSinRegistro.this, Imagen.class);
+                //startActivity(intent);
+            } else if ( feed.getTipo_feed().equals(Contants.PDF)&&!feed.is_grati) {
+              //  feed.is_grati=false;
+                holder.txtPrecio.setText("GRATIS");
+                //Intent intent = new Intent(HomeSinRegistro.this, DetallePdf.class);
+                //startActivity(intent);
+
+                if (feed.getTipo_feed().equals(Contants.PDF)&&feed.is_grati) {
+                    holder.txtPrecio.setText("12");
+                    //    feed.is_grati=true;
+
+                    //  Intent intent1 = new Intent(HomeSinRegistro.this, PantallaPDF.class);
+                    //intent1.putExtra("ViewType","internet");
+                    //startActivity(intent1);
+
+                }
+
+                else {
+                }
+            }
 
         SimpleDateFormat minutos = new SimpleDateFormat("mm", Locale.getDefault());
         java.util.Date currenTimeZoneMin=new java.util.Date((long)1559177288*1000);
@@ -158,6 +200,9 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
 
 
     public void setOnClickListener(View.OnClickListener listener) {
+
+
+
         this.listener = listener;
     }
 

@@ -56,13 +56,14 @@ public class HomeSinRegistro  extends AppCompatActivity  {
         imgAsesoria=findViewById(R.id.btnAsesoria);
         imgPerfil=findViewById(R.id.imgPerfil);
 
+        bajarFeed();
+
 
 
         imgPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeSinRegistro.this, UsuarioPerfil.class);
-                startActivity(intent);
+
             }
         });
 
@@ -81,21 +82,23 @@ public class HomeSinRegistro  extends AppCompatActivity  {
         adapterFeed=new AdapterFeed(feeds);
         recyclerView.setAdapter(adapterFeed);
 
-        Feed feed=new Feed(Contants.VIDEO,true,"","$45","","","Fernando Guzman",
+
+         final Feed feed0=new Feed(Contants.VIDEO,false,"","$45","","","Fernando Guzman",
                 "5:00", "Pdf con muestras para tonificar los brazos y tener mejor actitud en las cosas que tienen todo");
 
-        Feed feed1=new Feed("video",true,"","$45","","","Fernando Guzman",
+        final Feed feed1=new Feed(Contants.IMAGEN,false,"","$45","","","Fernando Guzman",
                 "5:00", "Pdf con muestras para tonificar los brazos y tener mejor actitud en las cosas que tienen todo");
 
-        Feed feed2=new Feed("PDF",false,"","$45","","","Fernando Guzman",
+        final Feed feed2=new Feed(Contants.PDF,false,"","$45","","","Fernando Guzman",
                 "5:00", "Pdf con muestras para tonificar los brazos y tener mejor actitud en las cosas que tienen todo");
 
-        Feed feed3=new Feed("PDF",true,"","$45","","","Fernando Guzman",
+        final Feed feed3=new Feed(Contants.PDF,true,"","$45","","","Fernando Guzman",
                 "5:00", "Pdf con muestras para tonificar los brazos y tener mejor actitud en las cosas que tienen todo");
-        Feed feed4=new Feed("PDF",true,"","$45","","","Fernando Guzman",
+        Feed feed4=new Feed(Contants.PDF,true,"","$45","","","Fernando Guzman",
                 "5:00", "Pdf con muestras para tonificar los brazos y tener mejor actitud en las cosas que tienen todo");
 
-        feeds.add(feed);
+
+        feeds.add(feed0);
         feeds.add(feed1);
         feeds.add(feed2);
         feeds.add(feed3);
@@ -103,13 +106,13 @@ public class HomeSinRegistro  extends AppCompatActivity  {
 
         adapterFeed.notifyDataSetChanged();
 
+
         adapterFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
 
-                bajarFeed();
 
 
             }
@@ -132,43 +135,51 @@ public class HomeSinRegistro  extends AppCompatActivity  {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Feed feed = snapshot.getValue(Feed.class);
 
-                        if (feed.getTipo_feed().equals(Contants.VIDEO)) {
-                            Intent intent = new Intent(HomeSinRegistro.this, Video.class);
-                            startActivity(intent);
-
-                        } else if (feed.getTipo_feed().equals(Contants.IMAGEN)) {
-                            Intent intent = new Intent(HomeSinRegistro.this, Imagen.class);
-                            startActivity(intent);
-                        } else if (!feed.is_grati) {
-                            Intent intent = new Intent(HomeSinRegistro.this, DetallePdf.class);
-                            startActivity(intent);
-
-                            if (feed.is_grati) {
-                                Intent intent1 = new Intent(HomeSinRegistro.this, PantallaPDF.class);
-                                intent1.putExtra("ViewType","internet");
-                                startActivity(intent1);
 
 
-                            }
+
+
+                            adapterFeed.notifyDataSetChanged();
+
+
 
                         }
                     }
 
                 }
 
-                else{
-                    Log.e(TAG, "Usuarios 3: ");
-                }
 
 
 
-            }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e(TAG, "ERROR: ");
             }
         });
+
+    }
+
+    public void pantalla(Feed feed){
+
+
+        if (feed.getTipo_feed().equals(Contants.VIDEO)){
+
+            Intent intent = new Intent(HomeSinRegistro.this, Video.class);
+            startActivity(intent);
+        }
+
+        else if (feed.getTipo_feed().equals(Contants.IMAGEN)) {
+
+            Intent intent = new Intent(HomeSinRegistro.this, Imagen.class);
+            startActivity(intent);
+        }
+        else {
+
+
+        }
+
 
     }
 

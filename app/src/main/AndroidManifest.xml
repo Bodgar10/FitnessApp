@@ -12,14 +12,13 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity android:name=".Login.SplashPantalla">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,27 +26,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login.IniciarSesion"/>
-        <activity android:name=".Login.Registro"
+        <activity android:name=".Login.IniciarSesion" />
+        <activity
+            android:name=".Login.Registro"
             android:parentActivityName=".Login.IniciarSesion" />
-
-        <activity android:name=".Usuario.DetallePdf"></activity>
-        <activity android:name=".Usuario.UsuarioHome"></activity>
-        <activity android:name=".Usuario.UsuarioPlan"></activity>
-        <activity android:name=".Usuario.UsuarioPerfil"></activity>
-        <activity android:name=".Usuario.UsuarioChat"></activity>
-        <activity android:name=".Usuario.PantallaPDF"></activity>
-        <activity android:name=".Usuario.Imagen"></activity>
-        <activity android:name=".Usuario.Video"></activity>
-        <activity android:name=".Usuario.MetodoPago"></activity>
-        <activity android:name=".Usuario.DatosUsuario"></activity>
+        <activity android:name=".Usuario.DetallePdf" />
+        <activity android:name=".Usuario.UsuarioHome" />
+        <activity android:name=".Usuario.UsuarioPlan" />
+        <activity android:name=".Usuario.UsuarioPerfil" />
+        <activity android:name=".Usuario.UsuarioChat" />
+        <activity android:name=".Usuario.PantallaPDF" />
+        <activity android:name=".Usuario.Imagen" />
+        <activity android:name=".Usuario.Video" />
+        <activity android:name=".Usuario.FeedSinRegistro.HomeSinRegistro" />
+        <activity android:name=".Usuario.Asesoria" />
+        <activity android:name=".Usuario.Paypal.PaymentDetails"></activity>
         <activity android:name=".Usuario.Tarjeta"></activity>
-        <activity android:name=".Usuario.FeedSinRegistro.HomeSinRegistro"></activity>
-        <activity android:name=".Usuario.Asesoria"></activity>
-
-
-
-
+        <activity android:name=".Usuario.MetodoPago"></activity>
     </application>
 
 </manifest>

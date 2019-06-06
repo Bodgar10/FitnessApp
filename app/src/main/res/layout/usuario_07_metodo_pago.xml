@@ -303,7 +303,7 @@
                    android:textAlignment="textEnd"
                    android:layout_marginEnd="15dp"
                    android:gravity="center|end"
-                   android:text="1200 USD"
+                   android:text="1200"
                    android:textAllCaps="false"
                    android:textStyle="bold"
                    android:textColor="@android:color/black"

@@ -40,6 +40,8 @@ dependencies {
     implementation 'com.karumi:dexter:5.0.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    implementation 'com.stripe:stripe-android:9.1.1'
+    implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
 
 
 }

@@ -61,7 +61,16 @@
             android:textStyle="bold" />
 
 
+
+        <com.stripe.android.view.CardInputWidget
+            android:id="@+id/card_input_widget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
     </LinearLayout>
+
+
 
 
     <LinearLayout
