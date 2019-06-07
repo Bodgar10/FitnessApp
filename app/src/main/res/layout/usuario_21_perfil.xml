@@ -1,89 +1,418 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_gravity="bottom"
-        android:gravity="bottom"
-        android:orientation="vertical"
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical">
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/imgPersona"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:src="@mipmap/ic_launcher"
+                    app:civ_border_color="#EEEEEE"
+                    app:civ_border_width="3dp" />
+
+
+                <TextView
+                    android:id="@+id/txtNombreUsuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Nombre usuario"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/boton_redondo_blanco"
+                    android:elevation="5dp"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:id="@+id/txtPesoActual"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="70 kg"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="Peso actual"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="14sp" />
+
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@android:color/darker_gray" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:id="@+id/txtEstatura"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="1.70 cm"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="Estatura"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="14sp" />
+
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@android:color/darker_gray" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="correo@correo.com"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="Email"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="14sp" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center|start"
+                    android:text="Recetas"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/boton_redondo_blanco"
+                    android:elevation="5dp"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center|start"
+                    android:text="Entrenamiento"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/boton_redondo_blanco"
+                    android:elevation="5dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+
+                    <LinearLayout
+                        android:id="@+id/linearCalificar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/black"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="15dp"
+                            android:gravity="center"
+                            android:text="Calificar asesoria"
+                            android:textAllCaps="true"
+                            android:textColor="@color/blanco"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:orientation="vertical">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginBottom="3dp"
-            android:background="#77a9a9a9"/>
+            android:background="#77a9a9a9" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:layout_height="wrap_content">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/btnHome"
-                android:orientation="horizontal"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 android:layout_weight="1.5"
                 android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/imgHome"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
-                    android:tint="@android:color/darker_gray"
+                    android:layout_marginBottom="3dp"
                     android:background="@null"
                     android:scaleType="centerCrop"
+                    android:tint="@android:color/darker_gray"
                     app:srcCompat="@drawable/ic_home" />
 
                 <TextView
                     android:id="@+id/txtHome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
                     android:layout_marginStart="2dp"
+                    android:text="Home"
+                    android:textColor="@android:color/black"
                     android:textSize="12sp"
-                    android:visibility="gone"
-                    android:text="Home" />
+                    android:visibility="gone" />
 
             </LinearLayout>
 
 
-
-
             <LinearLayout
                 android:id="@+id/btnPlan"
-                android:orientation="horizontal"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="3dp"
                 android:layout_width="wrap_content"
-                android:gravity="center"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="4dp"
                 android:layout_weight="1.5"
-                android:layout_height="wrap_content">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/imgPlan"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
                     android:background="@null"
-                    android:tint="@android:color/darker_gray"
                     android:scaleType="centerCrop"
+                    android:tint="@android:color/darker_gray"
                     app:srcCompat="@drawable/ic_restaurant" />
 
                 <TextView
@@ -92,32 +421,32 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
                     android:text="Mi plan"
-                    android:visibility="gone"
                     android:textColor="@android:color/black"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
 
             <LinearLayout
                 android:id="@+id/btnPerfil"
-                android:layout_weight="1.5"
-                android:orientation="horizontal"
-                android:background="@drawable/home_background_oval"
                 android:layout_width="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:layout_marginEnd="3dp"
-                android:layout_marginTop="4dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1.5"
+                android:background="@drawable/home_background_oval"
                 android:gravity="center"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/imgPerfil"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
                     android:background="@null"
                     android:scaleType="centerCrop"
                     android:tint="@android:color/black"
@@ -128,33 +457,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
+                    android:text="Perfil"
                     android:textColor="@android:color/black"
-                    android:textSize="12sp"
-                    android:text="Perfil" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/btnChat"
-                android:layout_weight="1.5"
-                android:orientation="horizontal"
-                android:layout_marginBottom="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="3dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1.5"
                 android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/imgChat"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
-                    android:tint="@android:color/darker_gray"
+                    android:layout_marginBottom="3dp"
                     android:background="@null"
                     android:scaleType="centerCrop"
+                    android:tint="@android:color/darker_gray"
                     app:srcCompat="@drawable/ic_search" />
 
                 <TextView
@@ -162,10 +491,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
+                    android:text="Chat"
                     android:textColor="@android:color/black"
                     android:textSize="12sp"
-                    android:visibility="gone"
-                    android:text="Chat" />
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -176,4 +505,4 @@
     </LinearLayout>
 
 
-</FrameLayout>
+</RelativeLayout>

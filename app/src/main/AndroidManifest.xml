@@ -40,9 +40,11 @@
         <activity android:name=".Usuario.Video" />
         <activity android:name=".Usuario.FeedSinRegistro.HomeSinRegistro" />
         <activity android:name=".Usuario.Asesoria" />
-        <activity android:name=".Usuario.Paypal.PaymentDetails"></activity>
-        <activity android:name=".Usuario.Tarjeta"></activity>
-        <activity android:name=".Usuario.MetodoPago"></activity>
+        <activity android:name=".Usuario.Paypal.PaymentDetails" />
+        <activity android:name=".Usuario.Tarjeta" />
+        <activity android:name=".Usuario.MetodoPago" />
+        <activity android:name=".Usuario.Calificar" />
+        <activity android:name=".Usuario.EditarPerfil"></activity>
     </application>
 
 </manifest>
