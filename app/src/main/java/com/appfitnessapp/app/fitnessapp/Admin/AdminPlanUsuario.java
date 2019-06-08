@@ -1,41 +1,34 @@
-package com.appfitnessapp.app.fitnessapp.Usuario;
+package com.appfitnessapp.app.fitnessapp.Admin;
 
-import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.appfitnessapp.app.fitnessapp.Adapters.AdapterPlanes;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterRecetas;
 import com.appfitnessapp.app.fitnessapp.Arrays.Recetas;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioPlan;
 
 import java.util.ArrayList;
 
-public class UsuarioPlan  extends AppCompatActivity {
+public class AdminPlanUsuario extends AppCompatActivity {
 
-    ImageButton imgHome,imgPerfil,imgChat;
+    TextView btnWorkouts;
     RecyclerView recyclerView;
     AdapterRecetas adapter;
     ArrayList<Recetas> recetas;
-    TextView btnWorkouts;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.usuario_15_plan);
+        setContentView(R.layout.admin_09_plan);
 
-        imgHome=findViewById(R.id.imgHome);
-        imgPerfil=findViewById(R.id.imgPerfil);
-        imgChat=findViewById(R.id.imgChat);
         btnWorkouts=findViewById(R.id.btnWorkouts);
+
 
         recyclerView=findViewById(R.id.recyclerview);
 
@@ -76,36 +69,6 @@ public class UsuarioPlan  extends AppCompatActivity {
             }
         });
 
-        imgPerfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(UsuarioPlan.this, UsuarioPerfil.class);
-                startActivity(intent);
-                finish();
-
-            }
-        });
-
-        imgHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(UsuarioPlan.this, UsuarioHome.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        imgChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(UsuarioPlan.this, UsuarioChat.class);
-                startActivity(intent);
-                finish();
-
-            }
-        });
 
         btnWorkouts.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +76,6 @@ public class UsuarioPlan  extends AppCompatActivity {
 
             }
         });
-
     }
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
@@ -149,5 +111,6 @@ public class UsuarioPlan  extends AppCompatActivity {
             }
         }
     }
+
 
 }

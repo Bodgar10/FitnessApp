@@ -1,0 +1,105 @@
+package com.appfitnessapp.app.fitnessapp.Usuario;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.appfitnessapp.app.fitnessapp.Adapters.AdapterFeed;
+import com.appfitnessapp.app.fitnessapp.Adapters.AdapterIngredientes;
+import com.appfitnessapp.app.fitnessapp.Adapters.AdapterPasos;
+import com.appfitnessapp.app.fitnessapp.Arrays.Ingredientes;
+import com.appfitnessapp.app.fitnessapp.Arrays.Pasos;
+import com.appfitnessapp.app.fitnessapp.R;
+
+import java.util.ArrayList;
+
+public class DetalleRecetas extends AppCompatActivity {
+
+    ImageView imagen;
+    TextView txtNombreReceta,txtTiempo,txtPorciones,txtCalorias,txtInversion;
+
+    AdapterIngredientes adapterIngredientes;
+    ArrayList<Ingredientes> ingredientes;
+
+    AdapterPasos adapterPasos;
+    ArrayList<Pasos>pasos;
+
+    RecyclerView recyclerIngredientes,recyclerPasos;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.usuario_17_desayuno);
+
+
+        imagen=findViewById(R.id.imgReceta);
+
+        txtNombreReceta=findViewById(R.id.txtNombreReceta);
+        txtTiempo=findViewById(R.id.txtTiempo);
+        txtPorciones=findViewById(R.id.txtPorciones);
+        txtCalorias=findViewById(R.id.txtCalorias);
+        txtInversion=findViewById(R.id.txtInversion);
+
+
+
+        recyclerIngredientes=findViewById(R.id.recyclerIngrediente);
+        recyclerPasos=findViewById(R.id.recyclerPreparacion);
+
+        recyclerIngredientes.setLayoutManager(new LinearLayoutManager(this));
+        ingredientes=new ArrayList<>();
+        adapterIngredientes=new AdapterIngredientes(ingredientes);
+        recyclerIngredientes.setAdapter(adapterIngredientes);
+
+        recyclerPasos.setLayoutManager(new LinearLayoutManager(this));
+        pasos=new ArrayList<>();
+        adapterPasos=new AdapterPasos(pasos);
+        recyclerPasos.setAdapter(adapterPasos);
+
+
+
+        Ingredientes ingredientes0=new Ingredientes("Huevos","3");
+        Ingredientes ingredientes1=new Ingredientes("Jamon","4");
+        Ingredientes ingredientes2=new Ingredientes("Tocino","1");
+        Ingredientes ingredientes3=new Ingredientes("Pan","6");
+
+
+        Pasos pasos0=new Pasos("Paso 1 ","mezclar todo junto y poner el aceite a 50 C");
+        Pasos pasos1=new Pasos("Paso 2 ","Vaciar en el aceite y  poner a fuego lento al principio");
+        Pasos pasos2=new Pasos("Paso 3 ","Despues de 5 min vaciar las verdurras y tapar");
+        Pasos pasos3=new Pasos("Paso 4 ","Dejar asi por 5 min mas y luego servir");
+
+
+        ingredientes.add(ingredientes0);
+        ingredientes.add(ingredientes1);
+        ingredientes.add(ingredientes2);
+        ingredientes.add(ingredientes3);
+
+        pasos.add(pasos0);
+        pasos.add(pasos1);
+        pasos.add(pasos2);
+        pasos.add(pasos3);
+
+        adapterPasos.notifyDataSetChanged();
+        adapterIngredientes.notifyDataSetChanged();
+
+
+        adapterIngredientes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        adapterPasos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+    }
+}

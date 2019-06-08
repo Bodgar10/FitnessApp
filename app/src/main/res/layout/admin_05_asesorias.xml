@@ -30,7 +30,7 @@
 
 
         <TextView
-            android:id="@+id/txtCambiarFoto"
+            android:id="@+id/txtNombreUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -192,12 +192,13 @@
 
 
                     <TextView
+                        android:id="@+id/txtObjetivo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center"
-                        android:text="correo@correo.com"
+                        android:text="Bajar de peso"
                         android:textAllCaps="false"
                         android:textColor="@android:color/black"
                         android:textSize="16sp" />
@@ -209,7 +210,7 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center"
-                        android:text="Email"
+                        android:text="Objetivo"
                         android:textAllCaps="false"
                         android:textColor="@android:color/darker_gray"
                         android:textSize="14sp" />

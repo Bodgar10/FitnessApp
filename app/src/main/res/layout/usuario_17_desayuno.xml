@@ -36,7 +36,7 @@
         android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imgReceta"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
@@ -44,6 +44,7 @@
 
 
     <TextView
+        android:id="@+id/txtNombreReceta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
@@ -70,7 +71,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtNumeroAsesorias"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -83,6 +83,7 @@
 
 
             <TextView
+                android:id="@+id/txtTiempo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
@@ -111,7 +112,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtPrecio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -124,6 +124,7 @@
 
 
             <TextView
+                android:id="@+id/txtPorciones"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
@@ -152,7 +153,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtCalificacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -165,6 +165,7 @@
 
 
             <TextView
+                android:id="@+id/txtCalorias"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
@@ -202,6 +203,7 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/txtInversion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
@@ -219,6 +221,7 @@
 
 
         <include
+            android:id="@+id/recyclerIngrediente"
             layout="@layout/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent">

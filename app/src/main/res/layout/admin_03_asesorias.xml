@@ -87,6 +87,7 @@
     </LinearLayout>
 
     <include
+        android:id="@+id/recyclerFinalizar"
         layout="@layout/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -131,6 +132,7 @@
 
 
     <include
+        android:id="@+id/recyclerRecientes"
         layout="@layout/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

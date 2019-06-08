@@ -71,6 +71,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/txtInversion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
@@ -88,6 +89,7 @@
 
 
         <TextView
+            android:id="@+id/txtIngrediente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
@@ -100,6 +102,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/txtCantidad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
