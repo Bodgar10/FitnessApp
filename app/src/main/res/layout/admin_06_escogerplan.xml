@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+    <LinearLayout
+        android:id="@+id/linearBoton"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+        <LinearLayout
+            android:background="@drawable/boton_negro_contorno"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/button"
+                android:padding="10dp"
+                android:gravity="center"
+                android:background="@color/negro"
+                android:textColor="@color/blanco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Recetas" />
+
+
+            <TextView
+                android:id="@+id/txtWorkoutsAdmin"
+                android:padding="10dp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Workouts" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <include
+        layout="@layout/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </include>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="Nombre de la comida"
+        android:textAllCaps="false"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/edtNombreComida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:ems="10"
+        android:textColor="@color/negro"
+        android:hint="Nombre"
+        android:inputType="textPersonName" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:gravity="start"
+        android:background="@android:color/darker_gray"
+        android:text="INFORMACIÓN DE LA RECETA"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+
+    <EditText
+        android:id="@+id/edtTiempo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:background="@drawable/boton_negro_contorno"
+        android:padding="10dp"
+        android:textColor="@color/negro"
+        android:hint="Tiempo de coccion"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edtCantidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:background="@drawable/boton_negro_contorno"
+        android:padding="10dp"
+        android:textColor="@color/negro"
+        android:hint="Cantidad de porciones"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edtCalorias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:background="@drawable/boton_negro_contorno"
+        android:padding="10dp"
+        android:textColor="@color/negro"
+        android:hint="Calorias aproximadas"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:gravity="start"
+        android:background="@android:color/darker_gray"
+        android:text="INGREDIENTES"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <include
+        layout="@layout/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </include>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:layout_marginEnd="10dp"
+            android:textAlignment="textEnd"
+            android:text="Agregar otro ingrediente"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:id="@+id/btnAgregarIngrediente"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@null"
+            android:scaleType="centerCrop"
+            android:tint="@color/negro"
+            app:srcCompat="@drawable/ic_mas" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:gravity="start"
+        android:background="@android:color/darker_gray"
+        android:text="Preparación"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <include
+        layout="@layout/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </include>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:layout_marginEnd="10dp"
+            android:textAlignment="textEnd"
+            android:text="Agregar otro paso"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:id="@+id/btnPaso"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="15dp"
+            android:background="@null"
+            android:tint="@color/negro"
+            app:srcCompat="@drawable/ic_mas" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:gravity="start"
+        android:background="@android:color/darker_gray"
+        android:text="Donde encontraras los ingredientes"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <include
+        android:layout_marginBottom="15dp"
+        layout="@layout/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </include>
+
+    </LinearLayout>
+
+
+</ScrollView>

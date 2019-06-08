@@ -6,14 +6,95 @@
     android:layout_height="match_parent">
 
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="50dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignStart="@+id/imageView3"
+        android:layout_alignTop="@+id/linearBoton"
+        android:layout_alignEnd="@+id/imageView3"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="493dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="530dp"
+        app:srcCompat="@drawable/ic_playvideo" />
+
+
+    <TextView
+        android:id="@+id/txtTiempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="355dp"
+        android:layout_marginEnd="283dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="start"
+        android:text="60 min"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtIntensidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTiempo"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="412dp"
+        android:layout_marginEnd="279dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="start"
+        android:text="Alta intensidad"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/txtEjericicios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtIntensidad"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="505dp"
+        android:layout_marginEnd="275dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="start"
+        android:text="8 ejercicios"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/linearBoton"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-
 
         <LinearLayout
             android:background="@drawable/boton_negro_contorno"
@@ -30,8 +111,7 @@
                 android:id="@+id/button"
                 android:padding="10dp"
                 android:gravity="center"
-                android:background="@color/negro"
-                android:textColor="@color/blanco"
+                android:textColor="@color/negro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -42,6 +122,7 @@
                 android:padding="10dp"
                 android:gravity="center"
                 android:layout_width="wrap_content"
+                android:background="@color/blanco"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Workouts" />
@@ -50,21 +131,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
-    <include
-        layout="@layout/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/linearBoton"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="49dp">
-
-    </include>
-
 
     <LinearLayout
         android:layout_width="match_parent"
