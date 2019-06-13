@@ -1,7 +1,9 @@
 package com.appfitnessapp.app.fitnessapp.Admin;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_08_perfil);
+
 
 
         imgPersona=findViewById(R.id.imgPersona);

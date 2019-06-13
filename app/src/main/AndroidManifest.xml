@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Login.SplashPantalla">
+        <activity android:name=".Usuario.UsuarioPlanWorkouts">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,21 +30,16 @@
         <activity
             android:name=".Login.Registro"
             android:parentActivityName=".Login.IniciarSesion" />
-        <activity android:name=".Usuario.DetallePdf" />
         <activity android:name=".Usuario.UsuarioHome" />
-        <activity android:name=".Usuario.UsuarioPlan" />
         <activity android:name=".Usuario.UsuarioPerfil" />
         <activity android:name=".Usuario.UsuarioChat" />
         <activity android:name=".Usuario.PantallaPDF" />
         <activity android:name=".Usuario.Imagen" />
         <activity android:name=".Usuario.Video" />
         <activity android:name=".Usuario.FeedSinRegistro.HomeSinRegistro" />
-        <activity android:name=".Usuario.Asesoria" />
         <activity android:name=".Usuario.Paypal.PaymentDetails" />
         <activity android:name=".Usuario.Tarjeta" />
         <activity android:name=".Usuario.MetodoPago" />
-        <activity android:name=".Usuario.Calificar" />
-        <activity android:name=".Usuario.EditarPerfil"></activity>
     </application>
 
 </manifest>

@@ -5,7 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/include" />
+
+
     <LinearLayout
+        android:layout_marginTop="5dp"
         android:id="@+id/linearBoton"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -19,7 +27,7 @@
             android:gravity="center"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -56,13 +64,11 @@
         android:gravity="center"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:padding="5dp"
             android:gravity="start"
             android:textColor="@android:color/darker_gray"
             android:layout_width="wrap_content"
@@ -73,7 +79,6 @@
 
 
         <TextView
-            android:padding="5dp"
             android:gravity="end"
             android:textColor="@android:color/darker_gray"
             android:layout_width="wrap_content"
@@ -105,7 +110,6 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:padding="5dp"
             android:gravity="start"
             android:textColor="@android:color/darker_gray"
             android:layout_width="wrap_content"
@@ -116,7 +120,6 @@
 
 
         <TextView
-            android:padding="5dp"
             android:gravity="end"
             android:textColor="@android:color/darker_gray"
             android:layout_width="wrap_content"
@@ -129,8 +132,6 @@
 
     </LinearLayout>
 
-
-
     <include
         android:id="@+id/recyclerRecientes"
         layout="@layout/recyclerview"
@@ -138,5 +139,9 @@
         android:layout_height="wrap_content">
 
     </include>
+
+
+
+
 
 </LinearLayout>

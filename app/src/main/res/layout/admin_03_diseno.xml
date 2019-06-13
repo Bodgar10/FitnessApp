@@ -9,20 +9,16 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
         android:orientation="horizontal"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/imgPersonaDiseno"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginEnd="5dp"
         android:layout_marginStart="5dp"
         android:src="@mipmap/ic_launcher"
@@ -33,12 +29,12 @@
     <LinearLayout
         android:layout_weight="1"
         android:orientation="vertical"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
         android:layout_marginEnd="5dp"
         android:layout_width="0dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:layout_gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -54,7 +50,7 @@
                 android:textStyle="bold"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/txtKilosDiseno"
@@ -69,7 +65,7 @@
                 android:textStyle="bold"
                 android:textAllCaps="false"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
 
         </LinearLayout>
@@ -88,17 +84,15 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             android:textColor="@android:color/darker_gray"
-            android:textSize="13sp" />
+            android:textSize="12sp" />
 
 
     </LinearLayout>
 
     <ImageButton
         android:id="@+id/btnAgregarIngrediente"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_gravity="center"
         android:layout_marginEnd="10dp"
         android:background="@null"

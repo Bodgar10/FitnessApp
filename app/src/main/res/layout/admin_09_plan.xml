@@ -6,44 +6,55 @@
     android:layout_height="match_parent">
 
 
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/include" />
+
 
     <LinearLayout
         android:id="@+id/linearBoton"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/include"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:orientation="vertical">
 
 
         <LinearLayout
-            android:background="@drawable/boton_negro_contorno"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/boton_negro_contorno"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
-                android:padding="10dp"
-                android:gravity="center"
-                android:background="@color/negro"
-                android:textColor="@color/blanco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Recetas" />
+                android:background="@color/negro"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Recetas"
+                android:textColor="@color/blanco" />
 
 
             <TextView
                 android:id="@+id/btnWorkouts"
-                android:padding="10dp"
-                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:padding="10dp"
                 android:text="Workouts" />
 
 
@@ -60,8 +71,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="49dp">
+        android:layout_marginEnd="0dp">
 
     </include>
 

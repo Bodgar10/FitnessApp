@@ -8,4 +8,19 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Toolbar" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/blanco</item>
+        <item name="android:textColorPrimary">@color/negro</item>
+
+    </style>
+
+    <style name="ToolbarTrans" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/negro</item>
+        <item name="android:textColorPrimary">@color/negro</item>
+
+    </style>
+
+
 </resources>

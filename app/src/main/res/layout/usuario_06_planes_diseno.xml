@@ -9,9 +9,11 @@
 
 
     <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
         android:padding="5dp"
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content">
 
 
@@ -84,7 +86,7 @@
         <TextView
             android:id="@+id/txtDescripcionM"
             android:gravity="center"
-            android:layout_width="310dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="5dp"

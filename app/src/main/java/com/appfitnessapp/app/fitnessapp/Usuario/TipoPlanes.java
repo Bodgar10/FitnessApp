@@ -29,7 +29,7 @@ public class TipoPlanes extends AppCompatActivity {
         recyclerView=findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         int spanCount = 1;
-        int spacing_left = 10;
+        int spacing_left = 5;
         int spacing_top=0;
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing_left, spacing_top));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);

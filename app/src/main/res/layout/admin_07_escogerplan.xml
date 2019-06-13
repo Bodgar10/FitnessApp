@@ -11,15 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <include
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/include" />
 
 
-    <LinearLayout
+        <LinearLayout
         android:id="@+id/linearBoton"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-
 
         <LinearLayout
             android:background="@drawable/boton_negro_contorno"
@@ -27,7 +30,7 @@
             android:gravity="center"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -72,9 +75,9 @@
 
         <ImageButton
             android:id="@+id/btnAgregarFoto"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
             android:layout_marginBottom="5dp"
             android:background="@null"
             android:scaleType="centerCrop"
@@ -84,13 +87,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="35dp"
             android:gravity="center"
             android:text="Subir foto o video"
             android:textAllCaps="false"
             android:textStyle="bold"
             android:textColor="@android:color/darker_gray"
-            android:textSize="17sp" />
+            android:textSize="15sp" />
 
 
 
@@ -118,7 +121,8 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:ems="10"
-        android:hint="Decrición"
+        android:textSize="12sp"
+        android:hint="Descripción"
         android:inputType="textMultiLine"
         android:textColor="@color/negro" />
 
@@ -128,13 +132,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="10dp"
-        android:padding="10dp"
+        android:padding="8dp"
         android:gravity="start"
         android:background="@android:color/darker_gray"
         android:text="rutina de ejercicios"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
-        android:textSize="15sp" />
+        android:textSize="13sp" />
 
     <include
         layout="@layout/recyclerview"
@@ -162,12 +166,12 @@
             android:text="Agregar otro ejercicio"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
-            android:textSize="15sp" />
+            android:textSize="12sp" />
 
         <ImageButton
             android:id="@+id/btnAgregarEjercicio"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="10dp"
@@ -182,15 +186,15 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
-        android:padding="10dp"
+        android:padding="8dp"
         android:gravity="start"
         android:background="@android:color/darker_gray"
         android:text="demostración de los ejercicios"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
-        android:textSize="15sp" />
+        android:textSize="13sp" />
 
     <include
         android:layout_marginBottom="15dp"

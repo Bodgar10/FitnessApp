@@ -12,6 +12,11 @@
         android:layout_height="wrap_content">
 
 
+        <include
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/include" />
 
     <LinearLayout
         android:id="@+id/linearBoton"
@@ -27,7 +32,7 @@
             android:gravity="center"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -85,6 +90,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:ems="10"
+        android:textSize="13sp"
         android:textColor="@color/negro"
         android:hint="Nombre"
         android:inputType="textPersonName" />
@@ -95,13 +101,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="10dp"
-        android:padding="10dp"
+        android:padding="8dp"
         android:gravity="start"
         android:background="@android:color/darker_gray"
         android:text="INFORMACIÓN DE LA RECETA"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
-        android:textSize="15sp" />
+        android:textSize="13sp" />
 
 
     <EditText
@@ -112,6 +118,7 @@
         android:layout_marginEnd="15dp"
         android:layout_marginTop="10dp"
         android:ems="10"
+        android:textSize="13sp"
         android:background="@drawable/boton_gris_margen"
         android:padding="10dp"
         android:textColor="@color/negro"
@@ -126,6 +133,7 @@
         android:layout_marginEnd="15dp"
         android:layout_marginTop="5dp"
         android:ems="10"
+        android:textSize="13sp"
         android:background="@drawable/boton_gris_margen"
         android:padding="10dp"
         android:textColor="@color/negro"
@@ -140,6 +148,7 @@
         android:layout_marginEnd="15dp"
         android:layout_marginTop="5dp"
         android:ems="10"
+        android:textSize="13sp"
         android:background="@drawable/boton_gris_margen"
         android:padding="10dp"
         android:textColor="@color/negro"
@@ -151,13 +160,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="10dp"
-        android:padding="10dp"
+        android:padding="8dp"
         android:gravity="start"
         android:background="@android:color/darker_gray"
         android:text="INGREDIENTES"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
-        android:textSize="15sp" />
+        android:textSize="13sp" />
 
     <include
         layout="@layout/recyclerview"
@@ -185,12 +194,12 @@
             android:text="Agregar otro ingrediente"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
-            android:textSize="15sp" />
+            android:textSize="12sp" />
 
         <ImageButton
             android:id="@+id/btnAgregarIngrediente"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="10dp"
@@ -207,13 +216,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="10dp"
-        android:padding="10dp"
+        android:padding="8dp"
         android:gravity="start"
         android:background="@android:color/darker_gray"
         android:text="Preparación"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
-        android:textSize="15sp" />
+        android:textSize="13sp" />
 
     <include
         layout="@layout/recyclerview"
@@ -241,16 +250,18 @@
             android:text="Agregar otro paso"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
-            android:textSize="15sp" />
+            android:textSize="12sp" />
+
 
         <ImageButton
             android:id="@+id/btnPaso"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
             android:background="@null"
+            android:scaleType="centerCrop"
             android:tint="@color/negro"
             app:srcCompat="@drawable/ic_mas" />
 
@@ -262,13 +273,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="10dp"
-        android:padding="10dp"
+        android:padding="8dp"
         android:gravity="start"
         android:background="@android:color/darker_gray"
         android:text="Donde encontraras los ingredientes"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
-        android:textSize="15sp" />
+        android:textSize="13sp" />
 
     <include
         android:layout_marginBottom="15dp"
