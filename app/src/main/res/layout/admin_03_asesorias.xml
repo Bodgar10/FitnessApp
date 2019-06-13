@@ -86,7 +86,7 @@
             android:textStyle="bold"
             android:layout_weight="1"
             android:textAllCaps="true"
-            android:text="Por finalizar" />
+            android:text="prueba final" />
 
 
     </LinearLayout>
