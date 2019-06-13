@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Activos" />
+                android:text="Aqui otra" />
 
 
             <TextView
@@ -86,7 +86,7 @@
             android:textStyle="bold"
             android:layout_weight="1"
             android:textAllCaps="true"
-            android:text="prueba final" />
+            android:text="Por finalizar" />
 
 
     </LinearLayout>
@@ -127,7 +127,7 @@
             android:textStyle="bold"
             android:layout_weight="1"
             android:textAllCaps="true"
-            android:text="Recientes" />
+            android:text="Aqui hay una prueba " />
 
 
     </LinearLayout>
