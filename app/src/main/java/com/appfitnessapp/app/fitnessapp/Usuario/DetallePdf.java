@@ -28,11 +28,6 @@ public class DetallePdf extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_14_feed_pdf_detalle);
 
-        Toolbar toolbarback=findViewById(R.id.include);
-        setSupportActionBar(toolbarback);
-        getSupportActionBar().setTitle("Calendario");
-        ActionBar actionBar=getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
 
 
         btnComprar=findViewById(R.id.linearComprarPDF);

@@ -13,7 +13,7 @@ import com.appfitnessapp.app.fitnessapp.R;
 
 public class EscogerPlan extends AppCompatActivity {
 
-    TextView btnRecetas;
+    TextView btnRecetas,btnGuardar;
     ImageView btnAgregarFoto,btnAgregarEjercicio;
     EditText edtDescripcion;
 
@@ -22,7 +22,7 @@ public class EscogerPlan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_07_escogerplan);
 
-        Toolbar toolbarback=findViewById(R.id.include);
+        Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Desayuno");
         ActionBar actionBar=getSupportActionBar();
@@ -34,6 +34,8 @@ public class EscogerPlan extends AppCompatActivity {
         btnAgregarEjercicio=findViewById(R.id.btnAgregarEjercicio);
 
         edtDescripcion=findViewById(R.id.edtDescripcion);
+
+        btnGuardar=findViewById(R.id.txtGuardar);
 
 
         btnRecetas.setOnClickListener(new View.OnClickListener() {
@@ -57,5 +59,14 @@ public class EscogerPlan extends AppCompatActivity {
 
             }
         });
+
+
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 }

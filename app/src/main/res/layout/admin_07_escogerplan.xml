@@ -11,11 +11,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include
-            layout="@layout/toolbar"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/include" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/white"
+            android:elevation="10dp"
+            android:theme="@style/Toolbar"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <TextView
+                android:id="@+id/txtGuardar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:padding="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="end"
+                android:textStyle="bold"
+                android:text="Guardar"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+
+        </android.support.v7.widget.Toolbar>
 
 
         <LinearLayout
@@ -25,7 +46,6 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:background="@drawable/boton_negro_contorno"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_marginStart="15dp"
@@ -36,20 +56,23 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:background="@drawable/boton_negro_contorno"
                 android:id="@+id/btnRecetas"
                 android:padding="10dp"
                 android:gravity="center"
                 android:textColor="@color/negro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
                 android:layout_weight="1"
                 android:text="Recetas" />
 
 
             <TextView
+                android:layout_marginStart="2dp"
                 android:padding="10dp"
                 android:gravity="center"
-                android:background="@color/negro"
+                android:background="@drawable/boton_negro_completo"
                 android:textColor="@color/blanco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

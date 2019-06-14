@@ -1,5 +1,6 @@
 package com.appfitnessapp.app.fitnessapp.Admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import com.appfitnessapp.app.fitnessapp.R;
 
 public class RecetasEditar extends AppCompatActivity {
 
-    TextView btnWorkouts;
+    TextView btnWorkouts,btnGuardar;
     EditText edtNombreComida,edtTiempo,edtCantidad, edtCalorias;
     ImageButton btnIngrediente,btnPaso;
 
@@ -22,7 +23,7 @@ public class RecetasEditar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_06_escogerplan);
 
-        Toolbar toolbarback=findViewById(R.id.include);
+        Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Desayuno");
         ActionBar actionBar=getSupportActionBar();
@@ -30,6 +31,7 @@ public class RecetasEditar extends AppCompatActivity {
 
 
         btnWorkouts=findViewById(R.id.txtWorkoutsAdmin);
+        btnGuardar=findViewById(R.id.txtGuardar);
 
         edtNombreComida=findViewById(R.id.edtNombreComida);
         edtTiempo=findViewById(R.id.edtTiempo);
@@ -44,6 +46,9 @@ public class RecetasEditar extends AppCompatActivity {
         btnWorkouts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent intent = new Intent(RecetasEditar.this, EscogerPlan.class);
+                startActivity(intent);
 
             }
         });
@@ -64,6 +69,12 @@ public class RecetasEditar extends AppCompatActivity {
             }
         });
 
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 }

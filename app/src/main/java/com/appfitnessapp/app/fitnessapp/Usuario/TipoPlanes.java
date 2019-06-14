@@ -1,5 +1,6 @@
 package com.appfitnessapp.app.fitnessapp.Usuario;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import android.view.View;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterPlanes;
 import com.appfitnessapp.app.fitnessapp.Arrays.Planes;
+import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
+import com.appfitnessapp.app.fitnessapp.Login.Registro;
 import com.appfitnessapp.app.fitnessapp.R;
 
 import java.util.ArrayList;
@@ -60,6 +63,9 @@ public class TipoPlanes extends AppCompatActivity {
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent intent = new Intent(TipoPlanes.this, MetodoPago.class);
+                startActivity(intent);
 
 
             }

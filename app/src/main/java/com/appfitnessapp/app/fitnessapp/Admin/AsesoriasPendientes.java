@@ -1,5 +1,6 @@
 package com.appfitnessapp.app.fitnessapp.Admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterAsesorias;
 import com.appfitnessapp.app.fitnessapp.Arrays.Asesorias;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
 
@@ -20,18 +22,22 @@ public class AsesoriasPendientes extends AppCompatActivity {
     ArrayList<Asesorias> asesorias;
     RecyclerView recyclerView;
     TextView txtActivos;
+    CircularImageView imgPostPersona;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_04_asesorias);
 
-        Toolbar toolbarback=findViewById(R.id.include);
+        Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Asesorias");
 
         recyclerView=findViewById(R.id.recyclerview);
         txtActivos=findViewById(R.id.txtActivos);
+
+        imgPostPersona=findViewById(R.id.imgPostPersona);
+
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -62,11 +68,32 @@ public class AsesoriasPendientes extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(AsesoriasPendientes.this, SolicitudAsesoria.class);
+                startActivity(intent);
+
             }
         });
 
 
+        txtActivos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AsesoriasPendientes.this, AsesoriasAdmin.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
 
+        imgPostPersona.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(AsesoriasPendientes.this, AdminPerfil.class);
+                startActivity(intent);
+
+            }
+        });
 
     }
 }

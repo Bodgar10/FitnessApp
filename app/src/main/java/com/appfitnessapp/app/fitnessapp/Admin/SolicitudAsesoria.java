@@ -1,5 +1,6 @@
 package com.appfitnessapp.app.fitnessapp.Admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,9 @@ public class SolicitudAsesoria extends AppCompatActivity {
         btnComenzarAsesoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(SolicitudAsesoria.this, RecetasEditar.class);
+                startActivity(intent);
+
 
             }
         });

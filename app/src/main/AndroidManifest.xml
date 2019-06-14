@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Usuario.UsuarioPlanWorkouts">
+        <activity android:name=".Admin.AsesoriasAdmin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,6 +40,41 @@
         <activity android:name=".Usuario.Paypal.PaymentDetails" />
         <activity android:name=".Usuario.Tarjeta" />
         <activity android:name=".Usuario.MetodoPago" />
+        <activity android:name=".Usuario.Asesoria"></activity>
+        <activity android:name=".Usuario.Calificar"
+            android:parentActivityName=".Usuario.UsuarioPerfil"></activity>
+        <activity android:name=".Usuario.DatosUsuario"></activity>
+        <activity android:name=".Usuario.DetallePdf"></activity>
+        <activity android:name=".Usuario.DetalleRecetas"
+            android:parentActivityName=".Usuario.UsuarioPlan"
+            ></activity>
+        <activity android:name=".Usuario.EditarPerfil"
+            android:parentActivityName=".Usuario.UsuarioPerfil"></activity>
+        <activity android:name=".Usuario.InformacionCompra"
+            android:parentActivityName=".Usuario.DetalleRecetas"></activity>
+        <activity android:name=".Usuario.RutinaUsuario"
+            android:parentActivityName=".Usuario.UsuarioPlanWorkouts"></activity>
+        <activity android:name=".Usuario.TipoPlanes"></activity>
+        <activity android:name=".Usuario.UsuarioPlan"></activity>
+        <activity android:name=".Usuario.UsuarioPlanWorkouts"></activity>
+
+
+
+        <activity android:name=".Admin.AdminPerfil"
+            android:parentActivityName=".Admin.AsesoriasAdmin"></activity>
+        <activity android:name=".Admin.AdminPlanUsuario"
+            android:parentActivityName=".Admin.PerfilUsuarioAdmin"></activity>
+        <activity android:name=".Admin.AdminRecetaDetalle"
+            android:parentActivityName=".Admin.AdminPlanUsuario"></activity>
+        <activity android:name=".Admin.AsesoriasPendientes"></activity>
+        <activity android:name=".Admin.EscogerPlan"
+            android:parentActivityName=".Admin.SolicitudAsesoria"></activity>
+        <activity android:name=".Admin.PerfilUsuarioAdmin"></activity>
+        <activity android:name=".Admin.RecetasEditar"
+            android:parentActivityName=".Admin.SolicitudAsesoria"></activity>
+        <activity android:name=".Admin.SolicitudAsesoria"
+            android:parentActivityName=".Admin.AsesoriasPendientes"></activity>
+
     </application>
 
 </manifest>

@@ -6,21 +6,26 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">#000000</item>
+
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="Toolbar" parent="Theme.AppCompat">
+    <style name="Toolbar" parent="@style/ThemeOverlay.AppCompat.ActionBar" >
         <item name="colorPrimary">@color/blanco</item>
         <item name="android:textColorPrimary">@color/negro</item>
 
     </style>
 
     <style name="ToolbarTrans" parent="Theme.AppCompat">
-        <item name="colorPrimary">@color/negro</item>
-        <item name="android:textColorPrimary">@color/negro</item>
+        <item name="colorPrimary">@color/blanco</item>
+        <item name="android:textColorPrimary">@color/blanco</item>
 
     </style>
 
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">15sp</item>
+    </style>
 
 </resources>

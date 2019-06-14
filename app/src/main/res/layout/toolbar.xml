@@ -8,6 +8,7 @@
     android:background="@android:color/white"
     android:elevation="10dp"
     android:theme="@style/Toolbar"
+    app:titleTextAppearance="@style/Toolbar.TitleText"
     app:popupTheme="@style/AppTheme.PopupOverlay">
 
 </android.support.v7.widget.Toolbar>

@@ -5,6 +5,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,5 +38,13 @@ public class RutinaUsuario extends AppCompatActivity {
         recyclerView=findViewById(R.id.recyclerview);
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menuswitch, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

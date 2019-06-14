@@ -97,7 +97,6 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:background="@drawable/boton_negro_contorno"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_marginStart="15dp"
@@ -108,12 +107,14 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:background="@drawable/boton_redondo_sinfondo"
                 android:id="@+id/btnRecetas"
                 android:padding="10dp"
                 android:gravity="center"
-                android:textColor="@color/negro"
+                android:textColor="@color/blanco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
                 android:layout_weight="1"
                 android:text="Recetas" />
 
@@ -121,8 +122,10 @@
             <TextView
                 android:padding="10dp"
                 android:gravity="center"
+                android:layout_marginStart="2dp"
+                android:textColor="@android:color/black"
                 android:layout_width="wrap_content"
-                android:background="@color/blanco"
+                android:background="@drawable/boton_redondo_blanco"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Workouts" />

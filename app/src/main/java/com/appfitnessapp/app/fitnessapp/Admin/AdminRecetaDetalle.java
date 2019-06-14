@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class AdminRecetaDetalle extends AppCompatActivity {
 
     ImageView imagen;
-    TextView txtNombreReceta,txtTiempo,txtPorciones,txtCalorias,txtInversion;
+    TextView txtNombreReceta,txtTiempo,txtPorciones,txtCalorias,txtInversion,btnEditar;
 
     AdapterIngredientes adapterIngredientes;
     ArrayList<Ingredientes> ingredientes;
@@ -36,7 +36,7 @@ public class AdminRecetaDetalle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_17_desayuno);
 
-        Toolbar toolbarback=findViewById(R.id.include);
+        Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Desayuno");
         ActionBar actionBar=getSupportActionBar();
@@ -50,6 +50,8 @@ public class AdminRecetaDetalle extends AppCompatActivity {
         txtPorciones=findViewById(R.id.txtPorciones);
         txtCalorias=findViewById(R.id.txtCalorias);
         txtInversion=findViewById(R.id.txtInversion);
+
+        btnEditar=findViewById(R.id.txtEditar);
 
 
 
@@ -102,6 +104,13 @@ public class AdminRecetaDetalle extends AppCompatActivity {
         });
 
         adapterPasos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

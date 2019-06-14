@@ -1,5 +1,6 @@
 package com.appfitnessapp.app.fitnessapp.Admin;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -73,6 +74,8 @@ public class AdminPlanUsuario extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(AdminPlanUsuario.this, AdminRecetaDetalle.class);
+                startActivity(intent);
 
             }
         });

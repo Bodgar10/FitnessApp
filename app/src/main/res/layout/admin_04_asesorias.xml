@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        layout="@layout/toolbar"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/include" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        android:elevation="10dp"
+        android:theme="@style/Toolbar"
+        app:titleTextAppearance="@style/Toolbar.TitleText"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/imgPostPersona"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="4dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
+            android:src="@mipmap/ic_launcher"
+            app:civ_border_color="#EEEEEE"
+            app:civ_border_width="1dp" />
+
+
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_marginTop="5dp"
@@ -19,7 +37,6 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:background="@drawable/boton_negro_contorno"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_marginStart="15dp"
@@ -30,9 +47,11 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:background="@drawable/boton_negro_contorno"
                 android:id="@+id/txtActivos"
                 android:padding="10dp"
                 android:gravity="center"
+                android:layout_marginEnd="2dp"
                 android:textColor="@color/negro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,9 +60,10 @@
 
 
             <TextView
+                android:background="@drawable/boton_negro_completo"
                 android:padding="10dp"
                 android:gravity="center"
-                android:background="@color/negro"
+                android:layout_marginStart="2dp"
                 android:textColor="@color/blanco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

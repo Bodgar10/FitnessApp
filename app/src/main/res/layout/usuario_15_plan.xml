@@ -16,7 +16,6 @@
 
 
         <LinearLayout
-            android:background="@drawable/boton_negro_contorno"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_marginStart="15dp"
@@ -29,15 +28,18 @@
             <TextView
                 android:padding="10dp"
                 android:gravity="center"
-                android:background="@color/negro"
+                android:background="@drawable/boton_negro_completo"
                 android:textColor="@color/blanco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginEnd="2dp"
                 android:text="Recetas" />
 
 
             <TextView
+                android:layout_marginStart="2dp"
+                android:background="@drawable/boton_negro_contorno"
                 android:id="@+id/btnWorkouts"
                 android:padding="10dp"
                 android:gravity="center"

@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterPlanes;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterRecetas;
 import com.appfitnessapp.app.fitnessapp.Arrays.Recetas;
+import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
+import com.appfitnessapp.app.fitnessapp.Login.Registro;
 import com.appfitnessapp.app.fitnessapp.R;
 
 import java.util.ArrayList;
@@ -72,6 +74,9 @@ public class UsuarioPlan  extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(UsuarioPlan.this, DetalleRecetas.class);
+                startActivity(intent);
+
 
             }
         });
@@ -110,6 +115,9 @@ public class UsuarioPlan  extends AppCompatActivity {
         btnWorkouts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent intent = new Intent(UsuarioPlan.this, UsuarioPlanWorkouts.class);
+                startActivity(intent);
 
             }
         });

@@ -11,11 +11,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include
-            layout="@layout/toolbar"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/include" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/white"
+            android:elevation="10dp"
+            android:theme="@style/Toolbar"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <TextView
+                android:id="@+id/txtEditar"
+                android:layout_width="65sp"
+                android:layout_height="25sp"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="end"
+                android:textStyle="bold"
+                android:text="Editar"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+
+        </android.support.v7.widget.Toolbar>
 
 
 
