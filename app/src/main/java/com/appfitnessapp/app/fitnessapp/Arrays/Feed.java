@@ -5,7 +5,7 @@ public class Feed {
 
     public String   tipo_feed;
 
-    public Boolean   is_grati;
+    public Boolean is_gratis;
 
     public String   imagen_feed;
 
@@ -17,16 +17,16 @@ public class Feed {
 
     public String   nombre_admin;
 
-    public String   timestamp;
+    public String timestamp;
 
     public String  descripcion;
 
 
 
 
-    public Feed(String tipo_feed, Boolean is_grati, String imagen_feed, String costo_pdf, String url_tipo, String imagen_admin, String nombre_admin, String timestamp, String descripcion) {
+    public Feed(String tipo_feed, Boolean is_gratis, String imagen_feed, String costo_pdf, String url_tipo, String imagen_admin, String nombre_admin, String timestamp, String descripcion) {
         this.tipo_feed = tipo_feed;
-        this.is_grati = is_grati;
+        this.is_gratis = is_gratis;
         this.imagen_feed = imagen_feed;
         this.costo_pdf = costo_pdf;
         this.url_tipo = url_tipo;
@@ -36,6 +36,8 @@ public class Feed {
         this.descripcion = descripcion;
     }
 
+    public Feed(){}
+
     public String getTipo_feed() {
         return tipo_feed;
     }
@@ -44,12 +46,12 @@ public class Feed {
         this.tipo_feed = tipo_feed;
     }
 
-    public Boolean getIs_grati() {
-        return is_grati;
+    public Boolean getIs_gratis() {
+        return is_gratis;
     }
 
-    public void setIs_grati(Boolean is_grati) {
-        this.is_grati = is_grati;
+    public void setIs_gratis(Boolean is_gratis) {
+        this.is_gratis = is_gratis;
     }
 
     public String getImagen_feed() {

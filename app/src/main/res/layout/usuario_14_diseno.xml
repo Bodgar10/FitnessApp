@@ -82,11 +82,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="128dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/boton_negro_redondo"
                 android:gravity="center"
                 android:text="PDF"
                 android:textAllCaps="true"
                 android:textColor="@color/blanco"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -112,27 +114,29 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.975" />
 
-            <TextView
-                android:id="@+id/txtDescripcionPost"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="7dp"
-                android:layout_marginBottom="8dp"
-                android:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis venenatis velit et metus."
-                android:textAlignment="textStart"
-                android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imagPostU" />
+
 
         </android.support.constraint.ConstraintLayout>
 
+        <TextView
+            android:id="@+id/txtDescripcionPost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginBottom="8dp"
+            android:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis venenatis velit et metus."
+            android:textAlignment="textStart"
+            android:textSize="13sp" />
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp">
+
+    </View>
 
 
 </LinearLayout>

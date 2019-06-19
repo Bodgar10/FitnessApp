@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Admin.AsesoriasAdmin">
+        <activity android:name=".Login.SplashPantalla">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,6 +31,9 @@
             android:name=".Login.Registro"
             android:parentActivityName=".Login.IniciarSesion" />
         <activity android:name=".Usuario.UsuarioHome" />
+
+        <activity android:name=".viewPdf"></activity>
+
         <activity android:name=".Usuario.UsuarioPerfil" />
         <activity android:name=".Usuario.UsuarioChat" />
         <activity android:name=".Usuario.PantallaPDF" />

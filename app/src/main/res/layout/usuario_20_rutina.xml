@@ -46,11 +46,10 @@
         android:layout_marginEnd="14dp"
         android:gravity="start"
         android:layout_marginTop="10dp"
-        android:text="qwsertyuiitrewqwertgkjsdfghklkhgfdxzxckytrewasxcvbnj sdfghjnbvdsertgyh wertghgdsdrfgth  rtgfdtgyhbvdfgi jifi jfoisdjfojd ogjfdo igjfdoi jgfdojg ofdj goifjg ofdjg ofdjg dfojg fdo"
+        android:text="qwsertyuiitrewqwertgkjs dfghklkhgfdxzxcky trewasxcvbnj sdfg hjnbvdsertgyh wertghgdsdrfgth  rtgfdtgyhbvdfgi jifi jfoisdjfojd ogjfdo igjfdoi jgfdojg ofdj goifjg ofdjg ofdjg dfojg fdo"
         android:textAllCaps="false"
-        android:textStyle="bold"
         android:textColor="@android:color/white"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -82,6 +82,7 @@ public class HomeSinRegistro  extends AppCompatActivity  {
         adapterFeed=new AdapterFeed(feeds);
         recyclerView.setAdapter(adapterFeed);
 
+        /*
 
          final Feed feed0=new Feed(Contants.VIDEO,false,"","$45","","","Fernando Guzman",
                 "5:00", "Pdf con muestras para tonificar los brazos y tener mejor actitud en las cosas que tienen todo");
@@ -103,7 +104,7 @@ public class HomeSinRegistro  extends AppCompatActivity  {
         feeds.add(feed2);
         feeds.add(feed3);
         feeds.add(feed4);
-
+*/
         adapterFeed.notifyDataSetChanged();
 
 
@@ -161,26 +162,6 @@ public class HomeSinRegistro  extends AppCompatActivity  {
 
     }
 
-    public void pantalla(Feed feed){
 
-
-        if (feed.getTipo_feed().equals(Contants.VIDEO)){
-
-            Intent intent = new Intent(HomeSinRegistro.this, Video.class);
-            startActivity(intent);
-        }
-
-        else if (feed.getTipo_feed().equals(Contants.IMAGEN)) {
-
-            Intent intent = new Intent(HomeSinRegistro.this, Imagen.class);
-            startActivity(intent);
-        }
-        else {
-
-
-        }
-
-
-    }
 
 }

@@ -33,9 +33,9 @@ public class viewPdf extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_14_feed_pdf_vista);
 
-        pdfView=findViewById(R.id.pdf_view);
-        progressBar=findViewById(R.id.progress_);
-
+        pdfView = findViewById(R.id.pdf_view);
+        progressBar = findViewById(R.id.progress_);
+/*
         if (getIntent() != null){
 
             String viewType=getIntent().getStringExtra("ViewType");
@@ -212,5 +212,6 @@ public class viewPdf extends AppCompatActivity {
 
         }
 
+    }*/
     }
 }

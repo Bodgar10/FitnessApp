@@ -1,9 +1,9 @@
 package com.appfitnessapp.app.fitnessapp.Adapters;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +13,14 @@ import android.widget.TextView;
 
 import com.appfitnessapp.app.fitnessapp.Arrays.Feed;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
+import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
-import com.appfitnessapp.app.fitnessapp.Usuario.DetallePdf;
-import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.HomeSinRegistro;
-import com.appfitnessapp.app.fitnessapp.Usuario.Imagen;
-import com.appfitnessapp.app.fitnessapp.Usuario.PantallaPDF;
-import com.appfitnessapp.app.fitnessapp.Usuario.Video;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.net.HttpURLConnection;
@@ -26,7 +28,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.Map;
+import java.util.TimeZone;
 
 public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder>
         implements View.OnClickListener{
@@ -37,6 +44,9 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
     ArrayList<Feed> feeds;
     URL imageURL = null;
     HttpURLConnection connection = null;
+    static DBProvider dbProvider;
+    private  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+
 
     Bitmap bm = null;
     private static final String TAG = "BAJARINFO:";
@@ -45,7 +55,12 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
 
 
         ImageView imgAdmin,imgFeed;
-        TextView txtNombreAdmin,txtDescripcion,txtPrecio,txtHora,txtTipoFeed,urlTipo;
+        TextView txtNombreAdmin;
+        TextView txtDescripcion;
+        TextView txtPrecio;
+        TextView txtHora;
+        TextView txtTipoFeed;
+        TextView urlTipo;
         Boolean isGratis;
 
         public FeedViewHolder (View itemView) {
@@ -59,7 +74,7 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
             txtPrecio=itemView.findViewById(R.id.txtTipoPostPrecio);
             txtHora=itemView.findViewById(R.id.txtTiempoPost);
             txtTipoFeed=itemView.findViewById(R.id.btnPostTipo);
-            isGratis=false;
+            isGratis=true;
 
 
         }
@@ -96,38 +111,44 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
 
 
 
+      /*
+        holder.txtHora= (TextView) ServerValue.TIMESTAMP;
+        long unixTime = feeds.get(position).timestamp;
+        Date date =new Date(unixTime);
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("America/Mexico_City"));
+        String time = simpleDateFormat.format(date);
+        holder.txtHora.setText(time);
+
+*/
 
             if (feed.getTipo_feed().equals(Contants.VIDEO)) {
                 holder.txtPrecio.setVisibility(View.GONE);
-              //  Intent intent = new Intent(HomeSinRegistro.this, Video.class);
-                //startActivity(intent);
 
-            } else if (feed.getTipo_feed().equals(Contants.IMAGEN)) {
+
+            }
+
+            else if (feed.getTipo_feed().equals(Contants.IMAGEN)) {
                 holder.txtPrecio.setVisibility(View.GONE);
                 holder.txtTipoFeed.setVisibility(View.GONE);
 
-                //Intent intent = new Intent(HomeSinRegistro.this, Imagen.class);
-                //startActivity(intent);
-            } else if ( feed.getTipo_feed().equals(Contants.PDF)&&!feed.is_grati) {
-              //  feed.is_grati=false;
-                holder.txtPrecio.setText("GRATIS");
-                //Intent intent = new Intent(HomeSinRegistro.this, DetallePdf.class);
-                //startActivity(intent);
 
-                if (feed.getTipo_feed().equals(Contants.PDF)&&feed.is_grati) {
-                    holder.txtPrecio.setText("12");
-                    //    feed.is_grati=true;
-
-                    //  Intent intent1 = new Intent(HomeSinRegistro.this, PantallaPDF.class);
-                    //intent1.putExtra("ViewType","internet");
-                    //startActivity(intent1);
-
-                }
-
-                else {
-                }
             }
 
+            else if ( feed.getTipo_feed().equals(Contants.PDF)&&feed.is_gratis) {
+                holder.txtPrecio.setText("GRATIS");
+
+
+                if (feed.getTipo_feed().equals(Contants.PDF)&&!feed.is_gratis) {
+                    holder.txtPrecio.setText("12");
+
+
+                }
+
+            }
+
+
+
+            /*
         SimpleDateFormat minutos = new SimpleDateFormat("mm", Locale.getDefault());
         java.util.Date currenTimeZoneMin=new java.util.Date((long)1559177288*1000);
         String textMin = minutos.format(currenTimeZoneMin);
@@ -135,7 +156,7 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
 
 
         SimpleDateFormat horas = new SimpleDateFormat("HH", Locale.getDefault());
-        java.util.Date currenTimeZoneHoras=new java.util.Date((long)1559177288*1000);
+        java.util.Date currenTimeZoneHoras=new java.util.Date((long)1560620912.713327*1000);
         String textHor = horas.format(currenTimeZoneHoras);
         int hour=Integer.parseInt(textHor);
 
@@ -143,6 +164,7 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
 
         if (hour ==0 && (min>=1 && min <=59)){
 
+            saveTime(holder.txtHora);
             holder.txtHora.setText("Hace "+textMin+" min");
 
         }
@@ -156,11 +178,11 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
         }
 
 
+*/
 
 
-
-        if (!feed.getImagen_feed().equals("nil")&&!feed.getImagen_admin().equals("nil")){
-            Log.e(TAG, "Imagen admin: "+ feed.getImagen_admin());
+        if (!feed.getImagen_feed().equals("nil")){
+           // Log.e(TAG, "Imagen admin: "+ feed.getImagen_admin());
             Log.e(TAG, "Imagen feed: "+ feed.getImagen_feed());
 
 
@@ -172,12 +194,15 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
                         .noFade()
                         .into(holder.imgFeed);
 
+                /*
                 URL urlAdmin = new URL(feed.getImagen_feed());
                 Picasso.get().load(String.valueOf(urlAdmin))
                         .error(R.mipmap.ic_launcher)
                         .fit()
                         .noFade()
                         .into(holder.imgAdmin);
+
+                */
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -214,6 +239,28 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
         }
     }
 
+
+
+    private Long getCurrentTime(){
+
+        Long timeStamp =System.currentTimeMillis()/1000;
+        return timeStamp;
+
+    }
+
+    private String getDate(Long timeStamp) {
+
+        Calendar cal = Calendar.getInstance(Locale.getDefault());
+        cal.setTimeInMillis(timeStamp*1000);
+        String date = DateFormat.format("dd-MM-yyyy hh:mm",cal).toString();
+
+        return date;
+    }
+
+    private void saveTime(TextView fecha) {
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        rootRef.child(Contants.TABLA_FEED).child("timestamp").setValue(ServerValue.TIMESTAMP);
+    }
 
 
 }

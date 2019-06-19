@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class DetalleRecetas extends AppCompatActivity {
 
     ImageView imagen;
-    TextView txtNombreReceta,txtTiempo,txtPorciones,txtCalorias,txtInversion;
+    TextView txtNombreReceta,txtTiempo,txtPorciones,txtCalorias,txtInversion,txtEditar;
 
     AdapterIngredientes adapterIngredientes;
     ArrayList<Ingredientes> ingredientes;
@@ -42,7 +42,7 @@ public class DetalleRecetas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_17_desayuno);
 
-        Toolbar toolbarback=findViewById(R.id.include);
+        Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Desayuno");
         ActionBar actionBar=getSupportActionBar();
@@ -56,6 +56,10 @@ public class DetalleRecetas extends AppCompatActivity {
         txtPorciones=findViewById(R.id.txtPorciones);
         txtCalorias=findViewById(R.id.txtCalorias);
         txtInversion=findViewById(R.id.txtInversion);
+
+        txtEditar=findViewById(R.id.txtEditar);
+        txtEditar.setVisibility(View.GONE);
+
 
 
 
