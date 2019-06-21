@@ -231,33 +231,15 @@ public class UsuarioHome  extends AppCompatActivity {
         dbProvider.tablaFeed().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
+                feeds.clear();
 
                 if (dataSnapshot.exists()) {
-                    Long timeStamp = 0L;
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Feed feed = snapshot.getValue(Feed.class);
 
-
-
-
-
-                        /*
-                        if (snapshot.getKey().equals("timestamp")){
-                            timeStamp = Long.valueOf(snapshot.getValue().toString());
-
-                            feed.getTimestamp();
-
-                        }
-
-*/
-  //                      getDate(timeStamp);
                         feeds.add(feed);
                         adapterFeed.notifyDataSetChanged();
-
-
 
                     }
                 }
@@ -276,14 +258,7 @@ public class UsuarioHome  extends AppCompatActivity {
 
 
 
-    private String getDate(Long timeStamp) {
 
-        Calendar cal = Calendar.getInstance(Locale.getDefault());
-        cal.setTimeInMillis(timeStamp*1000);
-        String date = DateFormat.format("dd-MM-yyyy hh:mm",cal).toString();
-
-        return date;
-    }
 
 
     @Override
@@ -302,6 +277,16 @@ public class UsuarioHome  extends AppCompatActivity {
 
     }
 
+
+
+    private String getDate(Long timeStamp) {
+
+        Calendar cal = Calendar.getInstance(Locale.getDefault());
+        cal.setTimeInMillis(timeStamp*1000);
+        String date = DateFormat.format("dd-MM-yyyy hh:mm",cal).toString();
+
+        return date;
+    }
     private void Compare() {
 
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
@@ -343,7 +328,6 @@ public class UsuarioHome  extends AppCompatActivity {
         ezzeearnRef.addValueEventListener(eventListener);
 
     }
-
     private void saveTime() {
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         rootRef.child(Contants.TABLA_FEED).child("timestamp").setValue(ServerValue.TIMESTAMP);

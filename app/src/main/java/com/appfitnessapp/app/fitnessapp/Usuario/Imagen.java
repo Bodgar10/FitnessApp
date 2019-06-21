@@ -40,20 +40,20 @@ public class Imagen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_14_feed_imagen);
 
-        imgImagen=findViewById(R.id.imgImagen);
-
+        //ids = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        //id=FirebaseStorage.getInstance().getReference().child("url_tipo");
+        //  mStorage= FirebaseStorage.getInstance().getReference();
 
         dbProvider = new DBProvider();
-
-        //ids = FirebaseAuth.getInstance().getCurrentUser().getUid();
-         //id=FirebaseStorage.getInstance().getReference().child("url_tipo");
-
 
         Bundle extras = getIntent().getExtras();
         assert extras != null;
         tipo =extras.getString("imagen");
 
-      //  mStorage= FirebaseStorage.getInstance().getReference();
+        imgImagen=findViewById(R.id.imgImagen);
+
+
+
 
 
         bajarFeed();
