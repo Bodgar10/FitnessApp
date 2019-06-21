@@ -101,15 +101,11 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
     public void onBindViewHolder(@NonNull AdapterFeed.FeedViewHolder holder, int position) {
         Feed feed = feeds.get(position);
 
-
-
         holder.txtNombreAdmin.setText(feed.getNombre_admin());
         holder.txtDescripcion.setText(feed.getDescripcion());
         holder.txtPrecio.setText(feed.getCosto_pdf());
         holder.txtHora.setText(feed.getTimestamp());
         holder.txtTipoFeed.setText(feed.getTipo_feed());
-
-
 
       /*
         holder.txtHora= (TextView) ServerValue.TIMESTAMP;
@@ -121,64 +117,222 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
 
 */
 
-            if (feed.getTipo_feed().equals(Contants.VIDEO)) {
-                holder.txtPrecio.setVisibility(View.GONE);
+        if (feed.getTipo_feed().equals(Contants.VIDEO)) {
+            holder.txtPrecio.setVisibility(View.GONE);
 
+        } else if (feed.getTipo_feed().equals(Contants.IMAGEN)) {
+            holder.txtPrecio.setVisibility(View.GONE);
+            holder.txtTipoFeed.setVisibility(View.GONE);
+        } else if (feed.getTipo_feed().equals(Contants.PDF) && feed.is_gratis) {
+            holder.txtPrecio.setText("GRATIS");
+            if (feed.getTipo_feed().equals(Contants.PDF) && !feed.is_gratis) {
+                holder.txtPrecio.setText("12");
+            }
+        }
+
+
+        //---------------------------------------------------------------------------------------------------------
+        String timest = feed.getTimestamp();
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        SimpleDateFormat sfdMin = new SimpleDateFormat("mm", Locale.getDefault());
+        String minutosHoy = sfdMin.format(Calendar.getInstance().getTime());
+        int nowMin = Integer.parseInt(minutosHoy);
+
+        SimpleDateFormat sfdHoras = new SimpleDateFormat("HH", Locale.getDefault());
+        String horasHoy = sfdHoras.format(Calendar.getInstance().getTime());
+        int nowHoras = Integer.parseInt(horasHoy);
+
+        SimpleDateFormat sfdDias = new SimpleDateFormat("dd", Locale.getDefault());
+        String diasHoy = sfdDias.format(Calendar.getInstance().getTime());
+        int nowDias = Integer.parseInt(diasHoy);
+
+
+        /*
+        SimpleDateFormat sfdMeses = new SimpleDateFormat("MM", Locale.getDefault());
+        String mesesHoy = sfdMeses.format(Calendar.getInstance().getTime());
+        int nowMeses = Integer.parseInt(mesesHoy);
+
+*/
+        //////////////////////////////////////////////////////////////////////////////////////7
+
+
+        SimpleDateFormat minutos = new SimpleDateFormat("mm", Locale.getDefault());
+        java.util.Date currenTimeZoneMin = new java.util.Date((long) Double.parseDouble(timest.trim())* 1000);
+        String textMin = minutos.format(currenTimeZoneMin);
+        int min = Integer.parseInt(textMin);
+
+
+        SimpleDateFormat horas = new SimpleDateFormat("HH", Locale.getDefault());
+        java.util.Date currenTimeZoneHoras = new java.util.Date((long)  Double.parseDouble(timest.trim()) * 1000);
+        String textHor = horas.format(currenTimeZoneHoras);
+        int hour = Integer.parseInt(textHor);
+
+
+        SimpleDateFormat dias = new SimpleDateFormat("dd", Locale.getDefault());
+        java.util.Date currenTimeZoneDias = new java.util.Date((long) Double.parseDouble(timest.trim())* 1000);
+        String textDias = dias.format(currenTimeZoneDias);
+        int days = Integer.parseInt(textDias);
+
+
+        /*
+        SimpleDateFormat meses = new SimpleDateFormat("MM", Locale.getDefault());
+        java.util.Date currenTimeZoneMeses = new java.util.Date((long) Double.parseDouble(timest.trim()) * 1000);
+        String textMeses = meses.format(currenTimeZoneMeses);
+        int month = Integer.parseInt(textMeses);
+
+*/
+
+        int minutosTotal = nowMin - min;
+        int horasTotal = nowHoras - hour;
+        int diasTotal = nowDias - days;
+
+
+        int Total = minutosTotal;
+
+        int Tutu = horasTotal;
+
+        int DiasBien = diasTotal;
+
+
+        /*
+        if (DiasBien>=7){
+            if (DiasBien > 30) {
+
+                holder.txtHora.setText("Hace" + (DiasBien / 30) + "meses.");
+            } else if (DiasBien > 360) {
+                holder.txtHora.setText("Hace" + (DiasBien / 360) + "año.");
+
+            } else {
+
+                holder.txtHora.setText("Hace" + (DiasBien / 7) + "semana.");
 
             }
 
-            else if (feed.getTipo_feed().equals(Contants.IMAGEN)) {
-                holder.txtPrecio.setVisibility(View.GONE);
-                holder.txtTipoFeed.setVisibility(View.GONE);
+        }
 
+        else if (DiasBien<7){
+            holder.txtHora.setText("Hace" + DiasBien + "dias.");
+
+        }
+
+
+        else if (Tutu>=1 && Tutu<24){
+            holder.txtHora.setText("Hace" + Tutu + " horas.");
+
+        }
+
+        else if (Total>1 && Total<60){
+            holder.txtHora.setText("Hace" + Total + " min.");
+
+        }
+
+
+        */
+
+        if (Total>=1 && Total<60) {
+            holder.txtHora.setText("Hace " + Total + "  min.");
+
+            if (Tutu>=1 && Tutu<24){
+                holder.txtHora.setText("Hace " + Tutu + "  horas.");
 
             }
 
-            else if ( feed.getTipo_feed().equals(Contants.PDF)&&feed.is_gratis) {
-                holder.txtPrecio.setText("GRATIS");
+        }
+
+        else if (DiasBien>=7) {
+            if (DiasBien > 30) {
+
+                holder.txtHora.setText("Hace " + (DiasBien / 30) + " meses.");
+            } else if (DiasBien > 360) {
+                holder.txtHora.setText("Hace " + (DiasBien / 360) + " año.");
+
+            } else {
+
+                holder.txtHora.setText("Hace " + (DiasBien / 7) + " semanas.");
+
+            }
+        }
+            else if (DiasBien<7){
+                holder.txtHora.setText("Hace " + DiasBien + " dias.");
+
+        }
 
 
-                if (feed.getTipo_feed().equals(Contants.PDF)&&!feed.is_gratis) {
-                    holder.txtPrecio.setText("12");
 
+
+
+
+
+
+        /*
+        if (horasTotal ==0 && (minutosTotal>=1 && minutosTotal <=59)){
+
+            holder.txtHora.setText("Hace"+Total+" min.");
+        }
+
+
+
+        else if (minutosTotal <60 && (horasTotal>=1 && horasTotal <= 23)){
+            holder.txtHora.setText("Hace "+Tutu+" hr.");
+
+
+        }
+
+
+*/
+
+        /*
+
+        else if (hour>23&&days>=1){
+
+            if (month==1||month==3||month==5||month==7||month==8||month==10||month==12){
+
+                if (days>=1&&days<=31){
+
+                    holder  .txtHora.setText("hace"+textDias+"dias.");
+
+                }
+
+            }
+
+            else if (month==4||month==6||month==9||month==11){
+
+                if (days>=1&&days<=30){
+
+                    holder  .txtHora.setText("hace"+textDias+"dias.");
+
+                }
+
+            }
+
+            else if (month==2){
+
+                if (days>=1&&days<=28||days<=29){
+
+                    holder  .txtHora.setText("hace"+textDias+"dias.");
 
                 }
 
             }
 
 
-
-            /*
-        SimpleDateFormat minutos = new SimpleDateFormat("mm", Locale.getDefault());
-        java.util.Date currenTimeZoneMin=new java.util.Date((long)1559177288*1000);
-        String textMin = minutos.format(currenTimeZoneMin);
-        int min=Integer.parseInt(textMin);
-
-
-        SimpleDateFormat horas = new SimpleDateFormat("HH", Locale.getDefault());
-        java.util.Date currenTimeZoneHoras=new java.util.Date((long)1560620912.713327*1000);
-        String textHor = horas.format(currenTimeZoneHoras);
-        int hour=Integer.parseInt(textHor);
-
-
-
-        if (hour ==0 && (min>=1 && min <=59)){
-
-            saveTime(holder.txtHora);
-            holder.txtHora.setText("Hace "+textMin+" min");
-
         }
-        else if (min <60 && (hour>=1 && hour <= 23)){
-            holder.txtHora.setText("Hace "+textHor+" hr.");
 
-        }
+*/
         else {
             holder.txtHora.setText("");
 
         }
 
 
-*/
+//---------------------------------------------------------------------------------------------------------------
+
+
 
 
         if (!feed.getImagen_feed().equals("nil")){
@@ -263,4 +417,20 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
     }
 
 
+    /*
+    public void  hora(){
+        SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String date = sfd.format(new Date(timestamp));
+
+
+    }
+
+*/
+
+
+    public void Comprobar() {
+
+
+
+    }
 }

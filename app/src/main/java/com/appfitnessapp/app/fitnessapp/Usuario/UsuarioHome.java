@@ -225,7 +225,7 @@ public class UsuarioHome  extends AppCompatActivity {
 
     public void bajarFeed(){
 
-//        feeds.removeAll(feeds);
+      //  feeds.removeAll(feeds);
 
         dbProvider = new DBProvider();
         dbProvider.tablaFeed().addValueEventListener(new ValueEventListener() {
@@ -239,6 +239,7 @@ public class UsuarioHome  extends AppCompatActivity {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Feed feed = snapshot.getValue(Feed.class);
+
 
 
 
