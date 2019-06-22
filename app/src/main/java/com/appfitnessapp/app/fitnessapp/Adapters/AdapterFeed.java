@@ -42,13 +42,8 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
 
     private View.OnClickListener listener;
     ArrayList<Feed> feeds;
-    URL imageURL = null;
-    HttpURLConnection connection = null;
     static DBProvider dbProvider;
-    private  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
 
-
-    Bitmap bm = null;
     private static final String TAG = "BAJARINFO:";
 
     public static class FeedViewHolder extends RecyclerView.ViewHolder{
@@ -107,15 +102,7 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
         holder.txtHora.setText(feed.getTimestamp());
         holder.txtTipoFeed.setText(feed.getTipo_feed());
 
-      /*
-        holder.txtHora= (TextView) ServerValue.TIMESTAMP;
-        long unixTime = feeds.get(position).timestamp;
-        Date date =new Date(unixTime);
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("America/Mexico_City"));
-        String time = simpleDateFormat.format(date);
-        holder.txtHora.setText(time);
 
-*/
 
         if (feed.getTipo_feed().equals(Contants.VIDEO)) {
             holder.txtPrecio.setVisibility(View.GONE);
@@ -152,47 +139,10 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
         int nowDias = Integer.parseInt(diasHoy);
 
 
-        /*
-        SimpleDateFormat sfdMeses = new SimpleDateFormat("MM", Locale.getDefault());
-        String mesesHoy = sfdMeses.format(Calendar.getInstance().getTime());
-        int nowMeses = Integer.parseInt(mesesHoy);
-
-*/
-        //////////////////////////////////////////////////////////////////////////////////////7
-
-
-        /*
-
-        Calendar calendar=Calendar.getInstance(TimeZone.getTimeZone("America/Mexico City"));
-        TimeZone tz =calendar.getTimeZone();
-
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("mm");
-        simpleDateFormat.setTimeZone(tz);
-        java.util.Date currenTimeZoneHorasPrueba = new java.util.Date((long)  Double.parseDouble(timest.trim()) * 1000);
-        String textHorPrueba = simpleDateFormat.format(currenTimeZoneHorasPrueba);
-        int pruebaMin = Integer.parseInt(textHorPrueba);
-
-        SimpleDateFormat simpleDateFormatPrueba=new SimpleDateFormat("HH");
-        simpleDateFormatPrueba.setTimeZone(tz);
-        java.util.Date currenTimeZoneHorasPruebaFinal = new java.util.Date((long)  Double.parseDouble(timest.trim()) * 1000);
-        String textHorPruebaFinal = simpleDateFormatPrueba.format(currenTimeZoneHorasPruebaFinal);
-        int pruebaFinalHor = Integer.parseInt(textHorPruebaFinal);
-
-
-        SimpleDateFormat simpleDateFormatPruebaDias=new SimpleDateFormat("dd");
-        simpleDateFormatPruebaDias.setTimeZone(tz);
-        java.util.Date currenTimeZoneHorasPruebaFinalDias = new java.util.Date((long)  Double.parseDouble(timest.trim()) * 1000);
-        String textHorPruebaFinalDias = simpleDateFormatPruebaDias.format(currenTimeZoneHorasPruebaFinalDias);
-        int pruebaFinalDias = Integer.parseInt(textHorPruebaFinalDias);
-
-
-*/
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
 
-        Calendar calendar=Calendar.getInstance(TimeZone.getTimeZone("GMT"));
-        TimeZone tz =calendar.getTimeZone();
+
 
         SimpleDateFormat minutos = new SimpleDateFormat("mm",Locale.getDefault());
         java.util.Date currenTimeZoneMin = new java.util.Date((long) Double.parseDouble(timest.trim())* 1000);
@@ -213,113 +163,48 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-        /*
-        SimpleDateFormat meses = new SimpleDateFormat("MM", Locale.getDefault());
-        java.util.Date currenTimeZoneMeses = new java.util.Date((long) Double.parseDouble(timest.trim()) * 1000);
-        String textMeses = meses.format(currenTimeZoneMeses);
-        int month = Integer.parseInt(textMeses);
-
-*/
-
-
 
         int minutosTotal = nowMin - min;
         int horasTotal = nowHoras - hour;
         int diasTotal = nowDias - days;
 
-        int Total = minutosTotal;
+        int minTotal = minutosTotal;
 
-        int Tutu = horasTotal;
+        int hourTotal = horasTotal;
 
-        int DiasBien = diasTotal;
-
-
-
-/*
+        int daysTotal = diasTotal;
 
 
-        int pruebatotalMin= nowMin-pruebaMin;
-        int pruebatotlafinalHor=nowHoras-pruebaFinalHor;
-        int pruebaDias = nowDias-pruebaFinalDias;
+        if (daysTotal>=7) {
+            if (daysTotal > 30) {
 
-        int PruebafinalMin = pruebatotalMin;
-        int pruebatodoHoras = pruebatotlafinalHor;
-        int pruebaDiasfinal=pruebaDias;
-
-
-*/
-
-
-
-
-        /*
-        if (DiasBien>=7){
-            if (DiasBien > 30) {
-
-                holder.txtHora.setText("Hace" + (DiasBien / 30) + "meses.");
-            } else if (DiasBien > 360) {
-                holder.txtHora.setText("Hace" + (DiasBien / 360) + "año.");
+                holder.txtHora.setText("Hace " + (daysTotal / 30) + " meses.");
+            } else if (daysTotal > 360) {
+                holder.txtHora.setText("Hace " + (daysTotal / 360) + " año.");
 
             } else {
 
-                holder.txtHora.setText("Hace" + (DiasBien / 7) + "semana.");
-
-            }
-
-        }
-
-        else if (DiasBien<7){
-            holder.txtHora.setText("Hace" + DiasBien + "dias.");
-
-        }
-
-
-        else if (Tutu>=1 && Tutu<24){
-            holder.txtHora.setText("Hace" + Tutu + " horas.");
-
-        }
-
-        else if (Total>1 && Total<60){
-            holder.txtHora.setText("Hace" + Total + " min.");
-
-        }
-
-
-        */
-
-
-
-
-        if (DiasBien>=7) {
-            if (DiasBien > 30) {
-
-                holder.txtHora.setText("Hace " + (DiasBien / 30) + " meses.");
-            } else if (DiasBien > 360) {
-                holder.txtHora.setText("Hace " + (DiasBien / 360) + " año.");
-
-            } else {
-
-                holder.txtHora.setText("Hace " + (DiasBien / 7) + " semanas.");
+                holder.txtHora.setText("Hace " + (daysTotal / 7) + " semanas.");
 
             }
         }
 
-        else if (DiasBien<7){
-            if (DiasBien==1){
-                holder.txtHora.setText("Hace " + DiasBien + " dia.");
+        else if (daysTotal<7){
+            if (daysTotal==1){
+                holder.txtHora.setText("Ayer a las " +hour+ ":" + min +". ");
 
             }
             else
-                holder.txtHora.setText("Hace " + DiasBien + " dias.");
-            if (DiasBien==0) {
-                if (Tutu >= 1 && Tutu < 24) {
-                    holder.txtHora.setText("Hace " + Tutu + "  hr.");
+                holder.txtHora.setText("Hace " + daysTotal + " dias.");
+            if (daysTotal==0) {
+                if (hourTotal >= 1 && hourTotal < 24) {
+                    holder.txtHora.setText("Hace " + hourTotal + "  hr.");
 
                 }
-                else if (Tutu <1) {
+                else if (hourTotal <1) {
 
-                    if (Total <60) {
-                        holder.txtHora.setText("Hace " + Total+ "  min.");
+                    if (minTotal <60) {
+                        holder.txtHora.setText("Hace " + minTotal+ "  min.");
 
                     }
 
@@ -330,75 +215,7 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
         }
 
 
-
-
-
-
-
-        /*
-        if (horasTotal ==0 && (minutosTotal>=1 && minutosTotal <=59)){
-
-            holder.txtHora.setText("Hace"+Total+" min.");
-        }
-
-
-
-        else if (minutosTotal <60 && (horasTotal>=1 && horasTotal <= 23)){
-            holder.txtHora.setText("Hace "+Tutu+" hr.");
-
-
-        }
-
-
-*/
-
-        /*
-
-        else if (hour>23&&days>=1){
-
-            if (month==1||month==3||month==5||month==7||month==8||month==10||month==12){
-
-                if (days>=1&&days<=31){
-
-                    holder  .txtHora.setText("hace"+textDias+"dias.");
-
-                }
-
-            }
-
-            else if (month==4||month==6||month==9||month==11){
-
-                if (days>=1&&days<=30){
-
-                    holder  .txtHora.setText("hace"+textDias+"dias.");
-
-                }
-
-            }
-
-            else if (month==2){
-
-                if (days>=1&&days<=28||days<=29){
-
-                    holder  .txtHora.setText("hace"+textDias+"dias.");
-
-                }
-
-            }
-
-
-        }
-
-*/
-        else {
-            holder.txtHora.setText("");
-
-        }
-
-
 //---------------------------------------------------------------------------------------------------------------
-
-
 
 
         if (!feed.getImagen_feed().equals("nil")){
@@ -427,11 +244,7 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
                 e.printStackTrace();
             }
 
-
-
         }
-
-
 
 
     }
@@ -482,21 +295,4 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
         rootRef.child(Contants.TABLA_FEED).child("timestamp").setValue(ServerValue.TIMESTAMP);
     }
 
-
-    /*
-    public void  hora(){
-        SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String date = sfd.format(new Date(timestamp));
-
-
-    }
-
-*/
-
-
-    public void Comprobar() {
-
-
-
-    }
 }
