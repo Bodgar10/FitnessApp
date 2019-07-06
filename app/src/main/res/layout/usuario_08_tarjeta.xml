@@ -104,7 +104,7 @@
                 android:layout_marginBottom="15dp"
                 android:text="Cancelar"
                 android:textAllCaps="true"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/naranja" />
 
         </LinearLayout>
 
@@ -113,9 +113,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/black"
+            android:background="@color/naranja"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
 
             <TextView
@@ -126,6 +126,15 @@
                 android:text="Comprar"
                 android:textAllCaps="true"
                 android:textColor="@color/blanco" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@null"
+                android:tint="@color/blanco"
+                android:layout_marginStart="10dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_flecha" />
 
         </LinearLayout>
 

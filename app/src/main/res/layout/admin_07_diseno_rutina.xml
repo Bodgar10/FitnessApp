@@ -9,7 +9,7 @@
 
 
     <LinearLayout
-        android:background="@drawable/boton_gris_redondo"
+        android:background="@drawable/boton_naranja_contorno"
         android:orientation="vertical"
         android:gravity="center"
         android:layout_marginTop="10dp"
@@ -28,6 +28,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="5dp"
             android:background="@null"
+            android:tint="@color/naranja"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_mas" />
 
@@ -40,7 +41,7 @@
             android:text="Subir foto o video"
             android:textAllCaps="false"
             android:textStyle="bold"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/naranja"
             android:textSize="13sp" />
 
 

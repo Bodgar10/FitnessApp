@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/imgVideo"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_alignStart="@+id/imgPrincipal"
         android:layout_alignTop="@+id/linearBoton"
         android:layout_alignEnd="@+id/imgPrincipal"
@@ -30,7 +30,8 @@
         android:layout_marginTop="493dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="530dp"
-        app:srcCompat="@drawable/ic_playvideo" />
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/play_icono" />
 
 
     <TextView
@@ -99,22 +100,22 @@
         <LinearLayout
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:layout_marginTop="15dp"
+            android:background="@drawable/tag_menu_btnderecho"
             android:layout_marginBottom="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="50dp">
 
             <TextView
-                android:background="@drawable/boton_redondo_sinfondo"
                 android:id="@+id/btnRecetas"
                 android:padding="10dp"
                 android:gravity="center"
                 android:textColor="@color/blanco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="2dp"
+                android:layout_marginStart="15dp"
                 android:layout_weight="1"
                 android:text="Recetas" />
 
@@ -122,10 +123,9 @@
             <TextView
                 android:padding="10dp"
                 android:gravity="center"
-                android:layout_marginStart="2dp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/blanco"
+                android:layout_marginEnd="12dp"
                 android:layout_width="wrap_content"
-                android:background="@drawable/boton_redondo_blanco"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Workouts" />
@@ -176,9 +176,9 @@
                     android:layout_marginTop="3dp"
                     android:layout_marginBottom="3dp"
                     android:background="@null"
-                    android:scaleType="centerCrop"
+                    android:scaleType="centerInside"
                     android:tint="@android:color/darker_gray"
-                    app:srcCompat="@drawable/ic_home" />
+                    app:srcCompat="@drawable/ic_homenuevo" />
 
                 <TextView
                     android:id="@+id/txtHome"
@@ -209,14 +209,14 @@
 
                 <ImageButton
                     android:id="@+id/imgPlan"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginBottom="3dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:background="@null"
-                    android:scaleType="centerCrop"
-                    android:tint="@android:color/black"
-                    app:srcCompat="@drawable/ic_restaurant" />
+                    android:scaleType="centerInside"
+                    android:tint="@color/naranja"
+                    app:srcCompat="@drawable/ic_miplan_icono" />
 
                 <TextView
                     android:id="@+id/txtPlan"
@@ -224,7 +224,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
                     android:text="Mi plan"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/naranja"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -249,9 +249,9 @@
                     android:layout_marginTop="3dp"
                     android:layout_marginBottom="3dp"
                     android:background="@null"
-                    android:scaleType="centerCrop"
+                    android:scaleType="centerInside"
                     android:tint="@android:color/darker_gray"
-                    app:srcCompat="@drawable/ic_person" />
+                    app:srcCompat="@drawable/ic_usuario" />
 
                 <TextView
                     android:id="@+id/txtPerfil"
@@ -284,9 +284,9 @@
                     android:layout_marginTop="3dp"
                     android:layout_marginBottom="3dp"
                     android:background="@null"
-                    android:scaleType="centerCrop"
+                    android:scaleType="centerInside"
                     android:tint="@android:color/darker_gray"
-                    app:srcCompat="@drawable/ic_search" />
+                    app:srcCompat="@drawable/ic_chatn" />
 
                 <TextView
                     android:id="@+id/txtChat"

@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/boton_negro_completo"
+                android:background="@drawable/boton_naranja_completo"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="Recetas"

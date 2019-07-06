@@ -139,6 +139,12 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
         int nowDias = Integer.parseInt(diasHoy);
 
 
+        SimpleDateFormat sfdMes = new SimpleDateFormat("MM", Locale.getDefault());
+        String MesHoy = sfdMes.format(Calendar.getInstance().getTime());
+        int nowMes = Integer.parseInt(MesHoy);
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
 
@@ -160,6 +166,19 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
         String textDias = dias.format(currenTimeZoneDias);
         int days = Integer.parseInt(textDias);
 
+        SimpleDateFormat MESPRUEBA = new SimpleDateFormat("MM", Locale.getDefault());
+        java.util.Date currenTimeZoneMESPRUEBA = new java.util.Date((long) Double.parseDouble(timest.trim())* 1000);
+        String textMESPRUEBA = MESPRUEBA.format(currenTimeZoneMESPRUEBA);
+        int MESPRUEBAFINAL = Integer.parseInt(textMESPRUEBA);
+
+
+
+
+        SimpleDateFormat mes = new SimpleDateFormat("MMMM", Locale.getDefault());
+        java.util.Date currenTimeZoneMes = new java.util.Date((long) Double.parseDouble(timest.trim())* 1000);
+        String textMes = mes.format(currenTimeZoneMes);
+//        int Mes = Integer.parseInt(textMes);
+        String mesCompleto= String.valueOf(textMes);
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -175,36 +194,30 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
         int daysTotal = diasTotal;
 
 
-        if (daysTotal>=7) {
-            if (daysTotal > 30) {
 
-                holder.txtHora.setText("Hace " + (daysTotal / 30) + " meses.");
-            } else if (daysTotal > 360) {
-                holder.txtHora.setText("Hace " + (daysTotal / 360) + " año.");
+        if (nowMes == MESPRUEBAFINAL){
 
-            } else {
-
-                holder.txtHora.setText("Hace " + (daysTotal / 7) + " semanas.");
-
+            if (daysTotal>=7) {
+                holder.txtHora.setText(days +" de " + mesCompleto+" a las " + hour + ":"+min+". ");
             }
-        }
-
-        else if (daysTotal<7){
-            if (daysTotal==1){
-                holder.txtHora.setText("Ayer a las " +hour+ ":" + min +". ");
-
-            }
-            else
-                holder.txtHora.setText("Hace " + daysTotal + " dias.");
-            if (daysTotal==0) {
-                if (hourTotal >= 1 && hourTotal < 24) {
-                    holder.txtHora.setText("Hace " + hourTotal + "  hr.");
+            else if (daysTotal<7){
+                if (daysTotal==1){
+                    holder.txtHora.setText("Ayer a las " +hour+ ":" + min +". ");
 
                 }
-                else if (hourTotal <1) {
+                else
+                    holder.txtHora.setText("Hace " + daysTotal + " dias.");
+                if (daysTotal==0) {
+                    if (hourTotal >= 1 && hourTotal < 24) {
+                        holder.txtHora.setText("Hace " + hourTotal + "  hr.");
 
-                    if (minTotal <60) {
-                        holder.txtHora.setText("Hace " + minTotal+ "  min.");
+                    }
+                    else if (hourTotal <1) {
+
+                        if (minTotal <60) {
+                            holder.txtHora.setText("Hace " + minTotal+ "  min.");
+
+                        }
 
                     }
 
@@ -213,6 +226,13 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
             }
 
         }
+
+        else if (nowMes != MESPRUEBAFINAL){
+
+            holder.txtHora.setText(days +" de " + mesCompleto+" a las " + hour + ":"+min+". ");
+
+        }
+
 
 
 //---------------------------------------------------------------------------------------------------------------

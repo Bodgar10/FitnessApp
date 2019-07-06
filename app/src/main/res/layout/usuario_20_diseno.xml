@@ -71,12 +71,12 @@
             android:layout_marginBottom="10dp"
             android:layout_gravity="end|center"
             android:gravity="end"
-            android:textColor="@color/blanco"
+            android:textColor="@color/naranja"
             android:id="@+id/checkBoxRutina"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
-            android:buttonTint="@color/blanco"
-            android:shadowColor="@color/blanco"
+            android:buttonTint="@color/naranja"
+            android:shadowColor="@color/naranja"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

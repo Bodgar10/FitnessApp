@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -73,7 +73,7 @@
                 android:textAllCaps="true"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="15dp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/naranja"
                 android:text="Cancelar"
                 />
 
@@ -82,9 +82,10 @@
         <LinearLayout
             android:id="@+id/linearComprarPost"
             android:gravity="center"
-            android:background="@android:color/black"
-            android:orientation="vertical"
+            android:background="@color/naranja"
+            android:orientation="horizontal"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -94,10 +95,19 @@
                 android:layout_height="wrap_content"
                 android:text="Comprar"
                 android:textColor="@color/blanco"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:textAllCaps="true"
                 />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@null"
+                android:tint="@color/blanco"
+                android:layout_marginStart="10dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_flecha" />
 
         </LinearLayout>
 

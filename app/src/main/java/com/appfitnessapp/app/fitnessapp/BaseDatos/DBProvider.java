@@ -71,5 +71,46 @@ public class DBProvider {
 
     }
 
+    public void updatePhoto(String photo, String id){
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.FOTO_USUARIO, photo);
+        usersRef().child(id).updateChildren(updates);
+    }
+
+    public void updateName(String name, String id) {
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.NOMBRE_USUARIO, name);
+        usersRef().child(id).updateChildren(updates);
+    }
+
+    public void updateInfo(String name,String photo,String email,String password,String id) {
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.NOMBRE_USUARIO, name);
+        updates.put(Contants.FOTO_USUARIO, photo);
+        updates.put(Contants.EMAIL_USUARIO, email);
+        updates.put(Contants.CONTRASENA_USUARIO, password);
+        usersRef().child(id).updateChildren(updates);
+    }
+
+    public void updateEmail(String email, String id) {
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.EMAIL_USUARIO, email);
+        usersRef().child(id).updateChildren(updates);
+    }
+    public void updatePass(String pass, String id) {
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.CONTRASENA_USUARIO, pass);
+        usersRef().child(id).updateChildren(updates);
+
+    }
+
+
 
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -62,7 +62,7 @@
             android:gravity="center|start"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:background="@android:color/black"
+            android:background="@color/naranja"
             android:layout_weight="1"
             android:layout_height="match_parent">
 
@@ -85,8 +85,8 @@
         <LinearLayout
             android:id="@+id/linearComprarPDF"
             android:gravity="center"
-            android:background="@android:color/black"
-            android:orientation="vertical"
+            android:background="@color/naranja"
+            android:orientation="horizontal"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -101,6 +101,15 @@
                 android:layout_marginBottom="20dp"
                 android:textAllCaps="true"
                 />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@null"
+                android:tint="@color/blanco"
+                android:layout_marginStart="10dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_flecha" />
 
         </LinearLayout>
 

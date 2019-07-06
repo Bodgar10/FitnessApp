@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.appfitnessapp.app.fitnessapp.Admin.AsesoriasAdmin;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
@@ -116,6 +118,15 @@ public class SplashPantalla extends AppCompatActivity {
                                     Intent intent = new Intent(SplashPantalla.this, UsuarioHome.class);
                                     startActivity(intent);
                                     SplashPantalla.this.finish();
+                                }
+
+                                else if (usuario.getTipo_usuario().equals(Contants.ADMIN)) {
+                                    progressDialog.dismiss();
+                                    Intent intent = new Intent(SplashPantalla.this, AsesoriasAdmin.class);
+                                    startActivity(intent);
+                                    SplashPantalla.this.finish();
+                                }else{
+                                    Toast.makeText(SplashPantalla.this, "Aún tu cuenta no está activa, te contactaremos cuando esté lista.", Toast.LENGTH_SHORT).show();
                                 }
 
                             }

@@ -44,8 +44,8 @@
                     android:layout_marginTop="3dp"
                     android:tint="@android:color/darker_gray"
                     android:background="@null"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_home" />
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/ic_homenuevo"/>
 
                 <TextView
                     android:id="@+id/txtHome"
@@ -83,8 +83,8 @@
                     android:layout_marginTop="3dp"
                     android:background="@null"
                     android:tint="@android:color/darker_gray"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_restaurant" />
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/ic_miplan_icono" />
 
                 <TextView
                     android:id="@+id/txtPlan"
@@ -118,9 +118,9 @@
                     android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
                     android:background="@null"
-                    android:scaleType="centerCrop"
+                    android:scaleType="centerInside"
                     android:tint="@android:color/darker_gray"
-                    app:srcCompat="@drawable/ic_person" />
+                    app:srcCompat="@drawable/ic_usuario" />
 
                 <TextView
                     android:id="@+id/txtPerfil"
@@ -149,21 +149,21 @@
 
                 <ImageButton
                     android:id="@+id/imgChat"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginBottom="3dp"
-                    android:layout_marginTop="3dp"
-                    android:tint="@android:color/black"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:tint="@color/naranja"
                     android:background="@null"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_search" />
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/ic_chatn" />
 
                 <TextView
                     android:id="@+id/txtChat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/naranja"
                     android:textSize="12sp"
                     android:text="Chat" />
 

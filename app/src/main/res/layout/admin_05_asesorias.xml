@@ -248,7 +248,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:layout_marginStart="0dp"
-        android:background="@android:color/black"
+        android:background="@color/naranja"
         android:gravity="center"
         android:orientation="vertical">
 

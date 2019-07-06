@@ -32,7 +32,7 @@
                 android:textStyle="bold"
                 android:text="Guardar"
                 android:textAllCaps="true"
-                android:textColor="@android:color/black"
+                android:textColor="@color/naranja"
                 android:textSize="15sp" />
 
 
@@ -72,7 +72,7 @@
                 android:layout_marginStart="2dp"
                 android:padding="10dp"
                 android:gravity="center"
-                android:background="@drawable/boton_negro_completo"
+                android:background="@drawable/boton_naranja_completo"
                 android:textColor="@color/blanco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
 
 
     <LinearLayout
-        android:background="@drawable/boton_gris_redondo"
+        android:background="@drawable/boton_naranja_completo"
         android:orientation="vertical"
         android:gravity="center"
         android:layout_marginStart="15dp"
@@ -103,6 +103,7 @@
             android:layout_marginTop="25dp"
             android:layout_marginBottom="5dp"
             android:background="@null"
+            android:tint="@color/blanco"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_mas" />
 
@@ -115,7 +116,7 @@
             android:text="Subir foto o video"
             android:textAllCaps="false"
             android:textStyle="bold"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/blanco"
             android:textSize="15sp" />
 
 
@@ -200,7 +201,7 @@
             android:layout_marginBottom="10dp"
             android:background="@null"
             android:scaleType="centerCrop"
-            android:tint="@color/negro"
+            android:tint="@color/naranja"
             app:srcCompat="@drawable/ic_mas" />
 
 

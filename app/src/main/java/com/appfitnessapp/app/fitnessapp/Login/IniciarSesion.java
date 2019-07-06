@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.appfitnessapp.app.fitnessapp.Admin.AsesoriasAdmin;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
@@ -145,7 +146,14 @@ public class IniciarSesion extends AppCompatActivity {
                                     startActivity(intent);
                                     IniciarSesion.this.finish();
                                 }
-
+                                else if (usuario.getTipo_usuario().equals(Contants.ADMIN)) {
+                                    progressDialog.dismiss();
+                                    Intent intent = new Intent(IniciarSesion.this, AsesoriasAdmin.class);
+                                    startActivity(intent);
+                                    IniciarSesion.this.finish();
+                                }else{
+                                        Toast.makeText(IniciarSesion.this, "Aún tu cuenta no está activa, te contactaremos cuando esté lista.", Toast.LENGTH_SHORT).show();
+                                    }
                             }
                         }
 

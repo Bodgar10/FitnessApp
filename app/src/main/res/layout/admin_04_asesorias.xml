@@ -23,7 +23,7 @@
             android:layout_gravity="end"
             android:layout_marginEnd="10dp"
             android:src="@mipmap/ic_launcher"
-            app:civ_border_color="#EEEEEE"
+            app:civ_border_color="@color/naranja"
             app:civ_border_width="1dp" />
 
 
@@ -60,7 +60,7 @@
 
 
             <TextView
-                android:background="@drawable/boton_negro_completo"
+                android:background="@drawable/boton_naranja_completo"
                 android:padding="10dp"
                 android:gravity="center"
                 android:layout_marginStart="2dp"

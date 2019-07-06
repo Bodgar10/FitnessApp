@@ -32,7 +32,7 @@
                 android:textStyle="bold"
                 android:text="Guardar"
                 android:textAllCaps="true"
-                android:textColor="@android:color/black"
+                android:textColor="@color/naranja"
                 android:textSize="15sp" />
 
 
@@ -62,7 +62,7 @@
                 android:id="@+id/button"
                 android:padding="10dp"
                 android:gravity="center"
-                android:background="@drawable/boton_negro_completo"
+                android:background="@drawable/boton_naranja_completo"
                 android:textColor="@color/blanco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -229,7 +229,7 @@
             android:layout_marginBottom="10dp"
             android:background="@null"
             android:scaleType="centerCrop"
-            android:tint="@color/negro"
+            android:tint="@color/naranja"
             app:srcCompat="@drawable/ic_mas" />
 
 
@@ -286,7 +286,7 @@
             android:layout_marginBottom="10dp"
             android:background="@null"
             android:scaleType="centerCrop"
-            android:tint="@color/negro"
+            android:tint="@color/naranja"
             app:srcCompat="@drawable/ic_mas" />
 
 

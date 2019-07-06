@@ -388,7 +388,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="0dp"
-        android:background="@android:color/black"
+        android:background="@color/naranja"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -397,7 +397,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/black"
             android:gravity="center|start"
             android:orientation="vertical">
 
@@ -422,9 +421,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/black"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
 
             <TextView
@@ -435,6 +433,15 @@
                 android:text="Comprar"
                 android:textAllCaps="true"
                 android:textColor="@color/blanco" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@null"
+                android:tint="@color/blanco"
+                android:layout_marginStart="10dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_flecha" />
 
         </LinearLayout>
 

@@ -94,16 +94,13 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="125"
-                android:textAllCaps="false"
-                android:textColor="@color/negro"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/tiempo_icono" />
 
 
             <TextView
@@ -135,16 +132,13 @@
             android:layout_marginBottom="5dp"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="1200 USD"
-                android:textAllCaps="false"
-                android:textColor="@color/negro"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/porciones_icono" />
 
 
             <TextView
@@ -176,17 +170,13 @@
             android:layout_marginBottom="5dp"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="4.8"
-                android:textAllCaps="false"
-                android:textColor="@color/negro"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/calorias_icono" />
 
             <TextView
                 android:id="@+id/txtCalorias"

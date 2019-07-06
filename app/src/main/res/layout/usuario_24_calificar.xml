@@ -56,9 +56,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:progressTint="@color/negro"
+                android:progressTint="@color/azul"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="40dp"
+                android:theme="@style/RatingBar"
                 android:numStars="5"
                 android:scaleX="1"
                 android:scaleY="1" />
@@ -117,7 +118,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/boton_gris_redondo"
+                android:background="@drawable/boton_naranja_contorno"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -127,8 +128,9 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="5dp"
                     android:background="@null"
+                    android:tint="@color/naranja"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_mas" />
+                    app:srcCompat="@drawable/agregar_icono" />
 
 
                 <TextView
@@ -139,7 +141,7 @@
                     android:gravity="center"
                     android:text="Subir foto antes"
                     android:textAllCaps="true"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/naranja"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -152,7 +154,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="15dp"
                 android:layout_weight="1"
-                android:background="@drawable/boton_gris_redondo"
+                android:background="@drawable/boton_naranja_contorno"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -162,8 +164,9 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="5dp"
                     android:background="@null"
+                    android:tint="@color/naranja"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_mas" />
+                    app:srcCompat="@drawable/agregar_icono" />
 
 
                 <TextView
@@ -174,7 +177,7 @@
                     android:gravity="center"
                     android:text="Subir foto despues"
                     android:textAllCaps="true"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/naranja"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -231,9 +234,9 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:layout_marginStart="0dp"
-        android:background="@android:color/black"
+        android:background="@color/naranja"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
 
         <TextView
@@ -246,6 +249,15 @@
             android:textColor="@color/blanco"
             android:textSize="14sp"
             android:textAllCaps="true" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@null"
+            android:tint="@color/blanco"
+            android:layout_marginStart="10dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_flecha" />
 
     </LinearLayout>
 

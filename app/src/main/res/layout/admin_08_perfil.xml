@@ -26,7 +26,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="@android:color/black"
+            android:background="@color/azul"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -352,7 +352,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/black"
+            android:background="@color/naranja"
             android:gravity="center"
             android:orientation="vertical">
 

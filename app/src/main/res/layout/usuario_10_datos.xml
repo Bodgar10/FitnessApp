@@ -90,27 +90,29 @@
 
             <ImageButton
                 android:id="@+id/imgHombre"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="250dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_height="250dp"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
-                app:srcCompat="@android:drawable/sym_def_app_icon" />
+                android:background="@null"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/hombre_noseleccionado" />
 
             <ImageButton
                 android:id="@+id/imgMujer"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_height="250dp"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
-                app:srcCompat="@android:drawable/sym_def_app_icon" />
+                android:scaleType="centerInside"
+                android:background="@null"
+                app:srcCompat="@drawable/mujer" />
 
         </LinearLayout>
 
