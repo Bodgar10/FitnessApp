@@ -24,7 +24,7 @@ public class AdapterPlanes extends RecyclerView.Adapter<AdapterPlanes.PlanesView
     public static class PlanesViewHolder extends RecyclerView.ViewHolder{
 
 
-        TextView txtTipoPlan,oferta,txtMeses,txtDescripcion;
+        TextView txtTipoPlan,txtMeses,txtDescripcion,txtPrecio;
 
         public PlanesViewHolder (View itemView) {
             super(itemView);
@@ -32,9 +32,10 @@ public class AdapterPlanes extends RecyclerView.Adapter<AdapterPlanes.PlanesView
 
 
             txtTipoPlan=itemView.findViewById(R.id.txtNombrePlan);
-            oferta=itemView.findViewById(R.id.txtOferta);
             txtMeses=itemView.findViewById(R.id.txtMeses);
             txtDescripcion=itemView.findViewById(R.id.txtDescripcionM);
+            txtPrecio=itemView.findViewById(R.id.txtPrecio);
+
 
 
         }
@@ -62,12 +63,10 @@ public class AdapterPlanes extends RecyclerView.Adapter<AdapterPlanes.PlanesView
 
 
 
-        holder.txtTipoPlan.setText(plan.getTipo_plan());
-        holder.txtDescripcion.setText(plan.getDescripcion());
-        holder.txtMeses.setText(plan.getMeses());
-        holder.oferta.setText(plan.getOferta());
-
-
+        holder.txtTipoPlan.setText(plan.getNombre_plan());
+        holder.txtDescripcion.setText(plan.getDescripcion_plan());
+        holder.txtMeses.setText(plan.getMeses_plan()+ " meses");
+        holder.txtPrecio.setText("$"+plan.getCosto_plan());
 
 
     }

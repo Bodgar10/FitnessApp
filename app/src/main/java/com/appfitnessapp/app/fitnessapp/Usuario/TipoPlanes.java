@@ -3,16 +3,25 @@ package com.appfitnessapp.app.fitnessapp.Usuario;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterPlanes;
+import com.appfitnessapp.app.fitnessapp.Arrays.Feed;
 import com.appfitnessapp.app.fitnessapp.Arrays.Planes;
+import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
+import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
+import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
 import com.appfitnessapp.app.fitnessapp.Login.Registro;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -20,7 +29,13 @@ public class TipoPlanes extends AppCompatActivity {
 
     RecyclerView recyclerView;
     AdapterPlanes adapter;
-    ArrayList<Planes> planes;
+    ArrayList<Planes> plan;
+    BajarInfo bajarInfo;
+    private static final String TAG = "BAJARINFO:";
+    static DBProvider dbProvider;
+
+    String costo;
+
 
 
 
@@ -28,6 +43,11 @@ public class TipoPlanes extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_06_planes);
+
+        bajarInfo = new BajarInfo();
+        dbProvider = new DBProvider();
+
+        bajarPlanes();
 
         recyclerView=findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -38,25 +58,11 @@ public class TipoPlanes extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         //  recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
         recyclerView.setLayoutManager(layoutManager);
-        planes = new ArrayList<>();
-        adapter=new AdapterPlanes(planes);
+        plan = new ArrayList<>();
+        adapter=new AdapterPlanes(plan);
         recyclerView.setAdapter(adapter);
 
 
-        Planes  planes0 = new Planes("Basico","Lo mas vendido","6 meses",
-                "El mejor plan para empezar con los ejercicios y a perder peso");
-
-        Planes  plane1 = new Planes("Intermedio","Para susperarse","8 meses",
-                "Plan mas completo para poder llevar a cabo una rutina mas espec ofkofkokfok fokfofkok ofkfofkfok ofkfofkfokfofko ializada");
-
-        Planes  planes2 = new Planes("Experto","Para susperarse","11 meses",
-                "El plan mas completo con todo lo que necesitas para perder peso tonificar el cuerpo y tener buena salud");
-
-
-
-        planes.add(planes0);
-        planes.add(plane1);
-        planes.add(planes2);
 
         adapter.notifyDataSetChanged();
 
@@ -65,6 +71,9 @@ public class TipoPlanes extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(TipoPlanes.this, MetodoPago.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("costo",costo);
+                intent.putExtras(bundle);
                 startActivity(intent);
 
 
@@ -72,6 +81,42 @@ public class TipoPlanes extends AppCompatActivity {
         });
 
     }
+
+
+    public void bajarPlanes(){
+
+
+        dbProvider = new DBProvider();
+        dbProvider.planes().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                plan.clear();
+
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Log.e(TAG, "Feed: " + dataSnapshot);
+                        Planes planes = snapshot.getValue(Planes.class);
+
+                        costo =String.valueOf(planes.getCosto_plan());
+
+                        plan.add(planes);
+                        adapter.notifyDataSetChanged();
+
+                    }
+                }
+                else {
+                    Log.e(TAG, "Feed: ");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "ERROR: ");
+            }
+        });
+
+    }
+
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
         final private int spanCount, spacing, spacing_top;

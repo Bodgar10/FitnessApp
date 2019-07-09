@@ -39,6 +39,55 @@ public class Contants {
     final public static String IMAGEN = "imagen";
 
 
+    //Asesoria
+    final public static String TABLA_ASESORIA_INFO = "asesoria_info";
+    final public static String ID_ASESORIA = "id_asesoria";
+    final public static String IMAGEN_PORTADA = "imagen_portada";
+    final public static String DESCRIPCION_ASESORIA = "descripcion_asesoria";
+    final public static String COSTO_ASESORIA = "costo_asesoria";
+    final public static String VIDEO_EXPLICATIVO = "video_explicativo";
+    final public static String RUTINAS_IMAGEN = "rutinas_imagen";
+    final public static String RUTINAS_DESCRIPCION = "rutinas_descripcion";
+    final public static String ALIMENTOS_IMAGEN = "alimentos_imagen";
+    final public static String ALIMENTOS_DESCRIPCION = "alimentos_descripcion";
+
+
+    //Valoraciones
+    final public static String TABLA_VALORACIONES_ASESORIA = "valoraciones_asesoria";
+    final public static String ID_VALORACION = "id_valoracion";
+    final public static String DESCRIPCION_VALORACION = "descripcion_valoracion";
+    final public static String ID_USUARIO_VALORACION = "nombre_usuario_valoracion";
+    final public static String FECHA_VALORACION = "fecha_valoracion";
+    final public static String IMAGEN_ANTES = "imagen_antes";
+    final public static String IMAGEN_DESPUES = "imagen_despues";
+    final public static String VALORACION = "valoracion";
+
+
+    //Planes
+    final public static String TABLA_PLANES = "planes";
+    final public static String ID_PLAN = "id_plan";
+    final public static String MESES_PLAN = "meses_plan";
+    final public static String DESCRIPCION_PLAN = "descripcion_plan";
+    final public static String COSTO_PLAN = "costo_plan";
+    final public static String NOMBRE_PLAN = "nombre_plan";
+    final public static String IS_VENDIDA = "isVendida";
+
+
+    //Formulario
+    final public static String TABLA_FORMULARIO = "formulario";
+    final public static String ID_PREGUNTA = "id_pregunta";
+    final public static String PREGUNTA = "pregunta";
+
+    //Respuestas
+    final public static String TABLA_RESPUESTA = "respuestas";
+    final public static String ID_RESPUESTA = "id_respuesta";
+    final public static String RESPUESTA = "respuesta";
+
+    //Forma pago
+    final public static String PAYPAL = "paypal";
+    final public static String TARJETA = "tarjeta";
+
+
     final public static String[] altura = {"1.30 cm", "1.31 cm", "1.32 cm", "1.33 cm", "1.34 cm", "1.35 cm", "1.36 cm", "1.37 cm", "1.38 cm", "1.39 cm",
             "1.40 cm", "1.41 cm", "1.42 cm", "1.43 cm", "1.44 cm", "1.45 cm", "1.46 cm", "1.47 cm", "1.48 cm", "1.49 cm",
             "1.50 cm", "1.51 cm", "1.52 cm", "1.53 cm", "1.54 cm", "1.55 cm", "1.56 cm", "1.57 cm", "1.58 cm", "1.59 cm",

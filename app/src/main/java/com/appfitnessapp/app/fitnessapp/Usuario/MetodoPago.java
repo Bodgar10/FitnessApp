@@ -43,6 +43,8 @@ public class MetodoPago extends AppCompatActivity {
 
     String amount="";
 
+    String pago;
+
     @Override
     protected void onDestroy() {
         stopService(new Intent(this,PayPalService.class));
@@ -55,15 +57,24 @@ public class MetodoPago extends AppCompatActivity {
         setContentView(R.layout.usuario_07_metodo_pago);
 
 
+        Bundle extras = getIntent().getExtras();
+        assert extras != null;
+        pago =extras.getString("costo");
+
         txtResumen=findViewById(R.id.txtResumen);
         txtPlan=findViewById(R.id.txtTipoPlan);
         txtTotal=findViewById(R.id.txtTotalPago);
+
 
 
         btnPagar=findViewById(R.id.linearRealizarPago);
 
         btnPaypal=findViewById(R.id.btnPaypal);
         btnTarjeta=findViewById(R.id.btnTarjeta);
+
+        String total =String.valueOf(pago);
+
+        txtTotal.setText(pago);
 
 
         Intent intent =new Intent(this,PayPalService.class);

@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Login.SplashPantalla">
+        <activity android:name=".Usuario.Asesoria">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,7 +43,6 @@
         <activity android:name=".Usuario.Paypal.PaymentDetails" />
         <activity android:name=".Usuario.Tarjeta" />
         <activity android:name=".Usuario.MetodoPago" />
-        <activity android:name=".Usuario.Asesoria"></activity>
         <activity android:name=".Usuario.Calificar"
             android:parentActivityName=".Usuario.UsuarioPerfil"></activity>
         <activity android:name=".Usuario.DatosUsuario"></activity>

@@ -23,13 +23,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Planes"
-            android:textSize="20sp"
-            android:textColor="@android:color/darker_gray" />
+
 
         <TextView
             android:id="@+id/txtNombrePlan"
@@ -43,11 +37,11 @@
 
 
         <TextView
-            android:id="@+id/txtOferta"
+            android:id="@+id/txtPrecio"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="La mas vendida"
+            android:text="$550.00"
             android:textSize="24sp"
             android:textColor="@android:color/black" />
 

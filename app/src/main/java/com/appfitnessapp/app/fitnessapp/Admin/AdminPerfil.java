@@ -40,7 +40,7 @@ public class AdminPerfil extends AppCompatActivity {
         txtContrasena=findViewById(R.id.txtContrasena);
         txtGanancias=findViewById(R.id.txtGanancias);
 
-        imagen=findViewById(R.id.imgAdmin);
+        imagen=findViewById(R.id.imgAsesoria);
 
 
 

@@ -2,51 +2,69 @@ package com.appfitnessapp.app.fitnessapp.Arrays;
 
 public class Planes {
 
-    public String tipo_plan;
+    public String id_plan;
+    public String meses_plan;
+    public String descripcion_plan;
+    public String costo_plan;
+    public Boolean isVendid;
+    public String nombre_plan;
 
-    public String oferta;
-
-    public String meses;
-
-    public String descripcion;
-
-
-    public Planes(String tipo_plan, String oferta, String meses, String descripcion) {
-        this.tipo_plan = tipo_plan;
-        this.oferta = oferta;
-        this.meses = meses;
-        this.descripcion = descripcion;
+    public Planes(String id_plan, String meses_plan, String descripcion_plan, String costo_plan, Boolean isVendid, String nombre_plan) {
+        this.id_plan = id_plan;
+        this.meses_plan = meses_plan;
+        this.descripcion_plan = descripcion_plan;
+        this.costo_plan = costo_plan;
+        this.isVendid = isVendid;
+        this.nombre_plan = nombre_plan;
     }
 
-    public String getTipo_plan() {
-        return tipo_plan;
+    public Planes(){}
+
+    public String getId_plan() {
+        return id_plan;
     }
 
-    public void setTipo_plan(String tipo_plan) {
-        this.tipo_plan = tipo_plan;
+    public void setId_plan(String id_plan) {
+        this.id_plan = id_plan;
     }
 
-    public String getOferta() {
-        return oferta;
+    public String getMeses_plan() {
+        return meses_plan;
     }
 
-    public void setOferta(String oferta) {
-        this.oferta = oferta;
+    public void setMeses_plan(String meses_plan) {
+        this.meses_plan = meses_plan;
     }
 
-    public String getMeses() {
-        return meses;
+    public String getDescripcion_plan() {
+        return descripcion_plan;
     }
 
-    public void setMeses(String meses) {
-        this.meses = meses;
+    public void setDescripcion_plan(String descripcion_plan) {
+        this.descripcion_plan = descripcion_plan;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getCosto_plan() {
+        return costo_plan;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setCosto_plan(String costo_plan) {
+        this.costo_plan = costo_plan;
+    }
+
+    public Boolean getVendid() {
+        return isVendid;
+    }
+
+    public void setVendid(Boolean vendid) {
+        isVendid = vendid;
+    }
+
+    public String getNombre_plan() {
+        return nombre_plan;
+    }
+
+    public void setNombre_plan(String nombre_plan) {
+        this.nombre_plan = nombre_plan;
     }
 }
