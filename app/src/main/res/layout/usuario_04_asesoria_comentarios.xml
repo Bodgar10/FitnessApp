@@ -74,6 +74,32 @@
         android:textColor="@color/negro"
         android:textSize="14sp" />
 
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/imgAntes"
+        android:layout_width="120dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="10dp"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/imgDespues"
+        android:layout_width="120dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="10dp"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+</LinearLayout>
+
 
     <View
         android:layout_marginTop="5dp"

@@ -51,9 +51,7 @@
 
         <LinearLayout
             android:layout_gravity="center"
-            android:elevation="5dp"
-            android:padding="5dp"
-            android:background="@drawable/bg_tarjeta"
+            android:background="@drawable/ic_bg_tarjeta"
             android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"

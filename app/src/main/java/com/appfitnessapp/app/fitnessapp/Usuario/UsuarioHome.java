@@ -143,31 +143,6 @@ public class UsuarioHome  extends AppCompatActivity {
 
 
 
-        final Feed feed0=new Feed(Contants.VIDEO,false,"","$45","","","Fernando Guzman",
-                "", "Video para rutina de brazos y hombros");
-
-        final Feed feed1=new Feed(Contants.IMAGEN,false,"","$45","","","Fernando Guzman",
-                "", "Imagen de el resultado final de una rutina fuerte");
-
-        final Feed feed2=new Feed(Contants.PDF,false,"","$45","","","Fernando Guzman",
-                "", "Pdf con muestras para tonificar los brazos y tener mejor actitud");
-
-        final Feed feed3=new Feed(Contants.PDF,true,"","$45","","","Fernando Guzman",
-                "", "Pdf con muestras para tonificar los brazos y tener mejor actitud ");
-        final Feed feed4=new Feed(Contants.PDF,true,"","$45","","","Fernando Guzman",
-                "", "Pdf con muestras para tonificar los brazos y tener mejor actitud");
-
-
-
-      /*
-        feeds.add(feed0);
-        feeds.add(feed1);
-        feeds.add(feed2);
-        feeds.add(feed3);
-        feeds.add(feed4);
-
-*/
-        adapterFeed.notifyDataSetChanged();
 
 
         adapterFeed.setOnClickListener(new View.OnClickListener() {
@@ -178,7 +153,7 @@ public class UsuarioHome  extends AppCompatActivity {
 
                     Intent intent = new Intent(UsuarioHome.this, Video.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("video",Contants.VIDEO);
+                    bundle.putString("video",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
@@ -187,7 +162,7 @@ public class UsuarioHome  extends AppCompatActivity {
 
                     Intent intent = new Intent(UsuarioHome.this, Imagen.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("imagen",Contants.IMAGEN);
+                    bundle.putString("imagen",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
@@ -198,12 +173,17 @@ public class UsuarioHome  extends AppCompatActivity {
                         Intent intent = new Intent(UsuarioHome.this, PantallaPDF.class);
                         intent.putExtra("ViewType","internet");
                         Bundle bundle = new Bundle();
-                        bundle.putString("pdf",Contants.PDF);
+                        bundle.putString("pdf",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }
                     else {
                         Intent intent = new Intent(UsuarioHome.this, DetallePdf.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pdf",feeds.get(recyclerView.getChildAdapterPosition(view)).getDescripcion());
+                        bundle.putString("precio",feeds.get(recyclerView.getChildAdapterPosition(view)).getCosto_pdf());
+
+                        intent.putExtras(bundle);
                         startActivity(intent);
 
                     }

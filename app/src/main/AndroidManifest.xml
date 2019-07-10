@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Usuario.Asesoria">
+        <activity android:name=".Login.SplashPantalla">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,7 +36,8 @@
 
         <activity android:name=".Usuario.UsuarioPerfil" />
         <activity android:name=".Usuario.UsuarioChat" />
-        <activity android:name=".Usuario.PantallaPDF" />
+        <activity android:name=".Usuario.PantallaPDF"
+            android:parentActivityName=".Usuario.UsuarioHome" />
         <activity android:name=".Usuario.Imagen" />
         <activity android:name=".Usuario.Video" />
         <activity android:name=".Usuario.FeedSinRegistro.HomeSinRegistro" />

@@ -33,12 +33,25 @@ public class DetallePdf extends AppCompatActivity {
     private static final int PDF_CODE = 1000 ;
 
 
+    String descripcion,precio;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_14_feed_pdf_detalle);
+
+        Toolbar toolbarback=findViewById(R.id.include);
+        setSupportActionBar(toolbarback);
+        getSupportActionBar().setTitle("");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        Bundle extras = getIntent().getExtras();
+        assert extras != null;
+        descripcion  =extras.getString("pdf");
+        precio  =extras.getString("precio");
+
 
         Dexter.withActivity(this)
                 .withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -61,66 +74,19 @@ public class DetallePdf extends AppCompatActivity {
         txtTitulo=findViewById(R.id.txtTituloPDF);
         txtDescripcion=findViewById(R.id.txtDescripcionPDF);
 
-        txtDescripcion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent intent=new Intent(DetallePdf.this,PantallaPDF.class);
-                intent.putExtra("ViewType","internet");
-                startActivity(intent);
+        txtDescripcion.setText(descripcion);
+        txtPrecio.setText(precio);
 
-            }
-        });
-
-/*
-        long date =System.currentTimeMillis();
-        SimpleDateFormat sfd = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-       // String text = sfd.format(date);
-        //txtDescripcion.setText("Hace "+text+"minutos");
-
-
-
-     //   Calendar calendar = Calendar.getInstance();
-      //  TimeZone tz = TimeZone.getDefault();
-       // calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
-
-        SimpleDateFormat minutos = new SimpleDateFormat("mm", Locale.getDefault());
-        java.util.Date currenTimeZoneMin=new java.util.Date((long)1559177288*1000);
-        String textMin = minutos.format(currenTimeZoneMin);
-        int min=Integer.parseInt(textMin);
-
-
-        SimpleDateFormat horas = new SimpleDateFormat("HH", Locale.getDefault());
-        java.util.Date currenTimeZoneHoras=new java.util.Date((long)1559177288*1000);
-        String textHor = horas.format(currenTimeZoneHoras);
-        int hour=Integer.parseInt(textHor);
-
-
-
-        if (hour ==0 && (min>=1 && min <=59)){
-
-            txtDescripcion.setText("Hace "+textMin+" min");
-
-        }
-        else if (min <60 && (hour>=1 && hour <= 23)){
-            txtDescripcion.setText("Hace "+textHor+" hr.");
-
-        }
-        else {
-            txtDescripcion.setText("");
-
-        }
-
-
-
-        Toast.makeText(DetallePdf.this, sfd.format(currenTimeZoneHoras), Toast.LENGTH_SHORT).show();
-
-*/
 
         btnComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(DetallePdf.this,MetodoPago.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("costo",precio);
+                bundle.putString("meses",txtTitulo.getText().toString());
+                intent.putExtras(bundle);
                 startActivity(intent);
 
 

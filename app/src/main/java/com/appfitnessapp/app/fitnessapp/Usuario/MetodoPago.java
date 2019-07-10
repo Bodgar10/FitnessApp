@@ -43,7 +43,7 @@ public class MetodoPago extends AppCompatActivity {
 
     String amount="";
 
-    String pago;
+    String pago,meses;
 
     @Override
     protected void onDestroy() {
@@ -56,25 +56,29 @@ public class MetodoPago extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_07_metodo_pago);
 
-
-        Bundle extras = getIntent().getExtras();
-        assert extras != null;
-        pago =extras.getString("costo");
-
         txtResumen=findViewById(R.id.txtResumen);
         txtPlan=findViewById(R.id.txtTipoPlan);
         txtTotal=findViewById(R.id.txtTotalPago);
-
-
 
         btnPagar=findViewById(R.id.linearRealizarPago);
 
         btnPaypal=findViewById(R.id.btnPaypal);
         btnTarjeta=findViewById(R.id.btnTarjeta);
 
-        String total =String.valueOf(pago);
 
-        txtTotal.setText(pago);
+        Bundle extras = getIntent().getExtras();
+        assert extras != null;
+        pago =extras.getString("costo");
+        meses =extras.getString("meses");
+
+
+        String simbolo="$";
+
+       // txtTotal.setText("$ "+pago);
+        txtResumen.setText("$ "+pago);
+        txtPlan.setText(meses +" meses");
+
+        txtTotal.setText(simbolo+pago);
 
 
         Intent intent =new Intent(this,PayPalService.class);
@@ -145,11 +149,11 @@ public class MetodoPago extends AppCompatActivity {
 
     private void processPayment(){
 
-        amount = txtTotal.getText().toString();
+        amount = pago;
 
 
 
-        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(amount)),"MXN","Pago fitness",
+        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(amount)),"MXN",txtPlan.getText().toString(),
                 PayPalPayment.PAYMENT_INTENT_SALE);
 
         Intent intent = new Intent(this,PaymentActivity.class);

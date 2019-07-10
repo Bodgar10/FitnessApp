@@ -48,6 +48,7 @@ dependencies {
     implementation'com.github.PhilJay:MPAndroidChart:v3.0.1'
 
 
+    implementation 'com.commit451:PhotoView:1.2.4'
 
 }
 apply plugin: 'com.google.gms.google-services'

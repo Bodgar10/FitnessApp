@@ -15,12 +15,15 @@
     <style name="Toolbar" parent="@style/ThemeOverlay.AppCompat.ActionBar" >
         <item name="colorPrimary">@color/blanco</item>
         <item name="android:textColorPrimary">@color/negro</item>
+        <item name="colorControlNormal">@color/naranja</item>
 
     </style>
 
     <style name="ToolbarTrans" parent="Theme.AppCompat">
         <item name="colorPrimary">@color/blanco</item>
         <item name="android:textColorPrimary">@color/blanco</item>
+        <item name="colorControlNormal">@color/naranja</item>
+
 
     </style>
 

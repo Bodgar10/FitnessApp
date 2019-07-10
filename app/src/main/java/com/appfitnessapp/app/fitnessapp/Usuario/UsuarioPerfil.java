@@ -52,11 +52,9 @@ public class UsuarioPerfil  extends AppCompatActivity {
     TextView txtNombre,txtPeso,txtAltura,txtEmail;
     LinearLayout btnCalificar;
 
-    private StorageReference mStorage;
     private ProgressDialog progressDialog;
     private static final String TAG = "BAJARINFO:";
     static DBProvider dbProvider;
-    BajarInfo bajarInfo;
 
     String id;
 
@@ -87,9 +85,6 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
 
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-
-        mStorage= FirebaseStorage.getInstance().getReference();
 
         bajarUsuarios();
 

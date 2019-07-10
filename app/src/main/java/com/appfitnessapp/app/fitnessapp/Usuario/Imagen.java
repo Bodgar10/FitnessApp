@@ -2,7 +2,9 @@ package com.appfitnessapp.app.fitnessapp.Usuario;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -21,81 +23,43 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import uk.co.senab.photoview.PhotoViewAttacher;
+
 public class Imagen extends AppCompatActivity {
 
     ImageView imgImagen;
-
-    private static final String TAG = "BAJARINFO:";
-
-    static DBProvider dbProvider;
-
     String tipo;
-
-  //  private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-   // private DatabaseReference reference =firebaseDatabase.getReference();
-   // private DatabaseReference childrefrence = reference.child("url_tipo");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_14_feed_imagen);
 
-        //ids = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        //id=FirebaseStorage.getInstance().getReference().child("url_tipo");
-        //  mStorage= FirebaseStorage.getInstance().getReference();
 
-        dbProvider = new DBProvider();
+
+        Toolbar toolbarback=findViewById(R.id.include);
+        setSupportActionBar(toolbarback);
+        getSupportActionBar().setTitle("");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         Bundle extras = getIntent().getExtras();
         assert extras != null;
         tipo =extras.getString("imagen");
 
         imgImagen=findViewById(R.id.imgImagen);
+        loadImageFromUrl(tipo);
+
+     //   PhotoViewAttacher photoViewAttacher = new PhotoViewAttacher(imgImagen);
+      //  photoViewAttacher.update();
 
 
 
 
 
-        bajarFeed();
 
         }
-
-
-    public void bajarFeed(){
-
-        dbProvider = new DBProvider();
-        dbProvider.tablaFeed().addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    Log.e(TAG, "Feed: " + dataSnapshot);
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Feed feed = snapshot.getValue(Feed.class);
-
-                        if (feed.getTipo_feed() != null) {
-                        if (feed.getTipo_feed().equals(tipo)) {
-
-                            loadImageFromUrl(feed.getUrl_tipo());
-
-
-                        }
-
-
-                    }
-                }
-                }
-                else {
-                    Log.e(TAG, "Feed: ");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e(TAG, "ERROR: ");
-            }
-        });
-
-    }
 
 
     private void loadImageFromUrl(String url) {

@@ -16,6 +16,13 @@
             android:layout_height="wrap_content">
 
 
+            <include
+                layout="@layout/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/include" />
+
+
             <TextView
                 android:id="@+id/txtTituloPDF"
                 android:layout_width="match_parent"
@@ -25,7 +32,7 @@
                 android:layout_marginEnd="5dp"
                 android:textColor="@color/negro"
                 android:textStyle="bold"
-                android:text="Titulo"
+                android:text="PDF"
                 android:textAlignment="textStart"
                 android:textSize="15sp" />
 
@@ -84,7 +91,7 @@
 
         <LinearLayout
             android:id="@+id/linearComprarPDF"
-            android:gravity="center"
+            android:gravity="end|center"
             android:background="@color/naranja"
             android:orientation="horizontal"
             android:layout_weight="1"
@@ -108,6 +115,7 @@
                 android:background="@null"
                 android:tint="@color/blanco"
                 android:layout_marginStart="10dp"
+                android:layout_marginEnd="30dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_flecha" />
 

@@ -4,7 +4,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,11 +36,9 @@ public class PantallaPDF extends AppCompatActivity {
 
     PDFView pdfView;
     ProgressBar progressBar;
-    private static final String TAG = "BAJARINFO:";
 
-    static DBProvider dbProvider;
 
-    String tipo,UrlPDF;
+    String tipo;
 
 
 
@@ -46,6 +46,15 @@ public class PantallaPDF extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_14_feed_pdf_vista);
+
+
+
+        Toolbar toolbarback=findViewById(R.id.include);
+        setSupportActionBar(toolbarback);
+        getSupportActionBar().setTitle("");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         pdfView = findViewById(R.id.pdf_view);
         progressBar = findViewById(R.id.progress_);
@@ -55,47 +64,11 @@ public class PantallaPDF extends AppCompatActivity {
         tipo =extras.getString("pdf");
 
 
-
-        bajarFeed();
+        verPdf(tipo);
 
 
     }
 
-    public void bajarFeed(){
-
-        dbProvider = new DBProvider();
-        dbProvider.tablaFeed().addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    Log.e(TAG, "Feed: " + dataSnapshot);
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Feed feed = snapshot.getValue(Feed.class);
-
-                        if (feed.getTipo_feed() != null) {
-                            if (feed.getTipo_feed().equals(tipo)&&feed.getIs_gratis()) {
-
-
-                                verPdf(feed.getUrl_tipo());
-
-                            }
-
-
-                        }
-                    }
-                }
-                else {
-                    Log.e(TAG, "Feed: ");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e(TAG, "ERROR: ");
-            }
-        });
-
-    }
 
     public void verPdf(String url){
 

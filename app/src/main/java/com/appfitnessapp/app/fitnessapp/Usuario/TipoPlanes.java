@@ -72,7 +72,8 @@ public class TipoPlanes extends AppCompatActivity {
 
                 Intent intent = new Intent(TipoPlanes.this, MetodoPago.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("costo",costo);
+                bundle.putString("costo",plan.get(recyclerView.getChildAdapterPosition(v)).getCosto_plan());
+                bundle.putString("meses",plan.get(recyclerView.getChildAdapterPosition(v)).getMeses_plan());
                 intent.putExtras(bundle);
                 startActivity(intent);
 
@@ -97,7 +98,7 @@ public class TipoPlanes extends AppCompatActivity {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Planes planes = snapshot.getValue(Planes.class);
 
-                        costo =String.valueOf(planes.getCosto_plan());
+                       // costo =String.valueOf(planes.getCosto_plan());
 
                         plan.add(planes);
                         adapter.notifyDataSetChanged();

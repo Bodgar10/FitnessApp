@@ -45,32 +45,11 @@ import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 public class Video extends AppCompatActivity {
 
-    FirebaseStorage firebaseStorage;
-    StorageReference storageReference;
-    StorageReference ref;
+
     VideoView videoView;
-
     VideoControllerView videoContr;
-
-    String videoURL ="https://firebasestorage.googleapis.com/v0/b/fitnesapp-c714f.appspot.com/o/video%2FVideo%20de%20prueba.mp4?alt=media&token=bcffb372-7a6e-4dc4-9a67-34243bb60aa9";
-
     String tipo;
-
-    String video;
-    StorageReference id;
-
-    static DBProvider dbProvider;
-    BajarInfo bajarInfo;
-    private static final String TAG = "BAJARINFO:";
-    AdapterFeed adapterFeed;
-    ArrayList<Feed> feeds;
-
-
     private int position = 0;
-
-   // private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-   // private DatabaseReference reference =firebaseDatabase.getReference();
-    //private DatabaseReference childrefrence = reference.child("url_tipo");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,23 +69,11 @@ public class Video extends AppCompatActivity {
 
         videoView=findViewById(R.id.videoView);
 
-       // id=FirebaseStorage.getInstance().getReference().child();
         Bundle extras = getIntent().getExtras();
         assert extras != null;
         tipo =extras.getString("video");
 
-
-
-
-        bajarFeed();
-
-
-        //    id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-
-      //  setUpVideoView();
-
-
+        setUpVideoView(tipo);
 
 
     }
@@ -119,43 +86,6 @@ public class Video extends AppCompatActivity {
 
 
 
-    public void bajarFeed(){
-
-        dbProvider = new DBProvider();
-        dbProvider.tablaFeed().addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    Log.e(TAG, "Feed: " + dataSnapshot);
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Feed feed = snapshot.getValue(Feed.class);
-
-                        if (feed.getTipo_feed() != null) {
-                            if (feed.getTipo_feed().equals(tipo)) {
-
-                                setUpVideoView(feed.getUrl_tipo());
-
-
-                            }
-
-
-                        }
-                    }
-                }
-                else {
-                    Log.e(TAG, "Feed: ");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e(TAG, "ERROR: ");
-            }
-        });
-
-    }
-
-
     private void setUpVideoView(String url) {
 
 /*
@@ -165,8 +95,13 @@ public class Video extends AppCompatActivity {
   */
 
         Uri uri = Uri.parse(url);
+        MediaController mediaController = new MediaController(this){
+            @Override
+            public void show(int timeout) {
+                super.show(0);
+            }
 
-        MediaController mediaController = new MediaController(this);
+        };
         videoView.setMediaController(mediaController);
 
         try {
