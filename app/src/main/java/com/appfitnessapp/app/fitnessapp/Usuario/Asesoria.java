@@ -77,8 +77,7 @@ public class Asesoria extends AppCompatActivity {
 
         dbProvider = new DBProvider();
 
-        bajarAsesoria();
-        bajarComentarios();
+
 
 
         Toolbar toolbarback=findViewById(R.id.toolbar);
@@ -136,10 +135,10 @@ public class Asesoria extends AppCompatActivity {
         });
 
 
-
+        bajarAsesoria();
+        bajarComentarios();
 
     }
-
 
 
     public void bajarAsesoria(){
@@ -193,36 +192,63 @@ public class Asesoria extends AppCompatActivity {
 
     public void bajarComentarios(){
         dbProvider = new DBProvider();
-
         dbProvider.valoracionAsesoria().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                plan.clear();
+                Log.e(TAG, "Valoracion 4: ");
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        //Log.e(TAG,"Usuarios: "+ snapshot);
+                        Log.e(TAG, "Valoracion: " + snapshot);
+                        Valoraciones valoraciones = snapshot.getValue(Valoraciones.class);
+
+                        if (valoraciones.getId_valoracion() != null){
+
+                            bajarUsuarios(valoraciones.getNombre_usuario_valoracion(),valoraciones.getId_valoracion(),
+                                    valoraciones.getDescripcion_valoracion(),valoraciones.getFecha_valoracion(),valoraciones.getImagen_antes(),
+                                    valoraciones.getImagen_despues(), valoraciones.getValoracion());
+                        }
+                    }
+                } else {
+                    Log.e(TAG, "Valoracion 3: "); }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "ERROR: ");
+            }
+        }); }
+
+       public void bajarUsuarios(final String id_usuario,final String id_valoracion,final String descripcion, final String fecha,
+                              final String imgAntes,final String imgDespues,
+                              final String valoracion){
+        dbProvider = new DBProvider();
+
+        dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 plan.clear();
                 Log.e(TAG, "Usuarios 4: ");
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        //Log.e(TAG,"Usuarios: "+ snapshot);
                         Log.e(TAG, "Usuarios: " + snapshot);
-                        Valoraciones valoraciones = snapshot.getValue(Valoraciones.class);
+                        Usuarios usuarios = snapshot.getValue(Usuarios.class);
 
+                        if (usuarios.getId_usuario() != null) {
 
+                            if (id_usuario.equals(usuarios.getId_usuario())) {
+                                Valoraciones valoraciones = new Valoraciones(usuarios.getId_usuario(), id_valoracion, descripcion,
+                                        fecha, imgAntes, imgDespues, valoracion, usuarios.getNombre_usuario(), usuarios.getFoto_usuario());
 
-
-                            // setUpVideoView(valoraciones.getImagen_antes());
-
-                            plan.add(valoraciones);
-                            adapter.notifyDataSetChanged();
-
-
-
-
+                                plan.add(valoraciones);
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
                     }
                 } else {
                     Log.e(TAG, "Usuarios 3: ");
                 }
-
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(TAG, "ERROR: ");

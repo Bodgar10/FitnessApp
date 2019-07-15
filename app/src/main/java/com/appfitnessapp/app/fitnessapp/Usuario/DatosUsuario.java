@@ -1,6 +1,7 @@
 package com.appfitnessapp.app.fitnessapp.Usuario;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +42,52 @@ public class DatosUsuario extends AppCompatActivity {
 
         btnGuardar=findViewById(R.id.btnGuardar);
 
+
+
+        imgHombre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (imgHombre.isClickable()){
+
+                    imgHombre.setImageDrawable(getResources().getDrawable(R.drawable.hombre_seleccionado));
+                    imgMujer.setImageDrawable(getResources().getDrawable(R.drawable.ic_mujer));
+
+                }
+
+                else if (!imgHombre.isClickable()){
+
+                    imgHombre.setImageDrawable(getResources().getDrawable(R.drawable.ic_hombre_noseleccionado));
+                    imgMujer.setImageDrawable(getResources().getDrawable(R.drawable.ic_mujer));
+
+
+                }
+
+            }
+        });
+
+
+        imgMujer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imgMujer.isClickable()){
+
+                    imgHombre.setImageDrawable(getResources().getDrawable(R.drawable.ic_hombre_noseleccionado));
+                    imgMujer.setImageDrawable(getResources().getDrawable(R.drawable.mujer_seleccionado));
+
+                }
+
+                else if (!imgMujer.isClickable()){
+
+                    imgHombre.setImageDrawable(getResources().getDrawable(R.drawable.ic_hombre_noseleccionado));
+                    imgMujer.setImageDrawable(getResources().getDrawable(R.drawable.ic_mujer));
+
+
+                }
+
+
+            }
+        });
 
         ArrayAdapter<String> altura = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.altura);
 

@@ -52,9 +52,9 @@ import java.net.URL;
 public class EditarPerfil extends AppCompatActivity {
 
     CircularImageView imgPersona;
-    TextView btnCambiarFoto,btnCambiarContra;
-    TextInputEditText edtNombreUsuario,edtCorreo;
-    EditText editContrasena;
+    TextView btnCambiarFoto,btnCambiarContra,btnCambiarCorreo;
+    TextInputEditText edtNombreUsuario;
+    TextView editContrasena,edtCorreo;
 
     Spinner spinnerPeso,spinnerEstatura,spinnerBuscando;
     LinearLayout btnAceptar;
@@ -68,13 +68,12 @@ public class EditarPerfil extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener listener;
 
 
-
     private static final String TAG = "BAJARINFO:";
 
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
 
-    String id,email,password,name,imagen;
+    String id;
 
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -90,40 +89,26 @@ public class EditarPerfil extends AppCompatActivity {
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
+
+
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
         mStorage= FirebaseStorage.getInstance().getReference();
         dbProvider = new DBProvider();
 
-        Bundle extras = getIntent().getExtras();
-        assert extras != null;
-         imagen = extras.getString("imagen");
-            email = extras.getString("nombre");
-            password = extras.getString("correo");
-            name = extras.getString("contrasena");
 
-
-
-
-        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        listener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = mAuth.getCurrentUser();
-                if (user == null) {
-
-                   }
-            }
-        };
-        mAuth = FirebaseAuth.getInstance();
-     //   bajarUsuarios();
-
+        bajarUsuarios();
 
         imgPersona=findViewById(R.id.imgPersona);
 
         btnCambiarFoto=findViewById(R.id.txtCambiarFoto);
         btnCambiarContra=findViewById(R.id.txtCambiarContra);
+        btnCambiarCorreo=findViewById(R.id.txtCambiarCorreo);
+
 
         edtNombreUsuario=findViewById(R.id.edtNombreUsuario);
         editContrasena=findViewById(R.id.editContrasena);
@@ -136,18 +121,6 @@ public class EditarPerfil extends AppCompatActivity {
 
         btnAceptar=findViewById(R.id.linearAceptar);
 
-
-        edtNombreUsuario.setText(name);
-        editContrasena.setText(email);
-        editContrasena.setText(password);
-        loadImageFromUrl(imagen);
-//        imgPersona.setImageResource(Integer.parseInt(imagen));
-
-        //name=edtNombreUsuario.getText().toString();
-      //  email=edtCorreo.getText().toString();
-      //  password=editContrasena.getText().toString();
-       // imagen=imgPersona.getDrawable().toString();
-       // loadImageFromUrl(imagen);
 
         ArrayAdapter<String> altura = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.altura);
 
@@ -198,29 +171,95 @@ public class EditarPerfil extends AppCompatActivity {
         btnCambiarContra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String contra = editContrasena.getText().toString();
-                if (contra.isEmpty()){
-                    Toast.makeText(EditarPerfil.this, "Necesitas escribir una contraseña", Toast.LENGTH_SHORT).show();
-                }else {
-                    progressDialog.setMessage("Actualizando contraseña");
-                    progressDialog.show();
-                    changePass(contra);
 
-                }
+                Intent intent = new Intent(EditarPerfil.this, CambiarContrasena.class);
+                startActivity(intent);
 
 
             }
         });
+
+        btnCambiarCorreo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(EditarPerfil.this, CambiarCorreo.class);
+                startActivity(intent);
+
+
+            }
+        });
+
 
         btnAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
-
             }
         });
 
+
+    }
+
+
+    public void bajarUsuarios(){
+        dbProvider = new DBProvider();
+
+        progressDialog.setMessage("Cargando Información...");
+        progressDialog.show();
+
+
+        dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e(TAG, "Usuarios 4: ");
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        //Log.e(TAG,"Usuarios: "+ snapshot);
+                        Log.e(TAG, "Usuarios: " + snapshot);
+                        Usuarios usuarios = snapshot.getValue(Usuarios.class);
+
+
+                        if (usuarios.getId_usuario().equals(id)) {
+
+                            edtNombreUsuario.setText(usuarios.getNombre_usuario());
+                            editContrasena.setText(usuarios.getContrasena_usuario());
+                            edtCorreo.setText(usuarios.getEmail_usuario());
+
+                            if (usuarios.getFoto_usuario().equals("nil")) {
+                                try {
+                                    URL urlfeed = new URL(usuarios.getFoto_usuario());
+                                    Picasso.get().load(String.valueOf(urlfeed))
+                                            .error(R.mipmap.ic_launcher)
+                                            .fit()
+                                            .noFade()
+                                            .into(imgPersona);
+                                } catch (MalformedURLException e) {
+                                    e.printStackTrace();
+                                }
+                                progressDialog.dismiss();
+                            }
+                            else {
+                                loadImageFromUrl(usuarios.getFoto_usuario());
+                                progressDialog.dismiss();
+                            }
+                        }
+
+
+
+
+                    }
+                } else {
+                    Log.e(TAG, "Usuarios 3: ");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "ERROR: ");
+            }
+        });
     }
 
 
@@ -234,7 +273,7 @@ public class EditarPerfil extends AppCompatActivity {
             try {
                 Bitmap bm = MediaStore.Images.Media.getBitmap(this.getApplicationContext().getContentResolver(), imgUri);
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                bm.compress(Bitmap.CompressFormat.JPEG,20,bytes);
+                bm.compress(Bitmap.CompressFormat.JPEG,25,bytes);
                 imgPersona.setImageBitmap(bm);
 
                 final ProgressDialog dialog = new ProgressDialog(this);
@@ -284,108 +323,9 @@ public class EditarPerfil extends AppCompatActivity {
         }
     }
 
-    public void bajarUsuarios(){
-        dbProvider = new DBProvider();
-
-        progressDialog.setMessage("Cargando Información...");
-        progressDialog.show();
-
-
-        dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.e(TAG, "Usuarios 4: ");
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        //Log.e(TAG,"Usuarios: "+ snapshot);
-                        Log.e(TAG, "Usuarios: " + snapshot);
-                        Usuarios usuarios = snapshot.getValue(Usuarios.class);
-
-
-                        if (usuarios.getId_usuario().equals(id)){
-
-                            edtNombreUsuario.setText(usuarios.getNombre_usuario());
-                            edtCorreo.setText(usuarios.getEmail_usuario());
-                            editContrasena.setText(usuarios.getContrasena_usuario());
-
-                        }
-
-                        if (usuarios.getFoto_usuario().equals("nil")) {
-                            try {
-                                URL urlfeed = new URL(usuarios.getFoto_usuario());
-                                Picasso.get().load(String.valueOf(urlfeed))
-                                        .error(R.mipmap.ic_launcher)
-                                        .fit()
-                                        .noFade()
-                                        .into(imgPersona);
-                            } catch (MalformedURLException e) {
-                                e.printStackTrace();
-                            }
-                            progressDialog.dismiss();
-                        }
-                        else {
-                            loadImageFromUrl(usuarios.getFoto_usuario());
-                            progressDialog.dismiss();
-                        }
-                    }
-                } else {
-                    Log.e(TAG, "Usuarios 3: ");
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG, "ERROR: ");
-            }
-        });
-    }
-
-
-
 
     private void loadImageFromUrl(String url) {
 
         Picasso.get().load(url).into(imgPersona);
     }
-
-    public void changeEmail(final String id, final String email) {
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        user.updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(EditarPerfil.this, "Se ha cambiado el correo correctamente.", Toast.LENGTH_SHORT).show();
-                    dbProvider.updateEmail(email, id);
-                } else {
-                    // Log.e(TAG, "Error : " + task.getResult());
-
-                    Toast.makeText(EditarPerfil.this, "Lo siento, hubo un error al cambiar el correo", Toast.LENGTH_SHORT).show();
-                }
-
-                progressDialog.dismiss();
-            }
-        });
-    }
-
-
-    public void changePass(final String pass) {
-        user.updatePassword(pass).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(EditarPerfil.this, "Se ha cambiado la contraseña correctamente.", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(EditarPerfil.this, "Lo siento, hubo un error al cambiar la contraseña", Toast.LENGTH_SHORT).show();
-                }
-                progressDialog.dismiss();
-            }
-        });
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(listener);
-    }
-
 }

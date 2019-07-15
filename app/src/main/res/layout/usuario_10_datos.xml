@@ -99,7 +99,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/hombre_noseleccionado" />
+                app:srcCompat="@drawable/ic_hombre_noseleccionado" />
 
             <ImageButton
                 android:id="@+id/imgMujer"
@@ -112,7 +112,7 @@
                 android:layout_weight="1"
                 android:scaleType="centerInside"
                 android:background="@null"
-                app:srcCompat="@drawable/mujer" />
+                app:srcCompat="@drawable/ic_mujer" />
 
         </LinearLayout>
 

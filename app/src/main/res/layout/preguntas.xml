@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/include" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="10dp"
+        android:gravity="start"
+        android:text="Escribe tu pregunta"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+
+    <EditText
+        android:id="@+id/edtPregunta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/boton_redondo_blanco"
+        android:ems="10"
+        android:hint="¿Pregunta?"
+        android:inputType="textMultiLine"
+        android:padding="10dp"
+        android:textColor="@android:color/black" />
+
+    <LinearLayout
+        android:id="@+id/btnAgregar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/naranja"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:text="Agregar "
+            android:textAllCaps="true"
+            android:textColor="@color/blanco"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@null"
+            android:tint="@color/blanco"
+            android:layout_marginStart="10dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_flecha" />
+
+    </LinearLayout>
+
+
+
+    <include
+        layout="@layout/recyclerview"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </include>
+
+</LinearLayout>

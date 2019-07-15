@@ -3,7 +3,7 @@ package com.appfitnessapp.app.fitnessapp.Arrays;
 public class Valoraciones {
 
 
-    public String id_usuario_valoracion;
+    public String nombre_usuario_valoracion;
     public String id_valoracion;
     public String descripcion_valoracion;
     public String fecha_valoracion;
@@ -13,10 +13,10 @@ public class Valoraciones {
     public String nombre_usuario;
     public String foto_usuario;
 
-    public Valoraciones(String id_usuario_valoracion, String id_valoracion, String descripcion_valoracion,
-                        String fecha_valoracion, String imagen_antes, String imagen_despues, String valoracion,
-                        String nombre_usuario, String foto_usuario) {
-        this.id_usuario_valoracion = id_usuario_valoracion;
+    public Valoraciones(){}
+
+    public Valoraciones(String nombre_usuario_valoracion, String id_valoracion, String descripcion_valoracion, String fecha_valoracion, String imagen_antes, String imagen_despues, String valoracion, String nombre_usuario, String foto_usuario) {
+        this.nombre_usuario_valoracion = nombre_usuario_valoracion;
         this.id_valoracion = id_valoracion;
         this.descripcion_valoracion = descripcion_valoracion;
         this.fecha_valoracion = fecha_valoracion;
@@ -27,15 +27,12 @@ public class Valoraciones {
         this.foto_usuario = foto_usuario;
     }
 
-    public Valoraciones(){}
-
-
-    public String getId_usuario_valoracion() {
-        return id_usuario_valoracion;
+    public String getNombre_usuario_valoracion() {
+        return nombre_usuario_valoracion;
     }
 
-    public void setId_usuario_valoracion(String id_usuario_valoracion) {
-        this.id_usuario_valoracion = id_usuario_valoracion;
+    public void setNombre_usuario_valoracion(String nombre_usuario_valoracion) {
+        this.nombre_usuario_valoracion = nombre_usuario_valoracion;
     }
 
     public String getId_valoracion() {

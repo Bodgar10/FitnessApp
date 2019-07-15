@@ -69,6 +69,8 @@ public class UsuarioPerfil  extends AppCompatActivity {
     BarDataSet set,setHorizontal ;
 
 
+    String nombre,foto,correo,contrasena;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,12 +111,6 @@ public class UsuarioPerfil  extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(UsuarioPerfil.this, Calificar.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("imagen",Contants.FOTO_USUARIO);
-                bundle.putString("nombre",Contants.NOMBRE_USUARIO);
-                bundle.putString("correo",Contants.EMAIL_USUARIO);
-                bundle.putString("contrasena",Contants.CONTRASENA_USUARIO);
-                intent.putExtras(bundle);
                 startActivity(intent);
 
             }
@@ -334,6 +330,12 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
 
                         if (usuarios.getId_usuario().equals(id)) {
+
+                           // nombre = usuarios.getNombre_usuario();
+                            foto = usuarios.getFoto_usuario();
+                            correo =usuarios.getEmail_usuario();
+                            contrasena =usuarios.getContrasena_usuario();
+
 
                             txtNombre.setText(usuarios.getNombre_usuario());
                             if (usuarios.getFoto_usuario().equals("nil")) {

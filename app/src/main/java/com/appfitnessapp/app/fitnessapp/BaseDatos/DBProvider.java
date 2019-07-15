@@ -105,12 +105,12 @@ public class DBProvider {
         usersRef().child(id).updateChildren(updates);
     }
 
-    public void updateInfo(String name,String photo,String email,String password,String id) {
+    public void updateInfo(String name/*,String photo*/,String email,String password,String id) {
 
         Map<String, Object> updates = new HashMap<>();
 
         updates.put(Contants.NOMBRE_USUARIO, name);
-        updates.put(Contants.FOTO_USUARIO, photo);
+     //   updates.put(Contants.FOTO_USUARIO, photo);
         updates.put(Contants.EMAIL_USUARIO, email);
         updates.put(Contants.CONTRASENA_USUARIO, password);
         usersRef().child(id).updateChildren(updates);
@@ -122,6 +122,8 @@ public class DBProvider {
         updates.put(Contants.EMAIL_USUARIO, email);
         usersRef().child(id).updateChildren(updates);
     }
+
+
     public void updatePass(String pass, String id) {
         Map<String, Object> updates = new HashMap<>();
 

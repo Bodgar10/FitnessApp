@@ -31,28 +31,16 @@ public class AdapterComentarios extends RecyclerView.Adapter<AdapterComentarios.
         implements View.OnClickListener {
 
     AdapterComentarios adapterPlanes;
-
     private View.OnClickListener listener;
     ArrayList<Valoraciones> planes;
-    ArrayList<Usuarios> usuarios;
-
-    private ProgressDialog progressDialog;
-    private static final String TAG = "BAJARINFO:";
-    static DBProvider dbProvider;
-
-
 
     public static class ComentariosViewHolder extends RecyclerView.ViewHolder{
-
-
         TextView txtNombre,txtFecha,txtComentario;
         CircularImageView imgPersona;
         ImageView imgAntes,imgDespues;
 
         public ComentariosViewHolder (View itemView) {
             super(itemView);
-
-
 
             txtNombre=itemView.findViewById(R.id.txtNombreComen);
             txtFecha=itemView.findViewById(R.id.txtFechaComen);
@@ -62,26 +50,16 @@ public class AdapterComentarios extends RecyclerView.Adapter<AdapterComentarios.
 
             imgAntes=itemView.findViewById(R.id.imgAntes);
             imgDespues=itemView.findViewById(R.id.imgDespues);
-
-
-
-
-
         }
 
     }
-
     public AdapterComentarios(ArrayList<Valoraciones>planes){
-
         this.planes=planes;
     }
-
     @Override
     public AdapterComentarios.ComentariosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.usuario_04_asesoria_comentarios,null,false);
         v.setOnClickListener(this);
-
         AdapterComentarios.ComentariosViewHolder holder=new AdapterComentarios.ComentariosViewHolder(v);
         return holder;
     }
@@ -90,13 +68,9 @@ public class AdapterComentarios extends RecyclerView.Adapter<AdapterComentarios.
     public void onBindViewHolder(@NonNull AdapterComentarios.ComentariosViewHolder holder, int position) {
         Valoraciones plan = planes.get(position);
 
-
         holder.txtFecha.setText(plan.getFecha_valoracion());
         holder.txtComentario.setText(plan.getDescripcion_valoracion());
         holder.txtNombre.setText(plan.getNombre_usuario());
-
-
-
 
         if (!plan.getImagen_antes().equals("nil")&&!plan.getImagen_despues().equals("nil")){
 
@@ -107,8 +81,6 @@ public class AdapterComentarios extends RecyclerView.Adapter<AdapterComentarios.
                         .fit()
                         .noFade()
                         .into(holder.imgAntes);
-
-
                 URL urlDespues = new URL(plan.getImagen_despues());
                 Picasso.get().load(String.valueOf(urlDespues))
                         .error(R.mipmap.ic_launcher)
@@ -116,13 +88,19 @@ public class AdapterComentarios extends RecyclerView.Adapter<AdapterComentarios.
                         .noFade()
                         .into(holder.imgDespues);
 
+                /*
+                URL urlUsuario = new URL(plan.getFoto_usuario());
+                Picasso.get().load(String.valueOf(urlUsuario))
+                        .error(R.mipmap.ic_launcher)
+                        .fit()
+                        .noFade()
+                        .into(holder.imgPersona);
+*/
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-
         }
-
         else {
 
             holder.imgDespues.setVisibility(View.GONE);
@@ -130,17 +108,12 @@ public class AdapterComentarios extends RecyclerView.Adapter<AdapterComentarios.
 
         }
 
-
-
     }
-
-
 
     @Override
     public int getItemCount() {
         return planes.size();
     }
-
 
     public void setOnClickListener(View.OnClickListener listener) {
 
@@ -149,45 +122,11 @@ public class AdapterComentarios extends RecyclerView.Adapter<AdapterComentarios.
         this.listener = listener;
     }
 
-
     @Override
     public void onClick(View v) {
         if (listener!=null){
             listener.onClick(v);
         }
-    }
-
-
-    public void bajarUsuarios(){
-        dbProvider = new DBProvider();
-
-        progressDialog.setMessage("Cargando Información...");
-        progressDialog.show();
-
-
-        dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.e(TAG, "Usuarios 4: ");
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        //Log.e(TAG,"Usuarios: "+ snapshot);
-                        Log.e(TAG, "Usuarios: " + snapshot);
-                        Usuarios usuarios = snapshot.getValue(Usuarios.class);
-
-
-                    }
-                } else {
-                    Log.e(TAG, "Usuarios 3: ");
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG, "ERROR: ");
-            }
-        });
     }
 
 
