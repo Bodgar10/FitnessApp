@@ -31,46 +31,38 @@
 
 
 
-
     <LinearLayout
-        android:layout_marginTop="5dp"
         android:id="@+id/linearBoton"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-
         <LinearLayout
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/tag_menubtn"
             android:layout_marginBottom="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="50dp">
 
             <TextView
-                android:background="@drawable/boton_naranja_completo"
                 android:padding="10dp"
                 android:gravity="center"
-                android:layout_marginEnd="2dp"
                 android:textColor="@color/blanco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
                 android:layout_weight="1"
-                android:text="Activos" />
+                android:text="Activos"/>
 
 
             <TextView
-                android:background="@drawable/boton_negro_contorno"
                 android:id="@+id/txtPendientes"
                 android:padding="10dp"
-                android:layout_marginStart="2dp"
                 android:gravity="center"
-                android:textColor="@color/negro"
                 android:layout_width="wrap_content"
+                android:layout_marginEnd="15dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Pendientes" />

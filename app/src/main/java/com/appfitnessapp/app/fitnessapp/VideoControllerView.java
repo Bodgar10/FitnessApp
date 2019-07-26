@@ -24,10 +24,6 @@ import java.lang.ref.WeakReference;
 import java.util.Formatter;
 import java.util.Locale;
 
-import java.lang.ref.WeakReference;
-import java.util.Formatter;
-import java.util.Locale;
-
 public class VideoControllerView extends FrameLayout {
     private static final String TAG = "VideoControllerView";
 
@@ -414,7 +410,7 @@ public class VideoControllerView extends FrameLayout {
             mFullscreenButton.setImageResource(R.drawable.ic_edit);
         }
         else {
-            mFullscreenButton.setImageResource(R.drawable.ic_home);
+            mFullscreenButton.setImageResource(R.drawable.ic_home_);
         }
     }
 

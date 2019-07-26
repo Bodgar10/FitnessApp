@@ -30,7 +30,7 @@
             android:background="@null"
             android:tint="@color/naranja"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_mas" />
+            app:srcCompat="@drawable/ic_agregar_iconore" />
 
 
         <TextView

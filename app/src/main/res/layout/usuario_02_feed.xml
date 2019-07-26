@@ -69,7 +69,7 @@
                     android:layout_marginBottom="3dp"
                     android:background="@null"
                     android:scaleType="centerInside"
-                    app:srcCompat="@drawable/home_icono" />
+                    app:srcCompat="@drawable/ic_homenuevo" />
 
                 <TextView
                     android:id="@+id/txtHome"
@@ -220,7 +220,7 @@
                 android:background="@null"
                 android:scaleType="centerCrop"
                 android:tint="@android:color/white"
-                app:srcCompat="@drawable/ic_home" />
+                app:srcCompat="@drawable/ic_home_" />
 
             <TextView
                 android:layout_width="wrap_content"

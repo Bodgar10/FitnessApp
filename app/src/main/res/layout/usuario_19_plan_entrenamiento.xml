@@ -31,7 +31,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="530dp"
         android:scaleType="centerInside"
-        app:srcCompat="@drawable/play_icono" />
+        app:srcCompat="@drawable/ic_play_icono" />
 
 
     <TextView

@@ -23,7 +23,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_arrow_forward_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/hardware/ic_keyboard_arrow_right_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -33,7 +33,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_flecha" />
+                                      <entry key="outputName" value="ic_flecha_derecha" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="faf6f9" />
                                     </map>
@@ -67,11 +67,11 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="height" value="1940" />
-                            <entry key="outputName" value="ic_mujer" />
+                            <entry key="height" value="74" />
+                            <entry key="outputName" value="ic_paypal" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="C:\Users\USUARIO\Desktop\mujer.svg" />
-                            <entry key="width" value="526" />
+                            <entry key="sourceFile" value="C:\Users\USUARIO\Desktop\paypal.svg" />
+                            <entry key="width" value="62" />
                           </map>
                         </option>
                       </PersistentState>

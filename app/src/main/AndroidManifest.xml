@@ -35,7 +35,13 @@
 
         <activity android:name=".viewPdf"></activity>
 
-        <activity android:name=".Usuario.UsuarioPerfil" />
+        <activity android:name=".Usuario.UsuarioPerfil">
+
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+        </intent-filter>
+        </activity>
+
         <activity android:name=".Usuario.UsuarioChat" />
         <activity android:name=".Usuario.PantallaPDF"
             android:parentActivityName=".Usuario.UsuarioHome" />

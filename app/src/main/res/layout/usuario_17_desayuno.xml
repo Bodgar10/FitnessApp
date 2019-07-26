@@ -100,7 +100,7 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/tiempo_icono" />
+                app:srcCompat="@drawable/ic_tiempo_icono" />
 
 
             <TextView
@@ -176,7 +176,7 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/calorias_icono" />
+                app:srcCompat="@drawable/ic_calorias_icono" />
 
             <TextView
                 android:id="@+id/txtCalorias"

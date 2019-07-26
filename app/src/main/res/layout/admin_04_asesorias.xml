@@ -29,49 +29,42 @@
 
     </android.support.v7.widget.Toolbar>
 
+
+
     <LinearLayout
-        android:layout_marginTop="5dp"
         android:id="@+id/linearBoton"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/tag_menu_pendiente"
+        android:layout_marginBottom="15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <TextView
+            android:id="@+id/txtActivos"
+            android:padding="10dp"
             android:gravity="center"
+            android:textColor="@color/negro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:background="@drawable/boton_negro_contorno"
-                android:id="@+id/txtActivos"
-                android:padding="10dp"
-                android:gravity="center"
-                android:layout_marginEnd="2dp"
-                android:textColor="@color/negro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Activos" />
+            android:layout_weight="1"
+            android:text="Activos" />
 
 
-            <TextView
-                android:background="@drawable/boton_naranja_completo"
-                android:padding="10dp"
-                android:gravity="center"
-                android:layout_marginStart="2dp"
-                android:textColor="@color/blanco"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Pendientes" />
+        <TextView
+            android:padding="10dp"
+            android:gravity="center"
+            android:textColor="@color/blanco"
+            android:layout_marginEnd="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pendientes" />
 
-
-        </LinearLayout>
 
     </LinearLayout>
 

@@ -25,38 +25,37 @@
         android:layout_marginEnd="0dp"
         android:orientation="vertical">
 
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/tag_menubtn"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
 
             <TextView
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="@color/blanco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
                 android:layout_weight="1"
-                android:background="@drawable/boton_naranja_completo"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="Recetas"
-                android:layout_marginEnd="2dp"
-                android:textColor="@color/blanco" />
+                android:text="Recetas" />
 
 
             <TextView
-                android:layout_marginStart="2dp"
-                android:background="@drawable/boton_negro_contorno"
+                android:layout_marginStart="7dp"
                 android:id="@+id/btnWorkouts"
+                android:padding="10dp"
+                android:gravity="center"
                 android:layout_width="wrap_content"
+                android:layout_marginEnd="15dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:padding="10dp"
                 android:text="Workouts" />
 
 

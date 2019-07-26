@@ -104,7 +104,7 @@
                                 android:layout_height="25dp"
                                 android:layout_gravity="center"
                                 android:scaleType="centerInside"
-                                app:srcCompat="@drawable/peso_icono" />
+                                app:srcCompat="@drawable/ic_peso_icono" />
 
 
                             <LinearLayout
@@ -157,7 +157,7 @@
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:scaleType="centerInside"
-                                app:srcCompat="@drawable/estatura_icono" />
+                                app:srcCompat="@drawable/ic_estatura_icono" />
 
 
                             <LinearLayout
@@ -209,7 +209,7 @@
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:scaleType="centerInside"
-                                app:srcCompat="@drawable/objetivo_icono" />
+                                app:srcCompat="@drawable/ic_objetivo_icono" />
 
 
                             <LinearLayout

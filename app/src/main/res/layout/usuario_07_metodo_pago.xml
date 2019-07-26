@@ -80,7 +80,7 @@
                android:layout_height="30dp"
                android:layout_marginStart="23dp"
                android:scaleType="centerInside"
-               app:srcCompat="@drawable/credit_card" />
+               app:srcCompat="@drawable/ic_credit_card" />
 
            <TextView
                android:id="@+id/txtTarjeta"
@@ -129,7 +129,7 @@
                android:layout_height="30dp"
                android:layout_marginStart="23dp"
                android:scaleType="centerInside"
-               app:srcCompat="@drawable/paypal" />
+               app:srcCompat="@drawable/ic_paypal" />
 
            <TextView
                android:id="@+id/txtPaypal"
