@@ -115,7 +115,7 @@ public class Registro extends AppCompatActivity {
                 }
                 if (task.isSuccessful()) {
                     FirebaseUser user = task.getResult().getUser();
-                    dbProvider.createUser(email,user.getUid(),name,pass,phone,photo,token,type);
+                    dbProvider.createUser(email,user.getUid(),name,pass,phone,photo,token,type,"nil","nil","nil");
                     Intent intent = new Intent(Registro.this, UsuarioHome.class);
                     startActivity(intent);
                     finish();

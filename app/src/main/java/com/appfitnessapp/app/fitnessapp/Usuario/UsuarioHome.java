@@ -20,7 +20,10 @@ import com.appfitnessapp.app.fitnessapp.Arrays.Feed;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
+import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,6 +59,8 @@ public class UsuarioHome  extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
+    private static FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +86,18 @@ public class UsuarioHome  extends AppCompatActivity {
 
         dbProvider = new DBProvider();
         bajarInfo = new BajarInfo();
+
+        mAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+        if (user==null){
+
+            Intent intent=new Intent(UsuarioHome.this, SplashPantalla.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+
+        }
 
         imgPlan=findViewById(R.id.imgPlan);
         imgPerfil=findViewById(R.id.imgPerfil);

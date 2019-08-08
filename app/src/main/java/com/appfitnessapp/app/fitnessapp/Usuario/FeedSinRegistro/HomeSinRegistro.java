@@ -1,8 +1,10 @@
 package com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterFeed;
 import com.appfitnessapp.app.fitnessapp.Arrays.Feed;
@@ -34,6 +37,8 @@ import java.util.ArrayList;
 public class HomeSinRegistro  extends AppCompatActivity  {
 
     LinearLayout imgAsesoria,imgPerfil ;
+    private static final int PDF_CODE = 1000 ;
+
 
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
@@ -44,19 +49,20 @@ public class HomeSinRegistro  extends AppCompatActivity  {
 
     RecyclerView recyclerView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_02_feed);
 
+        bajarFeed();
+
         dbProvider = new DBProvider();
         bajarInfo = new BajarInfo();
+
 
         imgAsesoria=findViewById(R.id.btnAsesoria);
         imgPerfil=findViewById(R.id.imgPerfil);
 
-        bajarFeed();
 
 
 
@@ -81,39 +87,55 @@ public class HomeSinRegistro  extends AppCompatActivity  {
         feeds=new ArrayList<>();
         adapterFeed=new AdapterFeed(feeds);
         recyclerView.setAdapter(adapterFeed);
-
-        /*
-
-         final Feed feed0=new Feed(Contants.VIDEO,false,"","$45","","","Fernando Guzman",
-                "5:00", "Pdf con muestras para tonificar los brazos y tener mejor actitud en las cosas que tienen todo");
-
-        final Feed feed1=new Feed(Contants.IMAGEN,false,"","$45","","","Fernando Guzman",
-                "5:00", "Pdf con muestras para tonificar los brazos y tener mejor actitud en las cosas que tienen todo");
-
-        final Feed feed2=new Feed(Contants.PDF,false,"","$45","","","Fernando Guzman",
-                "5:00", "Pdf con muestras para tonificar los brazos y tener mejor actitud en las cosas que tienen todo");
-
-        final Feed feed3=new Feed(Contants.PDF,true,"","$45","","","Fernando Guzman",
-                "5:00", "Pdf con muestras para tonificar los brazos y tener mejor actitud en las cosas que tienen todo");
-        Feed feed4=new Feed(Contants.PDF,true,"","$45","","","Fernando Guzman",
-                "5:00", "Pdf con muestras para tonificar los brazos y tener mejor actitud en las cosas que tienen todo");
-
-
-        feeds.add(feed0);
-        feeds.add(feed1);
-        feeds.add(feed2);
-        feeds.add(feed3);
-        feeds.add(feed4);
-*/
-        adapterFeed.notifyDataSetChanged();
-
-
         adapterFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.VIDEO)){
+
+                    Intent intent = new Intent(HomeSinRegistro.this, Video.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("video",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+
+                else if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.IMAGEN)){
+
+                    Intent intent = new Intent(HomeSinRegistro.this, Imagen.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("imagen",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+
+                else if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.PDF)){
+
+                    if (feeds.get(recyclerView.getChildAdapterPosition(view)).getIs_gratis()){
+                        Intent intent = new Intent(HomeSinRegistro.this, PantallaPDF.class);
+                        intent.putExtra("ViewType","internet");
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pdf",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                    else {
+                        Intent intent = new Intent(HomeSinRegistro.this, DetallePdf.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pdf",feeds.get(recyclerView.getChildAdapterPosition(view)).getDescripcion());
+                        bundle.putString("precio",feeds.get(recyclerView.getChildAdapterPosition(view)).getCosto_pdf());
+
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+
+                    }
+
+                }
+
+                else {
 
 
+                }
 
 
             }
@@ -125,34 +147,28 @@ public class HomeSinRegistro  extends AppCompatActivity  {
 
     public void bajarFeed(){
 
+        //  feeds.removeAll(feeds);
+
         dbProvider = new DBProvider();
         dbProvider.tablaFeed().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                feeds.clear();
 
                 if (dataSnapshot.exists()) {
-
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Feed feed = snapshot.getValue(Feed.class);
 
+                        feeds.add(feed);
+                        adapterFeed.notifyDataSetChanged();
 
-
-
-
-                            adapterFeed.notifyDataSetChanged();
-
-
-
-                        }
                     }
-
                 }
-
-
-
-
-
+                else {
+                    Log.e(TAG, "Feed: ");
+                }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -164,4 +180,22 @@ public class HomeSinRegistro  extends AppCompatActivity  {
 
 
 
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==PDF_CODE && resultCode == RESULT_OK && data != null){
+
+            Uri selecPdf=data.getData();
+            Intent intent=new Intent(HomeSinRegistro.this,PantallaPDF.class);
+            intent.putExtra("ViewType","storage");
+            intent.putExtra("FileUri",selecPdf.toString());
+            startActivity(intent);
+
+
+        }
+
+    }
 }

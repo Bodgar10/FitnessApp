@@ -158,16 +158,17 @@
 
        <LinearLayout
            android:id="@+id/linearRes"
-           android:background="@color/blanco"
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
+           android:layout_height="200dp"
+           android:layout_above="@+id/linearRealizarPago"
            android:layout_below="@+id/linese"
            android:layout_alignParentStart="true"
-           android:layout_marginBottom="10dp"
            android:layout_alignParentEnd="true"
            android:layout_marginStart="0dp"
            android:layout_marginTop="10dp"
            android:layout_marginEnd="0dp"
+           android:layout_marginBottom="184dp"
+           android:background="@drawable/ic_resumencompra"
            android:orientation="vertical">
 
            <TextView
@@ -294,8 +295,6 @@
                    android:textColor="@android:color/black"
                    android:textSize="15sp"
                    android:textStyle="bold" />
-
-
 
 
                <TextView

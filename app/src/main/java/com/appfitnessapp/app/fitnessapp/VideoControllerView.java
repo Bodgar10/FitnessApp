@@ -410,7 +410,7 @@ public class VideoControllerView extends FrameLayout {
             mFullscreenButton.setImageResource(R.drawable.ic_edit);
         }
         else {
-            mFullscreenButton.setImageResource(R.drawable.ic_home_);
+            mFullscreenButton.setImageResource(R.drawable.ic_homenuevo);
         }
     }
 

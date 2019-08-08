@@ -1,21 +1,37 @@
 package com.appfitnessapp.app.fitnessapp.Admin;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterAsesorias;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterIngredientes;
 import com.appfitnessapp.app.fitnessapp.Arrays.Asesorias;
+import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
+import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
+import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
+import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
+import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.Usuario.Asesoria;
 import com.appfitnessapp.app.fitnessapp.Usuario.DetalleRecetas;
 import com.appfitnessapp.app.fitnessapp.Usuario.InformacionCompra;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
@@ -28,6 +44,11 @@ public class AsesoriasAdmin extends AppCompatActivity {
     TextView txtPendientes;
     CircularImageView imgPostPersona;
 
+    private ProgressDialog progressDialog;
+    private static final String TAG = "BAJARINFO:";
+    static DBProvider dbProvider;
+    BajarInfo bajarInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +57,13 @@ public class AsesoriasAdmin extends AppCompatActivity {
         Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Asesorias");
+
+
+        dbProvider = new DBProvider();
+        bajarInfo = new BajarInfo();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setIndeterminate(true);
+
 
 
         recyclerFinalizar=findViewById(R.id.recyclerFinalizar);
@@ -54,7 +82,7 @@ public class AsesoriasAdmin extends AppCompatActivity {
         recyclerReciente.setAdapter(adapter);
 
 
-
+/*
 
         Asesorias asesorias0=new Asesorias("Pedro Ortiz","68 kg","Bajar  de peso","");
         Asesorias asesorias1=new Asesorias("Fernanda Ramirez","70 kg","Aumentar musculo","");
@@ -67,10 +95,10 @@ public class AsesoriasAdmin extends AppCompatActivity {
         asesorias.add(asesorias2);
         asesorias.add(asesorias3);
 
+*/
 
 
-
-        adapter.notifyDataSetChanged();
+      //  adapter.notifyDataSetChanged();
 
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +131,43 @@ public class AsesoriasAdmin extends AppCompatActivity {
             }
         });
 
+        bajarUsuarios();
 
+    }
+
+
+    public void bajarUsuarios(){
+        Log.e(TAG,"Usuarios 2: ");
+        dbProvider = new DBProvider();
+
+        dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                asesorias.clear();
+                Log.e(TAG,"Usuarios 4: ");
+                if (dataSnapshot.exists()){
+                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                        Log.e(TAG, "Usuarios: " + snapshot);
+                        Asesorias asesoria = snapshot.getValue(Asesorias.class);
+                        Usuarios usuarios = snapshot.getValue(Usuarios.class);
+
+                        if (usuarios.getTipo_usuario().equals(Contants.USUARIO)) {
+
+                        asesorias.add(asesoria);
+                        adapter.notifyDataSetChanged();
+                        progressDialog.dismiss();
+                    }
+
+                    }
+                }else{
+                    Log.e(TAG,"Usuarios 3: ");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG,"ERROR: ");
+            }
+        });
     }
 }

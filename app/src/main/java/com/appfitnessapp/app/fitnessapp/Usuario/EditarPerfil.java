@@ -15,8 +15,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
+import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -48,13 +50,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
 
 public class EditarPerfil extends AppCompatActivity {
 
     CircularImageView imgPersona;
-    TextView btnCambiarFoto,btnCambiarContra,btnCambiarCorreo;
-    TextInputEditText edtNombreUsuario;
-    TextView editContrasena,edtCorreo;
+    TextView btnCambiarFoto;
+    TextInputEditText edtNombreUsuario,editContrasena,edtCorreo;
 
     Spinner spinnerPeso,spinnerEstatura,spinnerBuscando;
     LinearLayout btnAceptar;
@@ -67,21 +69,28 @@ public class EditarPerfil extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener listener;
 
-
     private static final String TAG = "BAJARINFO:";
-
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
 
-    String id;
+    String id,email,password,name,txtObjetivo,txtPeso,txtEstatura;
+    Boolean isFotoReady = false;
+    String selectDay;
 
-    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+    ArrayAdapter<String> Saltura;
+    ArrayAdapter<String> Speso;
+    ArrayAdapter<String> Sbuscando;
+
+    int selectionEstatura,selectionPeso,selectionObjetivo;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_22_editar_perfil);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         Toolbar toolbarback=findViewById(R.id.include);
         setSupportActionBar(toolbarback);
@@ -106,12 +115,10 @@ public class EditarPerfil extends AppCompatActivity {
         imgPersona=findViewById(R.id.imgPersona);
 
         btnCambiarFoto=findViewById(R.id.txtCambiarFoto);
-        btnCambiarContra=findViewById(R.id.txtCambiarContra);
-        btnCambiarCorreo=findViewById(R.id.txtCambiarCorreo);
 
 
         edtNombreUsuario=findViewById(R.id.edtNombreUsuario);
-        editContrasena=findViewById(R.id.editContrasena);
+        editContrasena=findViewById(R.id.edtContrasena);
         edtCorreo=findViewById(R.id.edtCorreo);
 
 
@@ -122,19 +129,17 @@ public class EditarPerfil extends AppCompatActivity {
         btnAceptar=findViewById(R.id.linearAceptar);
 
 
-        ArrayAdapter<String> altura = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.altura);
-
-        ArrayAdapter<String> peso = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.peso);
-
-        ArrayAdapter<String> buscando = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.buscando);
+        Saltura = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.estatura);
+       Speso = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.peso);
+       Sbuscando = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.objetivos);
 
 
-        spinnerEstatura.setAdapter(altura);
-        spinnerEstatura.setPrompt("¿Cual es tu altura?");
-        spinnerPeso.setAdapter(peso);
+        spinnerEstatura.setAdapter(Saltura);
+        spinnerEstatura.setPrompt("¿Cual es tu estatura?");
+        spinnerPeso.setAdapter(Speso);
         spinnerPeso.setPrompt("¿Cual es tu peso?");
-        spinnerBuscando.setAdapter(buscando);
-        spinnerBuscando.setPrompt("¿Que estas buscando?");
+        spinnerBuscando.setAdapter(Sbuscando);
+        spinnerBuscando.setPrompt("¿Que estas objetivos?");
 
         spinnerEstatura.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -168,32 +173,47 @@ public class EditarPerfil extends AppCompatActivity {
             }
         });
 
-        btnCambiarContra.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(EditarPerfil.this, CambiarContrasena.class);
-                startActivity(intent);
-
-
-            }
-        });
-
-        btnCambiarCorreo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(EditarPerfil.this, CambiarCorreo.class);
-                startActivity(intent);
-
-
-            }
-        });
-
 
         btnAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String edtNombre = Objects.requireNonNull(edtNombreUsuario.getText()).toString();
+                String edtContra = Objects.requireNonNull(editContrasena.getText()).toString();
+                String editCorreo = Objects.requireNonNull(edtCorreo.getText()).toString();
+
+                //seleccionar el texto que se pone en el spinner
+                String objetivo = spinnerBuscando.getSelectedItem().toString();
+                String estatura = spinnerEstatura.getSelectedItem().toString();
+                String peso = spinnerPeso.getSelectedItem().toString();
+
+
+                if (!name.equals(edtNombre)){
+                    dbProvider.updateName(edtNombre, id);
+                }
+
+                if (!email.equals(editCorreo)){
+                    changeEmail(id, editCorreo);
+                }
+                if (!password.equals(edtContra)){
+                    changePass(id, edtContra);
+                }
+                if (!String.valueOf(selectionObjetivo).equals(objetivo)){
+                    dbProvider.updateObjetivo(objetivo, id);
+                }
+                if (!String.valueOf(selectionEstatura).equals(estatura)){
+                    dbProvider.updateEstatura(estatura, id);
+                }
+                if (!String.valueOf(selectionPeso).equals(peso)){
+                    dbProvider.updatePeso(peso,id);
+                }
+                if (name.equals(edtNombre)&&email.equals(editCorreo)&&password.equals(edtContra)){
+
+                    Intent intent=new Intent(EditarPerfil.this, UsuarioPerfil.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+
+
 
             }
         });
@@ -208,7 +228,6 @@ public class EditarPerfil extends AppCompatActivity {
         progressDialog.setMessage("Cargando Información...");
         progressDialog.show();
 
-
         dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -219,12 +238,31 @@ public class EditarPerfil extends AppCompatActivity {
                         Log.e(TAG, "Usuarios: " + snapshot);
                         Usuarios usuarios = snapshot.getValue(Usuarios.class);
 
-
                         if (usuarios.getId_usuario().equals(id)) {
+
+                            /*
+                            txtObjetivo =  usuarios.getObjetivo();
+                            txtPeso =  usuarios.getObjetivo();
+                            txtEstatura =  usuarios.getObjetivo();
+                             */
+
+                            name = usuarios.getNombre_usuario();
+                            email = usuarios.getEmail_usuario();
+                            password = usuarios.getContrasena_usuario();
 
                             edtNombreUsuario.setText(usuarios.getNombre_usuario());
                             editContrasena.setText(usuarios.getContrasena_usuario());
                             edtCorreo.setText(usuarios.getEmail_usuario());
+
+                            //para bajar la info y ponerle en el spinner
+                            selectionEstatura= Saltura.getPosition(usuarios.getEstatura());
+                            spinnerEstatura.setSelection(selectionEstatura);
+
+                            selectionPeso= Speso.getPosition(usuarios.getPeso_actual());
+                            spinnerPeso.setSelection(selectionPeso);
+
+                            selectionObjetivo= Sbuscando.getPosition(usuarios.getObjetivo());
+                            spinnerBuscando.setSelection(selectionObjetivo);
 
                             if (usuarios.getFoto_usuario().equals("nil")) {
                                 try {
@@ -245,23 +283,17 @@ public class EditarPerfil extends AppCompatActivity {
                             }
                         }
 
-
-
-
                     }
                 } else {
                     Log.e(TAG, "Usuarios 3: ");
                 }
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG, "ERROR: ");
             }
         });
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -322,10 +354,54 @@ public class EditarPerfil extends AppCompatActivity {
             }
         }
     }
-
-
     private void loadImageFromUrl(String url) {
-
         Picasso.get().load(url).into(imgPersona);
     }
+
+
+   public void changeEmail(final String id, final String email) {
+       mAuth = FirebaseAuth.getInstance();
+       final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+       assert user != null;
+        user.updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(EditarPerfil.this, "Se ha cambiado el correo correctamente.Inicia sesion de nuevo.", Toast.LENGTH_LONG).show();
+                    dbProvider.updateEmail(id,email);
+                    mAuth.signOut();
+                    Intent intent=new Intent(EditarPerfil.this, SplashPantalla.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+
+                } else {
+                    Toast.makeText(EditarPerfil.this, "Lo siento, hubo un error al cambiar el correo", Toast.LENGTH_SHORT).show();
+                }
+
+               // progressDialog.dismiss();
+            }
+        });
+    }
+    public void changePass(final String id, final String pass) {
+        mAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
+        user.updatePassword(pass).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(EditarPerfil.this, "Se ha cambiado la contraseña correctamente.Inicia sesión de nuevo.", Toast.LENGTH_LONG).show();
+                    dbProvider.updatePass(id,pass);
+                    mAuth.signOut();
+                    Intent intent=new Intent(EditarPerfil.this, SplashPantalla.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(EditarPerfil.this, "Lo siento, hubo un error al cambiar la contraseña", Toast.LENGTH_SHORT).show();
+                }
+              //  progressDialog.dismiss();
+            }
+        });
+    }
+
 }

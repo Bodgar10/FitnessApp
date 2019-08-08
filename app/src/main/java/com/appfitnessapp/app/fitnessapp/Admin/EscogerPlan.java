@@ -3,7 +3,9 @@ package com.appfitnessapp.app.fitnessapp.Admin;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,6 +19,8 @@ public class EscogerPlan extends AppCompatActivity {
     ImageView btnAgregarFoto,btnAgregarEjercicio;
     EditText edtDescripcion;
 
+    RecyclerView recyclerView,recyclerDemostracion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +31,9 @@ public class EscogerPlan extends AppCompatActivity {
         getSupportActionBar().setTitle("Desayuno");
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        recyclerView = findViewById(R.id.recyclerview);
+        recyclerDemostracion=findViewById(R.id.recyclerDemostracion);
 
 
         btnRecetas=findViewById(R.id.btnRecetas);
@@ -69,4 +76,23 @@ public class EscogerPlan extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
 }

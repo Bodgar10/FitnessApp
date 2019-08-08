@@ -63,8 +63,8 @@
 
                 <ImageButton
                     android:id="@+id/imgHome"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginBottom="3dp"
                     android:background="@null"
@@ -171,7 +171,7 @@
                     android:background="@null"
                     android:scaleType="centerCrop"
                     android:tint="@android:color/darker_gray"
-                    app:srcCompat="@drawable/ic_person" />
+                    app:srcCompat="@drawable/ic_usuario" />
 
                 <TextView
                     android:id="@+id/txtChat"
@@ -198,29 +198,29 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:layout_marginStart="136dp"
-        android:layout_marginEnd="136dp"
+        android:layout_marginStart="142dp"
+        android:layout_marginEnd="142dp"
+        android:layout_marginBottom="1dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
             android:id="@+id/btnAsesoria"
             android:layout_width="90dp"
             android:layout_height="55dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/boton_naranja_feed"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_marginTop="3dp"
                 android:background="@null"
                 android:scaleType="centerCrop"
                 android:tint="@android:color/white"
-                app:srcCompat="@drawable/ic_home_" />
+                app:srcCompat="@drawable/ic_asesoria" />
 
             <TextView
                 android:layout_width="wrap_content"

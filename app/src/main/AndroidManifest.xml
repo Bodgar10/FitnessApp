@@ -74,7 +74,7 @@
 
 
 
-        <activity android:name=".Admin.AsesoriasAdmin"></activity>
+
         <activity android:name=".Admin.AdminPerfil"
             android:parentActivityName=".Admin.AsesoriasAdmin"></activity>
         <activity android:name=".Admin.AdminPlanUsuario"

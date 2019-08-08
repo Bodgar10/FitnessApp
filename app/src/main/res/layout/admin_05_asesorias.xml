@@ -76,10 +76,11 @@
 
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@android:drawable/sym_def_app_icon" />
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/ic_peso_icono" />
 
 
                 <LinearLayout
@@ -133,10 +134,10 @@
 
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@android:drawable/sym_def_app_icon" />
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/ic_estatura_icono" />
 
 
                 <LinearLayout
@@ -191,10 +192,11 @@
 
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@android:drawable/sym_def_app_icon" />
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:scaleType="centerInside"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_objetivo_icono" />
 
 
                 <LinearLayout

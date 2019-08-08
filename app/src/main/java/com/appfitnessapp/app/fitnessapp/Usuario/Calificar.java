@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.appfitnessapp.app.fitnessapp.R;
 
@@ -18,6 +19,7 @@ public class Calificar extends AppCompatActivity {
     EditText edtExperiencia;
     LinearLayout btnFotoAntes,btnFotoDespues,btnCalificar;
     Spinner spinnerPeso;
+    TextView txtRating;
 
 
     @Override
@@ -40,6 +42,16 @@ public class Calificar extends AppCompatActivity {
         btnCalificar=findViewById(R.id.linearCalificar);
 
         spinnerPeso=findViewById(R.id.spinnerPeso);
+        txtRating=findViewById(R.id.txtRating);
+
+
+        ratingValoracion.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+
+                txtRating.setText(""+rating);
+            }
+        });
 
         btnFotoAntes.setOnClickListener(new View.OnClickListener() {
             @Override

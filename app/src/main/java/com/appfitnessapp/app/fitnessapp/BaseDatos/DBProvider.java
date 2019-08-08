@@ -55,7 +55,7 @@ public class DBProvider {
     //Creacion usuario
     public void createUser( String email, String id,
                            String name, String pass, String phone,
-                           String photo, String token, String type) {
+                           String photo, String token, String type,String pesoActual,String estatura,String objetivo) {
         Map<String, Object> updates = new HashMap<>();
 
         updates.put(Contants.ID_USUARIO, id);
@@ -66,6 +66,10 @@ public class DBProvider {
         updates.put(Contants.TIPO_USUARIO, type);
         updates.put(Contants.FOTO_USUARIO, photo);
         updates.put(Contants.CONTRASENA_USUARIO, pass);
+        updates.put(Contants.PESO_ACTUAL, pesoActual);
+        updates.put(Contants.ESTATURA, estatura);
+        updates.put(Contants.OBJETIVO, objetivo);
+
 
 
         usersRef().child(id).updateChildren(updates);
@@ -105,18 +109,39 @@ public class DBProvider {
         usersRef().child(id).updateChildren(updates);
     }
 
-    public void updateInfo(String name/*,String photo*/,String email,String password,String id) {
+
+    public void updatePeso(String peso,String id){
 
         Map<String, Object> updates = new HashMap<>();
 
-        updates.put(Contants.NOMBRE_USUARIO, name);
-     //   updates.put(Contants.FOTO_USUARIO, photo);
-        updates.put(Contants.EMAIL_USUARIO, email);
-        updates.put(Contants.CONTRASENA_USUARIO, password);
+        updates.put(Contants.PESO_ACTUAL, peso);
         usersRef().child(id).updateChildren(updates);
+
     }
 
-    public void updateEmail(String email, String id) {
+    public void updateObjetivo(String objetivo,String id){
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.OBJETIVO, objetivo);
+        usersRef().child(id).updateChildren(updates);
+
+    }
+
+    public void updateEstatura(String estatura,String id){
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.ESTATURA, estatura);
+        usersRef().child(id).updateChildren(updates);
+
+    }
+
+
+
+
+    public void updateEmail(String id, String email) {
+
         Map<String, Object> updates = new HashMap<>();
 
         updates.put(Contants.EMAIL_USUARIO, email);
@@ -124,14 +149,14 @@ public class DBProvider {
     }
 
 
-    public void updatePass(String pass, String id) {
+
+   public void updatePass(String id, String pass) {
+
         Map<String, Object> updates = new HashMap<>();
 
         updates.put(Contants.CONTRASENA_USUARIO, pass);
         usersRef().child(id).updateChildren(updates);
-
     }
-
 
 
     //Asesoria

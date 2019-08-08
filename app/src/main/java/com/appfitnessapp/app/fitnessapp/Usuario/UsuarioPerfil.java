@@ -49,7 +49,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
     ImageButton imgHome,imgPlan,imgChat;
     CircularImageView imgPersona;
-    TextView txtNombre,txtPeso,txtAltura,txtEmail;
+    TextView txtNombre,txtPeso,txtAltura,txtObjetivo;
     LinearLayout btnCalificar;
 
     private ProgressDialog progressDialog;
@@ -69,9 +69,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
     BarDataSet set,setHorizontal ;
 
 
-    String nombre,foto,correo,contrasena;
-
-    @Override
+       @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_21_perfil);
@@ -100,7 +98,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
         txtNombre=findViewById(R.id.txtNombreUsuario);
         txtPeso=findViewById(R.id.txtPesoActual);
         txtAltura=findViewById(R.id.txtEstatura);
-        txtEmail=findViewById(R.id.txtCorreo);
+        txtObjetivo=findViewById(R.id.txtObjetivo);
 
 
 
@@ -331,13 +329,13 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
                         if (usuarios.getId_usuario().equals(id)) {
 
-                           // nombre = usuarios.getNombre_usuario();
-                            foto = usuarios.getFoto_usuario();
-                            correo =usuarios.getEmail_usuario();
-                            contrasena =usuarios.getContrasena_usuario();
-
 
                             txtNombre.setText(usuarios.getNombre_usuario());
+                            txtAltura.setText(usuarios.getEstatura());
+                            txtPeso.setText(usuarios.getPeso_actual());
+                            txtObjetivo.setText(usuarios.getObjetivo());
+
+
                             if (usuarios.getFoto_usuario().equals("nil")) {
                                 try {
                                     URL urlfeed = new URL(usuarios.getFoto_usuario());

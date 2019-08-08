@@ -78,14 +78,11 @@ public class AdapterAsesorias extends RecyclerView.Adapter<AdapterAsesorias.Ases
 
 
 
-
+/*
         if (!asesoria.getImagen().equals("nil")){
             Log.e(TAG, "Imagen admin: "+ asesoria.getImagen());
 
-
             try {
-
-
                 URL urlAdmin = new URL(asesoria.getImagen());
                 Picasso.get().load(String.valueOf(urlAdmin))
                         .error(R.mipmap.ic_launcher)
@@ -96,9 +93,9 @@ public class AdapterAsesorias extends RecyclerView.Adapter<AdapterAsesorias.Ases
                 e.printStackTrace();
             }
 
-
-
         }
+
+        */
 
     }
 

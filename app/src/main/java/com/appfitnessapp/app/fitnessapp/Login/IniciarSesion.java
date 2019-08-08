@@ -169,9 +169,13 @@ public class IniciarSesion extends AppCompatActivity {
             }
         });
 
+        /*
         if (!yaCreado){
-            dbProvider.createUser(user.getEmail(),user.getUid(),name,"nil","nil","nil",refreshedToken,Contants.USUARIO);
+            dbProvider.createUser(user.getEmail(),user.getUid(),name,"nil","nil","nil",refreshedToken,Contants.USUARIO,"nil",
+                    "nil","nil");
         }
+
+        */
     }
 
 }

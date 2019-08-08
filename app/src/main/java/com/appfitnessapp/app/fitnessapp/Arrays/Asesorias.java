@@ -17,6 +17,8 @@ public class Asesorias {
         this.imagen = imagen;
     }
 
+    public Asesorias(){}
+
 
     public String getNombre_usuario() {
         return nombre_usuario;

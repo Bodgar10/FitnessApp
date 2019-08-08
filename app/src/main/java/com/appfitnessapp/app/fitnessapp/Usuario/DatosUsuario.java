@@ -1,9 +1,7 @@
 package com.appfitnessapp.app.fitnessapp.Usuario;
 
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -89,19 +87,19 @@ public class DatosUsuario extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<String> altura = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.altura);
+        ArrayAdapter<String> altura = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.estatura);
 
         ArrayAdapter<String> peso = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.peso);
 
-        ArrayAdapter<String> buscando = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.buscando);
+        ArrayAdapter<String> buscando = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.objetivos);
 
 
         spinnerAltura.setAdapter(altura);
-        spinnerAltura.setPrompt("¿Cual es tu altura?");
+        spinnerAltura.setPrompt("¿Cual es tu estatura?");
         spinnerPeso.setAdapter(peso);
         spinnerPeso.setPrompt("¿Cual es tu peso?");
         spinnerBuscando.setAdapter(buscando);
-        spinnerBuscando.setPrompt("¿Que estas buscando?");
+        spinnerBuscando.setPrompt("¿Que estas objetivos?");
 
 
 

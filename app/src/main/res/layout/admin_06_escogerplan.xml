@@ -188,6 +188,7 @@
         android:textSize="13sp" />
 
     <include
+        android:id="@+id/recyclerviewIngrediente"
         layout="@layout/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -243,6 +244,7 @@
         android:textSize="13sp" />
 
     <include
+        android:id="@+id/recyclerPreparacion"
         layout="@layout/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

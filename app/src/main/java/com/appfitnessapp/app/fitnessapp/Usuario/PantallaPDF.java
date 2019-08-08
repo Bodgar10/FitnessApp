@@ -71,16 +71,10 @@ public class PantallaPDF extends AppCompatActivity {
 
 
     public void verPdf(String url){
-
         if (getIntent() != null) {
-
             String viewType = getIntent().getStringExtra("ViewType");
-
             if (viewType.equals("internet")){
-
-
                 progressBar.setVisibility(View.VISIBLE);
-
                 FileLoader.with(this)
                         .load(url)
                         .fromDirectory("PDFFiles",FileLoader.DIR_EXTERNAL_PUBLIC)
@@ -148,14 +142,7 @@ public class PantallaPDF extends AppCompatActivity {
                             }
                         });
 
-
-
-
             }
-            else {
-
-            }
-
 
         }
 
