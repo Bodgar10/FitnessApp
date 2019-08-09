@@ -101,6 +101,22 @@ public class DBProvider {
         usersRef().child(id).updateChildren(updates);
     }
 
+    public void updateImgAntes(String photo,String id){
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.IMAGEN_ANTES, photo);
+        valoracionAsesoria().child(id).updateChildren(updates);
+
+    }
+
+    public void updateImgDespues(String photo,String id){
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.IMAGEN_DESPUES, photo);
+        valoracionAsesoria().child(id).updateChildren(updates);
+
+    }
+
     public void updateName(String name, String id) {
 
         Map<String, Object> updates = new HashMap<>();
@@ -226,16 +242,18 @@ public class DBProvider {
                                   String imagen_antes,String imagen_despues, String nombre_usuario_valoracion,String valoracion){
         Map<String, Object> updates = new HashMap<>();
 
+        String key = valoracionAsesoria().push().getKey();
+
         updates.put(Contants.DESCRIPCION_VALORACION , descripcion_valoracion);
         updates.put(Contants.FECHA_VALORACION , fecha_valoracion);
         updates.put(Contants.ID_ASESORIA , id_asesoria);
-        updates.put(Contants.ID_VALORACION , id_valoracion);
+        updates.put(Contants.ID_VALORACION , key);
         updates.put(Contants.IMAGEN_ANTES , imagen_antes);
         updates.put(Contants.IMAGEN_DESPUES , imagen_despues);
         updates.put(Contants.ID_USUARIO_VALORACION , nombre_usuario_valoracion);
         updates.put(Contants.VALORACION , valoracion);
 
-        valoracionAsesoria().child(id_valoracion).updateChildren(updates);
+        valoracionAsesoria().child(key).updateChildren(updates);
         }
 
 
