@@ -46,10 +46,9 @@ public class DBProvider {
         return dbRef().child(Contants.TABLA_RESPUESTA);
     }
 
-    public DatabaseReference valoracionAsesoria() {
-        return dbRef().child(Contants.TABLA_VALORACIONES_ASESORIA);
-    }
+    public DatabaseReference valoracionAsesoria() {return dbRef().child(Contants.TABLA_VALORACIONES_ASESORIA);}
 
+    public DatabaseReference chatRef() {return dbRef().child(Contants.TABLA_CHAT);}
 
 
     //Creacion usuario
@@ -257,6 +256,15 @@ public class DBProvider {
         }
 
 
+
+    public void subirChats(String id_servicio, String senderid, String text){
+        Map<String, Object> data = new HashMap<>();
+        String key = chatRef().push().getKey();
+        data.put(Contants.ID_SERVICIO, id_servicio);
+        data.put(Contants.SENDERID, senderid);
+        data.put(Contants.TEXT, text);
+        chatRef().child(id_servicio).child(key).updateChildren(data);
+    }
 
 
 }

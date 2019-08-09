@@ -4,6 +4,8 @@ public class Contants {
 
     //Tablas
     final public static String TABLA_USUARIOS = "tabla_usuarios";
+    final public static String TABLA_CHAT = "chats" ;// ---> YA
+
 
 
     //USERS
@@ -110,6 +112,25 @@ public class Contants {
 
 
     final public static String[] objetivos = {"Bajar de peso", "Musculatura", "Abdomen plano", "Aumentar masa muscular"};
+
+    //TABLA CHATS
+    //--> ID_SERVICIO
+    final public static String ID_SERVICIO = "id_servicio";
+    final public static String ID_MENSAJE = "mensaje";
+    final public static String SENDERID = "senderid";
+    final public static String TEXT = "text";
+
+    //TIPO_CONEXION
+    final public static String CHATS = "chats";
+    final public static String CHAT = "chat";
+
+    public static final String ARG_USERS = "users";
+    public static final String ARG_RECEIVER = "receiver";
+    public static final String ARG_RECEIVER_UID = "receiver_uid";
+    public static final String ARG_CHAT_ROOMS = "chat_rooms";
+    public static final String ARG_FIREBASE_TOKEN = "firebaseToken";
+    public static final String ARG_FRIENDS = "friends";
+    public static final String ARG_UID = "uid";
 
 
 }

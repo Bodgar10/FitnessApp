@@ -1,89 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_chat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="115dp"
+        app:layout_constraintBottom_toTopOf="@+id/edit_text_message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <EditText
+        android:id="@+id/edit_text_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/boton_gris_margen"
+        android:gravity="bottom"
+        android:hint="Escribe tu mensaje"
+        android:imeOptions="actionSend"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textSize="12sp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/vvdrb"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <LinearLayout
+        android:id="@+id/vvdrb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+
         android:gravity="bottom"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginBottom="3dp"
-            android:background="#77a9a9a9"/>
+            android:background="#77a9a9a9" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:layout_height="wrap_content">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/btnHome"
-                android:orientation="horizontal"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 android:layout_weight="1.5"
                 android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/imgHome"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
-                    android:tint="@android:color/darker_gray"
+                    android:layout_marginBottom="3dp"
                     android:background="@null"
                     android:scaleType="centerInside"
-                    app:srcCompat="@drawable/ic_homenuevo"/>
+                    android:tint="@android:color/darker_gray"
+                    app:srcCompat="@drawable/ic_homenuevo" />
 
                 <TextView
                     android:id="@+id/txtHome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:textColor="@android:color/black"
                     android:layout_marginStart="2dp"
+                    android:text="Home"
+                    android:textColor="@android:color/black"
                     android:textSize="12sp"
-                    android:text="Home" />
+                    android:visibility="gone" />
 
             </LinearLayout>
 
 
-
-
             <LinearLayout
                 android:id="@+id/btnPlan"
-                android:orientation="horizontal"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="3dp"
                 android:layout_width="wrap_content"
-                android:gravity="center"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="4dp"
                 android:layout_weight="1.5"
-                android:layout_height="wrap_content">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/imgPlan"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
                     android:background="@null"
-                    android:tint="@android:color/darker_gray"
                     android:scaleType="centerInside"
+                    android:tint="@android:color/darker_gray"
                     app:srcCompat="@drawable/ic_miplan_icono" />
 
                 <TextView
@@ -92,31 +130,31 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
                     android:text="Mi plan"
-                    android:visibility="gone"
                     android:textColor="@android:color/black"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
 
             <LinearLayout
                 android:id="@+id/btnPerfil"
-                android:layout_weight="1.5"
-                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:layout_marginEnd="3dp"
-                android:layout_marginTop="4dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1.5"
                 android:gravity="center"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/imgPerfil"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginBottom="3dp"
                     android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
                     android:background="@null"
                     android:scaleType="centerInside"
                     android:tint="@android:color/darker_gray"
@@ -127,35 +165,35 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
+                    android:text="Perfil"
                     android:textColor="@android:color/black"
                     android:textSize="12sp"
-                    android:visibility="gone"
-                    android:text="Perfil" />
+                    android:visibility="gone" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/btnChat"
-                android:layout_weight="1.5"
-                android:orientation="horizontal"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/home_background_oval"
-                android:layout_marginEnd="3dp"
-                android:gravity="center"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1.5"
+                android:background="@drawable/home_background_oval"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/imgChat"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
-                    android:tint="@color/naranja"
+                    android:layout_marginBottom="5dp"
                     android:background="@null"
                     android:scaleType="centerInside"
+                    android:tint="@color/naranja"
                     app:srcCompat="@drawable/ic_chatn" />
 
                 <TextView
@@ -163,9 +201,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
+                    android:text="Chat"
                     android:textColor="@color/naranja"
-                    android:textSize="12sp"
-                    android:text="Chat" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -176,4 +214,4 @@
     </LinearLayout>
 
 
-</FrameLayout>
+</android.support.constraint.ConstraintLayout>

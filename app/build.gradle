@@ -29,7 +29,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-auth:16.0.1'
     implementation 'com.google.firebase:firebase-core:16.0.1'
-    implementation 'com.google.firebase:firebase-messaging:10.2.1'
+    implementation 'com.google.firebase:firebase-messaging:17.0.0'
     implementation 'com.google.firebase:firebase-storage:16.0.1'
     implementation 'com.google.firebase:firebase-database:16.0.1'
     implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
@@ -47,8 +47,10 @@ dependencies {
     implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
     implementation'com.github.PhilJay:MPAndroidChart:v3.0.1'
 
-
     implementation 'com.commit451:PhotoView:1.2.4'
+
+    implementation 'org.greenrobot:eventbus:3.0.0'
+
 
 }
 apply plugin: 'com.google.gms.google-services'
