@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -47,6 +48,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -56,7 +58,7 @@ public class Calificar extends AppCompatActivity {
     EditText edtExperiencia;
     LinearLayout btnCalificar;
     Spinner spinnerPeso;
-    TextView txtRating,txtQuit,txtQuit2;
+    TextView txtRating,txtQuit,txtQuit2,txtTrato;
 
     ImageButton  btnFotoAntes,btnFotoDespues;
     ProgressDialog progressDialog;
@@ -74,10 +76,15 @@ public class Calificar extends AppCompatActivity {
 
     String id;
      StorageReference mStorage;
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
     Date date = new Date();
 
     String fecha = dateFormat.format(date);
+    Calendar cal = Calendar.getInstance();
+
+    String semana ="";
+
 
 
     @Override
@@ -85,11 +92,20 @@ public class Calificar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_24_calificar);
 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         Toolbar toolbarback=findViewById(R.id.include);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Calificar asesoria");
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+
+
+        //cal.setTime(date);
+        //int week = cal.get(Calendar.WEEK_OF_MONTH);
+        //semana= String.valueOf(week);
+
 
         storage=FirebaseStorage.getInstance();
         database=FirebaseDatabase.getInstance();
@@ -116,7 +132,7 @@ public class Calificar extends AppCompatActivity {
         txtRating=findViewById(R.id.txtRating);
         txtQuit=findViewById(R.id.txtQuit);
         txtQuit2=findViewById(R.id.txtQuit2);
-
+        txtTrato=findViewById(R.id.txtTrato);
 
 
         ratingValoracion.setRating(0.0f);
@@ -125,11 +141,48 @@ public class Calificar extends AppCompatActivity {
         imgAntes.setVisibility(View.GONE);
 
 
+        ratingValoracion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         ratingValoracion.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
 
-                txtRating.setText(""+rating);
+                txtTrato.setText(String.valueOf(rating));
+                switch ((int) ratingBar.getRating()) {
+                    case (int) 0.5:
+                        txtTrato.setText("Pesimo");
+                        txtRating.setText(""+rating);
+                        break;
+                    case 1:
+                        txtTrato.setText("Pesimo");
+                        txtRating.setText(""+rating);
+                        break;
+                    case 2:
+                        txtTrato.setText("Malo");
+                        txtRating.setText(""+rating);
+                        break;
+                    case 3:
+                        txtTrato.setText("Regular");
+                        txtRating.setText(""+rating);
+                        break;
+                    case 4:
+                        txtTrato.setText("Excelente");
+                        txtRating.setText(""+rating);
+                        break;
+                    case 5:
+                        txtTrato.setText("El mejor");
+                        txtRating.setText(""+rating);
+                        break;
+                    default:
+                        txtTrato.setText("");
+
+                }
+
             }
         });
 
@@ -176,9 +229,11 @@ public class Calificar extends AppCompatActivity {
                     Toast.makeText(Calificar.this, "Escribe tu experiencia y pon una calificación.", Toast.LENGTH_SHORT).show();
                 }
 
-                else if (pdfUri==null&&pdfUri2==null&&!txtExperiencia.isEmpty()){
+                else if (!txtExperiencia.isEmpty()){
+                    dbProvider.subirValoraciones(txtExperiencia,fecha,"",key, "nil",
+                            "nil",id,valor);
 
-                    Toast.makeText(Calificar.this, "Selecciona las imagenes", Toast.LENGTH_SHORT).show();
+                    edtExperiencia.getText().clear();
 
                 }
 
@@ -385,9 +440,6 @@ public class Calificar extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            btnFotoDespues.setVisibility(View.GONE);
-            txtQuit.setVisibility(View.GONE);
-
         }
 
        else if (requestCode==87&& resultCode ==RESULT_OK && data!= null){
@@ -402,17 +454,9 @@ public class Calificar extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
-            btnFotoAntes.setVisibility(View.GONE);
-            txtQuit2.setVisibility(View.GONE);
-
         }
-
         else {
-            btnFotoAntes.setVisibility(View.VISIBLE);
-            txtQuit2.setVisibility(View.VISIBLE);
-            btnFotoDespues.setVisibility(View.VISIBLE);
-            txtQuit.setVisibility(View.VISIBLE);
+
             Toast.makeText(Calificar.this,"Selecciona archivo", Toast.LENGTH_SHORT).show();
         }
 

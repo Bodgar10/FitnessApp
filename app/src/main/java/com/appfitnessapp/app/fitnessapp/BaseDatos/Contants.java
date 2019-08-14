@@ -20,6 +20,8 @@ public class Contants {
     final public static  String PESO_ACTUAL = "peso_actual";
     final public static  String ESTATURA = "estatura";
     final public static String  OBJETIVO = "objetivo";
+    final public static  String HOMBRE = "hombre";
+    final public static String  MUJER = "mujer";
 
 
     //Tipo usuario
@@ -82,6 +84,9 @@ public class Contants {
     final public static String TABLA_FORMULARIO = "formulario";
     final public static String ID_PREGUNTA = "id_pregunta";
     final public static String PREGUNTA = "pregunta";
+    final public static String NOMBRE_PREGUNTA = "nombre_pregunta";
+
+
 
     //Respuestas
     final public static String TABLA_RESPUESTA = "respuestas";
@@ -91,6 +96,91 @@ public class Contants {
     //Forma pago
     final public static String PAYPAL = "paypal";
     final public static String TARJETA = "tarjeta";
+
+    final public static String ALMUERZO = "almuerzo";
+    final public static String DESAYUNO = "desayuno";
+    final public static String CENA = "cena";
+
+
+    final public static String TABLA_ESTADISTICAS_ALIMENTOS = "estadisticas_alimentos";
+    final public static String FECHA_CUMPLIDA = "fecha_cumplida";
+    final public static String TIPO_ALIMENTO = "tipo_alimento";
+
+
+    final public static String TABLA_ESTADISTICAS_EJERCICIOS = "estadisticas_ejercicios";
+    final public static String EJERCICIOS_REALIZADOS = "ejercicios_realizados";
+    final public static String ID_ESTADISTICA = "id_estadistica";
+
+
+    final public static String ID_ADMIN = "id_admin";
+
+
+    final public static String PREGUNTA_1 = "pregunta_1";
+    final public static String PREGUNTA_2 = "pregunta_2";
+    final public static String PREGUNTA_3 = "pregunta_3";
+    final public static String PREGUNTA_4 = "pregunta_4";
+    final public static String PREGUNTA_5 = "pregunta_5";
+    final public static String PREGUNTA_6 = "pregunta_6";
+    final public static String PREGUNTA_7 = "pregunta_7";
+    final public static String PREGUNTA_8 = "pregunta_8";
+    final public static String PREGUNTA_9 = "pregunta_9";
+    final public static String PREGUNTA_10 = "pregunta_10";
+
+
+    final public static String TABLA_PLAN_ALIMENTICIO = "plan_alimenticio";
+    final public static String ID_ALIMENTO = "id_alimento";
+
+
+    //tipo_alimento
+
+    //id_usuario
+    final public static String NOMBRE_ALIMENTO = "nombre_alimento";
+    final public static String MIN_ALIMENTO = "min_alimento";
+    final public static String PORCIONES = "porciones";
+    final public static String KILOCALORIAS = "kilocalorias";
+    final public static String PRECIO_MAS_BAJO = "precio_mas_bajo";
+    final public static String PRECIO_MAS_ALTO = "precio_mas_alto";
+    final public static String IMAGEN_ALIMENTO = "imagen_alimento";
+
+
+    final public static String INGREDIENTES = "ingredientes";
+    final public static String NOMBRE_INGREDIENTE = "nombre_ingrediente";
+    final public static String CANTIDAD = "cantidad";
+    final public static String ID_INGREDIENTE = "id_ingrediente";
+
+
+    final public static String PREPARACION = "preparacion";
+    final public static String NOMBRE_PASO = "nombre_paso";
+    final public static String DESCRIPCION_PASO = "descripcion_paso";
+    final public static String ID_PREPARACION = "id_preparacion";
+
+
+    final public static String TABLA_PLAN_EJERCICIO = "plan_ejercicio";
+    final public static String MIN_EJERCICIO = "min_ejercicio";
+    final public static String NIVEL_EJERCICIO = "nivel_ejercicio";
+    final public static String NUM_EJERCICIOS = "num_ejercicios";
+    final public static String DESCRIPCION_EJERCICIOS = "descripcion_ejercicios";
+    final public static String ID_PLAN_EJERCICIO = "id_plan_ejercicio";
+
+
+    final public static String EJERCICIOS = "ejercicios";
+    final public static String NOMBRE_EJERCICIO = "nombre_ejercicio";
+    final public static String RONDAS = "rondas";
+    final public static String REPETICIONES = "repeticiones";
+    final public static String VIDEO_EJERCICIO = "video_ejercicio";
+    final public static String IMAGENES_EJERCICIO = "imagenes_ejercicio";
+    final public static String ID_EJERCICIO = "id_ejercicio";
+
+
+    final public static String ALTA_INTENSIDAD = "Alta Intensidad";
+    final public static String BAJA_INTENSIDAD = "Baja Intensidad";
+    final public static String MEDIA_INTENSIDAD = "Media Intensidad";
+
+    final  public static String[] MESES = {"01","02","03","04","05","06","07","08","09","10","11","12"};
+    final  public static String[] ANIOS = {"19","20","21","22","23","24","25","26","27","28","29","30"};
+    final  public static String[] TIEMPO_ESTIMADO = {"10", "15", "20", "25", "30", "45","50","55","60","65","70","80","90","100","110","120"};
+    final  public static String[] PORCENTAJE = {"10%","20%","30%","40%","50%","60%","70%","80%"};
+    final  public static String[] cantidad =  {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
 
 
     final public static String[] estatura = {"1.45 cm","1.46 cm","1.47 cm","1.48 cm","1.49 cm","1.50 cm","1.51 cm","1.52 cm","1.53 cm",

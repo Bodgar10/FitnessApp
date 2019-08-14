@@ -48,6 +48,12 @@ public class DBProvider {
 
     public DatabaseReference valoracionAsesoria() {return dbRef().child(Contants.TABLA_VALORACIONES_ASESORIA);}
 
+    public DatabaseReference estadisticaAlimentos() {return dbRef().child(Contants.TABLA_ESTADISTICAS_ALIMENTOS);}
+
+    public DatabaseReference estadisticaEjercicios() {return dbRef().child(Contants.TABLA_ESTADISTICAS_EJERCICIOS);}
+
+
+
     public DatabaseReference chatRef() {return dbRef().child(Contants.TABLA_CHAT);}
 
 
@@ -124,6 +130,13 @@ public class DBProvider {
         usersRef().child(id).updateChildren(updates);
     }
 
+    public void updatePhone(String telefono, String id) {
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.TELEFONO_USUARIO, telefono);
+        usersRef().child(id).updateChildren(updates);
+    }
 
     public void updatePeso(String peso,String id){
 
@@ -228,12 +241,13 @@ public class DBProvider {
     public void subirRespuestas(String id_pregunta,String id_respuesta, String id_usuario, String respuesta){
         Map<String, Object> updates = new HashMap<>();
 
+        String key = respuestas().push().getKey();
         updates.put(Contants.ID_PREGUNTA , id_pregunta);
-        updates.put(Contants.ID_RESPUESTA , id_respuesta);
+        updates.put(Contants.ID_RESPUESTA , key);
         updates.put(Contants.ID_USUARIO , id_usuario);
         updates.put(Contants.RESPUESTA , respuesta);
 
-        respuestas().child(id_respuesta).updateChildren(updates);
+        respuestas().child(key).updateChildren(updates);
     }
 
     //Valoraciones
@@ -265,6 +279,7 @@ public class DBProvider {
         data.put(Contants.TEXT, text);
         chatRef().child(id_servicio).child(key).updateChildren(data);
     }
+
 
 
 }

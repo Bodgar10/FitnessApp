@@ -7,52 +7,46 @@
     android:background="#4bdedede"
     android:layout_height="match_parent">
 
-
-    <LinearLayout
-        android:id="@+id/linem"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        android:elevation="20dp"
+        android:gravity="center"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
-        android:background="@android:color/white"
-        android:elevation="20dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:gravity="start"
-            android:text="Formulario de registro"
-            android:textAllCaps="false"
-            android:textColor="@color/negro"
-            android:textSize="15sp" />
+        android:theme="@style/Toolbar"
+        app:titleTextAppearance="@style/Toolbar.TitleText"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <Button
             android:id="@+id/btnGuardar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
             android:background="@null"
-            android:textAlignment="center"
+            android:text="Guardar"
+            android:textSize="15sp"
+            android:textColor="@color/azul"
             android:layout_marginEnd="10dp"
-            android:text="Guardar" />
+            />
 
-    </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+
 
     <LinearLayout
         android:id="@+id/linese"
         android:background="@color/blanco"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linem"
+        android:layout_below="@+id/toolbar"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"

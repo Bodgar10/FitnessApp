@@ -16,7 +16,10 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.appfitnessapp.app.fitnessapp.Arrays.EstadisticaAlimentos;
+import com.appfitnessapp.app.fitnessapp.Arrays.EstadisticaEjercicio;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
@@ -42,14 +45,19 @@ import com.squareup.picasso.Picasso;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
+import java.util.Locale;
 
 public class UsuarioPerfil  extends AppCompatActivity {
 
-    ImageButton imgHome,imgPlan,imgChat;
+    ImageButton imgHome,imgPlan,imgChat,btnDerecha,btnIzquierda;
     CircularImageView imgPersona;
-    TextView txtNombre,txtPeso,txtAltura,txtObjetivo;
+    TextView txtNombre,txtPeso,txtAltura,txtObjetivo,txtDiasSemana;
     LinearLayout btnCalificar;
 
     private ProgressDialog progressDialog;
@@ -57,6 +65,26 @@ public class UsuarioPerfil  extends AppCompatActivity {
     static DBProvider dbProvider;
 
     String id;
+
+    int index_almuerzo = 0;
+    int index_desayuno = 0;
+    int index_cena = 0;
+
+    int index_domingo = 0;
+    int index_lunes = 0;
+    int index_martes = 0;
+    int index_miercoles = 0;
+    int index_jueves = 0;
+    int index_viernes = 0;
+    int index_sabado = 0;
+    int index_ejercicio=0;
+
+
+
+    int porcentDesayuno,porcentComida,porcentCena;
+
+
+    int porcentDomingo,porcentLunes,porcentMartes,porcentMiercoles,porcentJueves,porcentViernes,porcentSabado;
 
     BarChart chart,chartHorizontal;
 
@@ -68,6 +96,13 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
     BarDataSet set,setHorizontal ;
 
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+    Date date = new Date();
+    Calendar cal = Calendar.getInstance();
+    int semanaActual,mesActual;
+
+
+    String fecha = dateFormat.format(date);
 
        @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,27 +117,66 @@ public class UsuarioPerfil  extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
 
         dbProvider = new DBProvider();
-
-
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         bajarUsuarios();
-
+        bajarEstadisticasAlimentos();
+        bajarEstadisticasEjercicios();
 
         imgHome=findViewById(R.id.imgHome);
         imgPlan=findViewById(R.id.imgPlan);
         imgChat=findViewById(R.id.imgChat);
 
-        imgPersona=findViewById(R.id.imgPersona);
+        btnDerecha=findViewById(R.id.btnDerecha);
+        btnIzquierda=findViewById(R.id.btnIzquierda);
+
+
+           imgPersona=findViewById(R.id.imgPersona);
 
         txtNombre=findViewById(R.id.txtNombreUsuario);
         txtPeso=findViewById(R.id.txtPesoActual);
         txtAltura=findViewById(R.id.txtEstatura);
         txtObjetivo=findViewById(R.id.txtObjetivo);
 
+        txtDiasSemana=findViewById(R.id.txtDiasSemana);
+
+
+        txtDiasSemana.setText(fecha);
+
 
 
         btnCalificar=findViewById(R.id.linearCalificar);
+
+        btnIzquierda.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   String fecha = "";
+
+                   if (btnIzquierda.isClickable()){
+
+                       txtDiasSemana.setText(getPreviousDate(fecha));
+
+
+                   }
+
+               }
+           });
+
+        btnDerecha.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+
+                   if (btnIzquierda.isClickable()){
+                       String fecha = "";
+                       txtDiasSemana.setText(getNextDate(fecha));
+
+
+                   }
+
+               }
+           });
+
+
 
         btnCalificar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -314,8 +388,6 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
         progressDialog.setMessage("Cargando Información...");
         progressDialog.show();
-
-
         dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -372,6 +444,179 @@ public class UsuarioPerfil  extends AppCompatActivity {
         });
     }
 
+
+    public void bajarEstadisticasAlimentos(){
+        dbProvider = new DBProvider();
+
+
+        dbProvider.estadisticaAlimentos().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e(TAG, "Usuarios 4: ");
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        //Log.e(TAG,"Usuarios: "+ snapshot);
+                        Log.e(TAG, "Usuarios: " + snapshot);
+                        EstadisticaAlimentos estadisticaAlimentos = snapshot.getValue(EstadisticaAlimentos.class);
+
+                        cal.setTime(date);
+                        semanaActual = cal.get(Calendar.WEEK_OF_MONTH);
+                        mesActual = cal.get(Calendar.MONTH);
+                        String semana= String.valueOf(semanaActual);
+                        String mes= String.valueOf(mesActual);
+
+
+
+                        String semanaBase =estadisticaAlimentos.getFecha_cumplida();
+                        SimpleDateFormat dateFormattt = new SimpleDateFormat("dd/MM/yyyy");
+                        Date convertedDate = new Date();
+                        try {
+                            convertedDate=dateFormattt.parse(semanaBase);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        Calendar c = Calendar.getInstance();
+                        c.setTime(convertedDate);
+                        int diaBase = c.get(Calendar.WEEK_OF_MONTH);
+                        int mesBase = c.get(Calendar.MONTH);
+
+
+
+
+                        if (estadisticaAlimentos.getId_usuario().equals(id)) {
+                            if (semana.equals(diaBase)&&mes.equals(mesBase)){
+
+                                if (estadisticaAlimentos.getTipo_alimento().equals(Contants.ALMUERZO)){
+                                    index_almuerzo +=1;
+                                    porcentComida = (index_almuerzo/7)*100;
+                                }
+                                else if(estadisticaAlimentos.getTipo_alimento().equals(Contants.DESAYUNO)){
+                                    index_desayuno +=1;
+                                    porcentDesayuno = (index_desayuno/7)*100;
+
+                                }
+                                else {
+                                    index_cena +=1;
+                                    porcentCena = (index_cena/7)*100;
+
+                                }
+
+                            }
+
+                        }
+
+
+
+
+                    }
+                } else {
+                    Log.e(TAG, "Usuarios 3: ");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "ERROR: ");
+            }
+        });
+    }
+
+
+    public void bajarEstadisticasEjercicios(){
+        dbProvider = new DBProvider();
+
+        dbProvider.estadisticaEjercicios().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e(TAG, "Usuarios 4: ");
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        //Log.e(TAG,"Usuarios: "+ snapshot);
+                        Log.e(TAG, "Usuarios: " + snapshot);
+                        EstadisticaEjercicio estadisticaEjercicio = snapshot.getValue(EstadisticaEjercicio.class);
+
+                        cal.setTime(date);
+                        semanaActual = cal.get(Calendar.WEEK_OF_MONTH);
+                        mesActual = cal.get(Calendar.MONTH);
+                        String semana= String.valueOf(semanaActual);
+                        String mes= String.valueOf(mesActual);
+
+                        String semanaBase =estadisticaEjercicio.getFecha_cumplida();
+                        SimpleDateFormat dateFormattt = new SimpleDateFormat("dd/MM/yyyy");
+                        Date convertedDate = new Date();
+                        try {
+                            convertedDate=dateFormattt.parse(semanaBase);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        Calendar c = Calendar.getInstance();
+                        c.setTime(convertedDate);
+                        int diaBase = c.get(Calendar.WEEK_OF_MONTH);
+                        int mesBase = c.get(Calendar.MONTH);
+
+                        if (estadisticaEjercicio.getId_usuario().equals(id)) {
+                            if (semana.equals(diaBase)&&mes.equals(mesBase)){
+                                index_ejercicio +=1;
+                                Calendar calendar = Calendar.getInstance();
+                                int day = calendar.get(Calendar.DAY_OF_WEEK);
+                                switch (day) {
+
+
+                  case Calendar.SUNDAY:
+                 index_domingo +=1;
+                 porcentDomingo =(index_domingo/index_ejercicio)*100;
+                 break;
+
+               case Calendar.MONDAY:
+                   index_lunes +=1;
+                   porcentLunes =(index_lunes/index_ejercicio)*100;
+
+                   break;
+               case Calendar.TUESDAY:
+                   index_martes +=1;
+                   porcentMartes =(index_martes/index_ejercicio)*100;
+
+                   break;
+               case Calendar.WEDNESDAY:
+                   index_miercoles +=1;
+                   porcentMiercoles =(index_miercoles/index_ejercicio)*100;
+
+                   break;
+
+               case Calendar.THURSDAY:
+                   index_jueves +=1;
+                   porcentJueves =(index_jueves/index_ejercicio)*100;
+
+                   break;
+               case Calendar.FRIDAY:
+                   index_viernes +=1;
+                   porcentViernes =(index_viernes/index_ejercicio)*100;
+                   break;
+
+               case Calendar.SATURDAY:
+                   index_sabado +=1;
+                   porcentSabado =(index_sabado/index_ejercicio)*100;
+                   break;
+           }
+                }
+                    }
+
+                    }
+                } else {
+                    Log.e(TAG, "Usuarios 3: ");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "ERROR: ");
+            }
+        });
+    }
+
+
     private void loadImageFromUrl(String url) {
 
         Picasso.get().load(url).into(imgPersona);
@@ -382,25 +627,25 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
     public void AddValuesToBARENTRY(){
 
-        BARENTRY.add(new BarEntry(0, 5f));
-        BARENTRY.add(new BarEntry(1, 7f));
-        BARENTRY.add(new BarEntry(2,  5.2f));
-        BARENTRY.add(new BarEntry(3, 3f));
-        BARENTRY.add(new BarEntry(4, 4f));
-        BARENTRY.add(new BarEntry(5, 5f));
-        BARENTRY.add(new BarEntry(6, 5f));
+        BARENTRY.add(new BarEntry(0, porcentDomingo));
+        BARENTRY.add(new BarEntry(1, porcentLunes));
+        BARENTRY.add(new BarEntry(2,  porcentMartes));
+        BARENTRY.add(new BarEntry(3, porcentMiercoles));
+        BARENTRY.add(new BarEntry(4, porcentJueves));
+        BARENTRY.add(new BarEntry(5, porcentViernes));
+        BARENTRY.add(new BarEntry(6, porcentSabado));
 
     }
 
     public void AddValuesToBarEntryLabels(){
 
+        BarEntryLabels.add("D");
         BarEntryLabels.add("L");
         BarEntryLabels.add("M");
         BarEntryLabels.add("Mi");
         BarEntryLabels.add("J");
         BarEntryLabels.add("V");
         BarEntryLabels.add("S");
-        BarEntryLabels.add("D");
     }
 
 
@@ -409,9 +654,9 @@ public class UsuarioPerfil  extends AppCompatActivity {
     public void AddValuesToBARENTRYHorizontal(){
 
         BARENTRYH.add(new BarEntry(0, 0));
-        BARENTRYH.add(new BarEntry(1, 7f));
-        BARENTRYH.add(new BarEntry(2,  5.2f));
-        BARENTRYH.add(new BarEntry(3,  5.2f));
+        BARENTRYH.add(new BarEntry(1, porcentDesayuno));
+        BARENTRYH.add(new BarEntry(2,  porcentComida));
+        BARENTRYH.add(new BarEntry(3,  porcentCena));
         BARENTRYH.add(new BarEntry(4,  0));
 
     }
@@ -425,6 +670,66 @@ public class UsuarioPerfil  extends AppCompatActivity {
         BarEntryLabelsH.add("");
 
 
+    }
+
+
+
+    private String getPreviousDate(String inputDate){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
+        inputDate = dateFormat.format(date);
+        try {
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+
+            c.add(Calendar.DATE, -1);
+            inputDate = dateFormat.format(c.getTime());
+            Log.d("asd", "selected date : "+inputDate);
+
+            System.out.println(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+            inputDate ="";
+        }
+        return inputDate;
+    }
+
+    private String getNextDate(String inputDate){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
+        inputDate = dateFormat.format(date);
+        try {
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+
+            c.add(Calendar.DATE, +1);
+            inputDate = dateFormat.format(c.getTime());
+            Log.d("asd", "selected date : "+inputDate);
+
+            System.out.println(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+            inputDate ="";
+        }
+        return inputDate;
+    }
+
+
+
+
+    public static class GetWeekOfMonthAndYear {
+
+        public static void main(String[] args) {
+
+            //Create calendar instance
+            Calendar calendar = Calendar.getInstance();
+
+            System.out.println("Current week of this month = " + calendar.get(Calendar.WEEK_OF_MONTH));
+
+
+            System.out.println("Current week of this year = " + calendar.get(Calendar.WEEK_OF_YEAR));
+
+        }
     }
 
 }

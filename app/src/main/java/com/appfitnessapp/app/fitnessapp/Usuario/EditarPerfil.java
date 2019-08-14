@@ -56,7 +56,7 @@ public class EditarPerfil extends AppCompatActivity {
 
     CircularImageView imgPersona;
     TextView btnCambiarFoto;
-    TextInputEditText edtNombreUsuario,editContrasena,edtCorreo;
+    TextInputEditText edtNombreUsuario,editContrasena,edtCorreo,edtTelefono;
 
     Spinner spinnerPeso,spinnerEstatura,spinnerBuscando;
     LinearLayout btnAceptar;
@@ -73,7 +73,7 @@ public class EditarPerfil extends AppCompatActivity {
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
 
-    String id,email,password,name,txtObjetivo,txtPeso,txtEstatura;
+    String id,email,password,name,telefono,txtObjetivo,txtPeso,txtEstatura;
     Boolean isFotoReady = false;
     String selectDay;
 
@@ -120,6 +120,7 @@ public class EditarPerfil extends AppCompatActivity {
         edtNombreUsuario=findViewById(R.id.edtNombreUsuario);
         editContrasena=findViewById(R.id.edtContrasena);
         edtCorreo=findViewById(R.id.edtCorreo);
+        edtTelefono=findViewById(R.id.edtTelefono);
 
 
         spinnerPeso=findViewById(R.id.spinnerPeso);
@@ -180,6 +181,8 @@ public class EditarPerfil extends AppCompatActivity {
                 String edtNombre = Objects.requireNonNull(edtNombreUsuario.getText()).toString();
                 String edtContra = Objects.requireNonNull(editContrasena.getText()).toString();
                 String editCorreo = Objects.requireNonNull(edtCorreo.getText()).toString();
+                String editTelefono = Objects.requireNonNull(edtTelefono.getText()).toString();
+
 
                 //seleccionar el texto que se pone en el spinner
                 String objetivo = spinnerBuscando.getSelectedItem().toString();
@@ -197,6 +200,9 @@ public class EditarPerfil extends AppCompatActivity {
                 if (!password.equals(edtContra)){
                     changePass(id, edtContra);
                 }
+                if (!telefono.equals(editTelefono)){
+                    dbProvider.updatePhone(editTelefono, id);
+                }
                 if (!String.valueOf(selectionObjetivo).equals(objetivo)){
                     dbProvider.updateObjetivo(objetivo, id);
                 }
@@ -206,7 +212,7 @@ public class EditarPerfil extends AppCompatActivity {
                 if (!String.valueOf(selectionPeso).equals(peso)){
                     dbProvider.updatePeso(peso,id);
                 }
-                if (name.equals(edtNombre)&&email.equals(editCorreo)&&password.equals(edtContra)){
+                if (name.equals(edtNombre)&&email.equals(editCorreo)&&password.equals(edtContra)&&telefono.equals(editTelefono)){
 
                     Intent intent=new Intent(EditarPerfil.this, UsuarioPerfil.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -240,19 +246,16 @@ public class EditarPerfil extends AppCompatActivity {
 
                         if (usuarios.getId_usuario().equals(id)) {
 
-                            /*
-                            txtObjetivo =  usuarios.getObjetivo();
-                            txtPeso =  usuarios.getObjetivo();
-                            txtEstatura =  usuarios.getObjetivo();
-                             */
 
                             name = usuarios.getNombre_usuario();
                             email = usuarios.getEmail_usuario();
                             password = usuarios.getContrasena_usuario();
+                            telefono = usuarios.getTelefono_usuario();
 
                             edtNombreUsuario.setText(usuarios.getNombre_usuario());
                             editContrasena.setText(usuarios.getContrasena_usuario());
                             edtCorreo.setText(usuarios.getEmail_usuario());
+                            edtTelefono.setText(usuarios.getTelefono_usuario());
 
                             //para bajar la info y ponerle en el spinner
                             selectionEstatura= Saltura.getPosition(usuarios.getEstatura());

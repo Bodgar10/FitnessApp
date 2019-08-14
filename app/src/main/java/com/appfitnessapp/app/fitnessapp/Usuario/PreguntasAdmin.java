@@ -50,7 +50,7 @@ public class PreguntasAdmin extends AppCompatActivity {
 
               if (!pregunta.isEmpty()){
                   RecyclerView.LayoutManager lmmanager = new LinearLayoutManager(getApplicationContext()); recyclerView.setLayoutManager(lmmanager);
-                  preguntas.add(new Preguntas("", pregunta,""));
+                //  preguntas.add(new Preguntas("", pregunta,""));
                   adapter = new AdapterPreguntas(preguntas);
                   recyclerView.setAdapter(adapter);
                   edtPregunta.getText().clear();

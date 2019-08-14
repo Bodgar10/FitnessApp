@@ -17,6 +17,8 @@ public class Respuestas {
         this.id_usuario = id_usuario;
     }
 
+    public Respuestas(){}
+
     public String getId_respuesta() {
         return id_respuesta;
     }

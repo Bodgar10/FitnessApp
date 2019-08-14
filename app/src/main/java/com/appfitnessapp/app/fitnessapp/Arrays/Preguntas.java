@@ -4,14 +4,16 @@ public class Preguntas {
 
     public String id_pregunta;
     public String pregunta;
-    public String respuesta;
+    public String nombre_pregunta;
 
 
-    public Preguntas(String id_pregunta, String pregunta, String respuesta) {
+    public Preguntas(String id_pregunta, String pregunta, String nombre_pregunta) {
         this.id_pregunta = id_pregunta;
         this.pregunta = pregunta;
-        this.respuesta = respuesta;
+        this.nombre_pregunta = nombre_pregunta;
     }
+
+    public Preguntas(){}
 
     public String getId_pregunta() {
         return id_pregunta;
@@ -29,11 +31,11 @@ public class Preguntas {
         this.pregunta = pregunta;
     }
 
-    public String getRespuesta() {
-        return respuesta;
+    public String getNombre_pregunta() {
+        return nombre_pregunta;
     }
 
-    public void setRespuesta(String respuesta) {
-        this.respuesta = respuesta;
+    public void setNombre_pregunta(String nombre_pregunta) {
+        this.nombre_pregunta = nombre_pregunta;
     }
 }

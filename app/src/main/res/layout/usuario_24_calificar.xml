@@ -8,15 +8,20 @@
     android:layout_height="match_parent">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <ScrollView
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
         android:orientation="vertical">
 
         <include
@@ -24,6 +29,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/include" />
+
+
 
 
 
@@ -66,6 +73,7 @@
                 android:scaleY="1" />
 
             <TextView
+                android:id="@+id/txtTrato"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -78,6 +86,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/txtRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -129,13 +138,7 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/imgAntes"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:visibility="gone"
-                    android:scaleType="centerCrop"
-                    android:gravity="center" />
+
 
                 <ImageButton
                     android:id="@+id/btnFotoAntes"
@@ -174,13 +177,6 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/imDespues"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:visibility="gone"
-                    android:scaleType="centerCrop"
-                    android:gravity="center" />
 
                 <ImageButton
                     android:id="@+id/btnFotoDespues"
@@ -211,6 +207,34 @@
 
         </LinearLayout>
 
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgAntes"
+                android:layout_width="160dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:gravity="center" />
+
+            <ImageView
+                android:id="@+id/imDespues"
+                android:layout_width="160dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="15dp"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:gravity="center" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -246,10 +270,15 @@
                 android:spinnerMode="dialog" />
 
 
+
+
         </LinearLayout>
+
+
 
     </LinearLayout>
 
+</ScrollView>
 
     <LinearLayout
         android:id="@+id/linearCalificar"
@@ -286,7 +315,6 @@
             app:srcCompat="@drawable/ic_flecha" />
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

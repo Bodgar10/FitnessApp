@@ -1,8 +1,13 @@
 package com.appfitnessapp.app.fitnessapp.Usuario;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
@@ -11,8 +16,19 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
+import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.squareup.picasso.Picasso;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class DatosUsuario extends AppCompatActivity {
 
@@ -20,13 +36,38 @@ public class DatosUsuario extends AppCompatActivity {
     ImageButton imgHombre,imgMujer;
     Spinner spinnerAltura,spinnerPeso,spinnerBuscando;
 
-
-
+    private static final String TAG = "BAJARINFO:";
+    static DBProvider dbProvider;
+    private ProgressDialog progressDialog;
+    String id;
+    int selectionEstatura,selectionPeso,selectionObjetivo;
+    ArrayAdapter<String> altura;
+    ArrayAdapter<String> peso;
+    ArrayAdapter<String> buscando;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_10_datos);
+
+        Toolbar toolbarback=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbarback);
+        getSupportActionBar().setTitle("Formulario");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setIndeterminate(true);
+
+
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
+        dbProvider = new DBProvider();
+
+
+        bajarUsuarios();
+
 
 
         spinnerAltura=findViewById(R.id.spinnerAltura);
@@ -87,11 +128,9 @@ public class DatosUsuario extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<String> altura = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.estatura);
-
-        ArrayAdapter<String> peso = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.peso);
-
-        ArrayAdapter<String> buscando = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.objetivos);
+      altura = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.estatura);
+      peso = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.peso);
+      buscando = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.objetivos);
 
 
         spinnerAltura.setAdapter(altura);
@@ -131,9 +170,77 @@ public class DatosUsuario extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                //seleccionar el texto que se pone en el spinner
+                String objetivo = spinnerBuscando.getSelectedItem().toString();
+                String estatura = spinnerAltura.getSelectedItem().toString();
+                String peso = spinnerPeso.getSelectedItem().toString();
+
+                String hombre=Contants.HOMBRE;
+                String mujer=Contants.MUJER;
+
+
+                if (imgHombre.isClickable()){
+
+                }
+
+                if (!String.valueOf(selectionObjetivo).equals(objetivo)){
+                    dbProvider.updateObjetivo(objetivo, id);
+                }
+                if (!String.valueOf(selectionEstatura).equals(estatura)){
+                    dbProvider.updateEstatura(estatura, id);
+                }
+                if (!String.valueOf(selectionPeso).equals(peso)){
+                    dbProvider.updatePeso(peso,id);
+                }
+
             }
         });
 
 
     }
+
+    public void bajarUsuarios(){
+        dbProvider = new DBProvider();
+
+        progressDialog.setMessage("Cargando Información...");
+        progressDialog.show();
+
+        dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e(TAG, "Usuarios 4: ");
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        //Log.e(TAG,"Usuarios: "+ snapshot);
+                        Log.e(TAG, "Usuarios: " + snapshot);
+                        Usuarios usuarios = snapshot.getValue(Usuarios.class);
+
+                        if (usuarios.getId_usuario().equals(id)) {
+
+
+                            //para bajar la info y ponerle en el spinner
+                            selectionEstatura= altura.getPosition(usuarios.getEstatura());
+                            spinnerAltura.setSelection(selectionEstatura);
+
+                            selectionPeso= peso.getPosition(usuarios.getPeso_actual());
+                            spinnerPeso.setSelection(selectionPeso);
+
+                            selectionObjetivo= buscando.getPosition(usuarios.getObjetivo());
+                            spinnerBuscando.setSelection(selectionObjetivo);
+
+
+                        }
+
+                    }
+                } else {
+                    Log.e(TAG, "Usuarios 3: ");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
 }
