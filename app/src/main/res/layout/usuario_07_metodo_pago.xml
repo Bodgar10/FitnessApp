@@ -257,7 +257,7 @@
                    android:layout_marginBottom="10dp"
                    android:layout_weight="1"
                    android:gravity="center|end"
-                   android:text="6 meses"
+                   android:text="6"
                    android:textAlignment="textEnd"
                    android:textAllCaps="false"
                    android:textColor="@android:color/black"

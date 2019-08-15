@@ -221,6 +221,8 @@ public class Contants {
     public static final String ARG_FIREBASE_TOKEN = "firebaseToken";
     public static final String ARG_FRIENDS = "friends";
     public static final String ARG_UID = "uid";
+    final public static String TOKEN = "token";
+
 
 
 }

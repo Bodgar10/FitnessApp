@@ -3,19 +3,28 @@ package com.appfitnessapp.app.fitnessapp.Usuario;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterPlanes;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterRecetas;
+import com.appfitnessapp.app.fitnessapp.Arrays.Feed;
 import com.appfitnessapp.app.fitnessapp.Arrays.Recetas;
+import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
+import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
+import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
 import com.appfitnessapp.app.fitnessapp.Login.Registro;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -28,11 +37,17 @@ public class UsuarioPlan  extends AppCompatActivity {
     TextView btnWorkouts;
 
 
+    static DBProvider dbProvider;
+    BajarInfo bajarInfo;
+    private static final String TAG = "BAJARINFO:";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_15_plan);
+
+        dbProvider = new DBProvider();
+        bajarInfo = new BajarInfo();
 
         imgHome=findViewById(R.id.imgHome);
         imgPerfil=findViewById(R.id.imgPerfil);
@@ -47,7 +62,6 @@ public class UsuarioPlan  extends AppCompatActivity {
         int spacing_top=0;
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing_left, spacing_top));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        //  recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
         recyclerView.setLayoutManager(layoutManager);
         recetas = new ArrayList<>();
         adapter=new AdapterRecetas(recetas);
@@ -75,6 +89,11 @@ public class UsuarioPlan  extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(UsuarioPlan.this, DetalleRecetas.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("nombre",recetas.get(recyclerView.getChildAdapterPosition(v)).getNombre_comida());
+                bundle.putString("imagen",recetas.get(recyclerView.getChildAdapterPosition(v)).getImagen_receta());
+                bundle.putString("tipo",recetas.get(recyclerView.getChildAdapterPosition(v)).getTiempo_comida());
+                intent.putExtras(bundle);
                 startActivity(intent);
 
 
@@ -158,4 +177,35 @@ public class UsuarioPlan  extends AppCompatActivity {
         }
     }
 
+
+    public void bajarFeed(){
+
+        dbProvider = new DBProvider();
+        dbProvider.tablaFeed().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                recetas.clear();
+
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Log.e(TAG, "Feed: " + dataSnapshot);
+                        Recetas receta = snapshot.getValue(Recetas.class);
+
+                        recetas.add(receta);
+                        adapter.notifyDataSetChanged();
+
+                    }
+                }
+                else {
+                    Log.e(TAG, "Feed: ");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "ERROR: ");
+            }
+        });
+
+    }
 }

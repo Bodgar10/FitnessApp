@@ -36,4 +36,12 @@
         <item name="colorControlActivated">@color/azul</item>
     </style>
 
+
+    <style name="TemaVideo" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/blanco</item>
+        <item name="colorPrimaryDark">@color/blanco</item>
+        <item name="colorAccent">@color/blanco</item>
+    </style>
+
 </resources>

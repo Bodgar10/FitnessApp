@@ -1,5 +1,6 @@
 package com.appfitnessapp.app.fitnessapp.Usuario;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +14,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterAsesorias;
+import com.appfitnessapp.app.fitnessapp.Adapters.AdapterImagenes;
+import com.appfitnessapp.app.fitnessapp.Adapters.AdapterRecetas;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterRutinas;
 import com.appfitnessapp.app.fitnessapp.Arrays.Ejercicios;
+import com.appfitnessapp.app.fitnessapp.Arrays.ImagenesEjercicios;
 import com.appfitnessapp.app.fitnessapp.R;
 
 import java.util.ArrayList;
@@ -23,10 +27,11 @@ public class RutinaUsuario extends AppCompatActivity {
 
     ImageView imgRutina;
     TextView txtDescripcion,txtRutina;
-    RecyclerView recyclerView;
+    RecyclerView recyclerView,recyclerViewImg;
     AdapterRutinas adapter;
     ArrayList<Ejercicios>ejercicios;
-
+    AdapterImagenes adapterImg;
+    ArrayList<ImagenesEjercicios>ejerciciosImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +51,42 @@ public class RutinaUsuario extends AppCompatActivity {
 
         recyclerView=findViewById(R.id.recyclerview);
 
+        recyclerViewImg=findViewById(R.id.recycler_viewImg);
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        recyclerViewImg.setLayoutManager(new LinearLayoutManager(this));
+        int spanCount = 1;
+        int spacing_left = 5;
+        int spacing_top=0;
+        recyclerViewImg.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing_left, spacing_top));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewImg.setLayoutManager(layoutManager);
+
         ejercicios=new ArrayList<>();
+        ejerciciosImg = new ArrayList<>();
+
+
         adapter=new AdapterRutinas(ejercicios);
+        adapterImg=new AdapterImagenes(ejerciciosImg);
+
         recyclerView.setAdapter(adapter);
+        recyclerViewImg.setAdapter(adapterImg);
+
+
+
+
+        ImagenesEjercicios ejerciciosimg=new ImagenesEjercicios("","");
+        ImagenesEjercicios ejerciciosimg1=new ImagenesEjercicios("","");
+        ImagenesEjercicios ejerciciosimg2=new ImagenesEjercicios("","");
+        ImagenesEjercicios ejerciciosimg3=new ImagenesEjercicios("","");
+        ImagenesEjercicios ejerciciosimg4=new ImagenesEjercicios("","");
+        ImagenesEjercicios ejerciciosimg5=new ImagenesEjercicios("","");
+
+
+
+
 
 
         Ejercicios ejercicio0=new Ejercicios("20 pull ups (dominadas)","20 repeticiones","5 rondas de ");
@@ -64,7 +100,19 @@ public class RutinaUsuario extends AppCompatActivity {
         ejercicios.add(ejercicio2);
         ejercicios.add(ejercicio3);
 
+
+        ejerciciosImg.add(ejerciciosimg);
+        ejerciciosImg.add(ejerciciosimg1);
+        ejerciciosImg.add(ejerciciosimg2);
+        ejerciciosImg.add(ejerciciosimg3);
+        ejerciciosImg.add(ejerciciosimg4);
+        ejerciciosImg.add(ejerciciosimg5);
+
+
         adapter.notifyDataSetChanged();
+
+        adapterImg.notifyDataSetChanged();
+
 
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +121,12 @@ public class RutinaUsuario extends AppCompatActivity {
             }
         });
 
+        adapterImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 
@@ -83,5 +137,39 @@ public class RutinaUsuario extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menuswitch, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
+        final private int spanCount, spacing, spacing_top;
+        final private boolean includeEdge;
+
+        public GridSpacingItemDecoration(int spanCount, int spacing_left, int spacing_top) {
+            this.spanCount = spanCount;
+            this.spacing = spacing_left;
+            this.includeEdge = true;
+            this.spacing_top = spacing_top;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            int position = parent.getChildAdapterPosition(view); // item phases_position
+            int column = position % spanCount; // item column
+
+            if (includeEdge) {
+                outRect.left = spacing - column * spacing / spanCount;
+                outRect.right = (column + 1) * spacing / spanCount;
+
+                if (position < spanCount) { // top edge
+                    outRect.top = spacing_top;
+                }
+                outRect.bottom = spacing_top; // item bottom
+            } else {
+                outRect.left = column * spacing / spanCount;
+                outRect.right = spacing - (column + 1) * spacing / spanCount;
+                if (position >= spanCount) {
+                    outRect.top = spacing_top; // item top
+                }
+            }
+        }
     }
 }

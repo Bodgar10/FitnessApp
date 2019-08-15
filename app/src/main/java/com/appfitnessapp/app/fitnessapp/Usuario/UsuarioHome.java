@@ -132,25 +132,6 @@ public class UsuarioHome  extends AppCompatActivity {
             }
         });
 
-        imgChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(UsuarioHome.this, UsuarioChat.class);
-                startActivity(intent);
-
-            }
-        });
-
-        imgHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(UsuarioHome.this, DetallePdf.class);
-                startActivity(intent);
-
-            }
-        });
-
-
 
         recyclerView=findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

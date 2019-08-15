@@ -76,7 +76,7 @@ public class MetodoPago extends AppCompatActivity {
 
        // txtTotal.setText("$ "+pago);
         txtResumen.setText("$ "+pago);
-        txtPlan.setText(meses +" meses");
+        txtPlan.setText(meses);
 
         txtTotal.setText(simbolo+pago);
 

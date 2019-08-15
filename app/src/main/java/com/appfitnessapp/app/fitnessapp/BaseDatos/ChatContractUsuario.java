@@ -5,7 +5,7 @@ import android.content.Context;
 import com.appfitnessapp.app.fitnessapp.Arrays.Chat;
 import com.appfitnessapp.app.fitnessapp.Arrays.Chats;
 
-public class ChatContractUsuario {
+public interface ChatContractUsuario {
     interface View {
         void onSendMessageSuccess();
 

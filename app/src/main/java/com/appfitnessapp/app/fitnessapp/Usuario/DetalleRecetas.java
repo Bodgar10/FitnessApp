@@ -21,6 +21,7 @@ import com.appfitnessapp.app.fitnessapp.Arrays.Pasos;
 import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
 import com.appfitnessapp.app.fitnessapp.Login.Registro;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -37,14 +38,24 @@ public class DetalleRecetas extends AppCompatActivity {
 
     RecyclerView recyclerIngredientes,recyclerPasos;
 
+    String imagenComida,nombre,tipo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_17_desayuno);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null){
+            imagenComida = extras.getString("imagen");
+            nombre = extras.getString("nombre");
+            tipo = extras.getString("tipo");
+
+        }
+
         Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
-        getSupportActionBar().setTitle("Desayuno");
+        getSupportActionBar().setTitle(tipo);
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -60,7 +71,9 @@ public class DetalleRecetas extends AppCompatActivity {
         txtEditar=findViewById(R.id.txtEditar);
         txtEditar.setVisibility(View.GONE);
 
-
+        //datos
+        txtNombreReceta.setText(nombre);
+      //  loadImageFromUrl(imagenComida);
 
 
         recyclerIngredientes=findViewById(R.id.recyclerIngrediente);
@@ -109,16 +122,15 @@ public class DetalleRecetas extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(DetalleRecetas.this, InformacionCompra.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("nombre",ingredientes.get(recyclerIngredientes.getChildAdapterPosition(v)).getIngredientes());
+                bundle.putString("cantidad",ingredientes.get(recyclerIngredientes.getChildAdapterPosition(v)).getCantidad());
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
 
-        adapterPasos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
 
     }
 
@@ -128,5 +140,10 @@ public class DetalleRecetas extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menuswitch, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void loadImageFromUrl(String url) {
+
+        Picasso.get().load(url).into(imagen);
     }
 }

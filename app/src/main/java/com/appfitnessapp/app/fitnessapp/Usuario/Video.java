@@ -3,16 +3,21 @@ package com.appfitnessapp.app.fitnessapp.Usuario;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.MediaController;
@@ -26,6 +31,8 @@ import com.appfitnessapp.app.fitnessapp.Arrays.Feed;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
+import com.appfitnessapp.app.fitnessapp.FullScreenMediaController;
+import com.appfitnessapp.app.fitnessapp.MyMediaController;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.VideoControllerView;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -50,24 +57,46 @@ public class Video extends AppCompatActivity {
     VideoControllerView videoContr;
     String tipo;
     private int position = 0;
+    MediaController mediaController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
+        goFullScreen();
+
+        // requestWindowFeature(Window.FEATURE_NO_TITLE);
+       // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         setContentView(R.layout.usuario_14_feed_video);
 
+        /*
         this.setRequestedOrientation(
                 ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-
+*/
         videoView=findViewById(R.id.videoView);
+
+        mediaController = new MyMediaController(this, (FrameLayout) findViewById(R.id.controllerAnchor));
+
+
+
+        mediaController = new MediaController(Video.this){
+            @Override
+            public void show(int timeout) {
+                super.show(0);
+            }
+        };
+
+       // mediaController.setAnchorView(videoView);
+
+        videoView.setMediaController(mediaController);
+
+        mediaController.setMediaPlayer(mcEvents);
+
 
         Bundle extras = getIntent().getExtras();
         assert extras != null;
@@ -85,24 +114,9 @@ public class Video extends AppCompatActivity {
     }
 
 
-
     private void setUpVideoView(String url) {
 
-/*
-        String uriPath = "android.resource://" + getPackageName()
-                + "/" + R.raw.video_example;
-
-  */
-
         Uri uri = Uri.parse(url);
-        MediaController mediaController = new MediaController(this){
-            @Override
-            public void show(int timeout) {
-                super.show(0);
-            }
-
-        };
-        videoView.setMediaController(mediaController);
 
         try {
             // Asigna la URI del vídeo que será reproducido a la vista.
@@ -125,10 +139,13 @@ public class Video extends AppCompatActivity {
             new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
+
                     /*
                      * Se indica al reproductor multimedia que el vídeo
                      * se reproducirá en un loop (on repeat).
                      */
+                    FrameLayout controllerAnchor = (FrameLayout) findViewById(R.id.controllerAnchor);
+                    mediaController.setAnchorView(controllerAnchor);
                     mediaPlayer.setLooping(true);
 
                     if (position == 0) {
@@ -137,8 +154,9 @@ public class Video extends AppCompatActivity {
                          * el vídeo debería comenzar desde aquí.
                          */
                         videoView.start();
+                    }
 
-                    } else {
+                    else {
                         /*
                          * Si venimos de un Activity "resumed",
                          * la reproducción del vídeo será pausada.
@@ -147,8 +165,6 @@ public class Video extends AppCompatActivity {
                     }
                 }
             };
-
-
 
 
     @Override
@@ -170,6 +186,8 @@ public class Video extends AppCompatActivity {
          */
         position = savedInstanceState.getInt("Position");
         videoView.seekTo(position);
+
+
     }
 
 
@@ -214,4 +232,73 @@ public class Video extends AppCompatActivity {
 
 
 */
+
+
+    private void goFullScreen() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        makeAllGone();
+    }
+    private void makeAllGone(){
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window w = getWindow(); // in Activity's onCreate() for instance
+                w.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+                w.setNavigationBarColor(Color.TRANSPARENT);
+            }
+
+    }
+
+
+
+
+    private MediaController.MediaPlayerControl mcEvents = new MediaController.MediaPlayerControl() {
+        public void start() {
+            videoView.start();
+        }
+
+        public void seekTo(int pos) {
+            videoView.seekTo(pos);
+        }
+
+        public void pause() {
+            videoView.pause();
+        }
+
+        public boolean isPlaying() {
+            return videoView.isPlaying();
+        }
+
+        @Override
+        public int getBufferPercentage() {
+            return 0;
+        }
+
+        public int getDuration() {
+            return videoView.getDuration();
+        }
+
+        public int getCurrentPosition() {
+            return videoView.getCurrentPosition();
+        }
+
+
+
+        public boolean canSeekForward() {
+            return true;
+        }
+
+        @Override
+        public int getAudioSessionId() {
+            return 0;
+        }
+
+        public boolean canSeekBackward() {
+            return true;
+        }
+
+        public boolean canPause() {
+            return true;
+        }
+    };
 }

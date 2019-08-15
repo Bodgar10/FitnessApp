@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,6 +29,7 @@ import com.appfitnessapp.app.fitnessapp.Arrays.Planes;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.Arrays.Valoraciones;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
+import com.appfitnessapp.app.fitnessapp.MyMediaController;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.VideoControllerView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,10 +50,10 @@ public class Asesoria extends AppCompatActivity {
     ImageView imgAsesoria,imgEjercicios,imgAlimentos;
     TextView txtAsesorias,txtPrecio,txtCalificacion,txtDescripcion,txtNombre,txtProfesion,
     txtDescripcionRutina,txtPrecioFinal,txtDescripcionAlimentos;
-    VideoView videoView;
+    ImageView videoView,imgVideo;
     LinearLayout btnComprar;
 
-    String id;
+    String id,videoUrl,precioTotal;
 
     RecyclerView recyclerView;
     AdapterComentarios adapter;
@@ -66,7 +68,6 @@ public class Asesoria extends AppCompatActivity {
     private int position = 0;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,8 +77,6 @@ public class Asesoria extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
 
         dbProvider = new DBProvider();
-
-
 
 
         Toolbar toolbarback=findViewById(R.id.toolbar);
@@ -103,8 +102,23 @@ public class Asesoria extends AppCompatActivity {
 
 
         videoView=findViewById(R.id.videoViewAsesoria);
+        imgVideo=findViewById(R.id.imgVideo);
 
         btnComprar=findViewById(R.id.btnComprarAsesoria);
+
+
+        imgVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Asesoria.this, Video.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("video",videoUrl);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
 
         recyclerView=findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -121,6 +135,10 @@ public class Asesoria extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(Asesoria.this, MetodoPago.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("costo",precioTotal);
+                bundle.putString("meses","Asesoria");
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }
@@ -160,14 +178,18 @@ public class Asesoria extends AppCompatActivity {
 
                         if (snapshot.getKey().equals(asesorias.getId_asesoria())){
 
-                            txtPrecio.setText(asesorias.getCosto_asesoria());
-                            txtPrecioFinal.setText(asesorias.getCosto_asesoria());
+                            precioTotal=asesorias.getCosto_asesoria();
+                            txtPrecio.setText("$"+asesorias.getCosto_asesoria());
+                            txtPrecioFinal.setText("$"+asesorias.getCosto_asesoria());
                             txtDescripcion.setText(asesorias.getDescripcion_asesoria());
                             txtDescripcionRutina.setText(asesorias.getRutinas_descripcion());
                             txtDescripcionAlimentos.setText(asesorias.getAlimentos_descripcion());
+                            videoUrl=asesorias.getVideo_explicativo();
                             Picasso.get().load(asesorias.getImagen_portada()).into(imgAsesoria);
                             Picasso.get().load(asesorias.getRutinas_imagen()).into(imgEjercicios);
                             Picasso.get().load(asesorias.getAlimentos_imagen()).into(imgAlimentos);
+                            Picasso.get().load(asesorias.getImagen_portada()).into(videoView);
+
 
                         }
 
@@ -254,97 +276,6 @@ public class Asesoria extends AppCompatActivity {
                 Log.e(TAG, "ERROR: ");
             }
         });
-    }
-
-
-
-    private void setUpVideoView(String url)     {
-
-/*
-        String uriPath = "android.resource://" + getPackageName()
-                + "/" + R.raw.video_example;
-
-  */
-
-        Uri uri = Uri.parse(url);
-
-        MediaController mediaController = new MediaController(this){
-            @Override
-            public void show(int timeout) {
-                super.show(0);
-            }
-
-        };
-        videoView.setMediaController(mediaController);
-
-
-        try {
-            // Asigna la URI del vídeo que será reproducido a la vista.
-            videoView.setVideoURI(uri);
-            // Se asigna el foco a la VideoView.
-            videoView.requestFocus();
-        } catch (Exception e) {
-            Log.e("Error", e.getMessage());
-            e.printStackTrace();
-        }
-
-        /*
-         * Se asigna un listener que nos informa cuando el vídeo
-         * está listo para ser reproducido.
-         */
-        videoView.setOnPreparedListener(videoViewListener);
-    }
-
-
-    private MediaPlayer.OnPreparedListener videoViewListener =
-            new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mediaPlayer) {
-                    /*
-                     * Se indica al reproductor multimedia que el vídeo
-                     * se reproducirá en un loop (on repeat).
-                     */
-                    mediaPlayer.setLooping(true);
-
-                    if (position == 0) {
-                        /*
-                         * Si tenemos una posición en savedInstanceState,
-                         * el vídeo debería comenzar desde aquí.
-                         */
-                        videoView.start();
-
-                    } else {
-                        /*
-                         * Si venimos de un Activity "resumed",
-                         * la reproducción del vídeo será pausada.
-                         */
-                        videoView.pause();
-                    }
-                }
-            };
-
-
-
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        /* Usamos onSaveInstanceState para guardar la posición de
-           reproducción del vídeo en caso de un cambio de orientación. */
-        savedInstanceState.putInt("Position",
-                videoView.getCurrentPosition());
-        videoView.pause();
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        /*
-         * Usamos onRestoreInstanceState para reproducir el vídeo
-         * desde la posición guardada.
-         */
-        position = savedInstanceState.getInt("Position");
-        videoView.seekTo(position);
     }
 
 

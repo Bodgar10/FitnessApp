@@ -12,10 +12,19 @@ public class InformacionCompra extends AppCompatActivity {
 
     TextView txtTotalInversion,txtCantidad,txtIngrediente;
 
+    String producto,cantidad;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_18_informacion);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null){
+            producto = extras.getString("nombre");
+            cantidad = extras.getString("cantidad");
+
+        }
 
         Toolbar toolbarback=findViewById(R.id.include);
         setSupportActionBar(toolbarback);
@@ -27,6 +36,8 @@ public class InformacionCompra extends AppCompatActivity {
         txtCantidad=findViewById(R.id.txtCantidad);
         txtIngrediente=findViewById(R.id.txtIngrediente);
 
+        txtIngrediente.setText(producto);
+        txtCantidad.setText("Cantidad: "+cantidad);
 
     }
 }

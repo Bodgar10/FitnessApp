@@ -20,6 +20,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.Usuario.Asesoria;
 import com.appfitnessapp.app.fitnessapp.Usuario.DetallePdf;
 import com.appfitnessapp.app.fitnessapp.Usuario.Imagen;
 import com.appfitnessapp.app.fitnessapp.Usuario.PantallaPDF;
@@ -36,9 +37,10 @@ import java.util.ArrayList;
 
 public class HomeSinRegistro  extends AppCompatActivity  {
 
-    LinearLayout imgAsesoria,imgPerfil ;
+    LinearLayout imgPerfil,linearAsesoria ;
     private static final int PDF_CODE = 1000 ;
 
+    ImageButton imgAsesoria;
 
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
@@ -63,6 +65,7 @@ public class HomeSinRegistro  extends AppCompatActivity  {
         imgAsesoria=findViewById(R.id.btnAsesoria);
         imgPerfil=findViewById(R.id.imgPerfil);
 
+        linearAsesoria=findViewById(R.id.linearAsesoria);
 
 
 
@@ -73,9 +76,21 @@ public class HomeSinRegistro  extends AppCompatActivity  {
             }
         });
 
+
+        linearAsesoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(HomeSinRegistro.this, Asesoria.class);
+                startActivity(intent);
+            }
+        });
         imgAsesoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Intent intent = new Intent(HomeSinRegistro.this, Asesoria.class);
+                startActivity(intent);
 
             }
         });
