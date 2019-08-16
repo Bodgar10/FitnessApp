@@ -9,43 +9,47 @@
 
     <LinearLayout
         android:id="@+id/linearBoton"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/tag_menubtn"
-            android:layout_marginBottom="15dp"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/tag_menubtn"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
-                android:padding="10dp"
-                android:gravity="center"
-                android:textColor="@color/blanco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_weight="1"
-                android:text="Recetas" />
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Recetas"
+                android:textColor="@color/blanco" />
 
 
             <TextView
-                android:layout_marginStart="7dp"
                 android:id="@+id/btnWorkouts"
-                android:padding="10dp"
-                android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_marginEnd="15dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="15dp"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:padding="10dp"
                 android:text="Workouts" />
 
 
@@ -53,19 +57,77 @@
 
     </LinearLayout>
 
-
-    <include
-        layout="@layout/recyclerview"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/linearBoton"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="49dp">
+        android:gravity="center"
+        android:orientation="vertical">
 
-    </include>
+
+        <ScrollView
+            android:layout_marginBottom="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/txtfechaActual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=""
+            android:textAllCaps="false"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+
+        <include
+            android:id="@+id/recycler1"
+            layout="@layout/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+        </include>
+
+        <TextView
+            android:id="@+id/txtfechaSiguiente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:text=""
+            android:textAllCaps="false"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <include
+            android:id="@+id/recycler2"
+            layout="@layout/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+        </include>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </LinearLayout>
 
 
     <LinearLayout
@@ -74,6 +136,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
+        android:background="@color/blanco"
         android:layout_marginEnd="0dp"
         android:gravity="bottom"
         android:orientation="vertical">

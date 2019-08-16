@@ -1,7 +1,8 @@
 package com.appfitnessapp.app.fitnessapp.BaseDatos;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.appfitnessapp.app.fitnessapp.Arrays.Feed;
 import com.firebase.ui.auth.data.model.User;

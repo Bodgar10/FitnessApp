@@ -2,15 +2,11 @@ package com.appfitnessapp.app.fitnessapp.Usuario;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -21,6 +17,13 @@ import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterComentarios;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterPlanes;
@@ -40,6 +43,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
+import com.taufiqrahman.reviewratings.BarLabels;
+import com.taufiqrahman.reviewratings.RatingReviews;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -59,14 +64,11 @@ public class Asesoria extends AppCompatActivity {
     AdapterComentarios adapter;
     ArrayList<Valoraciones> plan;
 
+    int valor,valor1,valor2,valor3,valor4;
+
     private ProgressDialog progressDialog;
     private static final String TAG = "BAJARINFO:";
     static DBProvider dbProvider;
-
-
-
-    private int position = 0;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,32 @@ public class Asesoria extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
 
         dbProvider = new DBProvider();
+
+        RatingReviews ratingReviews = (RatingReviews) findViewById(R.id.rating_reviews);
+
+
+
+        int star =100;
+        int star1 =80;
+        int star2 =20;
+        int star3 =5;
+        int star5 =5;
+
+        int total=(star+star1+star2+star3+star5)/5;
+
+        int colors[] = new int[]{
+                Color.parseColor("#0e9d58"),
+                Color.parseColor("#bfd047"),
+                Color.parseColor("#ffc105"),
+                Color.parseColor("#ef7e14"),
+                Color.parseColor("#d36259")};
+
+        int rango[]=new int[]{
+                valor,valor1,valor2,valor3,valor4
+        };
+
+        ratingReviews.createRatingBars(total+150, BarLabels.STYPE1, colors, rango);
+
 
 
         Toolbar toolbarback=findViewById(R.id.toolbar);
@@ -225,11 +253,39 @@ public class Asesoria extends AppCompatActivity {
                         Log.e(TAG, "Valoracion: " + snapshot);
                         Valoraciones valoraciones = snapshot.getValue(Valoraciones.class);
 
+                        int valor5 = Integer.parseInt(valoraciones.getValoracion());
+
                         if (valoraciones.getId_valoracion() != null){
 
                             bajarUsuarios(valoraciones.getNombre_usuario_valoracion(),valoraciones.getId_valoracion(),
                                     valoraciones.getDescripcion_valoracion(),valoraciones.getFecha_valoracion(),valoraciones.getImagen_antes(),
                                     valoraciones.getImagen_despues(), valoraciones.getValoracion());
+                        }
+
+                        if (valor5==5){
+                            valor= Integer.parseInt(valoraciones.getValoracion());
+
+                        }
+                        if (valor5==4){
+                            valor1= Integer.parseInt(valoraciones.getValoracion());
+
+
+                        }
+
+                        if (valor5==3){
+                            valor2= Integer.parseInt(valoraciones.getValoracion());
+
+                        }
+
+                        if (valor5==2){
+                            valor3= Integer.parseInt(valoraciones.getValoracion());
+
+
+                        }
+
+                        if (valor5==1){
+                            valor4= Integer.parseInt(valoraciones.getValoracion());
+
                         }
                     }
                 } else {

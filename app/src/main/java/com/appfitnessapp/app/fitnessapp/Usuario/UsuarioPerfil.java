@@ -4,10 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +14,10 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.appfitnessapp.app.fitnessapp.Arrays.EstadisticaAlimentos;
 import com.appfitnessapp.app.fitnessapp.Arrays.EstadisticaEjercicio;
@@ -45,6 +46,7 @@ import com.squareup.picasso.Picasso;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -96,7 +98,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
     BarDataSet set,setHorizontal ;
 
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
     Date date = new Date();
     Calendar cal = Calendar.getInstance();
     int semanaActual,mesActual;
@@ -121,7 +123,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
         bajarUsuarios();
         bajarEstadisticasAlimentos();
-        bajarEstadisticasEjercicios();
+       // bajarEstadisticasEjercicios();
 
         imgHome=findViewById(R.id.imgHome);
         imgPlan=findViewById(R.id.imgPlan);
@@ -357,6 +359,16 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
     }
 
+    public void AddValuesToBARENTRYHorizontal(){
+
+        BARENTRYH.add(new BarEntry(0, 0));
+        BARENTRYH.add(new BarEntry(1, porcentDesayuno));
+        BARENTRYH.add(new BarEntry(2,  porcentComida));
+        BARENTRYH.add(new BarEntry(3,  porcentCena));
+        BARENTRYH.add(new BarEntry(4,  0));
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
@@ -448,7 +460,6 @@ public class UsuarioPerfil  extends AppCompatActivity {
     public void bajarEstadisticasAlimentos(){
         dbProvider = new DBProvider();
 
-
         dbProvider.estadisticaAlimentos().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -462,51 +473,46 @@ public class UsuarioPerfil  extends AppCompatActivity {
                         cal.setTime(date);
                         semanaActual = cal.get(Calendar.WEEK_OF_MONTH);
                         mesActual = cal.get(Calendar.MONTH);
-                        String semana= String.valueOf(semanaActual);
-                        String mes= String.valueOf(mesActual);
-
 
 
                         String semanaBase =estadisticaAlimentos.getFecha_cumplida();
-                        SimpleDateFormat dateFormattt = new SimpleDateFormat("dd/MM/yyyy");
-                        Date convertedDate = new Date();
+                        DateFormat dateFormattt = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
+                       // Date convertedDate = new Date();
                         try {
-                            convertedDate=dateFormattt.parse(semanaBase);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        Calendar c = Calendar.getInstance();
-                        c.setTime(convertedDate);
-                        int diaBase = c.get(Calendar.WEEK_OF_MONTH);
-                        int mesBase = c.get(Calendar.MONTH);
+                            Date convertedDate=dateFormattt.parse(semanaBase);
+                           // Date neww=new java.sql.Date(dateFormattt.parse(semanaBase).getTime());
+                            Calendar c = Calendar.getInstance();
+                            c.setTime(convertedDate);
+                            int diaBase = c.get(Calendar.WEEK_OF_MONTH);
+                            int mesBase = c.get(Calendar.MONTH);
+
+                            if (estadisticaAlimentos.getId_usuario().equals(id)) {
+                                Toast.makeText(UsuarioPerfil.this, "hoy"+mesActual+"base"+mesBase, Toast.LENGTH_SHORT).show();
+                                if (semanaActual==diaBase&&mesActual==mesBase){
 
 
+                                    if (estadisticaAlimentos.getTipo_alimento().equals(Contants.ALMUERZO)){
+                                        index_almuerzo +=1;
+                                        porcentComida = (index_almuerzo/7)*100;
+                                    }
+                                    else if(estadisticaAlimentos.getTipo_alimento().equals(Contants.DESAYUNO)){
+                                        index_desayuno +=1;
+                                        porcentDesayuno = (index_desayuno/7)*100;
 
+                                    }
+                                    else {
+                                        index_cena +=1;
+                                        porcentCena = (index_cena/7)*100;
 
-                        if (estadisticaAlimentos.getId_usuario().equals(id)) {
-                            if (semana.equals(diaBase)&&mes.equals(mesBase)){
-
-                                if (estadisticaAlimentos.getTipo_alimento().equals(Contants.ALMUERZO)){
-                                    index_almuerzo +=1;
-                                    porcentComida = (index_almuerzo/7)*100;
-                                }
-                                else if(estadisticaAlimentos.getTipo_alimento().equals(Contants.DESAYUNO)){
-                                    index_desayuno +=1;
-                                    porcentDesayuno = (index_desayuno/7)*100;
-
-                                }
-                                else {
-                                    index_cena +=1;
-                                    porcentCena = (index_cena/7)*100;
+                                    }
 
                                 }
 
                             }
 
+                        } catch (ParseException e) {
+                            e.printStackTrace();
                         }
-
-
-
 
                     }
                 } else {
@@ -651,15 +657,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
 
 
-    public void AddValuesToBARENTRYHorizontal(){
 
-        BARENTRYH.add(new BarEntry(0, 0));
-        BARENTRYH.add(new BarEntry(1, porcentDesayuno));
-        BARENTRYH.add(new BarEntry(2,  porcentComida));
-        BARENTRYH.add(new BarEntry(3,  porcentCena));
-        BARENTRYH.add(new BarEntry(4,  0));
-
-    }
 
     public void AddValuesToBarEntryLabelsHorizontal(){
 

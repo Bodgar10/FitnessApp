@@ -13,6 +13,8 @@ public class EstadisticaAlimentos {
         this.tipo_alimento = tipo_alimento;
     }
 
+    public EstadisticaAlimentos(){}
+
     public String getId_usuario() {
         return id_usuario;
     }

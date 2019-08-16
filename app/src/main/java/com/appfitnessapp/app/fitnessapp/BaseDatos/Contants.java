@@ -97,6 +97,8 @@ public class Contants {
     final public static String PAYPAL = "paypal";
     final public static String TARJETA = "tarjeta";
 
+
+    final public static String TABLA_RECETAS = "recetas";
     final public static String ALMUERZO = "almuerzo";
     final public static String DESAYUNO = "desayuno";
     final public static String CENA = "cena";
@@ -141,14 +143,18 @@ public class Contants {
     final public static String PRECIO_MAS_BAJO = "precio_mas_bajo";
     final public static String PRECIO_MAS_ALTO = "precio_mas_alto";
     final public static String IMAGEN_ALIMENTO = "imagen_alimento";
+    final public static String FECHA_ALIMENTO = "fecha_alimento";
 
 
+
+    //tabla ingredientes
     final public static String INGREDIENTES = "ingredientes";
     final public static String NOMBRE_INGREDIENTE = "nombre_ingrediente";
     final public static String CANTIDAD = "cantidad";
     final public static String ID_INGREDIENTE = "id_ingrediente";
 
 
+    //preparacion
     final public static String PREPARACION = "preparacion";
     final public static String NOMBRE_PASO = "nombre_paso";
     final public static String DESCRIPCION_PASO = "descripcion_paso";

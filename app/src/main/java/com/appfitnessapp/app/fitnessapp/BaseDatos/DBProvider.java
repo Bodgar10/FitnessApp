@@ -52,6 +52,9 @@ public class DBProvider {
 
     public DatabaseReference estadisticaEjercicios() {return dbRef().child(Contants.TABLA_ESTADISTICAS_EJERCICIOS);}
 
+    public DatabaseReference recetas() {return dbRef().child(Contants.TABLA_RECETAS);}
+
+
 
 
     public DatabaseReference chatRef() {return dbRef().child(Contants.TABLA_CHAT);}
@@ -168,6 +171,8 @@ public class DBProvider {
 
 
 
+
+
     public void updateEmail(String id, String email) {
 
         Map<String, Object> updates = new HashMap<>();
@@ -233,6 +238,36 @@ public class DBProvider {
         updates.put(Contants.NOMBRE_PLAN , nombre_plan);
 
         planes().child(id_plan).updateChildren(updates);
+    }
+
+    //ALIMENTOS
+    public void subirAlimentos(String id_usuario,String fecha_cumplida, String tipo_alimentos){
+        Map<String, Object> updates = new HashMap<>();
+
+        String key = respuestas().push().getKey();
+        updates.put(Contants.ID_USUARIO , id_usuario);
+        updates.put(Contants.FECHA_CUMPLIDA , fecha_cumplida);
+        updates.put(Contants.TIPO_ALIMENTO , tipo_alimentos);
+
+        estadisticaAlimentos().child(key).updateChildren(updates);
+    }
+
+
+    public void subirRecetas(String id_alimento,String fecha, String tipo,String imagen,String calorias,String tiempo,String cantidad,
+                             String nombre){
+        Map<String, Object> updates = new HashMap<>();
+
+        String key = respuestas().push().getKey();
+        updates.put(Contants.ID_ALIMENTO , key);
+        updates.put(Contants.FECHA_ALIMENTO , fecha);
+        updates.put(Contants.TIPO_ALIMENTO , tipo);
+        updates.put(Contants.IMAGEN_ALIMENTO , imagen);
+        updates.put(Contants.KILOCALORIAS , calorias);
+        updates.put(Contants.MIN_ALIMENTO , tiempo);
+        updates.put(Contants.PORCIONES , cantidad);
+        updates.put(Contants.NOMBRE_ALIMENTO , nombre);
+
+        recetas().child(key).updateChildren(updates);
     }
 
 

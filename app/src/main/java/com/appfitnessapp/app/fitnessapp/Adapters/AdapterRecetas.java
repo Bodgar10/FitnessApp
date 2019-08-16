@@ -1,13 +1,15 @@
 package com.appfitnessapp.app.fitnessapp.Adapters;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.appfitnessapp.app.fitnessapp.Arrays.Asesorias;
 import com.appfitnessapp.app.fitnessapp.Arrays.Recetas;
@@ -71,32 +73,27 @@ public class AdapterRecetas extends RecyclerView.Adapter<AdapterRecetas.RecetasV
 
 
 
-        holder.txtTiempoComida.setText(receta.getTiempo_comida());
-        holder.txtNombreComida.setText(receta.getNombre_comida());
+        holder.txtTiempoComida.setText(receta.getTipo_alimento());
+        holder.txtNombreComida.setText(receta.getNombre_alimento());
 
 
 
-
-        if (!receta.getImagen_receta().equals("nil")){
-            Log.e(TAG, "Imagen admin: "+ receta.getImagen_receta());
-
+        if (!receta.getImagen_alimento().equals("nil")){
 
             try {
-
-
-                URL urlAdmin = new URL(receta.getImagen_receta());
-                Picasso.get().load(String.valueOf(urlAdmin))
+                URL urlfeed = new URL(receta.getImagen_alimento());
+                Picasso.get().load(String.valueOf(urlfeed))
                         .error(R.mipmap.ic_launcher)
                         .fit()
                         .noFade()
                         .into(holder.imagen);
+
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
 
-
-
         }
+
 
     }
 

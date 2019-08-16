@@ -2,16 +2,17 @@ package com.appfitnessapp.app.fitnessapp.Usuario;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterFeed;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterIngredientes;
@@ -38,7 +39,7 @@ public class DetalleRecetas extends AppCompatActivity {
 
     RecyclerView recyclerIngredientes,recyclerPasos;
 
-    String imagenComida,nombre,tipo;
+    String imagenComida,nombre,tipo,porciones,calorias,minutos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,10 @@ public class DetalleRecetas extends AppCompatActivity {
             imagenComida = extras.getString("imagen");
             nombre = extras.getString("nombre");
             tipo = extras.getString("tipo");
+            porciones = extras.getString("porciones");
+            calorias = extras.getString("calorias");
+            minutos = extras.getString("minutos");
+
 
         }
 
@@ -73,7 +78,10 @@ public class DetalleRecetas extends AppCompatActivity {
 
         //datos
         txtNombreReceta.setText(nombre);
-      //  loadImageFromUrl(imagenComida);
+        loadImageFromUrl(imagenComida);
+        txtCalorias.setText(calorias);
+        txtPorciones.setText(porciones);
+        txtTiempo.setText(minutos);
 
 
         recyclerIngredientes=findViewById(R.id.recyclerIngrediente);

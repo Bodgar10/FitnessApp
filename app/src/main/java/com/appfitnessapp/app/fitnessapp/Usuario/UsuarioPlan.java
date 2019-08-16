@@ -3,14 +3,16 @@ package com.appfitnessapp.app.fitnessapp.Usuario;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterPlanes;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterRecetas;
@@ -26,20 +28,32 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class UsuarioPlan  extends AppCompatActivity {
 
     ImageButton imgHome,imgPerfil,imgChat;
-    RecyclerView recyclerView;
-    AdapterRecetas adapter;
-    ArrayList<Recetas> recetas;
-    TextView btnWorkouts;
+    RecyclerView recyclerView,recyclerView2;
+    AdapterRecetas adapter,adapter2;
+    ArrayList<Recetas> recetas,recetas2;
+    TextView btnWorkouts,txtFechaSiguiente,txtFechaActual;
+
 
 
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
     private static final String TAG = "BAJARINFO:";
+
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+    Date date = new Date();
+
+    String fecha = dateFormat.format(date);
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,35 +68,37 @@ public class UsuarioPlan  extends AppCompatActivity {
         imgChat=findViewById(R.id.imgChat);
         btnWorkouts=findViewById(R.id.btnWorkouts);
 
-        recyclerView=findViewById(R.id.recyclerview);
+        recyclerView=findViewById(R.id.recycler1);
+        recyclerView2=findViewById(R.id.recycler2);
+
+        txtFechaSiguiente=findViewById(R.id.txtfechaSiguiente);
+        txtFechaActual=findViewById(R.id.txtfechaActual);
+
+        txtFechaActual.setText(fecha);
+        txtFechaSiguiente.setText(getNextDate(fecha));
+
+        bajarRecetas();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView2.setLayoutManager(new LinearLayoutManager(this));
+
         int spanCount = 1;
         int spacing_left = 10;
         int spacing_top=0;
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing_left, spacing_top));
+        recyclerView2.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing_left, spacing_top));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView2.setLayoutManager(layoutManager2);
         recetas = new ArrayList<>();
+        recetas2 = new ArrayList<>();
         adapter=new AdapterRecetas(recetas);
+        adapter2=new AdapterRecetas(recetas2);
         recyclerView.setAdapter(adapter);
+        recyclerView2.setAdapter(adapter2);
 
-
-        Recetas recetas0=new Recetas("","Desayuno","Huevo con jamon");
-        Recetas recetas1=new Recetas("","Comida","Bistec de cerdo");
-        Recetas recetas2=new Recetas("","Cena","Te de limon");
-        Recetas recetas3=new Recetas("","Comida","Filete de pescado");
-
-        recetas.add(recetas0);
-        recetas.add(recetas1);
-        recetas.add(recetas2);
-        recetas.add(recetas3);
-
-
-
-
-
-        adapter.notifyDataSetChanged();
 
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,13 +106,33 @@ public class UsuarioPlan  extends AppCompatActivity {
 
                 Intent intent = new Intent(UsuarioPlan.this, DetalleRecetas.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("nombre",recetas.get(recyclerView.getChildAdapterPosition(v)).getNombre_comida());
-                bundle.putString("imagen",recetas.get(recyclerView.getChildAdapterPosition(v)).getImagen_receta());
-                bundle.putString("tipo",recetas.get(recyclerView.getChildAdapterPosition(v)).getTiempo_comida());
+                bundle.putString("nombre",recetas.get(recyclerView.getChildAdapterPosition(v)).getNombre_alimento());
+                bundle.putString("imagen",recetas.get(recyclerView.getChildAdapterPosition(v)).getImagen_alimento());
+                bundle.putString("tipo",recetas.get(recyclerView.getChildAdapterPosition(v)).getTipo_alimento());
+                bundle.putString("calorias",recetas.get(recyclerView.getChildAdapterPosition(v)).getKilocalorias());
+                bundle.putString("minutos",recetas.get(recyclerView.getChildAdapterPosition(v)).getMin_alimento());
+                bundle.putString("porciones",recetas.get(recyclerView.getChildAdapterPosition(v)).getPorciones());
                 intent.putExtras(bundle);
                 startActivity(intent);
 
 
+            }
+        });
+
+        adapter2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(UsuarioPlan.this, DetalleRecetas.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("nombre",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getNombre_alimento());
+                bundle.putString("imagen",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getImagen_alimento());
+                bundle.putString("tipo",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getTipo_alimento());
+                bundle.putString("calorias",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getKilocalorias());
+                bundle.putString("minutos",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getMin_alimento());
+                bundle.putString("porciones",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getPorciones());
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
@@ -178,21 +214,34 @@ public class UsuarioPlan  extends AppCompatActivity {
     }
 
 
-    public void bajarFeed(){
+    public void bajarRecetas(){
 
         dbProvider = new DBProvider();
-        dbProvider.tablaFeed().addValueEventListener(new ValueEventListener() {
+        dbProvider.recetas().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 recetas.clear();
-
+                recetas2.clear();
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Recetas receta = snapshot.getValue(Recetas.class);
 
-                        recetas.add(receta);
-                        adapter.notifyDataSetChanged();
+
+
+                        if (receta.getFecha_alimento().equals(fecha)){
+
+                            recetas.add(receta);
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        else if (receta.getFecha_alimento().equals(getNextDate(fecha))){
+                            recetas2.add(receta);
+                            adapter2.notifyDataSetChanged();
+
+                        }
+
+
 
                     }
                 }
@@ -208,4 +257,25 @@ public class UsuarioPlan  extends AppCompatActivity {
         });
 
     }
+
+    private String getNextDate(String inputDate){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
+        inputDate = dateFormat.format(date);
+        try {
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+
+            c.add(Calendar.DATE, +1);
+            inputDate = dateFormat.format(c.getTime());
+            Log.d("asd", "selected date : "+inputDate);
+
+            System.out.println(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+            inputDate ="";
+        }
+        return inputDate;
+    }
+
 }

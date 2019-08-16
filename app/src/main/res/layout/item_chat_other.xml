@@ -25,7 +25,7 @@
         android:textStyle="bold"
         tools:text="a" />
 
-    <android.support.v4.widget.Space
+    <Space
         android:layout_width="@dimen/space_avg"
         android:layout_height="wrap_content" />
 

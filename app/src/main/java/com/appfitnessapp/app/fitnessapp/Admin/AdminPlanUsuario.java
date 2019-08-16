@@ -3,13 +3,15 @@ package com.appfitnessapp.app.fitnessapp.Admin;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterRecetas;
 import com.appfitnessapp.app.fitnessapp.Arrays.Recetas;
@@ -54,15 +56,7 @@ public class AdminPlanUsuario extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
-        Recetas recetas0=new Recetas("","Desayuno","Huevo con jamon");
-        Recetas recetas1=new Recetas("","Comida","Bistec de cerdo");
-        Recetas recetas2=new Recetas("","Cena","Te de limon");
-        Recetas recetas3=new Recetas("","Comida","Filete de pescado");
 
-        recetas.add(recetas0);
-        recetas.add(recetas1);
-        recetas.add(recetas2);
-        recetas.add(recetas3);
 
 
 
