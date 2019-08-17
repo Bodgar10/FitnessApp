@@ -197,6 +197,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
                 Intent intent = new Intent(UsuarioPerfil.this, UsuarioPlan.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
                 finish();
 
             }
@@ -208,6 +209,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
                 Intent intent = new Intent(UsuarioPerfil.this, UsuarioHome.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
                 finish();
             }
         });
@@ -217,6 +219,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(UsuarioPerfil.this, UsuarioChat.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
                 finish();
 
             }
@@ -728,6 +731,15 @@ public class UsuarioPerfil  extends AppCompatActivity {
             System.out.println("Current week of this year = " + calendar.get(Calendar.WEEK_OF_YEAR));
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(
+                getIntent().getIntExtra("anim id in", R.anim.move_in),
+                getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
+
     }
 
 }

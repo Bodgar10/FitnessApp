@@ -1,6 +1,7 @@
 package com.appfitnessapp.app.fitnessapp.Usuario;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -39,6 +40,28 @@ public class InformacionCompra extends AppCompatActivity {
 
         txtIngrediente.setText(producto);
         txtCantidad.setText("Cantidad: "+cantidad);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(
+                getIntent().getIntExtra("anim id in", R.anim.down_in),
+                getIntent().getIntExtra("anim id out", R.anim.down_out));
 
     }
 }

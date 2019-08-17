@@ -72,7 +72,7 @@ public class AdapterRutinas extends RecyclerView.Adapter<AdapterRutinas.RutinasV
 
 
 
-        holder.txtTipo.setText(ejercicio.getTipo_ejercicio());
+        holder.txtTipo.setText(ejercicio.getNombre_ejercicio());
         holder.txtRepeticiones.setText(ejercicio.getRepeticiones());
         holder.txtRondas.setText(ejercicio.getRondas());
 

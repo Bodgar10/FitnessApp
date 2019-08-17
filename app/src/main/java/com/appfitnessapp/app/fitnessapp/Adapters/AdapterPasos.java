@@ -63,8 +63,8 @@ public static class PasosViewHolder extends RecyclerView.ViewHolder{
 
 
 
-        holder.txtPaso.setText(paso.getPaso());
-        holder.txtDescripcion.setText(paso.getDescripcion());
+        holder.txtPaso.setText(paso.getNombre_paso());
+        holder.txtDescripcion.setText(paso.getDescripcion_paso());
 
 
 

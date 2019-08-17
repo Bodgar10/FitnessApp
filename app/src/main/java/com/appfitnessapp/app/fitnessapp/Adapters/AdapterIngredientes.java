@@ -39,7 +39,6 @@ public class AdapterIngredientes extends RecyclerView.Adapter<AdapterIngrediente
             super(itemView);
 
 
-
             txtNombreIngrediente=itemView.findViewById(R.id.txtNombreIngrediente);
             txtCantidad=itemView.findViewById(R.id.txtCantidad);
 
@@ -71,8 +70,7 @@ public class AdapterIngredientes extends RecyclerView.Adapter<AdapterIngrediente
 
 
         holder.txtCantidad.setText(ingrediente.getCantidad());
-        holder.txtNombreIngrediente.setText(ingrediente.getIngredientes());
-
+        holder.txtNombreIngrediente.setText(ingrediente.getNombre_ingrediente());
 
 
     }

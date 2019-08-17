@@ -3,12 +3,14 @@ package com.appfitnessapp.app.fitnessapp.Usuario;
 import android.graphics.Rect;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,7 +23,13 @@ import com.appfitnessapp.app.fitnessapp.Adapters.AdapterRecetas;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterRutinas;
 import com.appfitnessapp.app.fitnessapp.Arrays.Ejercicios;
 import com.appfitnessapp.app.fitnessapp.Arrays.ImagenesEjercicios;
+import com.appfitnessapp.app.fitnessapp.Arrays.PlanEntrenamiento;
+import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
+import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -35,6 +43,12 @@ public class RutinaUsuario extends AppCompatActivity {
     AdapterImagenes adapterImg;
     ArrayList<ImagenesEjercicios>ejerciciosImg;
 
+    String descripcion;
+
+    static DBProvider dbProvider;
+    BajarInfo bajarInfo;
+    private static final String TAG = "BAJARINFO:";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,15 +60,23 @@ public class RutinaUsuario extends AppCompatActivity {
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null){
+            descripcion = extras.getString("descripcion");
+
+        }
+
+        bajarEjercicios();
+
         imgRutina=findViewById(R.id.imgRutina);
 
         txtDescripcion=findViewById(R.id.txtDescripcion);
-        txtRutina=findViewById(R.id.txtTipoRutina);
 
         recyclerView=findViewById(R.id.recyclerview);
-
         recyclerViewImg=findViewById(R.id.recycler_viewImg);
 
+        txtDescripcion.setText(descripcion);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -77,8 +99,6 @@ public class RutinaUsuario extends AppCompatActivity {
         recyclerViewImg.setAdapter(adapterImg);
 
 
-
-
         ImagenesEjercicios ejerciciosimg=new ImagenesEjercicios("","");
         ImagenesEjercicios ejerciciosimg1=new ImagenesEjercicios("","");
         ImagenesEjercicios ejerciciosimg2=new ImagenesEjercicios("","");
@@ -86,21 +106,6 @@ public class RutinaUsuario extends AppCompatActivity {
         ImagenesEjercicios ejerciciosimg4=new ImagenesEjercicios("","");
         ImagenesEjercicios ejerciciosimg5=new ImagenesEjercicios("","");
 
-
-
-
-
-
-        Ejercicios ejercicio0=new Ejercicios("20 pull ups (dominadas)","20 repeticiones","5 rondas de ");
-        Ejercicios ejercicio1=new Ejercicios("30 pull ups (flexiones)","40 repeticiones","2 rondas de ");
-        Ejercicios ejercicio2=new Ejercicios("50 pull ups (abdominales)","10 repeticiones","3 rondas de ");
-        Ejercicios ejercicio3=new Ejercicios("10 pull ups (sentadillas)","10 repeticiones","3 rondas de ");
-
-
-        ejercicios.add(ejercicio0);
-        ejercicios.add(ejercicio1);
-        ejercicios.add(ejercicio2);
-        ejercicios.add(ejercicio3);
 
 
         ejerciciosImg.add(ejerciciosimg);
@@ -111,7 +116,6 @@ public class RutinaUsuario extends AppCompatActivity {
         ejerciciosImg.add(ejerciciosimg5);
 
 
-        adapter.notifyDataSetChanged();
 
         adapterImg.notifyDataSetChanged();
 
@@ -131,6 +135,42 @@ public class RutinaUsuario extends AppCompatActivity {
         });
 
     }
+
+
+    public void bajarEjercicios(){
+
+        dbProvider = new DBProvider();
+        dbProvider.tablaEjercicios().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ejercicios.clear();
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Log.e(TAG, "Feed: " + dataSnapshot);
+                        Ejercicios ejercicio = snapshot.getValue(Ejercicios.class);
+
+                        if (ejercicio.getId_ejercicio()!=null){
+
+                            ejercicios.add(ejercicio);
+                            adapter.notifyDataSetChanged();
+
+                        }
+
+                    }
+                }
+                else {
+                    Log.e(TAG, "Feed: ");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "ERROR: ");
+            }
+        });
+
+    }
+
 
 
     @Override

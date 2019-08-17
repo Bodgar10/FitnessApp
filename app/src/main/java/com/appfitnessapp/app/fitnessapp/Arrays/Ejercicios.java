@@ -2,24 +2,38 @@ package com.appfitnessapp.app.fitnessapp.Arrays;
 
 public class Ejercicios {
 
-    public String tipo_ejercicio;
-
-    public String repeticiones;
-
+    public String nombre_ejercicio;
     public String rondas;
+    public String repeticiones;
+    public String video_ejercicio;
+    public String imagenes_ejercicio;
+    public String id_ejercicio;
 
-    public Ejercicios(String tipo_ejercicio, String repeticiones, String rondas) {
-        this.tipo_ejercicio = tipo_ejercicio;
-        this.repeticiones = repeticiones;
+    public Ejercicios(String nombre_ejercicio, String rondas, String repeticiones, String video_ejercicio, String imagenes_ejercicio, String id_ejercicio) {
+        this.nombre_ejercicio = nombre_ejercicio;
         this.rondas = rondas;
+        this.repeticiones = repeticiones;
+        this.video_ejercicio = video_ejercicio;
+        this.imagenes_ejercicio = imagenes_ejercicio;
+        this.id_ejercicio = id_ejercicio;
     }
 
-    public String getTipo_ejercicio() {
-        return tipo_ejercicio;
+    public Ejercicios(){}
+
+    public String getNombre_ejercicio() {
+        return nombre_ejercicio;
     }
 
-    public void setTipo_ejercicio(String tipo_ejercicio) {
-        this.tipo_ejercicio = tipo_ejercicio;
+    public void setNombre_ejercicio(String nombre_ejercicio) {
+        this.nombre_ejercicio = nombre_ejercicio;
+    }
+
+    public String getRondas() {
+        return rondas;
+    }
+
+    public void setRondas(String rondas) {
+        this.rondas = rondas;
     }
 
     public String getRepeticiones() {
@@ -30,11 +44,27 @@ public class Ejercicios {
         this.repeticiones = repeticiones;
     }
 
-    public String getRondas() {
-        return rondas;
+    public String getVideo_ejercicio() {
+        return video_ejercicio;
     }
 
-    public void setRondas(String rondas) {
-        this.rondas = rondas;
+    public void setVideo_ejercicio(String video_ejercicio) {
+        this.video_ejercicio = video_ejercicio;
+    }
+
+    public String getImagenes_ejercicio() {
+        return imagenes_ejercicio;
+    }
+
+    public void setImagenes_ejercicio(String imagenes_ejercicio) {
+        this.imagenes_ejercicio = imagenes_ejercicio;
+    }
+
+    public String getId_ejercicio() {
+        return id_ejercicio;
+    }
+
+    public void setId_ejercicio(String id_ejercicio) {
+        this.id_ejercicio = id_ejercicio;
     }
 }

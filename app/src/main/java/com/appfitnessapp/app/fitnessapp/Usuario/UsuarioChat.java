@@ -30,6 +30,8 @@ public class UsuarioChat  extends AppCompatActivity {
 
                 Intent intent = new Intent(UsuarioChat.this, UsuarioPlan.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+
                 finish();
 
             }
@@ -40,6 +42,7 @@ public class UsuarioChat  extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(UsuarioChat.this, UsuarioPerfil.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
                 finish();
             }
         });
@@ -50,10 +53,20 @@ public class UsuarioChat  extends AppCompatActivity {
                 Intent intent = new Intent(UsuarioChat.this, UsuarioHome.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
                 finish();
 
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(
+                getIntent().getIntExtra("anim id in", R.anim.move_in),
+                getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
 
     }
 }

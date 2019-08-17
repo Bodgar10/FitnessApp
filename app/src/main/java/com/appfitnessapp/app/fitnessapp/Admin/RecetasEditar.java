@@ -86,16 +86,6 @@ public class RecetasEditar extends AppCompatActivity {
 
 
 
-        Ingredientes ingredientes0 = new Ingredientes("comida","12");
-        Ingredientes ingredientes1 = new Ingredientes("comida","12");
-        Ingredientes ingredientes2 = new Ingredientes("comida","12");
-        Ingredientes ingredientes3 = new Ingredientes("comida","12");
-
-        ingredientes.add(ingredientes0);
-        ingredientes.add(ingredientes1);
-        ingredientes.add(ingredientes2);
-        ingredientes.add(ingredientes3);
-
         adapterIngredientes.notifyDataSetChanged();
         adapterIngredientes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +110,7 @@ public class RecetasEditar extends AppCompatActivity {
             public void onClick(View v) {
 
                 RecyclerView.LayoutManager lmmanager = new LinearLayoutManager(getApplicationContext()); recyclerviewIngrediente.setLayoutManager(lmmanager);
-                ingredientes.add(new Ingredientes("",""));
+                ingredientes.add(new Ingredientes("","","",""));
                 adapterIngredientes = new AdapterIngredientes(ingredientes);
                 recyclerviewIngrediente.setAdapter(adapterIngredientes);
 
@@ -145,7 +135,7 @@ public class RecetasEditar extends AppCompatActivity {
 
                 String fecha = dateFormat.format(date);
 
-                String key = dbProvider.recetas().getKey();
+                String key = dbProvider.tablaEjercicios().getKey();
 
 
                 String nombre = Objects.requireNonNull(edtNombreComida.getText()).toString();
@@ -154,11 +144,13 @@ public class RecetasEditar extends AppCompatActivity {
                 String tiempo = Objects.requireNonNull(edtTiempo.getText()).toString();
 
 
-                if (!nombre.isEmpty()&&!cantidad.isEmpty()&&!calorias.isEmpty()&&!tiempo.isEmpty()){
+                if (!nombre.isEmpty()&&!cantidad.isEmpty()&&!tiempo.isEmpty()){
 
-                    dbProvider.subirRecetas(key,fecha,"","nil",calorias,tiempo,cantidad,
-                            nombre);
+                    //dbProvider.subirIngredientes(key,"",nombre,cantidad);
+                    //dbProvider.subirPasos(key,"",nombre,cantidad);
+                    //dbProvider.subirPlanEntrenamiento(tiempo,calorias,cantidad,nombre, key);
 
+                    dbProvider.subirEjercicios(nombre,cantidad,tiempo,"","",key);
                 }
 
             }

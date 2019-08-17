@@ -72,27 +72,7 @@ public class AdminRecetaDetalle extends AppCompatActivity {
 
 
 
-        Ingredientes ingredientes0=new Ingredientes("Huevos","3");
-        Ingredientes ingredientes1=new Ingredientes("Jamon","4");
-        Ingredientes ingredientes2=new Ingredientes("Tocino","1");
-        Ingredientes ingredientes3=new Ingredientes("Pan","6");
 
-
-        Pasos pasos0=new Pasos("Paso 1 ","mezclar todo junto y poner el aceite a 50 C");
-        Pasos pasos1=new Pasos("Paso 2 ","Vaciar en el aceite y  poner a fuego lento al principio");
-        Pasos pasos2=new Pasos("Paso 3 ","Despues de 5 min vaciar las verdurras y tapar");
-        Pasos pasos3=new Pasos("Paso 4 ","Dejar asi por 5 min mas y luego servir");
-
-
-        ingredientes.add(ingredientes0);
-        ingredientes.add(ingredientes1);
-        ingredientes.add(ingredientes2);
-        ingredientes.add(ingredientes3);
-
-        pasos.add(pasos0);
-        pasos.add(pasos1);
-        pasos.add(pasos2);
-        pasos.add(pasos3);
 
         adapterPasos.notifyDataSetChanged();
         adapterIngredientes.notifyDataSetChanged();

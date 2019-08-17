@@ -74,11 +74,9 @@ public class AdapterEjercicios extends RecyclerView.Adapter<AdapterEjercicios.Ej
 
 
 
-        holder.txtTipoEjercicio.setText(ejercicio.getTipo_ejercicio());
+        holder.txtTipoEjercicio.setText(ejercicio.getNombre_ejercicio());
         holder.txtRepeticiones.setText(ejercicio.getRepeticiones());
         holder.txtRondas.setText(ejercicio.getRondas());
-
-
 
     }
 

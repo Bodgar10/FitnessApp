@@ -111,8 +111,10 @@ public class UsuarioHome  extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(UsuarioHome.this, UsuarioPlan.class);
+                intent.putExtra("anim id in", R.anim.move_in);
+                intent.putExtra("anim id out", R.anim.move_leeft_in);
                 startActivity(intent);
-
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
             }
         });
 
@@ -120,7 +122,10 @@ public class UsuarioHome  extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(UsuarioHome.this, UsuarioPerfil.class);
+                intent.putExtra("anim id in", R.anim.move_in);
+                intent.putExtra("anim id out", R.anim.move_leeft_in);
                 startActivity(intent);
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
             }
         });
 
@@ -128,8 +133,10 @@ public class UsuarioHome  extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(UsuarioHome.this, UsuarioChat.class);
+                intent.putExtra("anim id in", R.anim.move_in);
+                intent.putExtra("anim id out", R.anim.move_leeft_in);
                 startActivity(intent);
-
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
             }
         });
 

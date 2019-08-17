@@ -106,6 +106,7 @@ public class UsuarioPlan  extends AppCompatActivity {
 
                 Intent intent = new Intent(UsuarioPlan.this, DetalleRecetas.class);
                 Bundle bundle = new Bundle();
+                bundle.putString("id",recetas.get(recyclerView.getChildAdapterPosition(v)).getId_alimento());
                 bundle.putString("nombre",recetas.get(recyclerView.getChildAdapterPosition(v)).getNombre_alimento());
                 bundle.putString("imagen",recetas.get(recyclerView.getChildAdapterPosition(v)).getImagen_alimento());
                 bundle.putString("tipo",recetas.get(recyclerView.getChildAdapterPosition(v)).getTipo_alimento());
@@ -113,6 +114,7 @@ public class UsuarioPlan  extends AppCompatActivity {
                 bundle.putString("minutos",recetas.get(recyclerView.getChildAdapterPosition(v)).getMin_alimento());
                 bundle.putString("porciones",recetas.get(recyclerView.getChildAdapterPosition(v)).getPorciones());
                 intent.putExtras(bundle);
+
                 startActivity(intent);
 
 
@@ -125,6 +127,7 @@ public class UsuarioPlan  extends AppCompatActivity {
 
                 Intent intent = new Intent(UsuarioPlan.this, DetalleRecetas.class);
                 Bundle bundle = new Bundle();
+                bundle.putString("id",recetas.get(recyclerView.getChildAdapterPosition(v)).getId_alimento());
                 bundle.putString("nombre",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getNombre_alimento());
                 bundle.putString("imagen",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getImagen_alimento());
                 bundle.putString("tipo",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getTipo_alimento());
@@ -142,6 +145,7 @@ public class UsuarioPlan  extends AppCompatActivity {
 
                 Intent intent = new Intent(UsuarioPlan.this, UsuarioPerfil.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
                 finish();
 
             }
@@ -153,6 +157,7 @@ public class UsuarioPlan  extends AppCompatActivity {
                 Intent intent = new Intent(UsuarioPlan.this, UsuarioHome.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
                 finish();
             }
         });
@@ -162,6 +167,7 @@ public class UsuarioPlan  extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(UsuarioPlan.this, UsuarioChat.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
                 finish();
 
             }
@@ -227,15 +233,15 @@ public class UsuarioPlan  extends AppCompatActivity {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Recetas receta = snapshot.getValue(Recetas.class);
 
+                        String nueva=getNextDate(receta.getFecha_alimento());
 
 
                         if (receta.getFecha_alimento().equals(fecha)){
-
                             recetas.add(receta);
                             adapter.notifyDataSetChanged();
                         }
 
-                        else if (receta.getFecha_alimento().equals(getNextDate(fecha))){
+                        else if (receta.getFecha_alimento().equals(nueva)){
                             recetas2.add(receta);
                             adapter2.notifyDataSetChanged();
 
@@ -277,5 +283,12 @@ public class UsuarioPlan  extends AppCompatActivity {
         }
         return inputDate;
     }
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(
+                getIntent().getIntExtra("anim id in", R.anim.move_in),
+                getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
 
+    }
 }
