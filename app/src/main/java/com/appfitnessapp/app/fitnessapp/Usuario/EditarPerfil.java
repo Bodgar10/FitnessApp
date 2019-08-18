@@ -93,7 +93,7 @@ public class EditarPerfil extends AppCompatActivity {
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        Toolbar toolbarback=findViewById(R.id.include);
+        Toolbar toolbarback=findViewById(R.id.toolbarU);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Editar Perfil");
         ActionBar actionBar=getSupportActionBar();

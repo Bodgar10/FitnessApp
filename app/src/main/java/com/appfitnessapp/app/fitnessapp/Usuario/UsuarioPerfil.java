@@ -66,6 +66,20 @@ public class UsuarioPerfil  extends AppCompatActivity {
     private static final String TAG = "BAJARINFO:";
     static DBProvider dbProvider;
 
+
+
+    BarChart chart,chartHorizontal;
+
+    ArrayList<BarEntry> BARENTRY;
+    ArrayList<String> BarEntryLabels;
+
+    ArrayList<BarEntry> BARENTRYH;
+    ArrayList<String> BarEntryLabelsH;
+
+    BarDataSet set,setHorizontal ;
+
+
+
     String id;
 
     int index_almuerzo = 0;
@@ -88,15 +102,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
     int porcentDomingo,porcentLunes,porcentMartes,porcentMiercoles,porcentJueves,porcentViernes,porcentSabado;
 
-    BarChart chart,chartHorizontal;
 
-    ArrayList<BarEntry> BARENTRY;
-    ArrayList<String> BarEntryLabels;
-
-    ArrayList<BarEntry> BARENTRYH;
-    ArrayList<String> BarEntryLabelsH;
-
-    BarDataSet set,setHorizontal ;
 
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
     Date date = new Date();
@@ -145,9 +151,9 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
         txtDiasSemana.setText(fecha);
 
-
-
         btnCalificar=findViewById(R.id.linearCalificar);
+
+
 
         btnIzquierda.setOnClickListener(new View.OnClickListener() {
                @Override
@@ -171,8 +177,6 @@ public class UsuarioPerfil  extends AppCompatActivity {
                    if (btnIzquierda.isClickable()){
                        String fecha = "";
                        txtDiasSemana.setText(getNextDate(fecha));
-
-
                    }
 
                }
@@ -225,11 +229,14 @@ public class UsuarioPerfil  extends AppCompatActivity {
             }
         });
 
-        chart = (BarChart) findViewById(R.id.chart1);
-        chartHorizontal = (BarChart) findViewById(R.id.chartHorizontal);
 
 
 
+
+        //________________________________________________________________________________________________
+
+           chart = (BarChart) findViewById(R.id.chart1);
+           chartHorizontal = (BarChart) findViewById(R.id.chartHorizontal);
         CustomBarChartRender barChartRender = new CustomBarChartRender(chart,chart.getAnimator(), chart.getViewPortHandler());
         barChartRender.setRadius(10);
         CustomBarChartRender barChartRenderH = new CustomBarChartRender(chartHorizontal,chartHorizontal.getAnimator(),
@@ -254,13 +261,16 @@ public class UsuarioPerfil  extends AppCompatActivity {
         BarData data = new BarData(dataSets);
         data.setBarWidth(0.5f);
 
-
-        //horizontal
-        int[] colors = {Color.rgb(255, 255, 255),Color.rgb(255, 50, 0), Color.rgb(0, 194, 176),
-                Color.rgb(18, 27, 34), Color.rgb(255, 255, 255)};
+//_____________________________________________________________________________________________
 
 
-        BARENTRYH = new ArrayList<>();
+
+        //////////////////////////////////////////////////////////////////////////////////////////
+           //horizontal
+           int[] colors = {Color.rgb(255, 255, 255),Color.rgb(255, 50, 0), Color.rgb(0, 194, 176),
+                   Color.rgb(18, 27, 34), Color.rgb(255, 255, 255)};
+
+           BARENTRYH = new ArrayList<>();
         BarEntryLabelsH = new ArrayList<String>();
         AddValuesToBARENTRYHorizontal();
         AddValuesToBarEntryLabelsHorizontal();
@@ -274,7 +284,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
         dataHorizontal.setBarWidth(0.5f);
 
 
-
+//____________________________________________________________________________________________
         //normal
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -316,8 +326,10 @@ public class UsuarioPerfil  extends AppCompatActivity {
         xAxis.setGranularity(1f); // minimum axis-step (interval) is 1
         xAxis.setValueFormatter(formatter);
 
+//______________________________________________________________________________________
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
         //horizontal
         XAxis xAxisH = chartHorizontal.getXAxis();
         xAxisH.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -346,7 +358,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
         chartHorizontal.invalidate();
 
 
-        //esto para los datos
+        //esto para los datosHorizontal
         IAxisValueFormatter formatterH = new IAxisValueFormatter() {
 
             @Override
@@ -359,9 +371,37 @@ public class UsuarioPerfil  extends AppCompatActivity {
         xAxisH.setGranularity(1f); // minimum axis-step (interval) is 1
         xAxisH.setValueFormatter(formatterH);
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////7
+
 
     }
 
+    public void AddValuesToBARENTRY(){
+
+        BARENTRY.add(new BarEntry(0, porcentDomingo));
+        BARENTRY.add(new BarEntry(1, porcentLunes));
+        BARENTRY.add(new BarEntry(2,  porcentMartes));
+        BARENTRY.add(new BarEntry(3, porcentMiercoles));
+        BARENTRY.add(new BarEntry(4, porcentJueves));
+        BARENTRY.add(new BarEntry(5, porcentViernes));
+        BARENTRY.add(new BarEntry(6, porcentSabado));
+
+    }
+
+    public void AddValuesToBarEntryLabels(){
+
+        BarEntryLabels.add("D");
+        BarEntryLabels.add("L");
+        BarEntryLabels.add("M");
+        BarEntryLabels.add("Mi");
+        BarEntryLabels.add("J");
+        BarEntryLabels.add("V");
+        BarEntryLabels.add("S");
+    }
+
+
+
+    //////////////////////////////////////////////////////////7
     public void AddValuesToBARENTRYHorizontal(){
 
         BARENTRYH.add(new BarEntry(0, 0));
@@ -372,31 +412,24 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.editar, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle presses on the action bar items
-        switch (item.getItemId()) {
-            case R.id.editar:
-                Abrir();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+    public void AddValuesToBarEntryLabelsHorizontal(){
 
-    private void Abrir() {
-        Intent intent=new Intent(UsuarioPerfil.this,EditarPerfil.class);
-        startActivity(intent);
+        BarEntryLabelsH.add("");
+        BarEntryLabelsH.add("");
+        BarEntryLabelsH.add("");
+        BarEntryLabelsH.add("");
+        BarEntryLabelsH.add("");
+
 
     }
+///////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
     public void bajarUsuarios(){
         dbProvider = new DBProvider();
@@ -490,7 +523,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
                             int mesBase = c.get(Calendar.MONTH);
 
                             if (estadisticaAlimentos.getId_usuario().equals(id)) {
-                                Toast.makeText(UsuarioPerfil.this, "hoy"+mesActual+"base"+mesBase, Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(UsuarioPerfil.this, "hoy"+semanaActual+"base"+diaBase, Toast.LENGTH_SHORT).show();
                                 if (semanaActual==diaBase&&mesActual==mesBase){
 
 
@@ -632,44 +665,29 @@ public class UsuarioPerfil  extends AppCompatActivity {
     }
 
 
-
-
-    public void AddValuesToBARENTRY(){
-
-        BARENTRY.add(new BarEntry(0, porcentDomingo));
-        BARENTRY.add(new BarEntry(1, porcentLunes));
-        BARENTRY.add(new BarEntry(2,  porcentMartes));
-        BARENTRY.add(new BarEntry(3, porcentMiercoles));
-        BARENTRY.add(new BarEntry(4, porcentJueves));
-        BARENTRY.add(new BarEntry(5, porcentViernes));
-        BARENTRY.add(new BarEntry(6, porcentSabado));
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.editar_usuario, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
-    public void AddValuesToBarEntryLabels(){
-
-        BarEntryLabels.add("D");
-        BarEntryLabels.add("L");
-        BarEntryLabels.add("M");
-        BarEntryLabels.add("Mi");
-        BarEntryLabels.add("J");
-        BarEntryLabels.add("V");
-        BarEntryLabels.add("S");
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.editar_U:
+                Abrir();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
-
-
-
-
-
-    public void AddValuesToBarEntryLabelsHorizontal(){
-
-        BarEntryLabelsH.add("");
-        BarEntryLabelsH.add("");
-        BarEntryLabelsH.add("");
-        BarEntryLabelsH.add("");
-        BarEntryLabelsH.add("");
-
+    private void Abrir() {
+        Intent intent=new Intent(UsuarioPerfil.this,EditarPerfil.class);
+        startActivity(intent);
 
     }
 
@@ -714,9 +732,6 @@ public class UsuarioPerfil  extends AppCompatActivity {
         }
         return inputDate;
     }
-
-
-
 
     public static class GetWeekOfMonthAndYear {
 

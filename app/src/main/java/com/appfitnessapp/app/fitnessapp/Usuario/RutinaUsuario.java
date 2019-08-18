@@ -1,5 +1,6 @@
 package com.appfitnessapp.app.fitnessapp.Usuario;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 
@@ -30,12 +31,13 @@ import com.appfitnessapp.app.fitnessapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class RutinaUsuario extends AppCompatActivity {
 
-    ImageView imgRutina;
+    ImageView imgRutina,imgVideo;
     TextView txtDescripcion,txtRutina;
     RecyclerView recyclerView,recyclerViewImg;
     AdapterRutinas adapter;
@@ -43,7 +45,7 @@ public class RutinaUsuario extends AppCompatActivity {
     AdapterImagenes adapterImg;
     ArrayList<ImagenesEjercicios>ejerciciosImg;
 
-    String descripcion;
+    String descripcion,videoUrl;
 
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
@@ -71,12 +73,28 @@ public class RutinaUsuario extends AppCompatActivity {
 
         imgRutina=findViewById(R.id.imgRutina);
 
+        imgVideo=findViewById(R.id.imgVideo);
+
         txtDescripcion=findViewById(R.id.txtDescripcion);
 
         recyclerView=findViewById(R.id.recyclerview);
         recyclerViewImg=findViewById(R.id.recycler_viewImg);
 
         txtDescripcion.setText(descripcion);
+
+        imgVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(RutinaUsuario.this, Video.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("video",videoUrl);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -151,6 +169,8 @@ public class RutinaUsuario extends AppCompatActivity {
 
                         if (ejercicio.getId_ejercicio()!=null){
 
+                            videoUrl=ejercicio.getVideo_ejercicio();
+                            Picasso.get().load(ejercicio.getImagenes_ejercicio()).into(imgRutina);
                             ejercicios.add(ejercicio);
                             adapter.notifyDataSetChanged();
 

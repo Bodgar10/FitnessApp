@@ -142,12 +142,7 @@ public class Calificar extends AppCompatActivity {
         imgAntes.setVisibility(View.GONE);
 
 
-        ratingValoracion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
 
         ratingValoracion.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -192,7 +187,7 @@ public class Calificar extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (ContextCompat.checkSelfPermission(Calificar.this, Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED){
-                    selectPDF2();
+                    selectPDF();
                 }
                 else {
                     ActivityCompat.requestPermissions(Calificar.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},9);
@@ -208,7 +203,7 @@ public class Calificar extends AppCompatActivity {
 
 
                 if (ContextCompat.checkSelfPermission(Calificar.this, Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED){
-                    selectPDF();
+                    selectPDF2();
                 }
                 else {
                     ActivityCompat.requestPermissions(Calificar.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},9);
@@ -230,7 +225,15 @@ public class Calificar extends AppCompatActivity {
                     Toast.makeText(Calificar.this, "Escribe tu experiencia y pon una calificación.", Toast.LENGTH_SHORT).show();
                 }
 
-                else if (!txtExperiencia.isEmpty()){
+                else if (!txtExperiencia.isEmpty()&&pdfUri!=null&&pdfUri2!=null){
+                   // uploadFile(pdfUri,key,txtExperiencia,fecha,"",key,"",id,valor);
+                    edtExperiencia.getText().clear();
+                    uploadFile2(key,txtExperiencia,fecha,"",key,pdfUri2.toString(),pdfUri.toString(),
+                            id,valor);
+
+                }
+
+            else if (!txtExperiencia.isEmpty()){
                     dbProvider.subirValoraciones(txtExperiencia,fecha,"",key, "nil",
                             "nil",id,valor);
 
@@ -239,15 +242,6 @@ public class Calificar extends AppCompatActivity {
                 }
 
 
-                else{
-                    dbProvider.subirValoraciones(txtExperiencia,fecha,"",key, "",
-                            "",id,valor);
-                    edtExperiencia.getText().clear();
-                    uploadFile(pdfUri);
-                    uploadFile2(pdfUri2);
-
-
-                }
             }
         });
 
@@ -256,7 +250,72 @@ public class Calificar extends AppCompatActivity {
 
     }
 
-    private void uploadFile(Uri pdfUri) {
+
+
+    private void uploadFile2( final String id_, final String descripcion, final String fecha, final String id_asesoria, final String id_valoracion, String imgDespues,
+                             final String imgAntes, final String nombre_usuario, final String valoracion) {
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setTitle("Subiendo...");
+        progressDialog.setProgress(0);
+        progressDialog.show();
+
+        final String fileName =System.currentTimeMillis()+id;
+       final StorageReference storageReference1 =  mStorage.child(Contants.TABLA_VALORACIONES_ASESORIA).child(fileName);
+
+
+        try {
+            Bitmap bmp;
+            bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), pdfUri2);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.JPEG, 25, baos);
+            byte[] data = baos.toByteArray();
+
+            UploadTask uploadTask2 = storageReference1.putBytes(data);
+
+
+            uploadTask2.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    storageReference1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+
+
+                            uploadFile(descripcion,fecha,id_asesoria,id_valoracion,imgAntes,uri.toString(),nombre_usuario,valoracion);
+                            progressDialog.dismiss();
+                            Toast.makeText(Calificar.this, "Se subio bien todo ", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(Calificar.this, "No subio bien", Toast.LENGTH_SHORT).show();
+
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    int currentProgess = (int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                    progressDialog.setProgress(currentProgess);
+
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+   }
+
+    private void uploadFile( final String descripcion, final String fecha, final String id_asesoria, final String id_valoracion,final String imgAntes, final String imgDespues,
+                             final String nombre_usuario, final String valoracion) {
 
         /*
         progressDialog = new ProgressDialog(this);
@@ -267,8 +326,6 @@ public class Calificar extends AppCompatActivity {
 */
         final String fileName =System.currentTimeMillis()+id;
         final StorageReference storageReference1 =  mStorage.child(Contants.TABLA_VALORACIONES_ASESORIA).child(fileName);
-
-
 
         try {
             Bitmap bmp;
@@ -287,7 +344,9 @@ public class Calificar extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
 
-                            dbProvider.updateImgAntes(uri.toString(), id);
+                            dbProvider.subirValoraciones(descripcion,fecha,id_asesoria,id_valoracion,uri.toString(),imgDespues,nombre_usuario,valoracion);
+
+                            //dbProvider.updateImgAntes(uri.toString(),id_);
                         }
                     });
 
@@ -332,68 +391,6 @@ public class Calificar extends AppCompatActivity {
 
 
     }
-
-    private void uploadFile2(Uri pdfUri2) {
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setTitle("Subiendo...");
-        progressDialog.setProgress(0);
-        progressDialog.show();
-
-        final String fileName =System.currentTimeMillis()+id;
-       final StorageReference storageReference1 =  mStorage.child(Contants.TABLA_VALORACIONES_ASESORIA).child(fileName);
-
-
-        try {
-            Bitmap bmp;
-            bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), pdfUri2);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bmp.compress(Bitmap.CompressFormat.JPEG, 25, baos);
-            byte[] data = baos.toByteArray();
-
-            UploadTask uploadTask2 = storageReference1.putBytes(data);
-
-
-            uploadTask2.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                    storageReference1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-
-
-                            dbProvider.updateImgDespues(uri.toString(), id);
-                            progressDialog.dismiss();
-                            Toast.makeText(Calificar.this, "Se subio bien todo ", Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(Calificar.this, "No subio bien", Toast.LENGTH_SHORT).show();
-
-                }
-            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-
-                    int currentProgess = (int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                    progressDialog.setProgress(currentProgess);
-
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-   }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
@@ -435,8 +432,8 @@ public class Calificar extends AppCompatActivity {
 
             try{
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),pdfUri);
-                imDespues.setVisibility(View.VISIBLE);
-                imDespues.setImageBitmap(bitmap);
+                imgAntes.setVisibility(View.VISIBLE);
+                imgAntes.setImageBitmap(bitmap);
             }catch (IOException e){
                 e.printStackTrace();
             }
@@ -449,8 +446,8 @@ public class Calificar extends AppCompatActivity {
 
             try{
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),pdfUri2);
-                imgAntes.setVisibility(View.VISIBLE);
-                imgAntes.setImageBitmap(bitmap);
+                imDespues.setVisibility(View.VISIBLE);
+                imDespues.setImageBitmap(bitmap);
             }catch (IOException e){
                 e.printStackTrace();
             }

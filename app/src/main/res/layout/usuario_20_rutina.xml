@@ -18,12 +18,48 @@
             android:layout_height="wrap_content"
             android:id="@+id/include" />
 
-    <ImageView
-        android:id="@+id/imgRutina"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        app:srcCompat="@android:drawable/sym_def_app_icon" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/imgRutina"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgRutina"
+                app:layout_constraintEnd_toEndOf="@+id/imgRutina"
+                app:layout_constraintStart_toStartOf="@+id/imgRutina"
+                app:layout_constraintTop_toTopOf="@+id/imgRutina"
+                android:layout_marginEnd="0dp"
+                android:background="@drawable/degradado_imagen"
+                android:orientation="vertical"/>
+
+            <ImageView
+                android:id="@+id/imgVideo"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:scaleType="centerInside"
+                app:layout_constraintBottom_toBottomOf="@+id/imgRutina"
+                app:layout_constraintEnd_toEndOf="@+id/imgRutina"
+                app:layout_constraintStart_toStartOf="@+id/imgRutina"
+                app:layout_constraintTop_toTopOf="@+id/imgRutina"
+                app:srcCompat="@drawable/ic_play_icono" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
     <TextView
@@ -46,7 +82,7 @@
         android:layout_marginEnd="14dp"
         android:gravity="start"
         android:layout_marginTop="10dp"
-        android:text="qwsertyuiitrewqwertgkjs dfghklkhgfdxzxcky trewasxcvbnj sdfg hjnbvdsertgyh wertghgdsdrfgth  rtgfdtgyhbvdfgi jifi jfoisdjfojd ogjfdo igjfdoi jgfdojg ofdj goifjg ofdjg ofdjg dfojg fdo"
+        android:text="Texto descripción"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="14sp" />
