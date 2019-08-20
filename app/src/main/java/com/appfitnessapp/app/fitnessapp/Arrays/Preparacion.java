@@ -1,6 +1,6 @@
 package com.appfitnessapp.app.fitnessapp.Arrays;
 
-public class Pasos {
+public class Preparacion {
 
     public String nombre_paso;
 
@@ -8,17 +8,13 @@ public class Pasos {
 
     public String  id_preparacion;
 
-    public String id_alimento;
-
-
-    public Pasos(String nombre_paso, String descripcion_paso, String id_preparacion, String id_alimento) {
+    public Preparacion(String nombre_paso, String descripcion_paso, String id_preparacion) {
         this.nombre_paso = nombre_paso;
         this.descripcion_paso = descripcion_paso;
         this.id_preparacion = id_preparacion;
-        this.id_alimento = id_alimento;
     }
 
-    public Pasos(){}
+    public Preparacion(){}
 
     public String getNombre_paso() {
         return nombre_paso;
@@ -42,13 +38,5 @@ public class Pasos {
 
     public void setId_preparacion(String id_preparacion) {
         this.id_preparacion = id_preparacion;
-    }
-
-    public String getId_alimento() {
-        return id_alimento;
-    }
-
-    public void setId_alimento(String id_alimento) {
-        this.id_alimento = id_alimento;
     }
 }

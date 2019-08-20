@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class AsesoriasPendientes extends AppCompatActivity {
 
     AdapterAsesorias adapter;
-    ArrayList<Asesorias> asesorias;
+    ArrayList<Usuarios> asesorias;
     RecyclerView recyclerView;
     TextView txtActivos;
     CircularImageView imgPostPersona;
@@ -77,11 +77,6 @@ public class AsesoriasPendientes extends AppCompatActivity {
         Asesorias asesorias2=new Asesorias("Mauricio Garcia","60 kg","Subir de peso","");
         Asesorias asesorias3=new Asesorias("Pedro Ortiz","68 kg","Bajar  de peso","");
 
-
-        asesorias.add(asesorias0);
-        asesorias.add(asesorias1);
-        asesorias.add(asesorias2);
-        asesorias.add(asesorias3);
 
 
 
@@ -138,7 +133,7 @@ public class AsesoriasPendientes extends AppCompatActivity {
 
                         if (usuarios.getTipo_usuario().equals(Contants.USUARIO)) {
 
-                            asesorias.add(asesoria);
+                          //  asesorias.add(asesoria);
                             adapter.notifyDataSetChanged();
                             progressDialog.dismiss();
                         }

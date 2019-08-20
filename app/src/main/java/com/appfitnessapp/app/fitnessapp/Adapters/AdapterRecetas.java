@@ -1,7 +1,6 @@
 package com.appfitnessapp.app.fitnessapp.Adapters;
 
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appfitnessapp.app.fitnessapp.Arrays.Asesorias;
-import com.appfitnessapp.app.fitnessapp.Arrays.Recetas;
+import com.appfitnessapp.app.fitnessapp.Arrays.PlanAlimenticio;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -26,7 +24,7 @@ public class AdapterRecetas extends RecyclerView.Adapter<AdapterRecetas.RecetasV
     AdapterRecetas adapterPlanes;
 
     private View.OnClickListener listener;
-    ArrayList<Recetas> recetas;
+    ArrayList<PlanAlimenticio> recetas;
     private static final String TAG = "BAJARINFO:";
 
 
@@ -52,7 +50,7 @@ public class AdapterRecetas extends RecyclerView.Adapter<AdapterRecetas.RecetasV
 
     }
 
-    public AdapterRecetas(ArrayList<Recetas>recetas){
+    public AdapterRecetas(ArrayList<PlanAlimenticio>recetas){
 
         this.recetas=recetas;
     }
@@ -69,7 +67,7 @@ public class AdapterRecetas extends RecyclerView.Adapter<AdapterRecetas.RecetasV
 
     @Override
     public void onBindViewHolder(@NonNull AdapterRecetas.RecetasViewHolder holder, int position) {
-        Recetas receta = recetas.get(position);
+        PlanAlimenticio receta = recetas.get(position);
 
 
 

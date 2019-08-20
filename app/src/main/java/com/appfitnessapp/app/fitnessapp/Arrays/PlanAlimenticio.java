@@ -1,6 +1,6 @@
 package com.appfitnessapp.app.fitnessapp.Arrays;
 
-public class Recetas {
+public class PlanAlimenticio {
 
     public String imagen_alimento;
 
@@ -16,12 +16,16 @@ public class Recetas {
 
     public String tipo_alimento;
 
-    public String id_alimento;
+    public String id_plan_alimenticio;
+
+    public String precio_mas_alto;
+
+    public String precio_mas_bajo;
+
+    public String id_usuario;
 
 
-    public Recetas(){}
-
-    public Recetas(String imagen_alimento, String min_alimento, String nombre_alimento, String kilocalorias, String porciones, String fecha_alimento, String tipo_alimento, String id_alimento) {
+    public PlanAlimenticio(String imagen_alimento, String min_alimento, String nombre_alimento, String kilocalorias, String porciones, String fecha_alimento, String tipo_alimento, String id_plan_alimenticio, String precio_mas_alto, String precio_mas_bajo, String id_usuario) {
         this.imagen_alimento = imagen_alimento;
         this.min_alimento = min_alimento;
         this.nombre_alimento = nombre_alimento;
@@ -29,8 +33,13 @@ public class Recetas {
         this.porciones = porciones;
         this.fecha_alimento = fecha_alimento;
         this.tipo_alimento = tipo_alimento;
-        this.id_alimento = id_alimento;
+        this.id_plan_alimenticio = id_plan_alimenticio;
+        this.precio_mas_alto = precio_mas_alto;
+        this.precio_mas_bajo = precio_mas_bajo;
+        this.id_usuario = id_usuario;
     }
+
+    public PlanAlimenticio(){}
 
     public String getImagen_alimento() {
         return imagen_alimento;
@@ -88,11 +97,35 @@ public class Recetas {
         this.tipo_alimento = tipo_alimento;
     }
 
-    public String getId_alimento() {
-        return id_alimento;
+    public String getId_plan_alimenticio() {
+        return id_plan_alimenticio;
     }
 
-    public void setId_alimento(String id_alimento) {
-        this.id_alimento = id_alimento;
+    public void setId_plan_alimenticio(String id_plan_alimenticio) {
+        this.id_plan_alimenticio = id_plan_alimenticio;
+    }
+
+    public String getPrecio_mas_alto() {
+        return precio_mas_alto;
+    }
+
+    public void setPrecio_mas_alto(String precio_mas_alto) {
+        this.precio_mas_alto = precio_mas_alto;
+    }
+
+    public String getPrecio_mas_bajo() {
+        return precio_mas_bajo;
+    }
+
+    public void setPrecio_mas_bajo(String precio_mas_bajo) {
+        this.precio_mas_bajo = precio_mas_bajo;
+    }
+
+    public String getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(String id_usuario) {
+        this.id_usuario = id_usuario;
     }
 }

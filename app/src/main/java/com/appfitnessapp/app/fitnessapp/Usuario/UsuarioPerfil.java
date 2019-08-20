@@ -378,13 +378,13 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
     public void AddValuesToBARENTRY(){
 
-        BARENTRY.add(new BarEntry(0, porcentDomingo));
-        BARENTRY.add(new BarEntry(1, porcentLunes));
-        BARENTRY.add(new BarEntry(2,  porcentMartes));
-        BARENTRY.add(new BarEntry(3, porcentMiercoles));
-        BARENTRY.add(new BarEntry(4, porcentJueves));
-        BARENTRY.add(new BarEntry(5, porcentViernes));
-        BARENTRY.add(new BarEntry(6, porcentSabado));
+        BARENTRY.add(new BarEntry(0, 45));
+        BARENTRY.add(new BarEntry(1, 20));
+        BARENTRY.add(new BarEntry(2,  68));
+        BARENTRY.add(new BarEntry(3, 80));
+        BARENTRY.add(new BarEntry(4, 40));
+        BARENTRY.add(new BarEntry(5, 50));
+        BARENTRY.add(new BarEntry(6, 68));
 
     }
 
@@ -405,9 +405,9 @@ public class UsuarioPerfil  extends AppCompatActivity {
     public void AddValuesToBARENTRYHorizontal(){
 
         BARENTRYH.add(new BarEntry(0, 0));
-        BARENTRYH.add(new BarEntry(1, porcentDesayuno));
-        BARENTRYH.add(new BarEntry(2,  porcentComida));
-        BARENTRYH.add(new BarEntry(3,  porcentCena));
+        BARENTRYH.add(new BarEntry(1, 50));
+        BARENTRYH.add(new BarEntry(2,  70));
+        BARENTRYH.add(new BarEntry(3,  100));
         BARENTRYH.add(new BarEntry(4,  0));
 
     }

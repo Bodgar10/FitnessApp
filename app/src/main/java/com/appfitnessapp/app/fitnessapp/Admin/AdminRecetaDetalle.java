@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterIngredientes;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterPasos;
 import com.appfitnessapp.app.fitnessapp.Arrays.Ingredientes;
-import com.appfitnessapp.app.fitnessapp.Arrays.Pasos;
+import com.appfitnessapp.app.fitnessapp.Arrays.Preparacion;
 import com.appfitnessapp.app.fitnessapp.R;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class AdminRecetaDetalle extends AppCompatActivity {
     ArrayList<Ingredientes> ingredientes;
 
     AdapterPasos adapterPasos;
-    ArrayList<Pasos>pasos;
+    ArrayList<Preparacion>pasos;
 
     RecyclerView recyclerIngredientes,recyclerPasos;
 

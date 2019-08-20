@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterAsesorias;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterIngredientes;
 import com.appfitnessapp.app.fitnessapp.Arrays.Asesorias;
+import com.appfitnessapp.app.fitnessapp.Arrays.Inscritos;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
@@ -35,12 +36,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class AsesoriasAdmin extends AppCompatActivity {
 
     AdapterAsesorias adapter;
-    ArrayList<Asesorias> asesorias;
+    ArrayList<Usuarios> asesorias;
     RecyclerView recyclerReciente,recyclerFinalizar;
     TextView txtPendientes;
     CircularImageView imgPostPersona;
@@ -149,15 +155,81 @@ public class AsesoriasAdmin extends AppCompatActivity {
                 if (dataSnapshot.exists()){
                     for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
                         Log.e(TAG, "Usuarios: " + snapshot);
-                        Asesorias asesoria = snapshot.getValue(Asesorias.class);
                         Usuarios usuarios = snapshot.getValue(Usuarios.class);
 
+                        //tabla inscritos checar si estaa activo o no y luego poner fecha si es actual o no
                         if (usuarios.getTipo_usuario().equals(Contants.USUARIO)) {
 
-                        asesorias.add(asesoria);
+                        asesorias.add(usuarios);
                         adapter.notifyDataSetChanged();
                         progressDialog.dismiss();
                     }
+
+                    }
+                }else{
+                    Log.e(TAG,"Usuarios 3: ");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG,"ERROR: ");
+            }
+        });
+    }
+
+    public void bajarInscritos(){
+        Log.e(TAG,"Usuarios 2: ");
+        dbProvider = new DBProvider();
+
+        dbProvider.tablaInscritos().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                asesorias.clear();
+                Log.e(TAG,"Usuarios 4: ");
+                if (dataSnapshot.exists()){
+                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                        Log.e(TAG, "Usuarios: " + snapshot);
+                        Inscritos inscritos = snapshot.getValue(Inscritos.class);
+
+                        //fechaHoy
+                        SimpleDateFormat dateMes = new SimpleDateFormat("MM", Locale.getDefault());
+                        SimpleDateFormat dateAnio = new SimpleDateFormat("yyyy", Locale.getDefault());
+                        Date date = new Date();
+                        String mesHoy = dateMes.format(date);
+                        String anioHoy = dateAnio.format(date);
+
+
+                        //fechaBase
+                        String fechaBase=inscritos.getFecha_limite();
+                        SimpleDateFormat format1=new SimpleDateFormat("dd/MM/yyyy");
+                        Date dt1;
+                        try {
+                            dt1 = format1.parse(fechaBase);
+                            DateFormat format2=new SimpleDateFormat("MM");
+                            DateFormat format3=new SimpleDateFormat("yyyy");
+                            String mesBase=format2.format(dt1);
+                            String AnioBase=format3.format(dt1);
+
+                                if (inscritos.getId_pendiente().equals(false)){
+                                    if (mesBase.equals(mesHoy)&&anioHoy.equals(AnioBase)) {
+
+
+
+
+                                    }
+
+
+                                }
+
+
+
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+
 
                     }
                 }else{

@@ -98,7 +98,7 @@ public class Contants {
     final public static String TARJETA = "tarjeta";
 
 
-    final public static String TABLA_RECETAS = "recetas";
+    final public static String TABLA_RECETAS = "tablaPlanAlimenticio";
     final public static String ALMUERZO = "almuerzo";
     final public static String DESAYUNO = "desayuno";
     final public static String CENA = "cena";
@@ -130,7 +130,7 @@ public class Contants {
 
 
     final public static String TABLA_PLAN_ALIMENTICIO = "plan_alimenticio";
-    final public static String ID_ALIMENTO = "id_alimento";
+    final public static String ID_ALIMENTO = "id_plan_alimenticio";
 
 
     //tipo_alimento
@@ -176,11 +176,26 @@ public class Contants {
     final public static String VIDEO_EJERCICIO = "video_ejercicio";
     final public static String IMAGENES_EJERCICIO = "imagenes_ejercicio";
     final public static String ID_EJERCICIO = "id_ejercicio";
+    final public static String DIA_EJERCICIO = "dia_ejercicio";
+
+    final public static String[] dias_ejercicios = {"Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"};
 
 
-    final public static String ALTA_INTENSIDAD = "Alta Intensidad";
-    final public static String BAJA_INTENSIDAD = "Baja Intensidad";
-    final public static String MEDIA_INTENSIDAD = "Media Intensidad";
+    final public static String IMAGEN_1 = "0";
+
+
+    //inscritos
+    final public static String TABLA_INSCRITOS ="tabla_inscritos";
+    final public static String ID_INSCRITO ="id_inscrito";
+    final public static String FECHA_LIMITE ="fecha_limite";
+    final public static String ID_PENDIENTE ="id_pendiente";
+
+
+
+
+    final public static String ALTA_INTENSIDAD = "Alta";
+    final public static String BAJA_INTENSIDAD = "Baja";
+    final public static String MEDIA_INTENSIDAD = "Media";
 
     final  public static String[] MESES = {"01","02","03","04","05","06","07","08","09","10","11","12"};
     final  public static String[] ANIOS = {"19","20","21","22","23","24","25","26","27","28","29","30"};

@@ -5,17 +5,15 @@ public class Ingredientes {
     public String nombre_ingrediente;
     public String cantidad;
     public String id_ingrediente;
-    public String id_alimento;
-
-    public Ingredientes(String nombre_ingrediente, String cantidad, String id_ingrediente, String id_alimento) {
-        this.nombre_ingrediente = nombre_ingrediente;
-        this.cantidad = cantidad;
-        this.id_ingrediente = id_ingrediente;
-        this.id_alimento = id_alimento;
-    }
 
 
     public Ingredientes(){}
+
+    public Ingredientes(String nombre_ingrediente, String cantidad, String id_ingrediente) {
+        this.nombre_ingrediente = nombre_ingrediente;
+        this.cantidad = cantidad;
+        this.id_ingrediente = id_ingrediente;
+    }
 
     public String getNombre_ingrediente() {
         return nombre_ingrediente;
@@ -39,13 +37,5 @@ public class Ingredientes {
 
     public void setId_ingrediente(String id_ingrediente) {
         this.id_ingrediente = id_ingrediente;
-    }
-
-    public String getId_alimento() {
-        return id_alimento;
-    }
-
-    public void setId_alimento(String id_alimento) {
-        this.id_alimento = id_alimento;
     }
 }

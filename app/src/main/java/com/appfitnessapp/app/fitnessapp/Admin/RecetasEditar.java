@@ -15,12 +15,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appfitnessapp.app.fitnessapp.Adapters.AdapterAsesorias;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterIngredientes;
-import com.appfitnessapp.app.fitnessapp.Adapters.AdapterPreguntas;
 import com.appfitnessapp.app.fitnessapp.Arrays.Ingredientes;
-import com.appfitnessapp.app.fitnessapp.Arrays.Preguntas;
-import com.appfitnessapp.app.fitnessapp.Arrays.Recetas;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
@@ -82,7 +78,7 @@ public class RecetasEditar extends AppCompatActivity {
         recyclerviewIngrediente.setAdapter(adapterIngredientes);
 
         dbProvider = new DBProvider();
-        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
 
@@ -110,7 +106,7 @@ public class RecetasEditar extends AppCompatActivity {
             public void onClick(View v) {
 
                 RecyclerView.LayoutManager lmmanager = new LinearLayoutManager(getApplicationContext()); recyclerviewIngrediente.setLayoutManager(lmmanager);
-                ingredientes.add(new Ingredientes("","","",""));
+                ingredientes.add(new Ingredientes("","",""));
                 adapterIngredientes = new AdapterIngredientes(ingredientes);
                 recyclerviewIngrediente.setAdapter(adapterIngredientes);
 
@@ -130,12 +126,6 @@ public class RecetasEditar extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-                Date date = new Date();
-
-                String fecha = dateFormat.format(date);
-
-                String key = dbProvider.tablaEjercicios().getKey();
 
 
                 String nombre = Objects.requireNonNull(edtNombreComida.getText()).toString();
@@ -143,20 +133,36 @@ public class RecetasEditar extends AppCompatActivity {
                 String calorias = Objects.requireNonNull(edtCalorias.getText()).toString();
                 String tiempo = Objects.requireNonNull(edtTiempo.getText()).toString();
 
+                String key =dbProvider.tablaPlanEntrenamiento().push().getKey();
 
-                if (!nombre.isEmpty()&&!cantidad.isEmpty()&&!tiempo.isEmpty()){
 
-                    //dbProvider.subirIngredientes(key,"",nombre,cantidad);
-                    //dbProvider.subirPasos(key,"",nombre,cantidad);
-                    //dbProvider.subirPlanEntrenamiento(tiempo,calorias,cantidad,nombre, key);
+                /*
+                String key = dbProvider.tablaPlanAlimenticio().push().getKey();
+                    dbProvider.subirPlanAlimenticio(key,id,"",
+                            "2000","30 min","6 porciones","Tacos Veganos",
+                            "desayuno", "$200", "$100");
 
-                    dbProvider.subirEjercicios(nombre,cantidad,tiempo,"","",key);
-                }
+                    dbProvider.subirPreparacion(key,"Paso 1","Picar la verdura que ocuparas");
+                    dbProvider.subirIngredientes(key,"Ensalada","1 Pieza");
+*/
+
+
+                dbProvider.subirPlanEjercicio("12","Alta intensidad","8 ejercicios",
+                        "Buen ejericico para ponerte en forma", key,"nil","1");
+
+
+                dbProvider.subirEjerciciosPlan("Saltos de 30 rondas","12"," 20","",
+                        key);
+
+                dbProvider.subirImagenesEjercicios("nil",key);
 
             }
         });
 
+
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

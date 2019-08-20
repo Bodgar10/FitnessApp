@@ -52,7 +52,6 @@
                 android:padding="10dp"
                 android:text="Workouts" />
 
-
         </LinearLayout>
 
     </LinearLayout>
@@ -66,8 +65,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
-
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_marginBottom="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -84,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""
+            android:text="Desayuno"
             android:textAllCaps="false"
             android:textColor="@android:color/darker_gray"
             android:textSize="15sp"
@@ -107,7 +105,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:gravity="center"
-            android:text=""
+            android:text="Comida"
             android:textAllCaps="false"
             android:textColor="@android:color/darker_gray"
             android:textSize="15sp"
@@ -122,9 +120,31 @@
 
         </include>
 
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center"
+                    android:text="Cena"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <include
+                    android:id="@+id/recycler3"
+                    layout="@layout/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+
+                </include>
+
             </LinearLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
 
     </LinearLayout>

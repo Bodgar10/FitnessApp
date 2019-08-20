@@ -9,8 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appfitnessapp.app.fitnessapp.Arrays.Ingredientes;
-import com.appfitnessapp.app.fitnessapp.Arrays.Pasos;
+import com.appfitnessapp.app.fitnessapp.Arrays.Preparacion;
 import com.appfitnessapp.app.fitnessapp.R;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class AdapterPasos  extends RecyclerView.Adapter<AdapterPasos.PasosViewHo
 
         AdapterPasos adapterPlanes;
         private View.OnClickListener listener;
-        ArrayList<Pasos> pasos;
+        ArrayList<Preparacion> pasos;
         private static final String TAG = "BAJARINFO:";
 
 
@@ -42,7 +41,7 @@ public static class PasosViewHolder extends RecyclerView.ViewHolder{
 
 }
 
-    public AdapterPasos(ArrayList<Pasos> pasos){
+    public AdapterPasos(ArrayList<Preparacion> pasos){
 
         this.pasos=pasos;
     }
@@ -59,7 +58,7 @@ public static class PasosViewHolder extends RecyclerView.ViewHolder{
 
     @Override
     public void onBindViewHolder(@NonNull AdapterPasos.PasosViewHolder holder, int position) {
-        Pasos paso = pasos.get(position);
+        Preparacion paso = pasos.get(position);
 
 
 

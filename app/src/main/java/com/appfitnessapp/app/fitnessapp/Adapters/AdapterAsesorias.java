@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.appfitnessapp.app.fitnessapp.Arrays.Asesorias;
 import com.appfitnessapp.app.fitnessapp.Arrays.Planes;
+import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -26,7 +27,7 @@ public class AdapterAsesorias extends RecyclerView.Adapter<AdapterAsesorias.Ases
     AdapterAsesorias adapterPlanes;
 
     private View.OnClickListener listener;
-    ArrayList<Asesorias> asesorias;
+    ArrayList<Usuarios> asesorias;
     private static final String TAG = "BAJARINFO:";
 
 
@@ -53,7 +54,7 @@ public class AdapterAsesorias extends RecyclerView.Adapter<AdapterAsesorias.Ases
 
     }
 
-    public AdapterAsesorias(ArrayList<Asesorias>asesorias){
+    public AdapterAsesorias(ArrayList<Usuarios>asesorias){
 
         this.asesorias=asesorias;
     }
@@ -70,12 +71,12 @@ public class AdapterAsesorias extends RecyclerView.Adapter<AdapterAsesorias.Ases
 
     @Override
     public void onBindViewHolder(@NonNull AdapterAsesorias.AsesoriasViewHolder holder, int position) {
-        Asesorias asesoria = asesorias.get(position);
+        Usuarios asesoria = asesorias.get(position);
 
 
 
         holder.txtNombre.setText(asesoria.getNombre_usuario());
-        holder.txtKilos.setText(asesoria.getPeso());
+        holder.txtKilos.setText(asesoria.getPeso_actual());
         holder.txtObjetivo.setText(asesoria.getObjetivo());
 
 

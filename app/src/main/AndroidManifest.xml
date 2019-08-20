@@ -49,6 +49,9 @@
         <activity android:name=".Usuario.Video"
                 android:theme="@style/TemaVideo" />
 
+
+        <activity android:name=".Usuario.ChatActivityUsuario"></activity>
+
         <activity android:name=".Usuario.Asesoria"/>
         <activity android:name=".Usuario.FeedSinRegistro.HomeSinRegistro" />
         <activity android:name=".Usuario.Paypal.PaymentDetails" />

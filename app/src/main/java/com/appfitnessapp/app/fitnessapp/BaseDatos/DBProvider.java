@@ -52,7 +52,7 @@ public class DBProvider {
 
     public DatabaseReference estadisticaEjercicios() {return dbRef().child(Contants.TABLA_ESTADISTICAS_EJERCICIOS);}
 
-    public DatabaseReference recetas() {return dbRef().child(Contants.TABLA_RECETAS);}
+    public DatabaseReference tablaPlanAlimenticio() {return dbRef().child(Contants.TABLA_PLAN_ALIMENTICIO);}
 
     public DatabaseReference ingredientes() {return dbRef().child(Contants.INGREDIENTES);}
 
@@ -62,6 +62,10 @@ public class DBProvider {
 
 
     public DatabaseReference tablaEjercicios() {return dbRef().child(Contants.EJERCICIOS);}
+
+
+    public DatabaseReference tablaInscritos() {return dbRef().child(Contants.TABLA_INSCRITOS);}
+
 
 
 
@@ -225,6 +229,7 @@ public class DBProvider {
 
 
 
+
     //Formulario
     public void subirFormulario(String id_pregunta,String pregunta){
         Map<String, Object> updates = new HashMap<>();
@@ -256,7 +261,7 @@ public class DBProvider {
     public void subirAlimentos(String id_usuario,String fecha_cumplida, String tipo_alimentos){
         Map<String, Object> updates = new HashMap<>();
 
-        String key = respuestas().push().getKey();
+        String key = estadisticaAlimentos().push().getKey();
         updates.put(Contants.ID_USUARIO , id_usuario);
         updates.put(Contants.FECHA_CUMPLIDA , fecha_cumplida);
         updates.put(Contants.TIPO_ALIMENTO , tipo_alimentos);
@@ -265,28 +270,33 @@ public class DBProvider {
     }
 
 
-    public void subirRecetas(String id_alimento,String fecha, String tipo,String imagen,String calorias,String tiempo,String cantidad,
-                             String nombre){
+    public void subirPlanAlimenticio(String id_plan_alimenticio,String id_usuario,String imagen_alimento,
+                                     String kilocalorias,String min_alimento,String porciones,String nombre_alimento,
+                                     String tipo_alimento,String precio_mas_alto,String precio_mas_bajo){
         Map<String, Object> updates = new HashMap<>();
 
-        String key = respuestas().push().getKey();
-        updates.put(Contants.ID_ALIMENTO , key);
-        updates.put(Contants.FECHA_ALIMENTO , fecha);
-        updates.put(Contants.TIPO_ALIMENTO , tipo);
-        updates.put(Contants.IMAGEN_ALIMENTO , imagen);
-        updates.put(Contants.KILOCALORIAS , calorias);
-        updates.put(Contants.MIN_ALIMENTO , tiempo);
-        updates.put(Contants.PORCIONES , cantidad);
-        updates.put(Contants.NOMBRE_ALIMENTO , nombre);
 
-        recetas().child(key).updateChildren(updates);
+        updates.put(Contants.ID_ALIMENTO , id_plan_alimenticio);
+        updates.put(Contants.ID_USUARIO , id_usuario);
+        updates.put(Contants.IMAGEN_ALIMENTO , imagen_alimento);
+        updates.put(Contants.KILOCALORIAS , kilocalorias);
+        updates.put(Contants.MIN_ALIMENTO , min_alimento);
+        updates.put(Contants.PORCIONES , porciones);
+        updates.put(Contants.NOMBRE_ALIMENTO , nombre_alimento);
+        updates.put(Contants.TIPO_ALIMENTO , tipo_alimento);
+        updates.put(Contants.PRECIO_MAS_ALTO , precio_mas_alto);
+        updates.put(Contants.PRECIO_MAS_BAJO , precio_mas_bajo);
+
+        tablaPlanAlimenticio().child(id_plan_alimenticio).updateChildren(updates);
     }
+
 
 
 
     //Respuestas
     public void subirRespuestas(String id_pregunta,String id_respuesta, String id_usuario, String respuesta){
         Map<String, Object> updates = new HashMap<>();
+
 
         String key = respuestas().push().getKey();
         updates.put(Contants.ID_PREGUNTA , id_pregunta);
@@ -299,63 +309,77 @@ public class DBProvider {
 
 
     //ingredientes
-    public void subirIngredientes(String id_ingrediente,String id_alimento, String nombre_ingrediente, String cantidad){
+    public void subirIngredientes(String id_plan_alimenticio, String nombre_ingrediente, String cantidad){
         Map<String, Object> updates = new HashMap<>();
 
-        String key = respuestas().push().getKey();
+        String key = tablaPlanAlimenticio().child(id_plan_alimenticio).child(Contants.INGREDIENTES).push().getKey();
         updates.put(Contants.ID_INGREDIENTE , key);
-        updates.put(Contants.ID_ALIMENTO , id_alimento);
         updates.put(Contants.NOMBRE_INGREDIENTE , nombre_ingrediente);
         updates.put(Contants.CANTIDAD , cantidad);
 
-        ingredientes().child(key).updateChildren(updates);
+        tablaPlanAlimenticio().child(id_plan_alimenticio).child(Contants.INGREDIENTES).child(key).updateChildren(updates);
     }
 
     //preparacion
-    public void subirPasos(String id_paso,String id_alimento, String nombre_paso, String descripcion_paso){
+    public void subirPreparacion(String id_plan_alimenticio, String nombre_paso, String descripcion_paso){
         Map<String, Object> updates = new HashMap<>();
 
-        String key = preparacion().push().getKey();
+        String key = tablaPlanAlimenticio().child(id_plan_alimenticio).child(Contants.PREPARACION).push().getKey();
         updates.put(Contants.ID_PREPARACION , key);
-        updates.put(Contants.ID_ALIMENTO , id_alimento);
         updates.put(Contants.NOMBRE_PASO , nombre_paso);
         updates.put(Contants.DESCRIPCION_PASO , descripcion_paso);
 
-        preparacion().child(key).updateChildren(updates);
+        tablaPlanAlimenticio().child(id_plan_alimenticio).child(Contants.PREPARACION).child(key).updateChildren(updates);
     }
 
 
     //tablaPlanEntrenamiento
-    public void subirPlanEntrenamiento(String min_ejercicio,String nivel_ejercicio, String num_ejercicios, String descripcion_ejercicios,
-                                       String id_plan_ejercicio){
+    public void subirPlanEjercicio(String min_ejercicio,String nivel_ejercicio, String num_ejercicios, String descripcion_ejercicios,
+                                       String id_plan_ejercicio,String id_usuario,String dia_ejercicio){
         Map<String, Object> updates = new HashMap<>();
 
-        String key = tablaPlanEntrenamiento().push().getKey();
         updates.put(Contants.MIN_EJERCICIO , min_ejercicio);
         updates.put(Contants.NIVEL_EJERCICIO , nivel_ejercicio);
         updates.put(Contants.NUM_EJERCICIOS , num_ejercicios);
         updates.put(Contants.DESCRIPCION_EJERCICIOS , descripcion_ejercicios);
-        updates.put(Contants.ID_PLAN_EJERCICIO , key);
+        updates.put(Contants.ID_PLAN_EJERCICIO , id_plan_ejercicio);
+        updates.put(Contants.ID_USUARIO , id_usuario);
+        updates.put(Contants.DIA_EJERCICIO , dia_ejercicio);
 
 
-        tablaPlanEntrenamiento().child(key).updateChildren(updates);
+
+        tablaPlanEntrenamiento().child(id_plan_ejercicio).updateChildren(updates);
     }
 
     //tabla Ejercicios
-    public void subirEjercicios(String nombre_ejercicio,String rondas, String repeticiones, String video_ejercicio,
-                                        String imagenes_ejercicio,String id_ejercicio){
+    public void subirEjerciciosPlan(String nombre_ejercicio,String rondas, String repeticiones, String video_ejercicio,
+                                    String id_ejercicio){
         Map<String, Object> updates = new HashMap<>();
 
-        String key = tablaEjercicios().push().getKey();
+        String key = tablaPlanAlimenticio().child(id_ejercicio).child(Contants.EJERCICIOS).push().getKey();
         updates.put(Contants.NOMBRE_EJERCICIO , nombre_ejercicio);
         updates.put(Contants.RONDAS , rondas);
         updates.put(Contants.REPETICIONES , repeticiones);
         updates.put(Contants.VIDEO_EJERCICIO , video_ejercicio);
-        updates.put(Contants.IMAGENES_EJERCICIO , imagenes_ejercicio);
         updates.put(Contants.ID_EJERCICIO , key);
 
-        tablaEjercicios().child(key).updateChildren(updates);
+        tablaPlanEntrenamiento().child(id_ejercicio).child(Contants.EJERCICIOS).updateChildren(updates);
     }
+
+
+    //tabla Ejercicios
+    public void subirImagenesEjercicios(String imagen1,String id_imagen){
+        Map<String, Object> updates = new HashMap<>();
+
+        String key = tablaPlanAlimenticio().child(id_imagen).child(Contants.EJERCICIOS).child(Contants.IMAGENES_EJERCICIO).push().getKey();
+
+        updates.put(Contants.IMAGEN_1 , imagen1);
+
+
+        tablaPlanEntrenamiento().child(id_imagen).child(Contants.EJERCICIOS).child(Contants.IMAGENES_EJERCICIO).updateChildren(updates);
+    }
+
+
 
     //Valoraciones
     public void subirValoraciones(String descripcion_valoracion,String fecha_valoracion, String id_asesoria, String id_valoracion,
@@ -388,5 +412,31 @@ public class DBProvider {
     }
 
 
+    //tabla Ejercicios
+    public void subirEjercicios(String nombre_ejercicio,String rondas, String repeticiones, String video_ejercicio,
+                                String imagenes_ejercicio,String id_ejercicio){
+        Map<String, Object> updates = new HashMap<>();
+
+       // String key = tablaEjercicios().push().getKey();
+
+        updates.put(Contants.NOMBRE_EJERCICIO , nombre_ejercicio);
+        updates.put(Contants.RONDAS , rondas);
+        updates.put(Contants.REPETICIONES , repeticiones);
+        updates.put(Contants.VIDEO_EJERCICIO , video_ejercicio);
+        updates.put(Contants.IMAGENES_EJERCICIO , imagenes_ejercicio);
+        updates.put(Contants.ID_EJERCICIO , id_ejercicio);
+
+        tablaEjercicios().child(id_ejercicio).updateChildren(updates);
+    }
+
+
+    public void subirIncritos(String fecha_limite, String id_inscrito, String id_pendiente,String id_usuario){
+        Map<String, Object> data = new HashMap<>();
+        data.put(Contants.FECHA_LIMITE, fecha_limite);
+        data.put(Contants.ID_INSCRITO, id_inscrito);
+        data.put(Contants.ID_PENDIENTE, id_pendiente);
+        data.put(Contants.ID_USUARIO, id_inscrito);
+        tablaInscritos().child(id_inscrito).updateChildren(data);
+    }
 
 }

@@ -7,13 +7,18 @@ public class PlanEntrenamiento {
     public String descripcion_ejercicios;
     public String num_ejercicios;
     public String id_plan_ejercicio;
+    public String id_usuario;
+    public String dia_ejercicio;
 
-    public PlanEntrenamiento(String min_ejercicio, String nivel_ejercicio, String descripcion_ejercicios, String num_ejercicios, String id_plan_ejercicio) {
+
+    public PlanEntrenamiento(String min_ejercicio, String nivel_ejercicio, String descripcion_ejercicios, String num_ejercicios, String id_plan_ejercicio, String id_usuario, String dia_ejercicio) {
         this.min_ejercicio = min_ejercicio;
         this.nivel_ejercicio = nivel_ejercicio;
         this.descripcion_ejercicios = descripcion_ejercicios;
         this.num_ejercicios = num_ejercicios;
         this.id_plan_ejercicio = id_plan_ejercicio;
+        this.id_usuario = id_usuario;
+        this.dia_ejercicio = dia_ejercicio;
     }
 
     public PlanEntrenamiento(){}
@@ -56,5 +61,21 @@ public class PlanEntrenamiento {
 
     public void setId_plan_ejercicio(String id_plan_ejercicio) {
         this.id_plan_ejercicio = id_plan_ejercicio;
+    }
+
+    public String getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(String id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
+    public String getDia_ejercicio() {
+        return dia_ejercicio;
+    }
+
+    public void setDia_ejercicio(String dia_ejercicio) {
+        this.dia_ejercicio = dia_ejercicio;
     }
 }

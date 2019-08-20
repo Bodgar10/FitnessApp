@@ -14,16 +14,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appfitnessapp.app.fitnessapp.Adapters.AdapterPlanes;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterRecetas;
-import com.appfitnessapp.app.fitnessapp.Arrays.Feed;
-import com.appfitnessapp.app.fitnessapp.Arrays.Recetas;
+import com.appfitnessapp.app.fitnessapp.Arrays.Ingredientes;
+import com.appfitnessapp.app.fitnessapp.Arrays.PlanAlimenticio;
+import com.appfitnessapp.app.fitnessapp.Arrays.Preparacion;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
-import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
-import com.appfitnessapp.app.fitnessapp.Login.Registro;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -37,11 +36,13 @@ import java.util.Locale;
 public class UsuarioPlan  extends AppCompatActivity {
 
     ImageButton imgHome,imgPerfil,imgChat;
-    RecyclerView recyclerView,recyclerView2;
-    AdapterRecetas adapter,adapter2;
-    ArrayList<Recetas> recetas,recetas2;
+    RecyclerView recyclerView,recyclerView2,recyclerView3;
+    AdapterRecetas adapter,adapter2,adapter3;
+    ArrayList<PlanAlimenticio> recetas,recetas2,recetas3;
     TextView btnWorkouts,txtFechaSiguiente,txtFechaActual;
 
+
+    String id;
 
 
     static DBProvider dbProvider;
@@ -63,6 +64,9 @@ public class UsuarioPlan  extends AppCompatActivity {
         dbProvider = new DBProvider();
         bajarInfo = new BajarInfo();
 
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
         imgHome=findViewById(R.id.imgHome);
         imgPerfil=findViewById(R.id.imgPerfil);
         imgChat=findViewById(R.id.imgChat);
@@ -70,34 +74,50 @@ public class UsuarioPlan  extends AppCompatActivity {
 
         recyclerView=findViewById(R.id.recycler1);
         recyclerView2=findViewById(R.id.recycler2);
+        recyclerView3=findViewById(R.id.recycler3);
 
         txtFechaSiguiente=findViewById(R.id.txtfechaSiguiente);
         txtFechaActual=findViewById(R.id.txtfechaActual);
 
-        txtFechaActual.setText(fecha);
-        txtFechaSiguiente.setText(getNextDate(fecha));
+
+       // txtFechaActual.setText(fecha);
+       // txtFechaSiguiente.setText(getNextDate(fecha));
 
         bajarRecetas();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView2.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView3.setLayoutManager(new LinearLayoutManager(this));
+
 
         int spanCount = 1;
         int spacing_left = 10;
         int spacing_top=0;
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing_left, spacing_top));
         recyclerView2.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing_left, spacing_top));
+        recyclerView3.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing_left, spacing_top));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager3 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView2.setLayoutManager(layoutManager2);
+        recyclerView3.setLayoutManager(layoutManager3);
+
         recetas = new ArrayList<>();
         recetas2 = new ArrayList<>();
+        recetas3 = new ArrayList<>();
         adapter=new AdapterRecetas(recetas);
         adapter2=new AdapterRecetas(recetas2);
+        adapter3=new AdapterRecetas(recetas3);
+
+
         recyclerView.setAdapter(adapter);
         recyclerView2.setAdapter(adapter2);
+        recyclerView3.setAdapter(adapter3);
+
+
 
 
         adapter.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +126,7 @@ public class UsuarioPlan  extends AppCompatActivity {
 
                 Intent intent = new Intent(UsuarioPlan.this, DetalleRecetas.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("id",recetas.get(recyclerView.getChildAdapterPosition(v)).getId_alimento());
+                bundle.putString("id",recetas.get(recyclerView.getChildAdapterPosition(v)).getId_plan_alimenticio());
                 bundle.putString("nombre",recetas.get(recyclerView.getChildAdapterPosition(v)).getNombre_alimento());
                 bundle.putString("imagen",recetas.get(recyclerView.getChildAdapterPosition(v)).getImagen_alimento());
                 bundle.putString("tipo",recetas.get(recyclerView.getChildAdapterPosition(v)).getTipo_alimento());
@@ -121,13 +141,14 @@ public class UsuarioPlan  extends AppCompatActivity {
             }
         });
 
+
         adapter2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(UsuarioPlan.this, DetalleRecetas.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("id",recetas.get(recyclerView.getChildAdapterPosition(v)).getId_alimento());
+                bundle.putString("id",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getId_plan_alimenticio());
                 bundle.putString("nombre",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getNombre_alimento());
                 bundle.putString("imagen",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getImagen_alimento());
                 bundle.putString("tipo",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getTipo_alimento());
@@ -139,8 +160,30 @@ public class UsuarioPlan  extends AppCompatActivity {
             }
         });
 
+        adapter3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(UsuarioPlan.this, DetalleRecetas.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id",recetas3.get(recyclerView3.getChildAdapterPosition(v)).getId_plan_alimenticio());
+                bundle.putString("nombre",recetas3.get(recyclerView3.getChildAdapterPosition(v)).getNombre_alimento());
+                bundle.putString("imagen",recetas3.get(recyclerView3.getChildAdapterPosition(v)).getImagen_alimento());
+                bundle.putString("tipo",recetas3.get(recyclerView3.getChildAdapterPosition(v)).getTipo_alimento());
+                bundle.putString("calorias",recetas3.get(recyclerView3.getChildAdapterPosition(v)).getKilocalorias());
+                bundle.putString("minutos",recetas3.get(recyclerView3.getChildAdapterPosition(v)).getMin_alimento());
+                bundle.putString("porciones",recetas3.get(recyclerView3.getChildAdapterPosition(v)).getPorciones());
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
+
+
         imgPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
+
+
             public void onClick(View view) {
 
                 Intent intent = new Intent(UsuarioPlan.this, UsuarioPerfil.class);
@@ -223,30 +266,39 @@ public class UsuarioPlan  extends AppCompatActivity {
     public void bajarRecetas(){
 
         dbProvider = new DBProvider();
-        dbProvider.recetas().addValueEventListener(new ValueEventListener() {
+        dbProvider.tablaPlanAlimenticio().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 recetas.clear();
                 recetas2.clear();
+                recetas3.clear();
+
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Log.e(TAG, "Feed: " + dataSnapshot);
-                        Recetas receta = snapshot.getValue(Recetas.class);
+                        PlanAlimenticio plan = snapshot.getValue(PlanAlimenticio.class);
 
-                        String nueva=getNextDate(receta.getFecha_alimento());
+                        if (plan.getId_usuario().equals(id)) {
+
+                            if (plan.getTipo_alimento().equals(Contants.DESAYUNO)) {
+                                recetas.add(plan);
+                                adapter.notifyDataSetChanged();
+                            }
+
+                            if (plan.getTipo_alimento().equals(Contants.ALMUERZO)) {
+                                recetas2.add(plan);
+                                adapter2.notifyDataSetChanged();
+                            }
+
+                            if (plan.getTipo_alimento().equals(Contants.CENA)) {
+
+                                recetas3.add(plan);
+                                adapter3.notifyDataSetChanged();
 
 
-                        if (receta.getFecha_alimento().equals(fecha)){
-                            recetas.add(receta);
-                            adapter.notifyDataSetChanged();
+                            }
+
                         }
-
-                        else if (receta.getFecha_alimento().equals(nueva)){
-                            recetas2.add(receta);
-                            adapter2.notifyDataSetChanged();
-
-                        }
-
 
 
                     }
@@ -263,6 +315,8 @@ public class UsuarioPlan  extends AppCompatActivity {
         });
 
     }
+
+
 
     private String getNextDate(String inputDate){
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");

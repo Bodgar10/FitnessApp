@@ -14,9 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterRecetas;
-import com.appfitnessapp.app.fitnessapp.Arrays.Recetas;
+import com.appfitnessapp.app.fitnessapp.Arrays.PlanAlimenticio;
 import com.appfitnessapp.app.fitnessapp.R;
-import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioPlan;
 
 import java.util.ArrayList;
 
@@ -25,7 +24,7 @@ public class AdminPlanUsuario extends AppCompatActivity {
     TextView btnWorkouts;
     RecyclerView recyclerView;
     AdapterRecetas adapter;
-    ArrayList<Recetas> recetas;
+    ArrayList<PlanAlimenticio> recetas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

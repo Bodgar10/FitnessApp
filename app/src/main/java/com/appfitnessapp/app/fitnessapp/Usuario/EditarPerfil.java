@@ -131,6 +131,7 @@ public class EditarPerfil extends AppCompatActivity {
         btnAceptar=findViewById(R.id.linearAceptar);
 
 
+
         Saltura = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.estatura);
        Speso = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.peso);
        Sbuscando = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.objetivos);
