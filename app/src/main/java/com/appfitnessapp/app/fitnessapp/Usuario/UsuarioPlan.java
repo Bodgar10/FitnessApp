@@ -76,9 +76,6 @@ public class UsuarioPlan  extends AppCompatActivity {
         recyclerView2=findViewById(R.id.recycler2);
         recyclerView3=findViewById(R.id.recycler3);
 
-        txtFechaSiguiente=findViewById(R.id.txtfechaSiguiente);
-        txtFechaActual=findViewById(R.id.txtfechaActual);
-
 
        // txtFechaActual.setText(fecha);
        // txtFechaSiguiente.setText(getNextDate(fecha));
@@ -134,7 +131,6 @@ public class UsuarioPlan  extends AppCompatActivity {
                 bundle.putString("minutos",recetas.get(recyclerView.getChildAdapterPosition(v)).getMin_alimento());
                 bundle.putString("porciones",recetas.get(recyclerView.getChildAdapterPosition(v)).getPorciones());
                 intent.putExtras(bundle);
-
                 startActivity(intent);
 
 

@@ -81,10 +81,10 @@
 
 
 
+        <activity android:name=".Admin.AsesoriasAdmin"></activity>
         <activity android:name=".Admin.AdminPerfil"
             android:parentActivityName=".Admin.AsesoriasAdmin"></activity>
-        <activity android:name=".Admin.AdminPlanUsuario"
-            android:parentActivityName=".Admin.PerfilUsuarioAdmin"></activity>
+        <activity android:name=".Admin.AdminPlanUsuario"></activity>
         <activity android:name=".Admin.AdminRecetaDetalle"
             android:parentActivityName=".Admin.AdminPlanUsuario"></activity>
         <activity android:name=".Admin.AsesoriasPendientes"></activity>

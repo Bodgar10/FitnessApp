@@ -52,6 +52,8 @@ public class AsesoriasPendientes extends AppCompatActivity {
         getSupportActionBar().setTitle("Asesorias");
 
 
+        bajarUsuarios();
+
         dbProvider = new DBProvider();
         bajarInfo = new BajarInfo();
         progressDialog = new ProgressDialog(this);
@@ -72,22 +74,14 @@ public class AsesoriasPendientes extends AppCompatActivity {
 
 
 
-        Asesorias asesorias0=new Asesorias("Pedro Ortiz","68 kg","Bajar  de peso","");
-        Asesorias asesorias1=new Asesorias("Fernanda Ramirez","70 kg","Aumentar musculo","");
-        Asesorias asesorias2=new Asesorias("Mauricio Garcia","60 kg","Subir de peso","");
-        Asesorias asesorias3=new Asesorias("Pedro Ortiz","68 kg","Bajar  de peso","");
-
-
-
-
-
-        adapter.notifyDataSetChanged();
-
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(AsesoriasPendientes.this, SolicitudAsesoria.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id",asesorias.get(recyclerView.getChildAdapterPosition(v)).getId_usuario());
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }
@@ -117,9 +111,7 @@ public class AsesoriasPendientes extends AppCompatActivity {
     }
 
     public void bajarUsuarios(){
-        Log.e(TAG,"Usuarios 2: ");
         dbProvider = new DBProvider();
-
         dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -128,12 +120,11 @@ public class AsesoriasPendientes extends AppCompatActivity {
                 if (dataSnapshot.exists()){
                     for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
                         Log.e(TAG, "Usuarios: " + snapshot);
-                        Asesorias asesoria = snapshot.getValue(Asesorias.class);
                         Usuarios usuarios = snapshot.getValue(Usuarios.class);
 
                         if (usuarios.getTipo_usuario().equals(Contants.USUARIO)) {
 
-                          //  asesorias.add(asesoria);
+                            asesorias.add(usuarios);
                             adapter.notifyDataSetChanged();
                             progressDialog.dismiss();
                         }

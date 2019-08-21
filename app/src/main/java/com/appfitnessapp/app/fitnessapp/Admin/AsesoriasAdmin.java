@@ -35,7 +35,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,8 +48,8 @@ import java.util.Locale;
 
 public class AsesoriasAdmin extends AppCompatActivity {
 
-    AdapterAsesorias adapter;
-    ArrayList<Usuarios> asesorias;
+    AdapterAsesorias adapter,adapter2;
+    ArrayList<Usuarios> asesorias,asesorias2;
     RecyclerView recyclerReciente,recyclerFinalizar;
     TextView txtPendientes;
     CircularImageView imgPostPersona;
@@ -56,6 +59,8 @@ public class AsesoriasAdmin extends AppCompatActivity {
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
 
+    String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +69,12 @@ public class AsesoriasAdmin extends AppCompatActivity {
         Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Asesorias");
+
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
+        bajarUsuarios();
+
 
 
         dbProvider = new DBProvider();
@@ -84,25 +95,12 @@ public class AsesoriasAdmin extends AppCompatActivity {
         recyclerFinalizar.setLayoutManager(new LinearLayoutManager(this));
         recyclerReciente.setLayoutManager(new LinearLayoutManager(this));
         asesorias=new ArrayList<>();
+        asesorias2=new ArrayList<>();
         adapter=new AdapterAsesorias(asesorias);
+        adapter2=new AdapterAsesorias(asesorias2);
         recyclerFinalizar.setAdapter(adapter);
-        recyclerReciente.setAdapter(adapter);
+        recyclerReciente.setAdapter(adapter2);
 
-
-/*
-
-        Asesorias asesorias0=new Asesorias("Pedro Ortiz","68 kg","Bajar  de peso","");
-        Asesorias asesorias1=new Asesorias("Fernanda Ramirez","70 kg","Aumentar musculo","");
-        Asesorias asesorias2=new Asesorias("Mauricio Garcia","60 kg","Subir de peso","");
-        Asesorias asesorias3=new Asesorias("Pedro Ortiz","68 kg","Bajar  de peso","");
-
-
-        asesorias.add(asesorias0);
-        asesorias.add(asesorias1);
-        asesorias.add(asesorias2);
-        asesorias.add(asesorias3);
-
-*/
 
 
       //  adapter.notifyDataSetChanged();
@@ -112,6 +110,15 @@ public class AsesoriasAdmin extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(AsesoriasAdmin.this, PerfilUsuarioAdmin.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id",asesorias.get(recyclerFinalizar.getChildAdapterPosition(v)).getId_usuario());
+
+                bundle.putString("nombre",asesorias.get(recyclerFinalizar.getChildAdapterPosition(v)).getNombre_usuario());
+                bundle.putString("peso",asesorias.get(recyclerFinalizar.getChildAdapterPosition(v)).getPeso_actual());
+                bundle.putString("estatura",asesorias.get(recyclerFinalizar.getChildAdapterPosition(v)).getEstatura());
+                bundle.putString("correo",asesorias.get(recyclerFinalizar.getChildAdapterPosition(v)).getEmail_usuario());
+                bundle.putString("imagen",asesorias.get(recyclerFinalizar.getChildAdapterPosition(v)).getFoto_usuario());
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }
@@ -138,7 +145,6 @@ public class AsesoriasAdmin extends AppCompatActivity {
             }
         });
 
-        bajarUsuarios();
 
     }
 
@@ -157,13 +163,40 @@ public class AsesoriasAdmin extends AppCompatActivity {
                         Log.e(TAG, "Usuarios: " + snapshot);
                         Usuarios usuarios = snapshot.getValue(Usuarios.class);
 
-                        //tabla inscritos checar si estaa activo o no y luego poner fecha si es actual o no
-                        if (usuarios.getTipo_usuario().equals(Contants.USUARIO)) {
+                        if (usuarios.getTipo_usuario().equals(Contants.USUARIO)){
 
-                        asesorias.add(usuarios);
-                        adapter.notifyDataSetChanged();
-                        progressDialog.dismiss();
-                    }
+                            bajarInscritos();
+                            asesorias.add(usuarios);
+                            asesorias2.add(usuarios);
+                            adapter.notifyDataSetChanged();
+                            adapter2.notifyDataSetChanged();
+                            progressDialog.dismiss();
+
+                        }
+
+                        else if (usuarios.getTipo_usuario().equals(Contants.ADMIN)) {
+
+                            if (usuarios.getId_usuario().equals(id)){
+
+                                if (usuarios.getFoto_usuario().equals("nil")) {
+                                    try {
+                                        URL urlfeed = new URL(usuarios.getFoto_usuario());
+                                        Picasso.get().load(String.valueOf(urlfeed))
+                                                .error(R.mipmap.ic_launcher)
+                                                .fit()
+                                                .noFade()
+                                                .into(imgPostPersona);
+                                    } catch (MalformedURLException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    loadImageFromUrl(usuarios.getFoto_usuario());
+                                    progressDialog.dismiss();
+                                }
+
+                        }
+                        }
+
 
                     }
                 }else{
@@ -179,18 +212,17 @@ public class AsesoriasAdmin extends AppCompatActivity {
     }
 
     public void bajarInscritos(){
-        Log.e(TAG,"Usuarios 2: ");
         dbProvider = new DBProvider();
 
         dbProvider.tablaInscritos().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                asesorias.clear();
-                Log.e(TAG,"Usuarios 4: ");
                 if (dataSnapshot.exists()){
                     for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
                         Log.e(TAG, "Usuarios: " + snapshot);
                         Inscritos inscritos = snapshot.getValue(Inscritos.class);
+
+
 
                         //fechaHoy
                         SimpleDateFormat dateMes = new SimpleDateFormat("MM", Locale.getDefault());
@@ -215,11 +247,16 @@ public class AsesoriasAdmin extends AppCompatActivity {
                                     if (mesBase.equals(mesHoy)&&anioHoy.equals(AnioBase)) {
 
 
+                                            adapter.notifyDataSetChanged();
 
 
                                     }
 
+                                    else {
 
+                                        adapter2.notifyDataSetChanged();
+
+                                    }
                                 }
 
 
@@ -243,4 +280,10 @@ public class AsesoriasAdmin extends AppCompatActivity {
             }
         });
     }
+
+    private void loadImageFromUrl(String url) {
+
+        Picasso.get().load(url).into(imgPostPersona);
+    }
+
 }

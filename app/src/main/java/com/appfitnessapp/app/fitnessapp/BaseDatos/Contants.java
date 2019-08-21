@@ -181,7 +181,10 @@ public class Contants {
     final public static String[] dias_ejercicios = {"Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"};
 
 
-    final public static String IMAGEN_1 = "0";
+    final public static String IMAGEN_1 = "imagen1";
+    final public static String IMAGEN_2 = "imagen2";
+    final public static String IMAGEN_3 = "imagen3";
+
 
 
     //inscritos

@@ -33,24 +33,19 @@
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@mipmap/ic_launcher" />
 
-        <TextView
-            android:id="@+id/txtNombreAdmin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="140dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="Nombre usuario"
-            android:textAllCaps="false"
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            app:layout_constraintEnd_toEndOf="@+id/imgAsesoria"
+            app:layout_constraintStart_toStartOf="@+id/imgAsesoria"
+            app:layout_constraintTop_toTopOf="@+id/imgAsesoria"
+            android:layout_marginEnd="0dp"
+            android:background="@drawable/degradado_blanco"
+            android:orientation="vertical"/>
+
+
 
 
     <LinearLayout
@@ -188,7 +183,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="140dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/degradado_abajo"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -199,11 +194,30 @@
             app:layout_constraintVertical_bias="1.0" />
 
 
+        <TextView
+            android:id="@+id/txtNombreAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="140dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Nombre "
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/degradado_blanco"
+            android:background="@null"
             android:theme="@style/ToolbarTrans"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -234,19 +248,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_gravity="center"
             android:orientation="horizontal">
 
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:adjustViewBounds="true"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="centerInside"
                 app:srcCompat="@drawable/ic_email_icono" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
                 android:orientation="vertical">
 
 
@@ -257,7 +274,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:text="70 kg"
+                    android:text=""
                     android:textAllCaps="false"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
@@ -292,12 +309,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_gravity="center"
             android:orientation="horizontal">
 
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 app:srcCompat="@drawable/ic_contrasea_icono" />
 
@@ -305,6 +324,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:orientation="vertical">
 
 
@@ -313,7 +333,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:layout_marginBottom="5dp"
                     android:gravity="center"
                     android:inputType="textPassword"
                     android:text="********"
@@ -349,7 +368,7 @@
 
         <LinearLayout
             android:layout_marginTop="20dp"
-
+            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -364,6 +383,7 @@
 
 
             <LinearLayout
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -376,7 +396,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:text="$1200 USD"
+                    android:text=""
                     android:textAllCaps="false"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
@@ -388,7 +408,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:text="Gananciass totales"
+                    android:text="Ganancias totales"
                     android:textAllCaps="false"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="14sp" />

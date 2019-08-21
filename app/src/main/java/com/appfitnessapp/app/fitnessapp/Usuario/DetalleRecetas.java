@@ -24,6 +24,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -44,7 +45,7 @@ public class DetalleRecetas extends AppCompatActivity {
 
     RecyclerView recyclerIngredientes,recyclerPasos;
 
-    String imagenComida,nombre,tipo,porciones,calorias,minutos,idReceta;
+    String imagenComida,nombre,tipo,porciones,calorias,minutos,idReceta,id;
 
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
@@ -58,6 +59,8 @@ public class DetalleRecetas extends AppCompatActivity {
 
         dbProvider = new DBProvider();
         bajarInfo = new BajarInfo();
+
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
         Bundle extras = getIntent().getExtras();
@@ -120,9 +123,6 @@ public class DetalleRecetas extends AppCompatActivity {
 
 
 
-
-
-
         adapterIngredientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,7 +146,6 @@ public class DetalleRecetas extends AppCompatActivity {
 
     public void bajarIngredientes(){
 
-        dbProvider = new DBProvider();
         dbProvider.tablaPlanAlimenticio().child(idReceta).child(Contants.INGREDIENTES).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -156,10 +155,8 @@ public class DetalleRecetas extends AppCompatActivity {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Ingredientes ingrediente = snapshot.getValue(Ingredientes.class);
 
-
                             ingredientes.add(ingrediente);
                             adapterIngredientes.notifyDataSetChanged();
-
 
                     }
                 }
@@ -180,7 +177,6 @@ public class DetalleRecetas extends AppCompatActivity {
 
     public void bajarPasos(){
 
-        dbProvider = new DBProvider();
         dbProvider.tablaPlanAlimenticio().child(idReceta).child(Contants.PREPARACION).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -189,15 +185,12 @@ public class DetalleRecetas extends AppCompatActivity {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Preparacion paso = snapshot.getValue(Preparacion.class);
-
                             pasos.add(paso);
                             adapterPasos.notifyDataSetChanged();
-
-
                     }
                 }
                 else {
-                    Log.e(TAG, "Feed: ");
+                    Log.e(TAG, ": ");
                 }
             }
 

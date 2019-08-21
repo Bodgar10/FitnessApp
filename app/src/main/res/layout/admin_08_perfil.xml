@@ -59,7 +59,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:text="Nombre usuario"
+                    android:text="Nombre"
                     android:textAllCaps="false"
                     android:textColor="@android:color/black"
                     android:textSize="15sp" />
@@ -85,10 +85,10 @@
 
 
                         <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@android:drawable/sym_def_app_icon" />
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/ic_peso_icono" />
 
 
                         <LinearLayout
@@ -104,7 +104,7 @@
                                 android:layout_marginStart="15dp"
                                 android:layout_marginBottom="5dp"
                                 android:gravity="center"
-                                android:text="70 kg"
+                                android:text=""
                                 android:textAllCaps="false"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp" />
@@ -142,10 +142,10 @@
 
 
                         <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@android:drawable/sym_def_app_icon" />
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/ic_estatura_icono" />
 
 
                         <LinearLayout
@@ -161,7 +161,7 @@
                                 android:layout_marginStart="15dp"
                                 android:layout_marginBottom="5dp"
                                 android:gravity="center"
-                                android:text="1.70 cm"
+                                android:text=""
                                 android:textAllCaps="false"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp" />
@@ -200,10 +200,10 @@
 
 
                         <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@android:drawable/sym_def_app_icon" />
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/ic_email_icono" />
 
 
                         <LinearLayout
@@ -219,7 +219,7 @@
                                 android:layout_marginStart="15dp"
                                 android:layout_marginBottom="5dp"
                                 android:gravity="center"
-                                android:text="correo@correo.com"
+                                android:text=""
                                 android:textAllCaps="false"
                                 android:textColor="@android:color/black"
                                 android:textSize="16sp" />
