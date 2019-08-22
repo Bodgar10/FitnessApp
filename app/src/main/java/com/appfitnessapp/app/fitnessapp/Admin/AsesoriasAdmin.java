@@ -112,12 +112,6 @@ public class AsesoriasAdmin extends AppCompatActivity {
                 Intent intent = new Intent(AsesoriasAdmin.this, PerfilUsuarioAdmin.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("id",asesorias.get(recyclerFinalizar.getChildAdapterPosition(v)).getId_usuario());
-
-                bundle.putString("nombre",asesorias.get(recyclerFinalizar.getChildAdapterPosition(v)).getNombre_usuario());
-                bundle.putString("peso",asesorias.get(recyclerFinalizar.getChildAdapterPosition(v)).getPeso_actual());
-                bundle.putString("estatura",asesorias.get(recyclerFinalizar.getChildAdapterPosition(v)).getEstatura());
-                bundle.putString("correo",asesorias.get(recyclerFinalizar.getChildAdapterPosition(v)).getEmail_usuario());
-                bundle.putString("imagen",asesorias.get(recyclerFinalizar.getChildAdapterPosition(v)).getFoto_usuario());
                 intent.putExtras(bundle);
                 startActivity(intent);
 
@@ -163,40 +157,41 @@ public class AsesoriasAdmin extends AppCompatActivity {
                         Log.e(TAG, "Usuarios: " + snapshot);
                         Usuarios usuarios = snapshot.getValue(Usuarios.class);
 
-                        if (usuarios.getTipo_usuario().equals(Contants.USUARIO)){
+                        if (usuarios.getId_usuario()!=null) {
 
-                            bajarInscritos();
-                            asesorias.add(usuarios);
-                            asesorias2.add(usuarios);
-                            adapter.notifyDataSetChanged();
-                            adapter2.notifyDataSetChanged();
-                            progressDialog.dismiss();
+                            if (usuarios.getTipo_usuario().equals(Contants.USUARIO)) {
 
-                        }
+                                bajarInscritos();
+                                asesorias.add(usuarios);
+                                asesorias2.add(usuarios);
+                                adapter.notifyDataSetChanged();
+                                adapter2.notifyDataSetChanged();
+                                progressDialog.dismiss();
 
-                        else if (usuarios.getTipo_usuario().equals(Contants.ADMIN)) {
+                            } else if (usuarios.getTipo_usuario().equals(Contants.ADMIN)) {
 
-                            if (usuarios.getId_usuario().equals(id)){
+                                if (usuarios.getId_usuario().equals(id)) {
 
-                                if (usuarios.getFoto_usuario().equals("nil")) {
-                                    try {
-                                        URL urlfeed = new URL(usuarios.getFoto_usuario());
-                                        Picasso.get().load(String.valueOf(urlfeed))
-                                                .error(R.mipmap.ic_launcher)
-                                                .fit()
-                                                .noFade()
-                                                .into(imgPostPersona);
-                                    } catch (MalformedURLException e) {
-                                        e.printStackTrace();
+                                    if (usuarios.getFoto_usuario().equals("nil")) {
+                                        try {
+                                            URL urlfeed = new URL(usuarios.getFoto_usuario());
+                                            Picasso.get().load(String.valueOf(urlfeed))
+                                                    .error(R.mipmap.ic_launcher)
+                                                    .fit()
+                                                    .noFade()
+                                                    .into(imgPostPersona);
+                                        } catch (MalformedURLException e) {
+                                            e.printStackTrace();
+                                        }
+                                    } else {
+                                        loadImageFromUrl(usuarios.getFoto_usuario());
+                                        progressDialog.dismiss();
                                     }
-                                } else {
-                                    loadImageFromUrl(usuarios.getFoto_usuario());
-                                    progressDialog.dismiss();
+
                                 }
+                            }
 
                         }
-                        }
-
 
                     }
                 }else{

@@ -26,6 +26,7 @@ import com.appfitnessapp.app.fitnessapp.Arrays.Ejercicios;
 import com.appfitnessapp.app.fitnessapp.Arrays.ImagenesEjercicios;
 import com.appfitnessapp.app.fitnessapp.Arrays.PlanEntrenamiento;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
+import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.google.firebase.database.DataSnapshot;
@@ -45,7 +46,7 @@ public class RutinaUsuario extends AppCompatActivity {
     AdapterImagenes adapterImg;
     ArrayList<ImagenesEjercicios>ejerciciosImg;
 
-    String descripcion,videoUrl;
+    String descripcion,idEjercicio,videoUrl,id_ejercicioArra;
 
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
@@ -66,10 +67,13 @@ public class RutinaUsuario extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null){
             descripcion = extras.getString("descripcion");
+            idEjercicio = extras.getString("id");
+
 
         }
 
-        bajarEjercicios();
+        //bajarEjercicios();
+        //bajarImagenes();
 
         imgRutina=findViewById(R.id.imgRutina);
 
@@ -155,10 +159,11 @@ public class RutinaUsuario extends AppCompatActivity {
     }
 
 
+
     public void bajarEjercicios(){
 
         dbProvider = new DBProvider();
-        dbProvider.tablaEjercicios().addValueEventListener(new ValueEventListener() {
+        dbProvider.tablaPlanEntrenamiento().child(idEjercicio).child(Contants.EJERCICIOS).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ejercicios.clear();
@@ -169,8 +174,9 @@ public class RutinaUsuario extends AppCompatActivity {
 
                         if (ejercicio.getId_ejercicio()!=null){
 
+                            id_ejercicioArra=ejercicio.getId_ejercicio();
                             videoUrl=ejercicio.getVideo_ejercicio();
-                            Picasso.get().load(ejercicio.getImagenes_ejercicio()).into(imgRutina);
+                           // Picasso.get().load(ejercicio.getImagenes_ejercicio()).into(imgRutina);
                             ejercicios.add(ejercicio);
                             adapter.notifyDataSetChanged();
 
@@ -191,6 +197,40 @@ public class RutinaUsuario extends AppCompatActivity {
 
     }
 
+
+
+    public void bajarImagenes(){
+
+        dbProvider = new DBProvider();
+        dbProvider.tablaPlanEntrenamiento().child(idEjercicio).child(Contants.EJERCICIOS).child(id_ejercicioArra).child(Contants.IMAGENES_EJERCICIO).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Log.e(TAG, "Feed: " + dataSnapshot);
+                        ImagenesEjercicios imagenes = snapshot.getValue(ImagenesEjercicios.class);
+
+                        if (imagenes.getId()!=null){
+
+                             Picasso.get().load(imagenes.getImagen()).into(imgRutina);
+
+
+                        }
+
+                    }
+                }
+                else {
+                    Log.e(TAG, "Feed: ");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "ERROR: ");
+            }
+        });
+
+    }
 
 
     @Override

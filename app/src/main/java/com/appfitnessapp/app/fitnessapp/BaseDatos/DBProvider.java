@@ -368,10 +368,13 @@ public class DBProvider {
 
 
     //tabla Ejercicios
-    public void subirImagenesEjercicios(String imagen1,String id_imagen){
+    public void subirImagenesEjercicios(String imagen1,String imagen2,String imagen3,String id_imagen){
         Map<String, Object> updates = new HashMap<>();
 
         updates.put(Contants.IMAGEN_1 , imagen1);
+        updates.put(Contants.IMAGEN_2 , imagen2);
+        updates.put(Contants.IMAGEN_3 , imagen3);
+
 
         tablaPlanEntrenamiento().child(id_imagen).child(Contants.EJERCICIOS).child(Contants.IMAGENES_EJERCICIO).updateChildren(updates);
     }

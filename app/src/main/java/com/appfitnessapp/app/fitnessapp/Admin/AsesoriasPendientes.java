@@ -16,17 +16,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterAsesorias;
 import com.appfitnessapp.app.fitnessapp.Arrays.Asesorias;
+import com.appfitnessapp.app.fitnessapp.Arrays.Inscritos;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class AsesoriasPendientes extends AppCompatActivity {
 
@@ -36,6 +46,7 @@ public class AsesoriasPendientes extends AppCompatActivity {
     TextView txtActivos;
     CircularImageView imgPostPersona;
 
+    String id;
 
     private ProgressDialog progressDialog;
     private static final String TAG = "BAJARINFO:";
@@ -51,8 +62,10 @@ public class AsesoriasPendientes extends AppCompatActivity {
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Asesorias");
 
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        bajarUsuarios();
+
+        bajarInscritos();
 
         dbProvider = new DBProvider();
         bajarInfo = new BajarInfo();
@@ -110,24 +123,28 @@ public class AsesoriasPendientes extends AppCompatActivity {
 
     }
 
-    public void bajarUsuarios(){
+
+    public void bajarInscritos(){
         dbProvider = new DBProvider();
-        dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
+
+        dbProvider.tablaInscritos().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                asesorias.clear();
-                Log.e(TAG,"Usuarios 4: ");
                 if (dataSnapshot.exists()){
                     for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
                         Log.e(TAG, "Usuarios: " + snapshot);
-                        Usuarios usuarios = snapshot.getValue(Usuarios.class);
+                        Inscritos inscritos = snapshot.getValue(Inscritos.class);
 
-                        if (usuarios.getTipo_usuario().equals(Contants.USUARIO)) {
+                            if (inscritos.getId_pendiente().equals(true)){
 
-                            asesorias.add(usuarios);
-                            adapter.notifyDataSetChanged();
-                            progressDialog.dismiss();
-                        }
+                                bajarUsuarios();
+
+                            }
+
+
+
+
+
 
                     }
                 }else{
@@ -141,4 +158,67 @@ public class AsesoriasPendientes extends AppCompatActivity {
             }
         });
     }
+
+    public void bajarUsuarios(){
+        dbProvider = new DBProvider();
+        dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                asesorias.clear();
+                Log.e(TAG,"Usuarios 4: ");
+                if (dataSnapshot.exists()){
+                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                        Log.e(TAG, "Usuarios: " + snapshot);
+                        Usuarios usuarios = snapshot.getValue(Usuarios.class);
+
+                        if (usuarios.getId_usuario() != null){
+                            if (usuarios.getTipo_usuario().equals(Contants.USUARIO)) {
+
+                                asesorias.add(usuarios);
+                                adapter.notifyDataSetChanged();
+                                progressDialog.dismiss();
+                            }
+
+                            else if (usuarios.getTipo_usuario().equals(Contants.ADMIN)){
+
+                                if (usuarios.getFoto_usuario().equals("nil")) {
+                                    try {
+                                        URL urlfeed = new URL(usuarios.getFoto_usuario());
+                                        Picasso.get().load(String.valueOf(urlfeed))
+                                                .error(R.mipmap.ic_launcher)
+                                                .fit()
+                                                .noFade()
+                                                .into(imgPostPersona);
+                                    } catch (MalformedURLException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    loadImageFromUrl(usuarios.getFoto_usuario());
+                                    progressDialog.dismiss();
+                                }
+
+
+
+                            }
+
+                        }
+                    }
+                }else{
+                    Log.e(TAG,"Usuarios 3: ");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG,"ERROR: ");
+            }
+        });
+    }
+
+    private void loadImageFromUrl(String url) {
+
+        Picasso.get().load(url).into(imgPostPersona);
+    }
+
+
 }

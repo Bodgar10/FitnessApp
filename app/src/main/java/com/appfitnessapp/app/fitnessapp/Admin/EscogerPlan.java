@@ -5,15 +5,20 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
 import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,26 +53,29 @@ import java.io.IOException;
 public class EscogerPlan extends AppCompatActivity {
 
     TextView btnRecetas,btnGuardar,txtPrueba;
-    ImageView btnAgregarFoto,btnAgregarEjercicio,img1,img2,img3;
-    EditText edtDescripcion;
+    ImageView btnAgregarEjercicio,img1,img2,img3;
+    EditText edtDescripcion,edtTiempo,edtNivel,edtNumEjercicios;
 
+    LinearLayout btnAgregarFoto;
     ImageButton btnFoto1,btnFoto2,btnFoto3;
+
+    ArrayAdapter<String> Sdia;
+    Spinner spinnerDia;
 
 
 
     RecyclerView recyclerView;
-
     ProgressDialog progressDialog;
-
     Uri videoUri,imagen1Uri,imagen2Uri,imagen3Uri;
 
     StorageReference mStorage;
-
     FirebaseStorage storage;
     FirebaseDatabase database;
 
     private static final String TAG = "BAJARINFO:";
     static DBProvider dbProvider;
+
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,18 +84,39 @@ public class EscogerPlan extends AppCompatActivity {
 
         Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
-        getSupportActionBar().setTitle("Desayuno");
+        getSupportActionBar().setTitle("Plan de ejercicios");
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            id = extras.getString("id");
+        }
 
         dbProvider = new DBProvider();
 
         storage=FirebaseStorage.getInstance();
         database=FirebaseDatabase.getInstance();
-
         mStorage= FirebaseStorage.getInstance().getReference();
 
         recyclerView = findViewById(R.id.recyclerview);
+
+        spinnerDia = findViewById(R.id.spinnerDia);
+
+        Sdia = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.dias_ejercicios);
+
+
+        spinnerDia.setAdapter(Sdia);
+        spinnerDia.setPrompt("Dia de ejercicio");
+
+        spinnerDia.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                ((TextView) spinnerDia.getSelectedView()).setTextColor(Color.GRAY);
+            }
+        });
+
+
 
         btnFoto1=findViewById(R.id.btnFoto1);
         btnFoto2=findViewById(R.id.btnFoto2);
@@ -105,6 +134,11 @@ public class EscogerPlan extends AppCompatActivity {
 
         edtDescripcion=findViewById(R.id.edtDescripcion);
 
+        edtTiempo=findViewById(R.id.edtTiempo);
+        edtNivel=findViewById(R.id.edtNivel);
+        edtNumEjercicios=findViewById(R.id.edtNumEjercicios);
+
+
         txtPrueba=findViewById(R.id.txtprueba);
 
         btnGuardar=findViewById(R.id.txtGuardar);
@@ -121,6 +155,8 @@ public class EscogerPlan extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
+
             }
         });
 
@@ -134,11 +170,8 @@ public class EscogerPlan extends AppCompatActivity {
                 }
                 else {
                     ActivityCompat.requestPermissions(EscogerPlan.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},9);
-                }
-
-            }
+                } }
         });
-
 
         btnFoto1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,49 +181,108 @@ public class EscogerPlan extends AppCompatActivity {
                 }
                 else {
                     ActivityCompat.requestPermissions(EscogerPlan.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},9);
-                }
-
-
-            }
+                } }
         });
 
         btnFoto2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (ContextCompat.checkSelfPermission(EscogerPlan.this, Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED){
                     selectFoto2();
                 }
                 else {
                     ActivityCompat.requestPermissions(EscogerPlan.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},9);
-                }
-
-            }
+                } }
         });
 
         btnFoto3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (ContextCompat.checkSelfPermission(EscogerPlan.this, Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED){
-                    selectFoto3();
-                }
+                    selectFoto3(); }
                 else {
-                    ActivityCompat.requestPermissions(EscogerPlan.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},9);
-                }
-            }
+                    ActivityCompat.requestPermissions(EscogerPlan.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},9); } }
         });
+
+
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String key = dbProvider.tablaPlanEntrenamiento().push().getKey();
                 String descripcion = edtDescripcion.getText().toString();
+                String tiempo = edtTiempo.getText().toString();
+                String nivel = edtNivel.getText().toString();
+                String ejercicios = edtNumEjercicios.getText().toString();
+                String diaEscogido = spinnerDia.getSelectedItem().toString();
+
+                if (!descripcion.isEmpty()&&!tiempo.isEmpty()&&!nivel.isEmpty()&&!ejercicios.isEmpty()){
+
+                    switch (diaEscogido) {
+                        case "Domingo":
+                            dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios,
+                                    descripcion, key, id, "1");
+                            dbProvider.subirEjerciciosPlan("Saltos de 30 rondas", "12", " 20", "nil", key);
+                            //dbProvider.subirImagenesEjercicios("nil","nil","nil",key);
+                            uploadImage3(key,imagen1Uri.toString(), imagen2Uri.toString(), imagen3Uri.toString());
+                            break;
+                        case "Lunes":
+                            dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios,
+                                    descripcion, key, id, "2");
+                            dbProvider.subirEjerciciosPlan("Saltos de 30 rondas", "12", " 20", "nil", key);
+                            //dbProvider.subirImagenesEjercicios("nil","nil","nil",key);
+                            uploadImage3(key,imagen1Uri.toString(), imagen2Uri.toString(), imagen3Uri.toString());
+                            break;
+                        case "Martes":
+                            dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios,
+                                    descripcion, key, id, "3");
+                            dbProvider.subirEjerciciosPlan("Saltos de 30 rondas", "12", " 20", "nil", key);
+                            //dbProvider.subirImagenesEjercicios("nil","nil","nil",key);
+                            uploadImage3(key,imagen1Uri.toString(), imagen2Uri.toString(), imagen3Uri.toString());
+                            break;
+                        case "Miercoles":
+                            dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios,
+                                    descripcion, key, id, "4");
+                            dbProvider.subirEjerciciosPlan("Saltos de 30 rondas", "12", " 20", "nil", key);
+                            //dbProvider.subirImagenesEjercicios("nil","nil","nil",key);
+                            uploadImage3(key,imagen1Uri.toString(), imagen2Uri.toString(), imagen3Uri.toString());
+                            break;
+                        case "Jueves":
+                            dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios,
+                                    descripcion, key, id, "5");
+                            dbProvider.subirEjerciciosPlan("Saltos de 30 rondas", "12", " 20", "nil", key);
+                            //dbProvider.subirImagenesEjercicios("nil","nil","nil",key);
+                            uploadImage3(key,imagen1Uri.toString(), imagen2Uri.toString(), imagen3Uri.toString());
+                            break;
+                        case "Viernes":
+                            dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios,
+                                    descripcion, key, id, "6");
+                            dbProvider.subirEjerciciosPlan("Saltos de 30 rondas", "12", " 20", "nil", key);
+                            //dbProvider.subirImagenesEjercicios("nil","nil","nil",key);
+                            uploadImage3(key,imagen1Uri.toString(), imagen2Uri.toString(), imagen3Uri.toString());
+                            break;
+                        case "Sabado":
+                            dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios,
+                                    descripcion, key, id, "7");
+                            dbProvider.subirEjerciciosPlan("Saltos de 30 rondas", "12", " 20", "nil", key);
+                            //dbProvider.subirImagenesEjercicios("nil","nil","nil",key);
+                            uploadImage3(key,imagen1Uri.toString(), imagen2Uri.toString(), imagen3Uri.toString());
+                            break;
+                    }
+            }
+                else {
+                    Toast.makeText(EscogerPlan.this, "Revisa  que todos los campos esten llenos.", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+                //ejercicios Solos
+                /*
                 String key = dbProvider.tablaEjercicios().push().getKey();
                 uploadVideo(videoUri,"irjirjf","nil","nil",key);
                 uploadImage3(key,imagen1Uri.toString(),imagen2Uri.toString(),imagen3Uri.toString());
 
-
+                */
 
             }
         });
@@ -217,7 +309,7 @@ public class EscogerPlan extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri) {
 
-                                dbProvider.subirEjercicios(nombre_ejercicio,rondas,repeticiones,uri.toString(),id_ejercicio);
+                                //dbProvider.subirEjercicios(nombre_ejercicio,rondas,repeticiones,uri.toString(),id_ejercicio);
                                 progressDialog.dismiss();
                                 Toast.makeText(EscogerPlan.this, "Se subio bien todo ", Toast.LENGTH_SHORT).show();
                             }
@@ -245,13 +337,13 @@ public class EscogerPlan extends AppCompatActivity {
 
     private void uploadImage3(final String key, final String img1, final String img2, String img3) {
 
-        /*
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setTitle("Subiendo...");
         progressDialog.setProgress(0);
         progressDialog.show();
-*/
+
         final String fileName =System.currentTimeMillis()+"";
         final StorageReference storageReference1 =  mStorage.child(Contants.EJERCICIOS).child(fileName);
 
@@ -273,6 +365,8 @@ public class EscogerPlan extends AppCompatActivity {
                         public void onSuccess(Uri uri) {
 
                             uploadImage2(key,img1,img2,uri.toString());
+                            progressDialog.dismiss();
+                            Toast.makeText(EscogerPlan.this, "Se subio bien todo ", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -390,7 +484,9 @@ public class EscogerPlan extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
 
-                            dbProvider.subirImagenes(uri.toString(),key,imagen2,imagen3);
+                            //dbProvider.subirImagenes(uri.toString(),key,imagen2,imagen3);
+                            dbProvider.subirImagenesEjercicios(uri.toString(),imagen2,imagen3,key);
+
                         }
                     });
 
@@ -481,8 +577,6 @@ public class EscogerPlan extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent,89);
     }
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
@@ -540,8 +634,6 @@ public class EscogerPlan extends AppCompatActivity {
 
 
     }
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -554,8 +646,6 @@ public class EscogerPlan extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
     @Override
     public void onBackPressed() {
         finish();

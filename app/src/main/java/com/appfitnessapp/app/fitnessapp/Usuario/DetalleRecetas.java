@@ -112,13 +112,13 @@ public class DetalleRecetas extends AppCompatActivity {
         recyclerPasos.setNestedScrollingEnabled(false);
 
         recyclerIngredientes.setLayoutManager(new LinearLayoutManager(this));
-        ingredientes=new ArrayList<>();
-        adapterIngredientes=new AdapterIngredientes(ingredientes);
-        recyclerIngredientes.setAdapter(adapterIngredientes);
-
         recyclerPasos.setLayoutManager(new LinearLayoutManager(this));
+        ingredientes=new ArrayList<>();
         pasos=new ArrayList<>();
+
+        adapterIngredientes=new AdapterIngredientes(ingredientes);
         adapterPasos=new AdapterPasos(pasos);
+        recyclerIngredientes.setAdapter(adapterIngredientes);
         recyclerPasos.setAdapter(adapterPasos);
 
 
@@ -155,9 +155,12 @@ public class DetalleRecetas extends AppCompatActivity {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Ingredientes ingrediente = snapshot.getValue(Ingredientes.class);
 
+                        if (ingrediente.getId_ingrediente()!=null) {
+
                             ingredientes.add(ingrediente);
                             adapterIngredientes.notifyDataSetChanged();
 
+                        }
                     }
                 }
                 else {
@@ -185,8 +188,12 @@ public class DetalleRecetas extends AppCompatActivity {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Preparacion paso = snapshot.getValue(Preparacion.class);
+
+                        if (paso.getId_preparacion()!=null) {
                             pasos.add(paso);
                             adapterPasos.notifyDataSetChanged();
+
+                        }
                     }
                 }
                 else {

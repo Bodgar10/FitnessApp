@@ -54,44 +54,14 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             id = extras.getString("id");
-            nombre = extras.getString("nombre");
-            peso = extras.getString("peso");
-            correo = extras.getString("correo");
-            estatura = extras.getString("estatura");
-            imagen = extras.getString("imagen");
         }
 
-
+        bajarUsuarios();
         imgPersona=findViewById(R.id.imgPersona);
         txtNombre=findViewById(R.id.txtNombreUsuario);
         txtPeso=findViewById(R.id.txtPesoActual);
         txtAltura=findViewById(R.id.txtEstatura);
         txtEmail=findViewById(R.id.txtCorreo);
-
-
-        txtNombre.setText(nombre);
-        txtPeso.setText(peso);
-        txtEmail.setText(correo);
-        txtAltura.setText(estatura);
-
-        if (imagen.equals("nil")) {
-            try {
-                URL urlfeed = new URL(imagen);
-                Picasso.get().load(String.valueOf(urlfeed))
-                        .error(R.mipmap.ic_launcher)
-                        .fit()
-                        .noFade()
-                        .into(imgPersona);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            loadImageFromUrl(imagen);
-            progressDialog.dismiss();
-        }
-
-
         btnMensaje=findViewById(R.id.btnMensaje);
         btnPlan=findViewById(R.id.btnPlan);
 
@@ -117,6 +87,63 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
         });
 
     }
+
+    public void bajarUsuarios(){
+        Log.e(TAG,"Usuarios 2: ");
+        dbProvider = new DBProvider();
+
+        dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e(TAG,"Usuarios 4: ");
+                if (dataSnapshot.exists()){
+                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                        Log.e(TAG, "Usuarios: " + snapshot);
+                        Usuarios usuarios = snapshot.getValue(Usuarios.class);
+
+                        if (usuarios.getId_usuario()!=null) {
+
+                            if (usuarios.getId_usuario().equals(id)) {
+
+                                txtPeso.setText(usuarios.getPeso_actual());
+                                txtAltura.setText(usuarios.getEstatura());
+                                txtNombre.setText(usuarios.getNombre_usuario());
+                                txtEmail.setText(usuarios.getEmail_usuario());
+
+                                if (usuarios.getFoto_usuario().equals("nil")) {
+                                    try {
+                                        URL urlfeed = new URL(usuarios.getFoto_usuario());
+                                        Picasso.get().load(String.valueOf(urlfeed))
+                                                .error(R.mipmap.ic_launcher)
+                                                .fit()
+                                                .noFade()
+                                                .into(imgPersona);
+                                    } catch (MalformedURLException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    loadImageFromUrl(usuarios.getFoto_usuario());
+                                    progressDialog.dismiss();
+                                }
+
+                            }
+
+
+                        }
+
+                    }
+                }else{
+                    Log.e(TAG,"Usuarios 3: ");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG,"ERROR: ");
+            }
+        });
+    }
+
 
 
     private void loadImageFromUrl(String url) {

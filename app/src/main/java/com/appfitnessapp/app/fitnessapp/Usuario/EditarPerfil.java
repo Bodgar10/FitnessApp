@@ -246,48 +246,50 @@ public class EditarPerfil extends AppCompatActivity {
                         Log.e(TAG, "Usuarios: " + snapshot);
                         Usuarios usuarios = snapshot.getValue(Usuarios.class);
 
-                        if (usuarios.getId_usuario().equals(id)) {
 
+                        if (usuarios.getId_usuario() != null){
+                            if (usuarios.getId_usuario().equals(id)) {
 
-                            name = usuarios.getNombre_usuario();
-                            email = usuarios.getEmail_usuario();
-                            password = usuarios.getContrasena_usuario();
-                            telefono = usuarios.getTelefono_usuario();
+                                name = usuarios.getNombre_usuario();
+                                email = usuarios.getEmail_usuario();
+                                password = usuarios.getContrasena_usuario();
+                                telefono = usuarios.getTelefono_usuario();
 
-                            edtNombreUsuario.setText(usuarios.getNombre_usuario());
-                            editContrasena.setText(usuarios.getContrasena_usuario());
-                            edtCorreo.setText(usuarios.getEmail_usuario());
-                            edtTelefono.setText(usuarios.getTelefono_usuario());
+                                edtNombreUsuario.setText(usuarios.getNombre_usuario());
+                                editContrasena.setText(usuarios.getContrasena_usuario());
+                                edtCorreo.setText(usuarios.getEmail_usuario());
+                                edtTelefono.setText(usuarios.getTelefono_usuario());
 
-                            //para bajar la info y ponerle en el spinner
-                            selectionEstatura= Saltura.getPosition(usuarios.getEstatura());
-                            spinnerEstatura.setSelection(selectionEstatura);
+                                //para bajar la info y ponerle en el spinner
+                                selectionEstatura = Saltura.getPosition(usuarios.getEstatura());
+                                spinnerEstatura.setSelection(selectionEstatura);
 
-                            selectionPeso= Speso.getPosition(usuarios.getPeso_actual());
-                            spinnerPeso.setSelection(selectionPeso);
+                                selectionPeso = Speso.getPosition(usuarios.getPeso_actual());
+                                spinnerPeso.setSelection(selectionPeso);
 
-                            selectionObjetivo= Sbuscando.getPosition(usuarios.getObjetivo());
-                            spinnerBuscando.setSelection(selectionObjetivo);
+                                selectionObjetivo = Sbuscando.getPosition(usuarios.getObjetivo());
+                                spinnerBuscando.setSelection(selectionObjetivo);
 
-                            if (usuarios.getFoto_usuario().equals("nil")) {
-                                try {
-                                    URL urlfeed = new URL(usuarios.getFoto_usuario());
-                                    Picasso.get().load(String.valueOf(urlfeed))
-                                            .error(R.mipmap.ic_launcher)
-                                            .fit()
-                                            .noFade()
-                                            .into(imgPersona);
-                                } catch (MalformedURLException e) {
-                                    e.printStackTrace();
+                                if (usuarios.getFoto_usuario().equals("nil")) {
+                                    try {
+                                        URL urlfeed = new URL(usuarios.getFoto_usuario());
+                                        Picasso.get().load(String.valueOf(urlfeed))
+                                                .error(R.mipmap.ic_launcher)
+                                                .fit()
+                                                .noFade()
+                                                .into(imgPersona);
+                                    } catch (MalformedURLException e) {
+                                        e.printStackTrace();
+                                    }
+                                    progressDialog.dismiss();
+                                } else {
+                                    loadImageFromUrl(usuarios.getFoto_usuario());
+                                    progressDialog.dismiss();
                                 }
-                                progressDialog.dismiss();
                             }
-                            else {
-                                loadImageFromUrl(usuarios.getFoto_usuario());
-                                progressDialog.dismiss();
-                            }
-                        }
 
+
+                    }
                     }
                 } else {
                     Log.e(TAG, "Usuarios 3: ");

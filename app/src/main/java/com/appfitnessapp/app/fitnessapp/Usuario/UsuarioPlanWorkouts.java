@@ -37,7 +37,7 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
     BajarInfo bajarInfo;
     private static final String TAG = "BAJARINFO:";
 
-    String descripcion;
+    String descripcion,idEjercicio;
 
     String id;
 
@@ -111,6 +111,7 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
                 Intent intent = new Intent(UsuarioPlanWorkouts.this, RutinaUsuario.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("descripcion",descripcion);
+                bundle.putString("id",idEjercicio);
                 intent.putExtras(bundle);
                 startActivity(intent);
 
@@ -151,6 +152,7 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
                             int fechaAc = calendar.get(Calendar.DAY_OF_WEEK);
                             if (fechaAc==1){
                                 if (dia.equals("1")){
+                                    idEjercicio=planEntrenamiento.getId_plan_ejercicio();
                                     descripcion=planEntrenamiento.getDescripcion_ejercicios();
                                     txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
                                     txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
@@ -160,6 +162,7 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
                             }
                             if (fechaAc==2){
                                 if (dia.equals("2")){
+                                    idEjercicio=planEntrenamiento.getId_plan_ejercicio();
                                     descripcion=planEntrenamiento.getDescripcion_ejercicios();
                                     txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
                                     txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
@@ -170,6 +173,7 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
 
                             if (fechaAc==3){
                                 if (dia.equals("3")){
+                                    idEjercicio=planEntrenamiento.getId_plan_ejercicio();
                                     descripcion=planEntrenamiento.getDescripcion_ejercicios();
                                     txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
                                     txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
@@ -179,6 +183,7 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
                             }
                             if (fechaAc==4){
                                 if (dia.equals("4")){
+                                    idEjercicio=planEntrenamiento.getId_plan_ejercicio();
                                     descripcion=planEntrenamiento.getDescripcion_ejercicios();
                                     txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
                                     txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
@@ -188,6 +193,7 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
 
                             if (fechaAc==5){
                                 if (dia.equals("5")){
+                                    idEjercicio=planEntrenamiento.getId_plan_ejercicio();
                                     descripcion=planEntrenamiento.getDescripcion_ejercicios();
                                     txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
                                     txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
@@ -198,6 +204,7 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
 
                             if (fechaAc==6){
                                 if (dia.equals("6")){
+                                    idEjercicio=planEntrenamiento.getId_plan_ejercicio();
                                     descripcion=planEntrenamiento.getDescripcion_ejercicios();
                                     txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
                                     txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
@@ -208,6 +215,7 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
 
                             if (fechaAc==7){
                                 if (dia.equals("7")){
+                                    idEjercicio=planEntrenamiento.getId_plan_ejercicio();
                                     descripcion=planEntrenamiento.getDescripcion_ejercicios();
                                     txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
                                     txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");

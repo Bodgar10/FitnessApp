@@ -75,42 +75,31 @@
 
         </LinearLayout>
 
-    <LinearLayout
-        android:background="@drawable/boton_naranja_completo"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:padding="5dp"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <ImageButton
+             <LinearLayout
             android:id="@+id/btnAgregarFoto"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="5dp"
-            android:background="@null"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_agregar_iconore" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/boton_naranja_completo"
             android:gravity="center"
-            android:text="Subir video"
-            android:textAllCaps="false"
-            android:textStyle="bold"
-            android:textColor="@color/blanco"
-            android:textSize="15sp" />
+            android:orientation="vertical">
 
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="Seleccionar video"
+                android:textColor="@color/blanco"
+                android:textSize="14sp"
+                android:textAllCaps="true" />
 
-    </LinearLayout>
+        </LinearLayout>
 
 
         <TextView
@@ -153,7 +142,88 @@
         android:textColor="@color/negro" />
 
 
-    <TextView
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:padding="8dp"
+            android:gravity="start"
+            android:background="@android:color/darker_gray"
+            android:text="Datos del ejercicio"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/edtTiempo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:textSize="13sp"
+            android:background="@drawable/boton_gris_margen"
+            android:padding="10dp"
+            android:textColor="@color/negro"
+            android:hint="Minutos"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/edtNivel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:textSize="13sp"
+            android:background="@drawable/boton_gris_margen"
+            android:padding="10dp"
+            android:textColor="@color/negro"
+            android:hint="Nivel Ejercicio"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/edtNumEjercicios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:textSize="13sp"
+            android:background="@drawable/boton_gris_margen"
+            android:padding="10dp"
+            android:textColor="@color/negro"
+            android:hint="Numero de ejercicios"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:padding="8dp"
+            android:gravity="start"
+            android:background="@android:color/darker_gray"
+            android:text="Dia del ejercicio"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textSize="13sp" />
+
+        <Spinner
+            android:id="@+id/spinnerDia"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:spinnerMode="dialog" />
+
+
+        <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"

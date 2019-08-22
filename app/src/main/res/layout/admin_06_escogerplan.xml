@@ -77,18 +77,46 @@
                 android:layout_weight="1"
                 android:text="Workouts"/>
 
-
         </LinearLayout>
 
     </LinearLayout>
 
 
-    <include
-        layout="@layout/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/btnImagen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/boton_naranja_completo"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    </include>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="Seleccionar imagen"
+                android:textColor="@color/blanco"
+                android:textSize="14sp"
+                android:textAllCaps="true" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/imgReceta"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginEnd="20dp"
+            android:scaleType="centerInside"
+            android:visibility="gone"
+            android:layout_marginStart="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -112,7 +140,7 @@
         android:textSize="13sp"
         android:textColor="@color/negro"
         android:hint="Nombre"
-        android:inputType="textPersonName" />
+        android:inputType="textCapSentences" />
 
 
     <TextView
@@ -142,7 +170,7 @@
         android:padding="10dp"
         android:textColor="@color/negro"
         android:hint="Tiempo de coccion"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/edtCantidad"
@@ -157,7 +185,7 @@
         android:padding="10dp"
         android:textColor="@color/negro"
         android:hint="Cantidad de porciones"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/edtCalorias"
@@ -172,9 +200,64 @@
         android:padding="10dp"
         android:textColor="@color/negro"
         android:hint="Calorias aproximadas"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
-    <TextView
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:padding="8dp"
+            android:gravity="start"
+            android:background="@android:color/darker_gray"
+            android:text="TIPO COMIDA"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textSize="13sp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/checkDesayuno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:buttonTint="@color/naranja"
+                android:shadowColor="@color/naranja"
+                android:layout_weight="1"
+                android:text="Desayuno" />
+            <RadioButton
+                android:id="@+id/checkComida"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:buttonTint="@color/naranja"
+                android:shadowColor="@color/naranja"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Almuerzo" />
+
+            <RadioButton
+                android:id="@+id/checkCena"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:buttonTint="@color/naranja"
+                android:shadowColor="@color/naranja"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cena" />
+
+        </LinearLayout>
+
+
+
+        <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -211,7 +294,7 @@
             android:gravity="end"
             android:layout_marginEnd="10dp"
             android:textAlignment="textEnd"
-            android:text="Agregar otro ingrediente"
+            android:text="Agregar  ingrediente"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
             android:textSize="12sp" />
@@ -267,7 +350,7 @@
             android:gravity="end"
             android:layout_marginEnd="10dp"
             android:textAlignment="textEnd"
-            android:text="Agregar otro paso"
+            android:text="Agregar paso"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
             android:textSize="12sp" />

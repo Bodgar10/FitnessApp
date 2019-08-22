@@ -157,9 +157,11 @@ public class AdminRecetaDetalle extends AppCompatActivity {
                         Ingredientes ingrediente = snapshot.getValue(Ingredientes.class);
 
 
-                        ingredientes.add(ingrediente);
-                        adapterIngredientes.notifyDataSetChanged();
+                        if (ingrediente.getId_ingrediente()!=null) {
+                            ingredientes.add(ingrediente);
+                            adapterIngredientes.notifyDataSetChanged();
 
+                        }
 
                     }
                 }
@@ -190,9 +192,12 @@ public class AdminRecetaDetalle extends AppCompatActivity {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Preparacion paso = snapshot.getValue(Preparacion.class);
 
-                        pasos.add(paso);
-                        adapterPasos.notifyDataSetChanged();
+                        if(paso.getId_preparacion()!=null) {
 
+                            pasos.add(paso);
+                            adapterPasos.notifyDataSetChanged();
+
+                        }
 
                     }
                 }
