@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
+import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.EditarPerfil;
 import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioPerfil;
@@ -40,7 +43,12 @@ public class AdminPerfil extends AppCompatActivity {
     private static final String TAG = "BAJARINFO:";
     static DBProvider dbProvider;
 
+    LinearLayout linearCerrar;
+
     String id;
+
+    private static FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +61,7 @@ public class AdminPerfil extends AppCompatActivity {
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        mAuth = FirebaseAuth.getInstance();
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
@@ -72,7 +81,24 @@ public class AdminPerfil extends AppCompatActivity {
 
         imagen=findViewById(R.id.imgAsesoria);
 
+        linearCerrar=findViewById(R.id.linearCerrar);
+
         bajarUsuarios();
+
+
+        linearCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mAuth.signOut();
+                Intent intent=new Intent(AdminPerfil.this, SplashPantalla.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
     }
 
 
@@ -120,7 +146,6 @@ public class AdminPerfil extends AppCompatActivity {
                             }
                         }
 
-
                     }
                 } else {
                     Log.e(TAG, "Usuarios 3: ");
@@ -155,14 +180,17 @@ public class AdminPerfil extends AppCompatActivity {
             case R.id.editar:
                 Abrir();
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
     private void Abrir() {
-        //Intent intent=new Intent(AdminPerfil.this,EditarPerfil.class);
-        //startActivity(intent);
+        Intent intent=new Intent(AdminPerfil.this,EditarPerfilAdmin.class);
+        startActivity(intent);
 
     }
+
+
 }

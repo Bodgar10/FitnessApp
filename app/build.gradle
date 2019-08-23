@@ -49,7 +49,7 @@ dependencies {
 
     implementation 'com.stripe:stripe-android:9.1.1'
     implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
-    implementation'com.github.PhilJay:MPAndroidChart:v3.0.1'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.1'
 
     implementation 'com.commit451:PhotoView:1.2.4'
 

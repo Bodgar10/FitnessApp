@@ -229,29 +229,31 @@ public class AdminPlanUsuario extends AppCompatActivity {
                         PlanAlimenticio plan = snapshot.getValue(PlanAlimenticio.class);
 
 
-                        if (plan.getId_usuario().equals(id)) {
+                        if (plan.getId_usuario() != null){
+                            if (plan.getId_usuario().equals(id)) {
 
-                            if (plan.getTipo_alimento().equals(Contants.DESAYUNO)) {
-                                recetas.add(plan);
-                                adapter.notifyDataSetChanged();
+                                if (plan.getTipo_alimento().equals(Contants.DESAYUNO)) {
+                                    recetas.add(plan);
+                                    adapter.notifyDataSetChanged();
+                                }
+
+                                if (plan.getTipo_alimento().equals(Contants.ALMUERZO)) {
+                                    recetas2.add(plan);
+                                    adapter2.notifyDataSetChanged();
+                                }
+
+                                if (plan.getTipo_alimento().equals(Contants.CENA)) {
+
+                                    recetas3.add(plan);
+                                    adapter3.notifyDataSetChanged();
+
+
+                                }
+
+
                             }
 
-                            if (plan.getTipo_alimento().equals(Contants.ALMUERZO)) {
-                                recetas2.add(plan);
-                                adapter2.notifyDataSetChanged();
-                            }
-
-                            if (plan.getTipo_alimento().equals(Contants.CENA)) {
-
-                                recetas3.add(plan);
-                                adapter3.notifyDataSetChanged();
-
-
-                            }
-
-
-                        }
-
+                    }
 
                     }
                 } else {

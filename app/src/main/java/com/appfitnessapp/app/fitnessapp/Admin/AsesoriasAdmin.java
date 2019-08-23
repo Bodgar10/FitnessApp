@@ -24,6 +24,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
+import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.Asesoria;
 import com.appfitnessapp.app.fitnessapp.Usuario.DetalleRecetas;
@@ -61,6 +62,9 @@ public class AsesoriasAdmin extends AppCompatActivity {
 
     String id;
 
+    private static FirebaseAuth mAuth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +74,23 @@ public class AsesoriasAdmin extends AppCompatActivity {
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Asesorias");
 
-        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        mAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+        if (user==null){
+
+            Intent intent=new Intent(AsesoriasAdmin.this, SplashPantalla.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+
+        }
+
+        else if (user!=null){
+            id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        }
+
 
 
         bajarUsuarios();
@@ -280,5 +300,7 @@ public class AsesoriasAdmin extends AppCompatActivity {
 
         Picasso.get().load(url).into(imgPostPersona);
     }
+
+
 
 }
