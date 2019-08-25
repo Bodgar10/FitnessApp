@@ -149,6 +149,7 @@ public class Asesoria extends AppCompatActivity {
         });
 
         recyclerView=findViewById(R.id.recyclerview);
+        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         plan = new ArrayList<>();
         adapter=new AdapterComentarios(plan);
@@ -253,8 +254,7 @@ public class Asesoria extends AppCompatActivity {
                         Log.e(TAG, "Valoracion: " + snapshot);
                         Valoraciones valoraciones = snapshot.getValue(Valoraciones.class);
 
-                        int valor5 = Integer.parseInt(valoraciones.getValoracion());
-
+                        String valor5 = valoraciones.getValoracion();
                         if (valoraciones.getId_valoracion() != null){
 
                             bajarUsuarios(valoraciones.getNombre_usuario_valoracion(),valoraciones.getId_valoracion(),
@@ -262,28 +262,30 @@ public class Asesoria extends AppCompatActivity {
                                     valoraciones.getImagen_despues(), valoraciones.getValoracion());
                         }
 
-                        if (valor5==5){
+
+
+                        if (valor5=="5"){
                             valor= Integer.parseInt(valoraciones.getValoracion());
 
                         }
-                        if (valor5==4){
+                        if (valor5=="4"){
                             valor1= Integer.parseInt(valoraciones.getValoracion());
 
 
                         }
 
-                        if (valor5==3){
+                        if (valor5=="3"){
                             valor2= Integer.parseInt(valoraciones.getValoracion());
 
                         }
 
-                        if (valor5==2){
+                        if (valor5=="2"){
                             valor3= Integer.parseInt(valoraciones.getValoracion());
 
 
                         }
 
-                        if (valor5==1){
+                        if (valor5=="1"){
                             valor4= Integer.parseInt(valoraciones.getValoracion());
 
                         }
@@ -315,8 +317,8 @@ public class Asesoria extends AppCompatActivity {
                         if (usuarios.getId_usuario() != null) {
 
                             if (id_usuario.equals(usuarios.getId_usuario())) {
-                                Valoraciones valoraciones = new Valoraciones(usuarios.getId_usuario(), id_valoracion, descripcion,
-                                        fecha, imgAntes, imgDespues, valoracion, usuarios.getNombre_usuario(), usuarios.getFoto_usuario());
+                                Valoraciones valoraciones =new Valoraciones(usuarios.getNombre_usuario(),id_valoracion,descripcion,fecha,
+                                        imgAntes,imgDespues,valoracion,usuarios.getFoto_usuario());
 
                                 plan.add(valoraciones);
                                 adapter.notifyDataSetChanged();

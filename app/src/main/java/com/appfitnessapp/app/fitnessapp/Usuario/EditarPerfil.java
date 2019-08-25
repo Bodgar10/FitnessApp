@@ -1,7 +1,9 @@
 package com.appfitnessapp.app.fitnessapp.Usuario;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -19,10 +21,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import com.appfitnessapp.app.fitnessapp.Admin.AdminPerfil;
+import com.appfitnessapp.app.fitnessapp.Admin.EditarPerfilAdmin;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
@@ -74,7 +81,7 @@ public class EditarPerfil extends AppCompatActivity {
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
 
-    String id,email,password,name,telefono,txtObjetivo,txtPeso,txtEstatura;
+    String id,email,password,name,telefono,imagen;
     Boolean isFotoReady = false;
     String selectDay;
 
@@ -168,10 +175,12 @@ public class EditarPerfil extends AppCompatActivity {
         btnCambiarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select image"), REQUEST_CODE);
+                if (ContextCompat.checkSelfPermission(EditarPerfil.this, Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED){
+                    selectImage();
+                }
+                else {
+                    ActivityCompat.requestPermissions(EditarPerfil.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},9);
+                }
 
             }
         });
@@ -192,18 +201,38 @@ public class EditarPerfil extends AppCompatActivity {
                 String peso = spinnerPeso.getSelectedItem().toString();
 
 
+                if (!imagen.equals(imgPersona)&&imgUri!=null){
+                    uploadImage(id,imgUri.toString());
+                    Intent intent=new Intent(EditarPerfil.this, UsuarioPerfil.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                }
+
                 if (!name.equals(edtNombre)){
                     dbProvider.updateName(edtNombre, id);
+                    Toast.makeText(EditarPerfil.this, "Se actualizo el nombre.", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(EditarPerfil.this, UsuarioPerfil.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 }
 
                 if (!email.equals(editCorreo)){
+                    progressDialog.setMessage("Actualizando correo");
+                    progressDialog.show();
                     changeEmail(id, editCorreo);
                 }
                 if (!password.equals(edtContra)){
+                    progressDialog.setMessage("Actualizando contraseña");
+                    progressDialog.show();
                     changePass(id, edtContra);
                 }
                 if (!telefono.equals(editTelefono)){
                     dbProvider.updatePhone(editTelefono, id);
+                    Toast.makeText(EditarPerfil.this, "Se actualizo el telefono.", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(EditarPerfil.this, UsuarioPerfil.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 }
                 if (!String.valueOf(selectionObjetivo).equals(objetivo)){
                     dbProvider.updateObjetivo(objetivo, id);
@@ -214,7 +243,8 @@ public class EditarPerfil extends AppCompatActivity {
                 if (!String.valueOf(selectionPeso).equals(peso)){
                     dbProvider.updatePeso(peso,id);
                 }
-                if (name.equals(edtNombre)&&email.equals(editCorreo)&&password.equals(edtContra)&&telefono.equals(editTelefono)){
+                if (name.equals(edtNombre)&&email.equals(editCorreo)&&password.equals(edtContra)&&telefono.equals(editTelefono)
+                        &&imgUri==null){
 
                     Intent intent=new Intent(EditarPerfil.this, UsuarioPerfil.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -250,6 +280,7 @@ public class EditarPerfil extends AppCompatActivity {
                         if (usuarios.getId_usuario() != null){
                             if (usuarios.getId_usuario().equals(id)) {
 
+                                imagen= usuarios.getFoto_usuario();
                                 name = usuarios.getNombre_usuario();
                                 email = usuarios.getEmail_usuario();
                                 password = usuarios.getContrasena_usuario();
@@ -302,69 +333,123 @@ public class EditarPerfil extends AppCompatActivity {
         });
     }
 
+    private void uploadImage( final String id,final String imagen) {
+
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setTitle("Subiendo...");
+        progressDialog.setProgress(0);
+        progressDialog.show();
+
+        final String fileName =System.currentTimeMillis()+"";
+        final StorageReference storageReference1 = mStorage.child(Contants.TABLA_USUARIOS).child(edtNombreUsuario.getText().toString());
+
+        try {
+            Bitmap bmp;
+            bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.JPEG, 25, baos);
+            byte[] data = baos.toByteArray();
+
+            UploadTask uploadTask2 = storageReference1.putBytes(data);
+
+            uploadTask2.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    storageReference1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+
+                            dbProvider.updatePhoto(uri.toString(), id);
+                            progressDialog.dismiss();
+                            Toast.makeText(EditarPerfil.this, "Se actualizo la foto.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(EditarPerfil.this, "Hubo un problema intenta de nuevo.", Toast.LENGTH_SHORT).show();
+
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    int currentProgess = (int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                    progressDialog.setProgress(currentProgess);
+
+                }
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            imgUri = data.getData();
+        if (requestCode==86&& resultCode ==RESULT_OK && data!= null){
+            imgUri=data.getData();
 
-            try {
-                Bitmap bm = MediaStore.Images.Media.getBitmap(this.getApplicationContext().getContentResolver(), imgUri);
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                bm.compress(Bitmap.CompressFormat.JPEG,25,bytes);
-                imgPersona.setImageBitmap(bm);
-
-                final ProgressDialog dialog = new ProgressDialog(this);
-                dialog.setTitle("Guardando Imagen");
-                dialog.show();
-                final StorageReference ref = mStorage.child(Contants.TABLA_USUARIOS).child(edtNombreUsuario.getText().toString());
-
-                ref.putFile(imgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                        //Dimiss dialog when success
-                        //Display success toast msg
-                        dialog.dismiss();
-                        Toast.makeText(EditarPerfil.this,"Imagen guardada",Toast.LENGTH_SHORT).show();
-
-                        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-
-                                dbProvider.updatePhoto(uri.toString(), id);
-                            }
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        dialog.dismiss();
-
-
-                    }
-                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-
-                    @Override
-                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-
-                        double progress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                        dialog.setMessage("Uploaded " + (int) progress + "%");
-
-                    }
-                });
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            try{
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imgUri);
+                imgPersona.setImageBitmap(bitmap);
+            }catch (IOException e){
                 e.printStackTrace();
             }
+
         }
+        else {
+            Toast.makeText(EditarPerfil.this,"Selecciona archivo", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if (requestCode==9 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            selectImage();
+        }
+        else {
+            Toast.makeText(EditarPerfil.this, "Permite el permiso", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void selectImage() {
+
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,86);
+    }
+
+
     private void loadImageFromUrl(String url) {
         Picasso.get().load(url).into(imgPersona);
     }
 
+    private void dismissProgressDialog() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        dismissProgressDialog();
+        super.onDestroy();
+    }
 
    public void changeEmail(final String id, final String email) {
        mAuth = FirebaseAuth.getInstance();
@@ -385,7 +470,7 @@ public class EditarPerfil extends AppCompatActivity {
                     Toast.makeText(EditarPerfil.this, "Lo siento, hubo un error al cambiar el correo", Toast.LENGTH_SHORT).show();
                 }
 
-               // progressDialog.dismiss();
+                progressDialog.dismiss();
             }
         });
     }
@@ -406,7 +491,7 @@ public class EditarPerfil extends AppCompatActivity {
                 } else {
                     Toast.makeText(EditarPerfil.this, "Lo siento, hubo un error al cambiar la contraseña", Toast.LENGTH_SHORT).show();
                 }
-              //  progressDialog.dismiss();
+                progressDialog.dismiss();
             }
         });
     }

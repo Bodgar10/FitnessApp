@@ -32,6 +32,7 @@ import androidx.core.content.ContextCompat;
 
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
+import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.subirArchivos;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -227,17 +228,25 @@ public class Calificar extends AppCompatActivity {
 
                 else if (!txtExperiencia.isEmpty()&&pdfUri!=null&&pdfUri2!=null){
                    // uploadFile(pdfUri,key,txtExperiencia,fecha,"",key,"",id,valor);
-                    edtExperiencia.getText().clear();
                     uploadFile2(key,txtExperiencia,fecha,"",key,pdfUri2.toString(),pdfUri.toString(),
                             id,valor);
+                    edtExperiencia.getText().clear();
+                    Intent intent=new Intent(Calificar.this, UsuarioPerfil.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
 
                 }
 
             else if (!txtExperiencia.isEmpty()){
                     dbProvider.subirValoraciones(txtExperiencia,fecha,"",key, "nil",
                             "nil",id,valor);
-
+                    Toast.makeText(Calificar.this, "Se  ha calificado la asesoria.", Toast.LENGTH_SHORT).show();
                     edtExperiencia.getText().clear();
+                    Intent intent=new Intent(Calificar.this, UsuarioPerfil.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
 
                 }
 
@@ -286,7 +295,7 @@ public class Calificar extends AppCompatActivity {
 
                             uploadFile(descripcion,fecha,id_asesoria,id_valoracion,imgAntes,uri.toString(),nombre_usuario,valoracion);
                             progressDialog.dismiss();
-                            Toast.makeText(Calificar.this, "Se subio bien todo ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Calificar.this, "Se ha calificado la asesoria.", Toast.LENGTH_SHORT).show();
 
                         }
                     });
@@ -295,7 +304,7 @@ public class Calificar extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(Calificar.this, "No subio bien", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Calificar.this, "Hubo un error.", Toast.LENGTH_SHORT).show();
 
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {

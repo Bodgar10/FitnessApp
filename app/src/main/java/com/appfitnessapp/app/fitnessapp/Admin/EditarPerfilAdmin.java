@@ -261,9 +261,6 @@ public class EditarPerfilAdmin extends AppCompatActivity {
         });
     }
 
-
-
-
     private void uploadImage( final String id,final String imagen) {
 
 
@@ -323,8 +320,6 @@ public class EditarPerfilAdmin extends AppCompatActivity {
 
 
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -421,7 +416,6 @@ public class EditarPerfilAdmin extends AppCompatActivity {
             }
         });
     }
-
 
 
     private void dismissProgressDialog() {

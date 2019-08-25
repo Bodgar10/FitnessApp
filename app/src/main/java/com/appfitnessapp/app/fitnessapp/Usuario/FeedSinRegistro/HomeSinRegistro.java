@@ -1,5 +1,6 @@
 package com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -52,6 +53,8 @@ public class HomeSinRegistro  extends AppCompatActivity {
     ArrayList<Feed> feeds;
 
     RecyclerView recyclerView;
+    private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,9 @@ public class HomeSinRegistro  extends AppCompatActivity {
 
         dbProvider = new DBProvider();
         bajarInfo = new BajarInfo();
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setIndeterminate(true);
 
 
         imgAsesoria=findViewById(R.id.btnAsesoria);
@@ -177,14 +183,23 @@ public class HomeSinRegistro  extends AppCompatActivity {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Feed feed = snapshot.getValue(Feed.class);
 
+
                         feeds.add(feed);
                         adapterFeed.notifyDataSetChanged();
 
+
                     }
+
+
                 }
+
+
                 else {
                     Log.e(TAG, "Feed: ");
+
                 }
+
+
             }
 
             @Override

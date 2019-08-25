@@ -75,7 +75,7 @@ public class Tarjeta extends AppCompatActivity {
 
 
                     // onClickSomething("4242424242424242", "12", "2020", "123");
-                    cards();
+                    //cards();
 
 
 

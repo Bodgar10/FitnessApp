@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Admin.AgregarEjercicios"></activity>
+
         <activity android:name=".Login.SplashPantalla">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,10 +38,11 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-        <activity android:name=".Usuario.UsuarioChat" />
+        <activity android:name=".Usuario.UsuarioChat"
+
+            />
         <activity
-            android:name=".Usuario.PantallaPDF"
-            android:parentActivityName=".Usuario.UsuarioHome" />
+            android:name=".Usuario.PantallaPDF" />
         <activity android:name=".Usuario.Imagen" />
         <activity
             android:name=".Usuario.Video"
@@ -78,6 +79,11 @@
         <activity
             android:name=".Usuario.CambiarContrasena"
             android:parentActivityName=".Usuario.EditarPerfil" />
+
+        <activity android:name=".Usuario.Formulario"></activity>
+
+
+
         <activity android:name=".Admin.AsesoriasAdmin" />
         <activity
             android:name=".Admin.AdminPerfil"
@@ -102,6 +108,9 @@
             android:parentActivityName=".Admin.AdminPerfil" />
 
         <activity android:name=".Admin.AgregarEjercicios"></activity>
+        <activity android:name=".Admin.AdminWorkouts"></activity>
+        <activity android:name=".Admin.AgregarIngredientes"></activity>
+
     </application>
 
 </manifest>

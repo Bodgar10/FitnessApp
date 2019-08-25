@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        android:elevation="10dp"
+        android:theme="@style/Toolbar"
+        app:titleTextAppearance="@style/Toolbar.TitleText"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <TextView
+            android:id="@+id/txtGuardar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:padding="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="end"
+            android:textStyle="bold"
+            android:text="Guardar"
+            android:textAllCaps="true"
+            android:textColor="@color/naranja"
+            android:textSize="15sp" />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:padding="8dp"
+        android:gravity="start"
+        android:background="@android:color/darker_gray"
+        android:text="Datos de los ingredientes"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="13sp" />
+
+    <EditText
+        android:id="@+id/edtNombreIngrediente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:textSize="13sp"
+        android:background="@drawable/boton_gris_margen"
+        android:padding="10dp"
+        android:textColor="@color/negro"
+        android:hint="Nombre ingrediente"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edtCantidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:textSize="13sp"
+        android:background="@drawable/boton_gris_margen"
+        android:padding="10dp"
+        android:textColor="@color/negro"
+        android:hint="Cantidad"
+        android:inputType="number" />
+
+</LinearLayout>

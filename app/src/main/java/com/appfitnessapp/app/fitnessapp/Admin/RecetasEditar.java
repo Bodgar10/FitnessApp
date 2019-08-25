@@ -66,6 +66,7 @@ public class RecetasEditar extends AppCompatActivity {
     ProgressDialog progressDialog;
     StorageReference mStorage;
 
+    String keyPlan;
 
     ArrayList<Ingredientes> ingredientes;
     RecyclerView recyclerView,recyclerPreparacion,recyclerviewIngrediente;
@@ -224,25 +225,38 @@ public class RecetasEditar extends AppCompatActivity {
                 String calorias = Objects.requireNonNull(edtCalorias.getText()).toString();
                 String tiempo = Objects.requireNonNull(edtTiempo.getText()).toString();
 
+                keyPlan = key;
                 if (!nombre.isEmpty()&&!cantidad.isEmpty()&&!calorias.isEmpty()&&!tiempo.isEmpty()&&imgUri!=null){
                     if (checkDesayuno.isChecked()) {
                         uploadImage(key, id, imgUri.toString(),
                                 calorias + " Kcal", tiempo + " min", cantidad + " porciones",
                                 nombre, "desayuno", "200", "$100");
                         dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
-                        dbProvider.subirIngredientes(key, "Ensalada", "1 Pieza");
+                        Intent intent = new Intent(RecetasEditar.this, AgregarIngredientes.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("key",keyPlan);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
                     } else if (checkComida.isChecked()) {
                         uploadImage(key, id, imgUri.toString(),
                                 calorias + " Kcal", tiempo + " min", cantidad + " porciones",
                                 nombre, "almuerzo", "$200", "100");
                         dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
-                        dbProvider.subirIngredientes(key, "Ensalada", "1 Pieza");
+                        Intent intent1 = new Intent(RecetasEditar.this, AgregarIngredientes.class);
+                        Bundle bundle1 = new Bundle();
+                        bundle1.putString("key",keyPlan);
+                        intent1.putExtras(bundle1);
+                        startActivity(intent1);
                     } else if (checkCena.isChecked()) {
                         uploadImage(key, id, imgUri.toString(),
                                 calorias + " Kcal", tiempo + " min", cantidad + " porciones",
                                 nombre, "cena", "200", "100");
                         dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
-                        dbProvider.subirIngredientes(key, "Ensalada", "1 Pieza");
+                        Intent intent2 = new Intent(RecetasEditar.this, AgregarIngredientes.class);
+                        Bundle bundle2 = new Bundle();
+                        bundle2.putString("key",keyPlan);
+                        intent2.putExtras(bundle2);
+                        startActivity(intent2);
                     }
                     else {
                         Toast.makeText(RecetasEditar.this, "Selecciona un tipo de comida", Toast.LENGTH_SHORT).show();

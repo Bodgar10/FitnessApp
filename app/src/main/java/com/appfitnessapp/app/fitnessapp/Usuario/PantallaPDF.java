@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -77,7 +78,7 @@ public class PantallaPDF extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
                 FileLoader.with(this)
                         .load(url)
-                        .fromDirectory("PDFFiles",FileLoader.DIR_EXTERNAL_PUBLIC)
+                        //.fromDirectory("PDFFiles",FileLoader.DIR_EXTERNAL_PUBLIC)
                         .asFile(new FileRequestListener<File>() {
                             @Override
                             public void onLoad(FileLoadRequest fileLoadRequest, FileResponse<File> fileResponse) {
@@ -146,5 +147,23 @@ public class PantallaPDF extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

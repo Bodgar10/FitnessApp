@@ -79,9 +79,6 @@ public class AdapterAsesorias extends RecyclerView.Adapter<AdapterAsesorias.Ases
         holder.txtKilos.setText(asesoria.getPeso_actual());
         holder.txtObjetivo.setText(asesoria.getObjetivo());
 
-
-
-
         if (!asesoria.getFoto_usuario().equals("nil")){
 
             try {

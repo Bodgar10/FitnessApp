@@ -110,6 +110,19 @@ public class AdminPlanUsuario extends AppCompatActivity {
         recyclerView3.setAdapter(adapter3);
 
 
+        btnWorkouts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(AdminPlanUsuario.this, AdminWorkouts.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id",id);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
+
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,12 +182,6 @@ public class AdminPlanUsuario extends AppCompatActivity {
             }
         });
 
-        btnWorkouts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {

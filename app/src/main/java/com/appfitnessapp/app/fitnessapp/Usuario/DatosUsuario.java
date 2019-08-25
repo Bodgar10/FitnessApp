@@ -1,6 +1,7 @@
 package com.appfitnessapp.app.fitnessapp.Usuario;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -182,18 +183,38 @@ public class DatosUsuario extends AppCompatActivity {
 
 
                 if (imgHombre.isClickable()){
+                    if (!String.valueOf(selectionObjetivo).equals(objetivo)){
+                        dbProvider.updateObjetivo(objetivo, id);
+                    }
+                    if (!String.valueOf(selectionEstatura).equals(estatura)){
+                        dbProvider.updateEstatura(estatura, id);
+                    }
+                    if (!String.valueOf(selectionPeso).equals(peso)){
+                        dbProvider.updatePeso(peso,id);
+                    }
+                    Intent intent=new Intent(DatosUsuario.this, Formulario.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+
+                else if (imgMujer.isClickable()){
+
+                    if (!String.valueOf(selectionObjetivo).equals(objetivo)){
+                        dbProvider.updateObjetivo(objetivo, id);
+                    }
+                    if (!String.valueOf(selectionEstatura).equals(estatura)){
+                        dbProvider.updateEstatura(estatura, id);
+                    }
+                    if (!String.valueOf(selectionPeso).equals(peso)){
+                        dbProvider.updatePeso(peso,id);
+                    }
+                    Intent intent=new Intent(DatosUsuario.this, Formulario.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
 
                 }
 
-                if (!String.valueOf(selectionObjetivo).equals(objetivo)){
-                    dbProvider.updateObjetivo(objetivo, id);
-                }
-                if (!String.valueOf(selectionEstatura).equals(estatura)){
-                    dbProvider.updateEstatura(estatura, id);
-                }
-                if (!String.valueOf(selectionPeso).equals(peso)){
-                    dbProvider.updatePeso(peso,id);
-                }
+
 
             }
         });

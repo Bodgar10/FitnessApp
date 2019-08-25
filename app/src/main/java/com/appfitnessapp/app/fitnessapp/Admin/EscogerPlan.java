@@ -147,6 +147,7 @@ public class EscogerPlan extends AppCompatActivity {
 
                 if (!descripcion.isEmpty()&&!tiempo.isEmpty()&&!nivel.isEmpty()&&!ejercicios.isEmpty()){
 
+
                     switch (diaEscogido) {
                         case "Domingo":
                             dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios, descripcion, key, id, "1");
@@ -158,27 +159,56 @@ public class EscogerPlan extends AppCompatActivity {
                             //dbProvider.subirImagenesEjercicios("nil","nil","nil",key);
                             break;
                         case "Lunes":
-                            dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios,
-                                    descripcion, key, id, "2");
+                            dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios, descripcion, key, id, "2");
+                            Intent intent1 = new Intent(EscogerPlan.this, AgregarEjercicios.class);
+                            Bundle bundle1 = new Bundle();
+                            bundle1.putString("key",keyPlan);
+                            intent1.putExtras(bundle1);
+                            startActivity(intent1);
 
                             break;
                         case "Martes":
                             dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios, descripcion, key, id, "3");
+                            Intent intent2 = new Intent(EscogerPlan.this, AgregarEjercicios.class);
+                            Bundle bundle2 = new Bundle();
+                            bundle2.putString("key",keyPlan);
+                            intent2.putExtras(bundle2);
+                            startActivity(intent2);
                             break;
                         case "Miercoles":
                             dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios, descripcion, key, id, "4");
+                            Intent intent3 = new Intent(EscogerPlan.this, AgregarEjercicios.class);
+                            Bundle bundle3 = new Bundle();
+                            bundle3.putString("key",keyPlan);
+                            intent3.putExtras(bundle3);
+                            startActivity(intent3);
 
                             break;
                         case "Jueves":
                             dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios, descripcion, key, id, "5");
+                            Intent intent4 = new Intent(EscogerPlan.this, AgregarEjercicios.class);
+                            Bundle bundle4 = new Bundle();
+                            bundle4.putString("key",keyPlan);
+                            intent4.putExtras(bundle4);
+                            startActivity(intent4);
 
                             break;
                         case "Viernes":
                             dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios, descripcion, key, id, "6");
+                            Intent intent5 = new Intent(EscogerPlan.this, AgregarEjercicios.class);
+                            Bundle bundle5 = new Bundle();
+                            bundle5.putString("key",keyPlan);
+                            intent5.putExtras(bundle5);
+                            startActivity(intent5);
 
                             break;
                         case "Sabado":
                             dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios, descripcion, key, id, "7");
+                            Intent intent6 = new Intent(EscogerPlan.this, AgregarEjercicios.class);
+                            Bundle bundle6 = new Bundle();
+                            bundle6.putString("key",keyPlan);
+                            intent6.putExtras(bundle6);
+                            startActivity(intent6);
 
                             break;
                     }

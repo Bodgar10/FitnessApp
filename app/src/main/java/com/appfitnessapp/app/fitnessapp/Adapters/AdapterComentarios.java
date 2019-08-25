@@ -71,7 +71,25 @@ public class AdapterComentarios extends RecyclerView.Adapter<AdapterComentarios.
 
         holder.txtFecha.setText(plan.getFecha_valoracion());
         holder.txtComentario.setText(plan.getDescripcion_valoracion());
-        holder.txtNombre.setText(plan.getNombre_usuario());
+        holder.txtNombre.setText(plan.getNombre_usuario_valoracion());
+
+        if (!plan.getFoto_usuario().equals("nil")){
+
+            try {
+
+                URL urlUsuario = new URL(plan.getFoto_usuario());
+                Picasso.get().load(String.valueOf(urlUsuario))
+                        .error(R.mipmap.ic_launcher)
+                        .fit()
+                        .noFade()
+                        .into(holder.imgPersona);
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+
+        }
 
         if (!plan.getImagen_antes().equals("nil")&&!plan.getImagen_despues().equals("nil")){
 
