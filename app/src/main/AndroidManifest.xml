@@ -10,6 +10,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission  android:name="android.permission.WAKE_LOCK"  />
+    <uses-permission  android:name="android.permission.WRITE_SETTINGS"  />
+
 
     <application
         android:allowBackup="true"
@@ -81,6 +84,18 @@
             android:parentActivityName=".Usuario.EditarPerfil" />
 
         <activity android:name=".Usuario.Formulario"></activity>
+
+        <activity android:name=".videoplayer.VideoPlayer"
+            android:theme="@style/TemaVideo"
+            android:screenOrientation="landscape"
+        android:configChanges="orientation|screenSize|keyboardHidden">
+        </activity>
+
+        <!--
+        android:screenOrientation="landscape">
+        -->
+
+
 
 
 

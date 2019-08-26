@@ -24,6 +24,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.videoplayer.VideoPlayer;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -166,7 +167,7 @@ public class UsuarioHome  extends AppCompatActivity {
 
                 if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.VIDEO)){
 
-                    Intent intent = new Intent(UsuarioHome.this, Video.class);
+                    Intent intent = new Intent(UsuarioHome.this, VideoPlayer.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("video",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
                     intent.putExtras(bundle);
