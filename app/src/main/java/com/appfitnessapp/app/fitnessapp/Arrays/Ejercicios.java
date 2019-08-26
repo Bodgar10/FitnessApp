@@ -2,19 +2,17 @@ package com.appfitnessapp.app.fitnessapp.Arrays;
 
 public class Ejercicios {
 
-    public String nombre_ejercicio;
-    public String rondas;
-    public String repeticiones;
-    public String video_ejercicio;
-    public String imagenes_ejercicio;
-    public String id_ejercicio;
+    private String nombre_ejercicio;
+    private String rondas;
+    private String repeticiones;
+    private String video_ejercicio;
+    private String id_ejercicio;
 
-    public Ejercicios(String nombre_ejercicio, String rondas, String repeticiones, String video_ejercicio, String imagenes_ejercicio, String id_ejercicio) {
+    public Ejercicios(String nombre_ejercicio, String rondas, String repeticiones, String video_ejercicio, String id_ejercicio) {
         this.nombre_ejercicio = nombre_ejercicio;
         this.rondas = rondas;
         this.repeticiones = repeticiones;
         this.video_ejercicio = video_ejercicio;
-        this.imagenes_ejercicio = imagenes_ejercicio;
         this.id_ejercicio = id_ejercicio;
     }
 
@@ -50,14 +48,6 @@ public class Ejercicios {
 
     public void setVideo_ejercicio(String video_ejercicio) {
         this.video_ejercicio = video_ejercicio;
-    }
-
-    public String getImagenes_ejercicio() {
-        return imagenes_ejercicio;
-    }
-
-    public void setImagenes_ejercicio(String imagenes_ejercicio) {
-        this.imagenes_ejercicio = imagenes_ejercicio;
     }
 
     public String getId_ejercicio() {

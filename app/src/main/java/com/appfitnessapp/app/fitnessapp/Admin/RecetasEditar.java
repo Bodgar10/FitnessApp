@@ -232,6 +232,9 @@ public class RecetasEditar extends AppCompatActivity {
                                 calorias + " Kcal", tiempo + " min", cantidad + " porciones",
                                 nombre, "desayuno", "200", "$100");
                         dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
+
+
+
                         Intent intent = new Intent(RecetasEditar.this, AgregarIngredientes.class);
                         Bundle bundle = new Bundle();
                         bundle.putString("key",keyPlan);
@@ -242,6 +245,8 @@ public class RecetasEditar extends AppCompatActivity {
                                 calorias + " Kcal", tiempo + " min", cantidad + " porciones",
                                 nombre, "almuerzo", "$200", "100");
                         dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
+
+
                         Intent intent1 = new Intent(RecetasEditar.this, AgregarIngredientes.class);
                         Bundle bundle1 = new Bundle();
                         bundle1.putString("key",keyPlan);
@@ -252,6 +257,8 @@ public class RecetasEditar extends AppCompatActivity {
                                 calorias + " Kcal", tiempo + " min", cantidad + " porciones",
                                 nombre, "cena", "200", "100");
                         dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
+
+
                         Intent intent2 = new Intent(RecetasEditar.this, AgregarIngredientes.class);
                         Bundle bundle2 = new Bundle();
                         bundle2.putString("key",keyPlan);

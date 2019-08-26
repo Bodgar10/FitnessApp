@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,14 +34,20 @@ public class AdapterImagenes extends RecyclerView.Adapter<AdapterImagenes.Ejeric
     public static class EjericiosViewHolder extends RecyclerView.ViewHolder{
 
 
+        TextView txtNombre;
 
-        ImageView imgEjercicio;
+        ImageView imgEjercicio,imgEjercicio2,imgEjercicio3;
 
         public EjericiosViewHolder (View itemView) {
             super(itemView);
 
+            txtNombre=itemView.findViewById(R.id.txtNombre);
+
 
             imgEjercicio=itemView.findViewById(R.id.imgEjercicio);
+            imgEjercicio2=itemView.findViewById(R.id.imgEjercicio2);
+            imgEjercicio3=itemView.findViewById(R.id.imgEjercicio3);
+
 
 
         }
@@ -67,22 +74,40 @@ public class AdapterImagenes extends RecyclerView.Adapter<AdapterImagenes.Ejeric
         ImagenesEjercicios ejercicio = ejercicios.get(position);
 
 
+        holder.txtNombre.setText(ejercicio.getNombre());
 
-        if (!ejercicio.getImagen().equals("nil")){
+
+        if (!ejercicio.getImagen_1().equals("nil")&&!ejercicio.getImagen_2().equals("nil")&&!ejercicio.getImagen_3().equals("nil")){
 
             try {
-                URL urlfeed = new URL(ejercicio.getImagen());
+                URL urlfeed = new URL(ejercicio.getImagen_1());
                 Picasso.get().load(String.valueOf(urlfeed))
                         .error(R.mipmap.ic_launcher)
                         .fit()
                         .noFade()
                         .into(holder.imgEjercicio);
 
+                URL urlfeed1 = new URL(ejercicio.getImagen_2());
+                Picasso.get().load(String.valueOf(urlfeed1))
+                        .error(R.mipmap.ic_launcher)
+                        .fit()
+                        .noFade()
+                        .into(holder.imgEjercicio2);
+
+                URL urlfeed2 = new URL(ejercicio.getImagen_3());
+                Picasso.get().load(String.valueOf(urlfeed2))
+                        .error(R.mipmap.ic_launcher)
+                        .fit()
+                        .noFade()
+                        .into(holder.imgEjercicio3);
+
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
 
         }
+
+
 
     }
 

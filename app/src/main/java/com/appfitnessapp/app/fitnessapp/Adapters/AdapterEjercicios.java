@@ -72,8 +72,6 @@ public class AdapterEjercicios extends RecyclerView.Adapter<AdapterEjercicios.Ej
     public void onBindViewHolder(@NonNull AdapterEjercicios.EjericiosViewHolder holder, int position) {
         Ejercicios ejercicio = ejercicios.get(position);
 
-
-
         holder.txtTipoEjercicio.setText(ejercicio.getNombre_ejercicio());
         holder.txtRepeticiones.setText(ejercicio.getRepeticiones());
         holder.txtRondas.setText(ejercicio.getRondas());

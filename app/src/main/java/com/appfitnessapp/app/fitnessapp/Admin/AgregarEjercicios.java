@@ -17,6 +17,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -61,7 +62,8 @@ public class AgregarEjercicios extends AppCompatActivity {
     private static final String TAG = "BAJARINFO:";
     static DBProvider dbProvider;
 
-    String key;
+    String key,idEjercicio;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +166,9 @@ public class AgregarEjercicios extends AppCompatActivity {
 
                 if (!nombre.isEmpty()&&!ronda.isEmpty()&&!repeticiones.isEmpty()){
                     uploadVideo(nombre,ronda,repeticiones,key);
-                    uploadImage3(key,imagen1Uri.toString(), imagen2Uri.toString(), imagen3Uri.toString());
+                    Log.e(TAG, "Ejercicio2: " + idEjercicio);
+
+                   // uploadImage3(idEjercicio,imagen1Uri.toString(), imagen2Uri.toString(), imagen3Uri.toString());
 
                 }
                 else {
@@ -207,7 +211,12 @@ public class AgregarEjercicios extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri) {
 
-                                dbProvider.subirEjerciciosPlan(nombre_ejercicio, rondas, repeticiones, uri.toString(), id_ejercicio);
+                                String key = dbProvider.tablaPlanEntrenamiento().child(id_ejercicio).child(Contants.EJERCICIOS).push().getKey();
+
+                                idEjercicio = key;
+                                dbProvider.subirEjerciciosPlan(nombre_ejercicio, rondas, repeticiones, uri.toString(), id_ejercicio,key);
+                                uploadImage3(id_ejercicio,idEjercicio,imagen1Uri.toString(),imagen2Uri.toString(),imagen3Uri.toString());
+
 
                                 //ejerciciosSolos
                                 //dbProvider.subirEjercicios(nombre_ejercicio,rondas,repeticiones,uri.toString(),id_ejercicio);
@@ -236,7 +245,7 @@ public class AgregarEjercicios extends AppCompatActivity {
         });
     }
 
-    private void uploadImage3(final String key, final String img1, final String img2, String img3) {
+    private void uploadImage3(final String keyPlan,final String keyEjercicio, final String img1, final String img2, String img3) {
 
 /*
         progressDialog = new ProgressDialog(this);
@@ -265,7 +274,7 @@ public class AgregarEjercicios extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
 
-                            uploadImage2(key,img1,img2,uri.toString());
+                            uploadImage2(keyPlan,keyEjercicio,img1,img2,uri.toString());
                            // progressDialog.dismiss();
                             Toast.makeText(AgregarEjercicios.this, "Se subio bien todo ", Toast.LENGTH_SHORT).show();
                         }
@@ -297,7 +306,7 @@ public class AgregarEjercicios extends AppCompatActivity {
     }
 
 
-    private void uploadImage2( final String key,final String imagen1,final String imagen2, final String imagen3) {
+    private void uploadImage2( final String keyPlan,final String keyEjercicio,final String imagen1,final String imagen2, final String imagen3) {
 
         /*
         progressDialog = new ProgressDialog(this);
@@ -326,7 +335,7 @@ public class AgregarEjercicios extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
 
-                            uploadImage1(key,imagen1,uri.toString(),imagen3);
+                            uploadImage1(keyPlan,keyEjercicio,imagen1,uri.toString(),imagen3);
                         }
                     });
 
@@ -356,7 +365,7 @@ public class AgregarEjercicios extends AppCompatActivity {
     }
 
 
-    private void uploadImage1( final String key,final String imagen1, final String imagen2, final String imagen3) {
+    private void uploadImage1( final String keyPlan,final String keyEjercicio, String imagen1, final String imagen2, final String imagen3) {
 
         /*
         progressDialog = new ProgressDialog(this);
@@ -386,7 +395,7 @@ public class AgregarEjercicios extends AppCompatActivity {
                         public void onSuccess(Uri uri) {
 
                             //dbProvider.subirImagenes(uri.toString(),key,imagen2,imagen3);
-                            dbProvider.subirImagenesEjercicios(uri.toString(),imagen2,imagen3,key);
+                            dbProvider.subirImagenesEjercicios(uri.toString(),imagen2,imagen3,keyPlan,keyEjercicio);
 
                         }
                     });

@@ -73,9 +73,10 @@ public class AdminRecetaDetalle extends AppCompatActivity {
             calorias = extras.getString("calorias");
             minutos = extras.getString("minutos");
 
+            bajarIngredientes();
+            bajarPasos();
         }
-        bajarIngredientes();
-        bajarPasos();
+
 
         imagen=findViewById(R.id.imgReceta);
         imagen.setScaleType(ImageView.ScaleType.FIT_XY);

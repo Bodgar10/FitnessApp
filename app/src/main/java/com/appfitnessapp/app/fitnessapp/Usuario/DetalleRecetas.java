@@ -73,6 +73,8 @@ public class DetalleRecetas extends AppCompatActivity {
             calorias = extras.getString("calorias");
             minutos = extras.getString("minutos");
 
+            bajarIngredientes();
+            bajarPasos();
         }
 
         Toolbar toolbarback=findViewById(R.id.toolbar);
@@ -82,8 +84,6 @@ public class DetalleRecetas extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
 
-        bajarIngredientes();
-        bajarPasos();
 
         imagen=findViewById(R.id.imgReceta);
         imagen.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -146,9 +146,11 @@ public class DetalleRecetas extends AppCompatActivity {
 
     public void bajarIngredientes(){
 
+        Log.e(TAG, "Receta: " + idReceta);
         dbProvider.tablaPlanAlimenticio().child(idReceta).child(Contants.INGREDIENTES).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e(TAG, "Feed: " +dataSnapshot );
                 ingredientes.clear();
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
