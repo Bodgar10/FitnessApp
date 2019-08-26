@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -167,9 +168,7 @@ public class AgregarEjercicios extends AppCompatActivity {
                 if (!nombre.isEmpty()&&!ronda.isEmpty()&&!repeticiones.isEmpty()){
                     uploadVideo(nombre,ronda,repeticiones,key);
                     Log.e(TAG, "Ejercicio2: " + idEjercicio);
-
-                   // uploadImage3(idEjercicio,imagen1Uri.toString(), imagen2Uri.toString(), imagen3Uri.toString());
-
+                    Toast.makeText(AgregarEjercicios.this, "Se subio toda la información correctamente.", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(AgregarEjercicios.this, "Revisa  que todos los campos esten llenos.", Toast.LENGTH_SHORT).show();
@@ -221,7 +220,7 @@ public class AgregarEjercicios extends AppCompatActivity {
                                 //ejerciciosSolos
                                 //dbProvider.subirEjercicios(nombre_ejercicio,rondas,repeticiones,uri.toString(),id_ejercicio);
                                 progressDialog.dismiss();
-                                Toast.makeText(AgregarEjercicios.this, "Se subio bien todo ", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AgregarEjercicios.this, "Se subio correctamente la informacion", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -231,7 +230,7 @@ public class AgregarEjercicios extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
 
-                Toast.makeText(AgregarEjercicios.this, "No subio bien", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AgregarEjercicios.this, "Hubo un error al subir el video.", Toast.LENGTH_SHORT).show();
 
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -276,7 +275,7 @@ public class AgregarEjercicios extends AppCompatActivity {
 
                             uploadImage2(keyPlan,keyEjercicio,img1,img2,uri.toString());
                            // progressDialog.dismiss();
-                            Toast.makeText(AgregarEjercicios.this, "Se subio bien todo ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AgregarEjercicios.this, "Se subieron las imagenes correctamente. ", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -285,7 +284,7 @@ public class AgregarEjercicios extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(AgregarEjercicios.this, "No subio bien", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AgregarEjercicios.this, "Hubo un error al subir las imagenes.", Toast.LENGTH_SHORT).show();
 
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -545,6 +544,22 @@ public class AgregarEjercicios extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 
 
 }

@@ -19,12 +19,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.appfitnessapp.app.fitnessapp.Admin.AdminPerfil;
 import com.appfitnessapp.app.fitnessapp.Arrays.EstadisticaAlimentos;
 import com.appfitnessapp.app.fitnessapp.Arrays.EstadisticaEjercicio;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
+import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -67,6 +69,10 @@ public class UsuarioPerfil  extends AppCompatActivity {
     static DBProvider dbProvider;
 
 
+    LinearLayout linearCerrar;
+
+
+    private static FirebaseAuth mAuth;
 
     BarChart chart,chartHorizontal;
 
@@ -140,8 +146,13 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
 
            imgPersona=findViewById(R.id.imgPersona);
+           linearCerrar=findViewById(R.id.linearCerrar);
 
-        txtNombre=findViewById(R.id.txtNombreUsuario);
+           mAuth = FirebaseAuth.getInstance();
+
+
+
+           txtNombre=findViewById(R.id.txtNombreUsuario);
         txtPeso=findViewById(R.id.txtPesoActual);
         txtAltura=findViewById(R.id.txtEstatura);
         txtObjetivo=findViewById(R.id.txtObjetivo);
@@ -229,6 +240,20 @@ public class UsuarioPerfil  extends AppCompatActivity {
             }
         });
 
+
+           linearCerrar.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+
+                   mAuth.signOut();
+                   Toast.makeText(UsuarioPerfil.this, "Se ha cerrado la sesión correctamente.", Toast.LENGTH_SHORT).show();
+                   Intent intent=new Intent(UsuarioPerfil.this, SplashPantalla.class);
+                   intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                   startActivity(intent);
+                   finish();
+
+               }
+           });
 
 
 

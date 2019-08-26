@@ -56,7 +56,7 @@ public class AdminRecetaDetalle extends AppCompatActivity {
 
         Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
-        getSupportActionBar().setTitle("Desayuno");
+        getSupportActionBar().setTitle("Recetas");
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 

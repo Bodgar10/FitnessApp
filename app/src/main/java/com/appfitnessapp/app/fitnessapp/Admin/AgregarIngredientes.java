@@ -60,6 +60,9 @@ public class AgregarIngredientes extends AppCompatActivity  {
                 if (!nombre.isEmpty()&&!cantidad.isEmpty()){
                     dbProvider.subirIngredientes(key, nombre, cantidad);
                     Toast.makeText(AgregarIngredientes.this, "Se subieron los ingredientes.", Toast.LENGTH_SHORT).show();
+                    edtNombre.getText().clear();
+                    edtCantidad.getText().clear();
+
 
                 }
                 else {

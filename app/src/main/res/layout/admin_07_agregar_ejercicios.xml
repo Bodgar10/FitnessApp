@@ -143,6 +143,7 @@
 
 
         <LinearLayout
+            android:visibility="gone"
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_width="match_parent"

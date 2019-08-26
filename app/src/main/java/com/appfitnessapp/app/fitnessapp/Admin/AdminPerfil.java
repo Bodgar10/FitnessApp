@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -91,6 +92,7 @@ public class AdminPerfil extends AppCompatActivity {
             public void onClick(View v) {
 
                 mAuth.signOut();
+                Toast.makeText(AdminPerfil.this, "Se ha cerrado la sesión correctamente.", Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(AdminPerfil.this, SplashPantalla.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

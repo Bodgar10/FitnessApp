@@ -2,6 +2,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -25,15 +26,15 @@
                 android:id="@+id/txtGuardar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="10dp"
                 android:gravity="end"
                 android:padding="5dp"
-                android:layout_marginEnd="10dp"
-                android:layout_gravity="end"
-                android:textStyle="bold"
-                android:text="Guardar"
+                android:text="Siguiente"
                 android:textAllCaps="true"
                 android:textColor="@color/naranja"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
 
         </androidx.appcompat.widget.Toolbar>
@@ -136,15 +137,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
             android:layout_marginTop="5dp"
-            android:ems="10"
-            android:textSize="13sp"
+            android:layout_marginEnd="15dp"
             android:background="@drawable/boton_gris_margen"
+            android:ems="10"
+            android:hint='Nivel Ejercicio "Alta", "Baja", "Media"'
+            android:inputType="textPersonName"
             android:padding="10dp"
             android:textColor="@color/negro"
-            android:hint="Nivel Ejercicio"
-            android:inputType="textPersonName" />
+            android:textSize="13sp" />
 
         <EditText
             android:id="@+id/edtNumEjercicios"
@@ -185,17 +186,18 @@
 
 
         <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp"
-        android:padding="8dp"
-        android:gravity="start"
-        android:background="@android:color/darker_gray"
-        android:text="rutina de ejercicios"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        android:textSize="13sp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/darker_gray"
+            android:gravity="start"
+            android:padding="8dp"
+            android:text="rutina de ejercicios"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textSize="13sp"
+            tools:visibility="gone" />
 
     <include
         layout="@layout/recyclerview"
@@ -204,40 +206,43 @@
 
     </include>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:layout_marginEnd="10dp"
-            android:textAlignment="textEnd"
-            android:text="Agregar otro ejercicio"
-            android:textAllCaps="true"
-            android:textColor="@android:color/black"
-            android:textSize="12sp" />
-
-        <ImageButton
-            android:id="@+id/btnAgregarEjercicio"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="10dp"
-            android:background="@null"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_agregrar_iconocua"/>
+            android:gravity="center"
+            android:orientation="horizontal"
+            tools:visibility="gone">
 
 
-    </LinearLayout>
+            <TextView
+                android:visibility="gone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="Agregar otro ejercicio"
+                android:textAlignment="textEnd"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
+
+            <ImageButton
+                android:visibility="gone"
+                android:id="@+id/btnAgregarEjercicio"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@null"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_agregrar_iconocua" />
+
+
+        </LinearLayout>
 
 
 

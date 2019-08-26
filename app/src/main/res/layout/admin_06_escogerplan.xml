@@ -25,15 +25,15 @@
                 android:id="@+id/txtGuardar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="10dp"
                 android:gravity="end"
                 android:padding="5dp"
-                android:layout_marginEnd="10dp"
-                android:layout_gravity="end"
-                android:textStyle="bold"
-                android:text="Guardar"
+                android:text="Siguiente"
                 android:textAllCaps="true"
                 android:textColor="@color/naranja"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
 
 
@@ -258,6 +258,7 @@
 
 
         <TextView
+            android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -279,6 +280,7 @@
     </include>
 
     <LinearLayout
+        android:visibility="gone"
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -314,6 +316,7 @@
     </LinearLayout>
 
     <TextView
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -335,6 +338,7 @@
     </include>
 
     <LinearLayout
+        android:visibility="gone"
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_width="match_parent"

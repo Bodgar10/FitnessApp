@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterFeed;
+import com.appfitnessapp.app.fitnessapp.Admin.AsesoriasAdmin;
 import com.appfitnessapp.app.fitnessapp.Arrays.Feed;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
@@ -62,6 +63,7 @@ public class UsuarioHome  extends AppCompatActivity {
 
     private static FirebaseAuth mAuth;
 
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +99,12 @@ public class UsuarioHome  extends AppCompatActivity {
             Intent intent=new Intent(UsuarioHome.this, SplashPantalla.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+
+        }
+
+
+        else if (user!=null){
+            id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         }
 

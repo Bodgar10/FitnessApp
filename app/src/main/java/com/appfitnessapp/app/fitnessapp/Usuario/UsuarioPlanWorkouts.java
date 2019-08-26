@@ -157,6 +157,12 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
                                     txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
                                     txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
                                     txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio()+" Intensidad");
+                                    imgVideo.setVisibility(View.VISIBLE);
+
+                                }  else {
+                                    Toast.makeText(UsuarioPlanWorkouts.this, "No tienes ejercicios por hoy", Toast.LENGTH_SHORT).show();
+                                    imgVideo.setVisibility(View.GONE);
+
                                 }
 
                             }
@@ -167,6 +173,13 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
                                     txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
                                     txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
                                     txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio()+" Intensidad");
+                                    imgVideo.setVisibility(View.VISIBLE);
+
+                                }
+                                else {
+                                    Toast.makeText(UsuarioPlanWorkouts.this, "No tienes ejercicios por hoy", Toast.LENGTH_SHORT).show();
+                                    imgVideo.setVisibility(View.GONE);
+
                                 }
 
                             }
@@ -178,6 +191,12 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
                                     txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
                                     txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
                                     txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio()+" Intensidad");
+                                    imgVideo.setVisibility(View.VISIBLE);
+
+                                }  else {
+                                    Toast.makeText(UsuarioPlanWorkouts.this, "No tienes ejercicios por hoy", Toast.LENGTH_SHORT).show();
+                                    imgVideo.setVisibility(View.GONE);
+
                                 }
 
                             }
@@ -188,6 +207,12 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
                                     txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
                                     txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
                                     txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio()+" Intensidad");
+                                    imgVideo.setVisibility(View.VISIBLE);
+
+                                }  else {
+                                    Toast.makeText(UsuarioPlanWorkouts.this, "No tienes ejercicios por hoy", Toast.LENGTH_SHORT).show();
+                                    imgVideo.setVisibility(View.GONE);
+
                                 }
                             }
 
@@ -198,6 +223,12 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
                                     txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
                                     txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
                                     txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio()+" Intensidad");
+                                    imgVideo.setVisibility(View.VISIBLE);
+
+                                }  else {
+                                    Toast.makeText(UsuarioPlanWorkouts.this, "No tienes ejercicios por hoy", Toast.LENGTH_SHORT).show();
+                                    imgVideo.setVisibility(View.GONE);
+
                                 }
                             }
 
@@ -209,6 +240,13 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
                                     txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
                                     txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
                                     txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio()+" Intensidad");
+                                    imgVideo.setVisibility(View.VISIBLE);
+
+                                }
+                                else {
+                                    Toast.makeText(UsuarioPlanWorkouts.this, "No tienes ejercicios por hoy", Toast.LENGTH_SHORT).show();
+                                    imgVideo.setVisibility(View.GONE);
+
                                 }
                             }
 
@@ -220,6 +258,12 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
                                     txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
                                     txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
                                     txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio()+" Intensidad");
+                                    imgVideo.setVisibility(View.VISIBLE);
+
+                                }
+                                else {
+                                    Toast.makeText(UsuarioPlanWorkouts.this, "No tienes ejercicios por hoy", Toast.LENGTH_SHORT).show();
+                                    imgVideo.setVisibility(View.GONE);
                                 }
                             }
                         }

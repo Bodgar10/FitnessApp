@@ -320,7 +320,7 @@ public class RecetasEditar extends AppCompatActivity {
                                     kilocalorias , min_alimentos, porciones,
                                     nombre_alimento, tipo_alimento, precioAlto, precioBajo);
                             progressDialog.dismiss();
-                            Toast.makeText(RecetasEditar.this, "Se subio bien todo ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RecetasEditar.this, "Se subio correctamen la información. ", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -329,7 +329,7 @@ public class RecetasEditar extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(RecetasEditar.this, "No subio bien", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RecetasEditar.this, "Hubo un error al subir la información", Toast.LENGTH_SHORT).show();
 
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
