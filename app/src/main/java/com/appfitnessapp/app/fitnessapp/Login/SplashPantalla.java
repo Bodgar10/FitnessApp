@@ -57,6 +57,7 @@ public class SplashPantalla extends AppCompatActivity {
         if (FirebaseAuth.getInstance().getCurrentUser() != null){
             progressDialog.setMessage("Recopilando información importante...");
             progressDialog.show();
+            progressDialog.setCancelable(false);
             bajarUsuarios();
         }
 

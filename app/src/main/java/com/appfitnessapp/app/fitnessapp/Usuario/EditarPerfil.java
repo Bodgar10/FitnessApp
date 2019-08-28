@@ -203,10 +203,7 @@ public class EditarPerfil extends AppCompatActivity {
 
                 if (!imagen.equals(imgPersona)&&imgUri!=null){
                     uploadImage(id,imgUri.toString());
-                    Intent intent=new Intent(EditarPerfil.this, UsuarioPerfil.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    finish();
+
                 }
 
                 if (!name.equals(edtNombre)){
@@ -215,16 +212,19 @@ public class EditarPerfil extends AppCompatActivity {
                     Intent intent=new Intent(EditarPerfil.this, UsuarioPerfil.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    finish();
                 }
 
                 if (!email.equals(editCorreo)){
                     progressDialog.setMessage("Actualizando correo");
                     progressDialog.show();
+                    progressDialog.setCancelable(false);
                     changeEmail(id, editCorreo);
                 }
                 if (!password.equals(edtContra)){
                     progressDialog.setMessage("Actualizando contraseña");
                     progressDialog.show();
+                    progressDialog.setCancelable(false);
                     changePass(id, edtContra);
                 }
                 if (!telefono.equals(editTelefono)){
@@ -341,6 +341,8 @@ public class EditarPerfil extends AppCompatActivity {
         progressDialog.setTitle("Subiendo...");
         progressDialog.setProgress(0);
         progressDialog.show();
+        progressDialog.setCancelable(false);
+
 
         final String fileName =System.currentTimeMillis()+"";
         final StorageReference storageReference1 = mStorage.child(Contants.TABLA_USUARIOS).child(edtNombreUsuario.getText().toString());
@@ -349,7 +351,7 @@ public class EditarPerfil extends AppCompatActivity {
             Bitmap bmp;
             bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bmp.compress(Bitmap.CompressFormat.JPEG, 25, baos);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] data = baos.toByteArray();
 
             UploadTask uploadTask2 = storageReference1.putBytes(data);
@@ -467,6 +469,7 @@ public class EditarPerfil extends AppCompatActivity {
                     startActivity(intent);
 
                 } else {
+                    Log.e(TAG, "Correo: " + email);
                     Toast.makeText(EditarPerfil.this, "Lo siento, hubo un error al cambiar el correo", Toast.LENGTH_SHORT).show();
                 }
 

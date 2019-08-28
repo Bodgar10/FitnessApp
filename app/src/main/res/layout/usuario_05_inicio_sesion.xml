@@ -19,6 +19,8 @@
         android:layout_height="match_parent">
 
 
+
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="200dp"
@@ -41,6 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="6dp"
+                android:textColorHint="@color/negro"
                 android:layout_marginEnd="3dp"
                 android:layout_height="wrap_content">
 
@@ -53,16 +56,19 @@
                     android:layout_marginBottom="5dp"
                     android:ems="10"
                     android:textSize="14sp"
+                    android:backgroundTint="@color/negro"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:textColor="@android:color/black"
-                    android:textColorHint="@android:color/darker_gray" />
+                    android:textColorHint="@color/negro" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <View
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"/>
@@ -72,6 +78,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginStart="6dp"
                 android:layout_marginEnd="3dp"
+                android:textColorHint="@color/negro"
                 android:layout_height="wrap_content">
 
 
@@ -79,12 +86,13 @@
                 android:id="@+id/editContrasena"
                 android:hint="Contraseña"
                 android:layout_marginEnd="3dp"
-                android:textColorHint="@android:color/darker_gray"
+                android:textColorHint="@color/negro"
                 android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="5dp"
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/negro"
                 android:ems="10"
                 android:inputType="textPassword" />
 

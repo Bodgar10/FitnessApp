@@ -81,9 +81,9 @@ public class AdapterRecetas extends RecyclerView.Adapter<AdapterRecetas.RecetasV
             try {
                 URL urlfeed = new URL(receta.getImagen_alimento());
                 Picasso.get().load(String.valueOf(urlfeed))
-                        .error(R.mipmap.ic_launcher)
                         .fit()
-                        .noFade()
+                        .centerInside()
+                        .error(R.mipmap.ic_launcher)
                         .into(holder.imagen);
 
             } catch (MalformedURLException e) {

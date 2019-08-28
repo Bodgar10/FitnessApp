@@ -102,8 +102,6 @@ public class UsuarioHome  extends AppCompatActivity {
             startActivity(intent);
 
         }
-
-
         else if (user!=null){
             id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

@@ -81,6 +81,7 @@ public class IniciarSesion extends AppCompatActivity {
                 if (!correo.isEmpty() && !pass.isEmpty()){
                     progressDialog.setMessage("Ingresando...");
                     progressDialog.show();
+                    progressDialog.setCancelable(false);
                     login(correo,pass);
                 }else{
                     Toast.makeText(IniciarSesion.this, "Falta información.", Toast.LENGTH_SHORT).show();

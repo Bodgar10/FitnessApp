@@ -77,6 +77,7 @@ public class Registro extends AppCompatActivity {
                 if (!correo.isEmpty() && !contrasena.isEmpty() && !nombre.isEmpty() && !telefono.isEmpty()) {
                     progressDialog.setMessage("Creando cuenta...");
                     progressDialog.show();
+                    progressDialog.setCancelable(false);
                     register(correo,"nil",nombre,contrasena,telefono,"nil",refreshedToken,Contants.USUARIO);
                 }else{
                     Toast.makeText(Registro.this, "Verifica que tengas todo rellenado.", Toast.LENGTH_SHORT).show();
