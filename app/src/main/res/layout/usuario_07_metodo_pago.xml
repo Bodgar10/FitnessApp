@@ -8,34 +8,16 @@
     android:layout_height="match_parent">
 
 
-    <LinearLayout
-        android:id="@+id/linem"
+    <include
+        layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="@android:color/white"
         android:elevation="20dp"
         android:gravity="start"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="Suscribirse a un plan "
-            android:textAllCaps="false"
-            android:textColor="@color/negro"
-            android:textSize="15sp" />
-
-    </LinearLayout>
+        android:id="@+id/include" />
 
 
    <LinearLayout
@@ -43,7 +25,7 @@
        android:background="@color/blanco"
         android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_below="@+id/linem"
+       android:layout_below="@+id/include"
        android:layout_alignParentStart="true"
        android:layout_alignParentEnd="true"
        android:layout_marginStart="0dp"
@@ -221,7 +203,7 @@
                    android:layout_marginBottom="10dp"
                    android:layout_weight="1"
                    android:gravity="center|end"
-                   android:text="1200 USD"
+                   android:text=""
                    android:textAlignment="textEnd"
                    android:textAllCaps="false"
                    android:textColor="@android:color/black"
@@ -257,7 +239,7 @@
                    android:layout_marginBottom="10dp"
                    android:layout_weight="1"
                    android:gravity="center|end"
-                   android:text="6"
+                   android:text=""
                    android:textAlignment="textEnd"
                    android:textAllCaps="false"
                    android:textColor="@android:color/black"
@@ -306,7 +288,7 @@
                    android:textAlignment="textEnd"
                    android:layout_marginEnd="15dp"
                    android:gravity="center|end"
-                   android:text="1200"
+                   android:text=""
                    android:textAllCaps="false"
                    android:textStyle="bold"
                    android:textColor="@android:color/black"

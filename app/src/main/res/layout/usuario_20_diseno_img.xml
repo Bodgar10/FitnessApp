@@ -39,7 +39,7 @@
             android:layout_weight="1"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:srcCompat="@drawable/ic_imgnull" />
 
         <ImageView
             android:id="@+id/imgEjercicio2"
@@ -52,7 +52,7 @@
             android:layout_weight="1"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:srcCompat="@drawable/ic_imgnull" />
 
         <ImageView
             android:id="@+id/imgEjercicio3"
@@ -65,7 +65,7 @@
             android:layout_weight="1"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:srcCompat="@drawable/ic_imgnull" />
 
 
     </LinearLayout>

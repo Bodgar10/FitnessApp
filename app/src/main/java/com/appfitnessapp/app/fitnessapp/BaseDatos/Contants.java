@@ -180,6 +180,9 @@ public class Contants {
 
     final public static String[] dias_ejercicios = {"Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"};
 
+    final public static String[] nivel_ejercicio = {"Alta", "Media", "Baja"};
+
+
 
     final public static String IMAGEN_1 = "imagen_1";
     final public static String IMAGEN_2 = "imagen_2";

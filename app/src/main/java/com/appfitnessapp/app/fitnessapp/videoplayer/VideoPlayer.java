@@ -1,6 +1,5 @@
 package com.appfitnessapp.app.fitnessapp.videoplayer;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
@@ -8,19 +7,14 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.Display;
 
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -242,7 +236,7 @@ public class VideoPlayer extends AppCompatActivity implements HlsSampleSource.Ev
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.hplib_activity_video_player);
+        setContentView(R.layout.usuario_video);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null){
@@ -325,7 +319,7 @@ public class VideoPlayer extends AppCompatActivity implements HlsSampleSource.Ev
         root = (LinearLayout) findViewById(R.id.root);
         root.setVisibility(View.VISIBLE);
 
-        surface = (SurfaceView) findViewById(R.id.surface_view);
+        surface = (SurfaceView) findViewById(R.id.srface_view);
 
         currentTrackIndex=0;
 
@@ -363,7 +357,6 @@ public class VideoPlayer extends AppCompatActivity implements HlsSampleSource.Ev
         if (i1 == R.id.btn_rev) {
             player.seekTo(player.getCurrentPosition() - 10000);
         }
-
 
     }
 

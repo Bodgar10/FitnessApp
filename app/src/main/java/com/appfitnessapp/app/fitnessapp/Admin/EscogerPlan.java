@@ -54,10 +54,12 @@ public class EscogerPlan extends AppCompatActivity {
 
     TextView btnRecetas,btnGuardar;
     ImageView btnAgregarEjercicio;
-    EditText edtDescripcion,edtTiempo,edtNivel,edtNumEjercicios;
+    EditText edtDescripcion,edtTiempo,edtNumEjercicios;
 
     ArrayAdapter<String> Sdia;
-    Spinner spinnerDia;
+    ArrayAdapter<String> SNivel;
+
+    Spinner spinnerDia,spinnerNivel;
 
     RecyclerView recyclerView;
 
@@ -88,11 +90,20 @@ public class EscogerPlan extends AppCompatActivity {
 
         spinnerDia = findViewById(R.id.spinnerDia);
 
+        spinnerNivel = findViewById(R.id.spinnerNivel);
+
+
         Sdia = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.dias_ejercicios);
+
+        SNivel = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, Contants.nivel_ejercicio);
+
 
 
         spinnerDia.setAdapter(Sdia);
         spinnerDia.setPrompt("Dia de ejercicio");
+
+        spinnerNivel.setAdapter(SNivel);
+        spinnerNivel.setPrompt("Nivel de ejercicio");
 
         spinnerDia.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -102,6 +113,12 @@ public class EscogerPlan extends AppCompatActivity {
         });
 
 
+        spinnerNivel.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                ((TextView) spinnerNivel.getSelectedView()).setTextColor(Color.GRAY);
+            }
+        });
 
         btnRecetas=findViewById(R.id.btnRecetas);
         btnAgregarEjercicio=findViewById(R.id.btnAgregarEjercicio);
@@ -109,7 +126,6 @@ public class EscogerPlan extends AppCompatActivity {
         edtDescripcion=findViewById(R.id.edtDescripcion);
 
         edtTiempo=findViewById(R.id.edtTiempo);
-        edtNivel=findViewById(R.id.edtNivel);
         edtNumEjercicios=findViewById(R.id.edtNumEjercicios);
 
 
@@ -140,17 +156,18 @@ public class EscogerPlan extends AppCompatActivity {
                 String key = dbProvider.tablaPlanEntrenamiento().push().getKey();
                 String descripcion = edtDescripcion.getText().toString();
                 String tiempo = edtTiempo.getText().toString();
-                String nivel = edtNivel.getText().toString();
                 String ejercicios = edtNumEjercicios.getText().toString();
                 String diaEscogido = spinnerDia.getSelectedItem().toString();
+                String nivelEjercicio = spinnerNivel.getSelectedItem().toString();
+
                 keyPlan=key;
 
-                if (!descripcion.isEmpty()&&!tiempo.isEmpty()&&!nivel.isEmpty()&&!ejercicios.isEmpty()){
+                if (!descripcion.isEmpty()&&!tiempo.isEmpty()&&!ejercicios.isEmpty()){
 
 
                     switch (diaEscogido) {
                         case "Domingo":
-                            dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios, descripcion, key, id, "1");
+                            dbProvider.subirPlanEjercicio(tiempo, nivelEjercicio, ejercicios, descripcion, key, id, "1");
                             Intent intent = new Intent(EscogerPlan.this, AgregarEjercicios.class);
                             Bundle bundle = new Bundle();
                             bundle.putString("key",keyPlan);
@@ -159,7 +176,7 @@ public class EscogerPlan extends AppCompatActivity {
                             //dbProvider.subirImagenesEjercicios("nil","nil","nil",key);
                             break;
                         case "Lunes":
-                            dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios, descripcion, key, id, "2");
+                            dbProvider.subirPlanEjercicio(tiempo, nivelEjercicio, ejercicios, descripcion, key, id, "2");
                             Intent intent1 = new Intent(EscogerPlan.this, AgregarEjercicios.class);
                             Bundle bundle1 = new Bundle();
                             bundle1.putString("key",keyPlan);
@@ -168,7 +185,7 @@ public class EscogerPlan extends AppCompatActivity {
 
                             break;
                         case "Martes":
-                            dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios, descripcion, key, id, "3");
+                            dbProvider.subirPlanEjercicio(tiempo, nivelEjercicio, ejercicios, descripcion, key, id, "3");
                             Intent intent2 = new Intent(EscogerPlan.this, AgregarEjercicios.class);
                             Bundle bundle2 = new Bundle();
                             bundle2.putString("key",keyPlan);
@@ -176,7 +193,7 @@ public class EscogerPlan extends AppCompatActivity {
                             startActivity(intent2);
                             break;
                         case "Miercoles":
-                            dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios, descripcion, key, id, "4");
+                            dbProvider.subirPlanEjercicio(tiempo, nivelEjercicio, ejercicios, descripcion, key, id, "4");
                             Intent intent3 = new Intent(EscogerPlan.this, AgregarEjercicios.class);
                             Bundle bundle3 = new Bundle();
                             bundle3.putString("key",keyPlan);
@@ -185,7 +202,7 @@ public class EscogerPlan extends AppCompatActivity {
 
                             break;
                         case "Jueves":
-                            dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios, descripcion, key, id, "5");
+                            dbProvider.subirPlanEjercicio(tiempo, nivelEjercicio, ejercicios, descripcion, key, id, "5");
                             Intent intent4 = new Intent(EscogerPlan.this, AgregarEjercicios.class);
                             Bundle bundle4 = new Bundle();
                             bundle4.putString("key",keyPlan);
@@ -194,7 +211,7 @@ public class EscogerPlan extends AppCompatActivity {
 
                             break;
                         case "Viernes":
-                            dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios, descripcion, key, id, "6");
+                            dbProvider.subirPlanEjercicio(tiempo, nivelEjercicio, ejercicios, descripcion, key, id, "6");
                             Intent intent5 = new Intent(EscogerPlan.this, AgregarEjercicios.class);
                             Bundle bundle5 = new Bundle();
                             bundle5.putString("key",keyPlan);
@@ -203,7 +220,7 @@ public class EscogerPlan extends AppCompatActivity {
 
                             break;
                         case "Sabado":
-                            dbProvider.subirPlanEjercicio(tiempo, nivel, ejercicios, descripcion, key, id, "7");
+                            dbProvider.subirPlanEjercicio(tiempo, nivelEjercicio, ejercicios, descripcion, key, id, "7");
                             Intent intent6 = new Intent(EscogerPlan.this, AgregarEjercicios.class);
                             Bundle bundle6 = new Bundle();
                             bundle6.putString("key",keyPlan);

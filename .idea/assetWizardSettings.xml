@@ -152,11 +152,11 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="height" value="772" />
-                            <entry key="outputName" value="ic_resumencompra" />
+                            <entry key="height" value="31" />
+                            <entry key="outputName" value="ic_imgnull" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="C:\Users\USUARIO\Desktop\bg-resumendecompra.svg" />
-                            <entry key="width" value="1440" />
+                            <entry key="sourceFile" value="C:\Users\USUARIO\Desktop\icoImgPosicion.svg" />
+                            <entry key="width" value="33" />
                           </map>
                         </option>
                       </PersistentState>

@@ -11,11 +11,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.Paypal.Config;
 import com.appfitnessapp.app.fitnessapp.Usuario.Paypal.PaymentDetails;
+import com.google.android.gms.wallet.IsReadyToPayRequest;
+import com.google.android.gms.wallet.PaymentsClient;
+import com.google.android.gms.wallet.Wallet;
+import com.google.android.gms.wallet.WalletConstants;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalPaymentDetails;
@@ -41,6 +47,7 @@ public class MetodoPago extends AppCompatActivity {
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIENTE_ID);
 
+    private PaymentsClient paymentsClient;
 
     String amount="";
 
@@ -57,6 +64,12 @@ public class MetodoPago extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_07_metodo_pago);
 
+        Toolbar toolbarback=findViewById(R.id.include);
+        setSupportActionBar(toolbarback);
+        getSupportActionBar().setTitle("Pago");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         txtResumen=findViewById(R.id.txtResumen);
         txtPlan=findViewById(R.id.txtTipoPlan);
         txtTotal=findViewById(R.id.txtTotalPago);
@@ -66,6 +79,11 @@ public class MetodoPago extends AppCompatActivity {
         btnPaypal=findViewById(R.id.btnPaypal);
         btnTarjeta=findViewById(R.id.btnTarjeta);
 
+
+        Wallet.WalletOptions walletOptions = new Wallet.WalletOptions.Builder()
+                .setEnvironment(WalletConstants.ENVIRONMENT_TEST).build();
+
+        paymentsClient= Wallet.getPaymentsClient(this,walletOptions);
 
         Bundle extras = getIntent().getExtras();
         assert extras != null;
@@ -113,13 +131,6 @@ public class MetodoPago extends AppCompatActivity {
         });
 
 
-        btnPagar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
 
         btnPagar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,6 +158,9 @@ public class MetodoPago extends AppCompatActivity {
 
 
     }
+
+
+
 
     private void processPayment(){
 

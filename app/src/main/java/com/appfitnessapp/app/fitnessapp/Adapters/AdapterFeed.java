@@ -248,9 +248,9 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
             try {
                 URL urlfeed = new URL(feed.getImagen_feed());
                 Picasso.get().load(String.valueOf(urlfeed))
-                        .error(R.mipmap.ic_launcher)
-                        .fit()
-                        .noFade()
+                        .error(R.drawable.ic_imgnull)
+                        .resize(0,1000)
+                        .centerCrop()
                         .into(holder.imgFeed);
 
                 /*

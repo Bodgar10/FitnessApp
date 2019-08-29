@@ -84,7 +84,7 @@ public class AdapterAsesorias extends RecyclerView.Adapter<AdapterAsesorias.Ases
             try {
                 URL urlAdmin = new URL(asesoria.getFoto_usuario());
                 Picasso.get().load(String.valueOf(urlAdmin))
-                        .error(R.mipmap.ic_launcher)
+                        .error(R.drawable.ic_imgnull)
                         .fit()
                         .noFade()
                         .into(holder.imagen);

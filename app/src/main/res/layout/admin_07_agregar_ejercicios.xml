@@ -30,7 +30,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_gravity="end"
                 android:textStyle="bold"
-                android:text="Guardar"
+                android:text="Siguiente"
                 android:textAllCaps="true"
                 android:textColor="@color/naranja"
                 android:textSize="15sp" />
@@ -356,9 +356,6 @@
                 android:gravity="center" />
 
         </LinearLayout>
-
-
-
 
     </LinearLayout>
 

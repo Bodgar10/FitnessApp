@@ -37,24 +37,12 @@
         </androidx.appcompat.widget.Toolbar>
 
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:text="Detalle de la receta"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black"
-        android:textSize="15sp" />
-
     <LinearLayout
         android:elevation="5dp"
         android:background="@drawable/boton_redondo_blanco"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -65,7 +53,7 @@
             android:layout_height="200dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            app:srcCompat="@android:drawable/sym_def_app_icon" />
+            app:srcCompat="@drawable/ic_imgnull" />
 
 
     <TextView
@@ -76,7 +64,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:text="Nombre de comida"
+        android:text="Comida"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
         android:textSize="15sp" />
@@ -110,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:gravity="center"
-                android:text="45 min"
+                android:text=""
                 android:textAllCaps="false"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="14sp" />
@@ -148,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:gravity="center"
-                android:text="2 Porciones"
+                android:text=""
                 android:textAllCaps="false"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="14sp" />
@@ -185,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:gravity="center"
-                android:text="500 kcal"
+                android:text=""
                 android:textAllCaps="false"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="14sp" />

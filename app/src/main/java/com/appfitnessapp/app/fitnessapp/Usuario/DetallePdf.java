@@ -46,7 +46,7 @@ public class DetallePdf extends AppCompatActivity {
 
         Toolbar toolbarback=findViewById(R.id.include);
         setSupportActionBar(toolbarback);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("PDF");
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 

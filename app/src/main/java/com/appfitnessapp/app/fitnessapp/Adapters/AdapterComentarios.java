@@ -79,7 +79,7 @@ public class AdapterComentarios extends RecyclerView.Adapter<AdapterComentarios.
 
                 URL urlUsuario = new URL(plan.getFoto_usuario());
                 Picasso.get().load(String.valueOf(urlUsuario))
-                        .error(R.mipmap.ic_launcher)
+                        .error(R.drawable.ic_imgnull)
                         .fit()
                         .noFade()
                         .into(holder.imgPersona);
@@ -102,7 +102,7 @@ public class AdapterComentarios extends RecyclerView.Adapter<AdapterComentarios.
                         .into(holder.imgAntes);
                 URL urlDespues = new URL(plan.getImagen_despues());
                 Picasso.get().load(String.valueOf(urlDespues))
-                        .error(R.mipmap.ic_launcher)
+                        .error(R.drawable.ic_imgnull)
                         .fit()
                         .noFade()
                         .into(holder.imgDespues);

@@ -16,7 +16,7 @@
         <ImageView
             android:id="@+id/imgAsesoria"
             android:layout_width="match_parent"
-            android:layout_height="210dp"
+            android:layout_height="310dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -31,7 +31,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/ic_imgnull" />
 
 
 
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="125"
+                android:text=""
                 android:textAllCaps="false"
                 android:textColor="@color/negro"
                 android:textSize="18sp"
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="40"
+                android:text=""
                 android:textAllCaps="false"
                 android:textColor="@color/negro"
                 android:textSize="18sp"
@@ -159,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="4.8"
+                android:text=""
                 android:textAllCaps="false"
                 android:textColor="@color/negro"
                 android:textSize="18sp"
@@ -200,11 +200,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="200dp"
             android:layout_marginEnd="8dp"
             android:gravity="center"
             android:padding="5dp"
-            android:text="Nombre "
+            android:text="Nombre"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="22sp"

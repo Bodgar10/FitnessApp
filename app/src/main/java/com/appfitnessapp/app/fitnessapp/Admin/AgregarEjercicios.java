@@ -108,7 +108,6 @@ public class AgregarEjercicios extends AppCompatActivity {
 
 
         txtPrueba=findViewById(R.id.txtprueba);
-
         btnGuardar=findViewById(R.id.txtGuardar);
 
 

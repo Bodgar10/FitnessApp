@@ -686,7 +686,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
     private void loadImageFromUrl(String url) {
 
-        Picasso.get().load(url).into(imgPersona);
+        Picasso.get().load(url).fit().centerInside().noFade().into(imgPersona);
     }
 
 

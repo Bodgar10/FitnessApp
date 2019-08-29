@@ -82,21 +82,21 @@ public class AdapterImagenes extends RecyclerView.Adapter<AdapterImagenes.Ejeric
             try {
                 URL urlfeed = new URL(ejercicio.getImagen_1());
                 Picasso.get().load(String.valueOf(urlfeed))
-                        .error(R.mipmap.ic_launcher)
+                        .error(R.drawable.ic_imgnull)
                         .fit()
                         .noFade()
                         .into(holder.imgEjercicio);
 
                 URL urlfeed1 = new URL(ejercicio.getImagen_2());
                 Picasso.get().load(String.valueOf(urlfeed1))
-                        .error(R.mipmap.ic_launcher)
+                        .error(R.drawable.ic_imgnull)
                         .fit()
                         .noFade()
                         .into(holder.imgEjercicio2);
 
                 URL urlfeed2 = new URL(ejercicio.getImagen_3());
                 Picasso.get().load(String.valueOf(urlfeed2))
-                        .error(R.mipmap.ic_launcher)
+                        .error(R.drawable.ic_imgnull)
                         .fit()
                         .noFade()
                         .into(holder.imgEjercicio3);

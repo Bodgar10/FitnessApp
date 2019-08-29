@@ -64,6 +64,7 @@ dependencies {
     implementation 'com.android.support:mediarouter-v7:28.8.0'
     implementation 'com.googlecode.android-query:android-query:0.25.9'
 
+    implementation 'com.google.android.gms:play-services-wallet:15.0.1'
 
 
 

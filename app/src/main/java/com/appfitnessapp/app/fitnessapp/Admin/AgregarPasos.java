@@ -19,27 +19,27 @@ import androidx.appcompat.widget.Toolbar;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
 
-public class AgregarIngredientes extends AppCompatActivity {
+public class AgregarPasos extends AppCompatActivity {
 
+    EditText edtPaso,edtDescripcion;
 
-    EditText edtNombre, edtCantidad;
     TextView btnGuardar;
-    String key;
-    LinearLayout btnSubirIngredientes;
 
+    LinearLayout btnSubirPaso;
+
+    String key;
     private static final String TAG = "BAJARINFO:";
     static DBProvider dbProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.admin_06_agregar_ingredientes);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        Toolbar toolbarback = findViewById(R.id.toolbar);
+        Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Plan Alimenticio");
-        ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         dbProvider = new DBProvider();
@@ -49,41 +49,41 @@ public class AgregarIngredientes extends AppCompatActivity {
             key = extras.getString("key");
         }
 
-        edtNombre = findViewById(R.id.edtNombreIngrediente);
-        edtCantidad = findViewById(R.id.edtCantidad);
+        edtDescripcion=findViewById(R.id.edtNombreIngrediente);
+        edtPaso=findViewById(R.id.edtCantidad);
 
-        btnGuardar = findViewById(R.id.txtGuardar);
+        btnGuardar=findViewById(R.id.txtGuardar);
 
-        btnSubirIngredientes = findViewById(R.id.btnSubirIngredientes);
+        btnSubirPaso=findViewById(R.id.btnSubirPaso);
 
-
-        btnSubirIngredientes.setOnClickListener(new View.OnClickListener() {
+        btnSubirPaso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String nombre = edtNombre.getText().toString();
-                String cantidad = edtCantidad.getText().toString();
+                String descripcion= edtDescripcion.getText().toString();
+                String paso = edtPaso.getText().toString();
 
-                if (!nombre.isEmpty() && !cantidad.isEmpty()) {
-                    dbProvider.subirIngredientes(key, nombre, cantidad);
-                    Toast.makeText(AgregarIngredientes.this, "Se subieron los ingredientes.", Toast.LENGTH_SHORT).show();
-                    edtNombre.getText().clear();
-                    edtCantidad.getText().clear();
+                if (!descripcion.isEmpty()&&!paso.isEmpty()){
+                    dbProvider.subirPreparacion(key, paso, descripcion);
+                    Toast.makeText(AgregarPasos.this, "Se subio el paso."+edtPaso, Toast.LENGTH_SHORT).show();
+                    edtDescripcion.getText().clear();
+                    edtPaso.getText().clear();
 
-
-                } else {
-                    Toast.makeText(AgregarIngredientes.this, "Revisa que tengas todo completo.", Toast.LENGTH_SHORT).show();
                 }
+                else {
+                    Toast.makeText(AgregarPasos.this, "Revisa que tengas los campos rellenos.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
-
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(AgregarIngredientes.this);
+
+                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(AgregarPasos.this);
                 dialogo1.setTitle("Ingredientes");
-                dialogo1.setMessage("¿Se pusieron todos los ingredientes?");
+                dialogo1.setMessage("¿Se pusieron todos los pasos?");
                 dialogo1.setCancelable(false);
                 dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogo1, int id) {
@@ -97,10 +97,7 @@ public class AgregarIngredientes extends AppCompatActivity {
                 });
                 dialogo1.show();
             }
-
-
         });
-
 
     }
 
@@ -112,13 +109,11 @@ public class AgregarIngredientes extends AppCompatActivity {
     }
 
     private void aceptar() {
-        Toast t=Toast.makeText(this,"Los inredientes se subieron.", Toast.LENGTH_SHORT);
+        Toast t=Toast.makeText(this,"Plan alimenticio completo.", Toast.LENGTH_SHORT);
         t.show();
-        Intent intent = new Intent(AgregarIngredientes.this, AgregarPasos.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("key", key);
-        intent.putExtras(bundle);
+        Intent intent = new Intent(AgregarPasos.this, AsesoriasAdmin.class);
         startActivity(intent);
+        finish();
 
 
     }
@@ -139,5 +134,4 @@ public class AgregarIngredientes extends AppCompatActivity {
     public void onBackPressed() {
         finish();
     }
-
 }

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -24,13 +25,14 @@
             android:layout_marginEnd="10dp"
             android:layout_gravity="end"
             android:textStyle="bold"
-            android:text="Siguiente"
+            android:text="Guardar"
             android:textAllCaps="true"
             android:textColor="@color/naranja"
             android:textSize="15sp" />
 
 
     </androidx.appcompat.widget.Toolbar>
+
 
     <TextView
         android:layout_width="match_parent"
@@ -40,13 +42,13 @@
         android:padding="8dp"
         android:gravity="start"
         android:background="@android:color/darker_gray"
-        android:text="Datos de los ingredientes"
+        android:text="Datos de los pasos"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
         android:textSize="13sp" />
 
     <EditText
-        android:id="@+id/edtNombreIngrediente"
+        android:id="@+id/edtNombreEjercicio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -57,11 +59,11 @@
         android:background="@drawable/boton_gris_margen"
         android:padding="10dp"
         android:textColor="@color/negro"
-        android:hint="Nombre ingrediente"
-        android:inputType="textPersonName" />
+        android:hint="Paso 1"
+        android:inputType="number" />
 
     <EditText
-        android:id="@+id/edtCantidad"
+        android:id="@+id/edtRepeticiones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -72,13 +74,12 @@
         android:background="@drawable/boton_gris_margen"
         android:padding="10dp"
         android:textColor="@color/negro"
-        android:hint="Cantidad"
-        android:inputType="number" />
-
+        android:hint="Descripción."
+        android:inputType="textMultiLine" />
 
 
     <LinearLayout
-        android:id="@+id/btnSubirIngredientes"
+        android:id="@+id/btnSubirPaso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -95,12 +96,13 @@
             android:gravity="center"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:text="Subir ingredientes"
+            android:text="Subir pasos"
             android:textColor="@color/blanco"
             android:textSize="14sp"
             android:textAllCaps="true" />
 
     </LinearLayout>
+
 
 
 </LinearLayout>

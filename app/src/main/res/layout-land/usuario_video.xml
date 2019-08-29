@@ -23,9 +23,8 @@
         android:foregroundGravity="center">
 
         <SurfaceView
-            android:id="@+id/surface_view"
-
-            android:layout_width="match_parent"
+            android:id="@+id/srface_view"
+            android:layout_width="550dp"
             android:layout_gravity="center"
             android:layout_height="match_parent"/>
 
@@ -157,7 +156,7 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:layout_gravity="center"
-               >
+                >
 
                 <ImageButton
                     android:layout_width="32dp"

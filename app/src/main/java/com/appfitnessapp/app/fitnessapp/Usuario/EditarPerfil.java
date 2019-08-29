@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
@@ -351,7 +352,7 @@ public class EditarPerfil extends AppCompatActivity {
             Bitmap bmp;
             bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 30, baos);
             byte[] data = baos.toByteArray();
 
             UploadTask uploadTask2 = storageReference1.putBytes(data);
@@ -438,7 +439,7 @@ public class EditarPerfil extends AppCompatActivity {
 
 
     private void loadImageFromUrl(String url) {
-        Picasso.get().load(url).into(imgPersona);
+        Picasso.get().load(url).fit().centerInside().noFade().into(imgPersona);
     }
 
     private void dismissProgressDialog() {
@@ -498,5 +499,24 @@ public class EditarPerfil extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+
 
 }
