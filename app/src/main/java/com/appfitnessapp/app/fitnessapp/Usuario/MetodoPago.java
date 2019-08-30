@@ -18,13 +18,8 @@ import androidx.appcompat.widget.Toolbar;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.Paypal.Config;
 import com.appfitnessapp.app.fitnessapp.Usuario.Paypal.PaymentDetails;
-import com.google.android.gms.wallet.IsReadyToPayRequest;
-import com.google.android.gms.wallet.PaymentsClient;
-import com.google.android.gms.wallet.Wallet;
-import com.google.android.gms.wallet.WalletConstants;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
-import com.paypal.android.sdk.payments.PayPalPaymentDetails;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
@@ -47,7 +42,6 @@ public class MetodoPago extends AppCompatActivity {
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIENTE_ID);
 
-    private PaymentsClient paymentsClient;
 
     String amount="";
 
@@ -80,10 +74,6 @@ public class MetodoPago extends AppCompatActivity {
         btnTarjeta=findViewById(R.id.btnTarjeta);
 
 
-        Wallet.WalletOptions walletOptions = new Wallet.WalletOptions.Builder()
-                .setEnvironment(WalletConstants.ENVIRONMENT_TEST).build();
-
-        paymentsClient= Wallet.getPaymentsClient(this,walletOptions);
 
         Bundle extras = getIntent().getExtras();
         assert extras != null;

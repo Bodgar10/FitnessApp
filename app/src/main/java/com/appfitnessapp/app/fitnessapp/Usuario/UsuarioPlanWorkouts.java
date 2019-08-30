@@ -124,6 +124,7 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
 
                 Intent intent = new Intent(UsuarioPlanWorkouts.this, UsuarioPlan.class);
                 startActivity(intent);
+                finish();
             }
         });
 

@@ -35,6 +35,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.MyMediaController;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.VideoControllerView;
+import com.appfitnessapp.app.fitnessapp.videoplayer.VideoPlayer;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -139,7 +140,7 @@ public class Asesoria extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Asesoria.this, Video.class);
+                Intent intent = new Intent(Asesoria.this, VideoPlayer.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("video",videoUrl);
                 intent.putExtras(bundle);

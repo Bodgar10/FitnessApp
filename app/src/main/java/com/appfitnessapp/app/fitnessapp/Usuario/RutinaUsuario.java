@@ -26,17 +26,20 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.videoplayer.VideoPlayer;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class RutinaUsuario extends AppCompatActivity {
 
     ImageView imgRutina,imgVideo,img1,img2,img3;
-    TextView txtDescripcion,txtRutina;
+    TextView txtDescripcion,txtRutina,txtNombreEjercicio;
     RecyclerView recyclerView,recyclerViewImg;
     AdapterRutinas adapter;
     ArrayList<Ejercicios>ejercicios;
@@ -81,6 +84,7 @@ public class RutinaUsuario extends AppCompatActivity {
         img3=findViewById(R.id.img3);
 
 
+        txtNombreEjercicio=findViewById(R.id.txtNombreEjercicio);
 
         imgVideo=findViewById(R.id.imgVideo);
 
@@ -95,7 +99,7 @@ public class RutinaUsuario extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(RutinaUsuario.this, Video.class);
+                Intent intent = new Intent(RutinaUsuario.this, VideoPlayer.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("video",videoUrl);
                 intent.putExtras(bundle);
@@ -151,8 +155,8 @@ public class RutinaUsuario extends AppCompatActivity {
                         Ejercicios ejercicio = snapshot.getValue(Ejercicios.class);
 
                         if (ejercicio.getId_ejercicio()!=null){
+                            txtNombreEjercicio.setText(ejercicio.getNombre_ejercicio());
                             videoUrl=ejercicio.getVideo_ejercicio();
-                           // Picasso.get().load(ejercicio.getImagenes_ejercicio()).into(imgRutina);
                             ejercicios.add(ejercicio);
                             adapter.notifyDataSetChanged();
                             bajarImagenes(ejercicio.getId_ejercicio(),ejercicio.getNombre_ejercicio());
@@ -184,8 +188,13 @@ public class RutinaUsuario extends AppCompatActivity {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         ImagenesEjercicios ejercicio = dataSnapshot.getValue(ImagenesEjercicios.class);
                         ejercicio.setNombre(titulo);
-                        ejerciciosImg.add(ejercicio);
-                        adapterImg.notifyDataSetChanged();
+
+                        Picasso.get().load(ejercicio.getImagen_1()).fit().centerCrop().into(img1);
+                        Picasso.get().load(ejercicio.getImagen_2()).fit().centerCrop().into(img2);
+                        Picasso.get().load(ejercicio.getImagen_3()).fit().centerCrop().into(img3);
+
+                       // ejerciciosImg.add(ejercicio);
+                       // adapterImg.notifyDataSetChanged();
 
                     }
                 }
@@ -202,7 +211,6 @@ public class RutinaUsuario extends AppCompatActivity {
 
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
@@ -211,37 +219,4 @@ public class RutinaUsuario extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
-        final private int spanCount, spacing, spacing_top;
-        final private boolean includeEdge;
-
-        public GridSpacingItemDecoration(int spanCount, int spacing_left, int spacing_top) {
-            this.spanCount = spanCount;
-            this.spacing = spacing_left;
-            this.includeEdge = true;
-            this.spacing_top = spacing_top;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            int position = parent.getChildAdapterPosition(view); // item phases_position
-            int column = position % spanCount; // item column
-
-            if (includeEdge) {
-                outRect.left = spacing - column * spacing / spanCount;
-                outRect.right = (column + 1) * spacing / spanCount;
-
-                if (position < spanCount) { // top edge
-                    outRect.top = spacing_top;
-                }
-                outRect.bottom = spacing_top; // item bottom
-            } else {
-                outRect.left = column * spacing / spanCount;
-                outRect.right = spacing - (column + 1) * spacing / spanCount;
-                if (position >= spanCount) {
-                    outRect.top = spacing_top; // item top
-                }
-            }
-        }
-    }
 }

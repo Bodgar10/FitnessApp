@@ -100,6 +100,7 @@
 
 
 
+
     <include
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
@@ -109,6 +110,17 @@
         android:layout_height="match_parent">
 
     </include>
+
+        <TextView
+            android:id="@+id/txtNombreEjercicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Nombre"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
 
 
         <include
@@ -122,6 +134,50 @@
             android:layout_height="match_parent">
 
         </include>
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img1"
+                android:layout_width="100dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="15dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="5dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:gravity="center" />
+
+            <ImageView
+                android:id="@+id/img2"
+                android:layout_width="100dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="5dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:gravity="center" />
+
+            <ImageView
+                android:id="@+id/img3"
+                android:layout_width="100dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="15dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:gravity="center" />
+
+        </LinearLayout>
+
 
 
     </LinearLayout>
