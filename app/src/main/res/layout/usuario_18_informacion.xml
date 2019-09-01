@@ -19,7 +19,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:text="Donde encuentras los ingredientes"
+        android:text="@string/donde_encuentras_los_ingredientes"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
         android:textSize="15sp" />
@@ -40,7 +40,7 @@
             android:gravity="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Supermercados"
+            android:text="@string/supermercados"
             android:textAllCaps="false"
             android:textStyle="bold"
             android:textColor="@android:color/darker_gray"
@@ -71,7 +71,7 @@
             android:layout_marginStart="14dp"
             android:gravity="center"
             android:layout_marginTop="5dp"
-            android:text="Ingredientes"
+            android:text="Ingredientes:"
             android:textAllCaps="false"
             android:textStyle="bold"
             android:textColor="@android:color/black"
@@ -84,7 +84,7 @@
             android:layout_marginStart="14dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:text="Total inversion:"
+            android:text="@string/total_inversion"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="12sp" />
@@ -128,8 +128,8 @@
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="15dp"
             android:gravity="start"
-            android:text="Este producto lo puedes conseguir en cualquiera de los supermecados nombrados anteriormente
-Tambien puedes encontrarlo en las siguientes ubicaciones"
+            android:text="Este producto lo puedes conseguir en cualquiera de los supermercados nombrados anteriormente
+También puedes encontrarlo en las siguientes ubicaciones"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="12sp" />

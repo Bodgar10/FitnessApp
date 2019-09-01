@@ -57,7 +57,7 @@
                     android:ems="10"
                     android:textSize="14sp"
                     android:backgroundTint="@color/negro"
-                    android:hint="Email"
+                    android:hint="@string/correo_electronico"
                     android:inputType="textEmailAddress"
                     android:textColor="@android:color/black"
                     android:textColorHint="@color/negro" />
@@ -84,7 +84,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editContrasena"
-                android:hint="Contraseña"
+                android:hint="@string/contrase_a"
                 android:layout_marginEnd="3dp"
                 android:textColorHint="@color/negro"
                 android:textColor="@android:color/black"
@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:textColor="@android:color/white"
-                android:text="¿Aún no tienes una cuenta?"
+                android:text="@string/a_n_no_tienes_una_cuenta"
                 />
 
             <TextView
@@ -141,7 +141,7 @@
                 android:textAllCaps="true"
                 android:layout_marginBottom="5dp"
                 android:textColor="@android:color/white"
-                android:text="Registrarse"
+                android:text="@string/registrarse"
                 />
 
         </LinearLayout>
@@ -159,7 +159,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Iniciar Sesión"
+                android:text="@string/iniciar_sesi_n"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/naranja"
                 android:layout_marginBottom="5dp"

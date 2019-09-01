@@ -60,7 +60,7 @@ public class AsesoriasPendientes extends AppCompatActivity {
 
         Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
-        getSupportActionBar().setTitle("Asesorias");
+        getSupportActionBar().setTitle("Asesorías");
 
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

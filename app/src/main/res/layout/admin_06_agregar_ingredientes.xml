@@ -40,7 +40,7 @@
         android:padding="8dp"
         android:gravity="start"
         android:background="@android:color/darker_gray"
-        android:text="Datos de los ingredientes"
+        android:text="@string/datos_de_los_ingredientes"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
         android:textSize="13sp" />
@@ -57,7 +57,7 @@
         android:background="@drawable/boton_gris_margen"
         android:padding="10dp"
         android:textColor="@color/negro"
-        android:hint="Nombre ingrediente"
+        android:hint="@string/nombre_ingrediente"
         android:inputType="textPersonName" />
 
     <EditText
@@ -72,7 +72,7 @@
         android:background="@drawable/boton_gris_margen"
         android:padding="10dp"
         android:textColor="@color/negro"
-        android:hint="Cantidad"
+        android:hint="@string/cantidad"
         android:inputType="number" />
 
 
@@ -95,7 +95,7 @@
             android:gravity="center"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:text="Subir ingredientes"
+            android:text="@string/subir_ingredientes"
             android:textColor="@color/blanco"
             android:textSize="14sp"
             android:textAllCaps="true" />

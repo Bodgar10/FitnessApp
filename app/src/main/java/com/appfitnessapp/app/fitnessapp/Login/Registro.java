@@ -80,7 +80,7 @@ public class Registro extends AppCompatActivity {
                     progressDialog.setCancelable(false);
                     register(correo,"nil",nombre,contrasena,telefono,"nil",refreshedToken,Contants.USUARIO);
                 }else{
-                    Toast.makeText(Registro.this, "Verifica que tengas todo rellenado.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Verifica que tengas todos los datos.", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -113,7 +113,7 @@ public class Registro extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (!task.isSuccessful()) {
-                    Toast.makeText(Registro.this, "Hubo un error, Revisa si el correo no esta ya existente o si tu ontraseña es mayor a 6 caracteres ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registro.this, "Hubo un error, Revisa si el correo no esta ya existente.", Toast.LENGTH_SHORT).show();
                 }
                 if (task.isSuccessful()) {
                     FirebaseUser user = task.getResult().getUser();

@@ -30,7 +30,7 @@
                 android:layout_marginEnd="10dp"
                 android:gravity="end"
                 android:padding="5dp"
-                android:text="Siguiente"
+                android:text="@string/siguiente"
                 android:textAllCaps="true"
                 android:textColor="@color/naranja"
                 android:textSize="15sp"
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_weight="1"
-                android:text="Recetas" />
+                android:text="@string/recetas" />
 
 
             <TextView
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Workouts" />
+                android:text="@string/workouts" />
 
 
         </LinearLayout>
@@ -99,7 +99,7 @@
         android:layout_marginEnd="15dp"
         android:ems="10"
         android:textSize="12sp"
-        android:hint="Descripción"
+        android:hint="@string/descripci_n"
         android:inputType="textMultiLine"
         android:textColor="@color/negro" />
 
@@ -112,7 +112,7 @@
             android:padding="8dp"
             android:gravity="start"
             android:background="@android:color/darker_gray"
-            android:text="Datos del ejercicio"
+            android:text="@string/datos_del_ejercicio"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
             android:textSize="13sp" />
@@ -129,7 +129,7 @@
             android:background="@drawable/boton_gris_margen"
             android:padding="10dp"
             android:textColor="@color/negro"
-            android:hint="Minutos"
+            android:hint="@string/minutos"
             android:inputType="number" />
 
 
@@ -147,7 +147,7 @@
             android:background="@drawable/boton_gris_margen"
             android:padding="10dp"
             android:textColor="@color/negro"
-            android:hint="Numero de ejercicios"
+            android:hint="@string/numero_de_ejercicios"
             android:inputType="number" />
 
         <Spinner
@@ -168,7 +168,7 @@
             android:padding="8dp"
             android:gravity="start"
             android:background="@android:color/darker_gray"
-            android:text="Dia del ejercicio"
+            android:text="@string/dia_del_ejercicio"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
             android:textSize="13sp" />

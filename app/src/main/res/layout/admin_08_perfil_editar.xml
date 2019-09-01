@@ -87,7 +87,7 @@
                 android:layout_marginBottom="5dp"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="Añadir foto de perfil"
+                android:text="@string/a_adir_foto_de_perfil"
                 android:textAllCaps="false"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="15sp" />
@@ -100,7 +100,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:gravity="center"
-                android:text="Información de perfil"
+                android:text="@string/informaci_n_de_perfil"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
@@ -120,7 +120,7 @@
                     android:layout_marginEnd="3dp"
                     android:layout_marginBottom="5dp"
                     android:ems="10"
-                    android:hint="Correo"
+                    android:hint="@string/correo_electronico"
                     android:inputType="textEmailAddress"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray" />
@@ -142,7 +142,7 @@
                     android:layout_marginEnd="3dp"
                     android:layout_marginBottom="5dp"
                     android:ems="10"
-                    android:hint="Contraseña"
+                    android:hint="@string/contrase_a"
                     android:inputType="textPassword"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray" />
@@ -165,7 +165,7 @@
                     android:layout_marginEnd="3dp"
                     android:layout_marginBottom="5dp"
                     android:ems="10"
-                    android:hint="Telefono"
+                    android:hint="@string/telefono"
                     android:inputType="phone"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray" />
@@ -187,7 +187,7 @@
                     android:layout_marginEnd="3dp"
                     android:layout_marginBottom="5dp"
                     android:ems="10"
-                    android:hint="Nombre"
+                    android:hint="@string/nombre"
                     android:inputType="textPersonName"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/darker_gray" />
@@ -222,7 +222,7 @@
             android:gravity="center"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:text="Actualizar Información"
+            android:text="@string/actualizar_informaci_n"
             android:textColor="@color/blanco"
             android:textSize="14sp"
             android:textAllCaps="true" />

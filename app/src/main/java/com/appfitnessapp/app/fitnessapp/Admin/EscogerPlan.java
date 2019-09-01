@@ -100,7 +100,7 @@ public class EscogerPlan extends AppCompatActivity {
 
 
         spinnerDia.setAdapter(Sdia);
-        spinnerDia.setPrompt("Dia de ejercicio");
+        spinnerDia.setPrompt("Día de ejercicio");
 
         spinnerNivel.setAdapter(SNivel);
         spinnerNivel.setPrompt("Nivel de ejercicio");

@@ -109,7 +109,7 @@ public class AdminPerfil extends AppCompatActivity {
 
         progressDialog.setMessage("Cargando Información...");
         progressDialog.show();
-
+        progressDialog.setCancelable(false);
 
         dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
             @Override

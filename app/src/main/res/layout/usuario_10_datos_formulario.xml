@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:background="@null"
-                android:text="Guardar"
+                android:text="@string/guardar"
                 android:textSize="15sp"
                 android:textColor="@color/azul"
                 android:layout_marginEnd="10dp"

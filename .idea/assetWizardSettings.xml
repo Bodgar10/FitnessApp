@@ -55,6 +55,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="outputName" value="ic_edit_u" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="fff5fa" />
@@ -74,11 +75,23 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="scalingPercent" value="74" />
+                                                <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                    </map>
+                                  </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="060105" />
+                                      <entry key="backgroundLayerName" value="ic_icon_back" />
+                                      <entry key="foregroundImage" value="C:\Users\USUARIO\Desktop\logo.png" />
+                                      <entry key="foregroundLayerName" value="ic_icon_fore" />
+                                      <entry key="outputName" value="ic_icon_app" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -126,11 +139,6 @@
                                 </PersistentState>
                               </value>
                             </entry>
-                          </map>
-                        </option>
-                        <option name="values">
-                          <map>
-                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>

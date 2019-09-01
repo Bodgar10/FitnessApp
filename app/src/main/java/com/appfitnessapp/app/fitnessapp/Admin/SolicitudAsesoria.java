@@ -50,7 +50,7 @@ public class SolicitudAsesoria extends AppCompatActivity {
 
         Toolbar toolbarback=findViewById(R.id.include);
         setSupportActionBar(toolbarback);
-        getSupportActionBar().setTitle("Solicitud de asesoria");
+        getSupportActionBar().setTitle("Solicitud de asesoría");
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 

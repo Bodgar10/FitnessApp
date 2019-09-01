@@ -25,7 +25,7 @@
             android:layout_marginEnd="10dp"
             android:layout_gravity="end"
             android:textStyle="bold"
-            android:text="Guardar"
+            android:text="@string/guardar"
             android:textAllCaps="true"
             android:textColor="@color/naranja"
             android:textSize="15sp" />
@@ -42,7 +42,7 @@
         android:padding="8dp"
         android:gravity="start"
         android:background="@android:color/darker_gray"
-        android:text="Datos de los pasos"
+        android:text="@string/datos_de_los_pasos"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
         android:textSize="13sp" />
@@ -59,7 +59,7 @@
         android:background="@drawable/boton_gris_margen"
         android:padding="10dp"
         android:textColor="@color/negro"
-        android:hint="Paso 1"
+        android:hint="@string/paso"
         android:inputType="number" />
 
     <EditText
@@ -74,7 +74,7 @@
         android:background="@drawable/boton_gris_margen"
         android:padding="10dp"
         android:textColor="@color/negro"
-        android:hint="Descripción."
+        android:hint="@string/descripci_n"
         android:inputType="textMultiLine" />
 
 
@@ -96,7 +96,7 @@
             android:gravity="center"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:text="Subir pasos"
+            android:text="@string/subir_pasos"
             android:textColor="@color/blanco"
             android:textSize="14sp"
             android:textAllCaps="true" />

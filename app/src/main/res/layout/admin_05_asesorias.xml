@@ -108,7 +108,7 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center"
-                        android:text="Peso actual"
+                        android:text="@string/peso_actual"
                         android:textAllCaps="false"
                         android:textColor="@android:color/darker_gray"
                         android:textSize="14sp" />
@@ -165,7 +165,7 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center"
-                        android:text="Estatura"
+                        android:text="@string/estatura"
                         android:textAllCaps="false"
                         android:textColor="@android:color/darker_gray"
                         android:textSize="14sp" />
@@ -224,7 +224,7 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginBottom="5dp"
                         android:gravity="center"
-                        android:text="Objetivo"
+                        android:text="@string/objetivo"
                         android:textAllCaps="false"
                         android:textColor="@android:color/darker_gray"
                         android:textSize="14sp" />
@@ -261,7 +261,7 @@
             android:gravity="center"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:text="Comenzar asesoria"
+            android:text="@string/comenzar_asesoria"
             android:textColor="@color/blanco"
             android:textSize="14sp"
             android:textAllCaps="true" />

@@ -110,7 +110,7 @@ public class Asesoria extends AppCompatActivity {
 
         Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
-        getSupportActionBar().setTitle("Asesoria personalizada");
+        getSupportActionBar().setTitle("Asesoría personalizada");
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 

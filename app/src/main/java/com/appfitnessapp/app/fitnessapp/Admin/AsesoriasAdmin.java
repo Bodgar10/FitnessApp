@@ -72,7 +72,7 @@ public class AsesoriasAdmin extends AppCompatActivity {
 
         Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
-        getSupportActionBar().setTitle("Asesorias");
+        getSupportActionBar().setTitle("Asesorías");
 
         mAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

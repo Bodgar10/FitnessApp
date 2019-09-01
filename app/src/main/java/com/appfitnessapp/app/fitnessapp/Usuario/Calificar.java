@@ -98,7 +98,7 @@ public class Calificar extends AppCompatActivity {
 
         Toolbar toolbarback=findViewById(R.id.include);
         setSupportActionBar(toolbarback);
-        getSupportActionBar().setTitle("Calificar asesoria");
+        getSupportActionBar().setTitle("Calificar asesoría");
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -152,11 +152,11 @@ public class Calificar extends AppCompatActivity {
                 txtTrato.setText(String.valueOf(rating));
                 switch ((int) ratingBar.getRating()) {
                     case (int) 0.5:
-                        txtTrato.setText("Pesimo");
+                        txtTrato.setText("Pésimo");
                         txtRating.setText(""+rating);
                         break;
                     case 1:
-                        txtTrato.setText("Pesimo");
+                        txtTrato.setText("Pésimo");
                         txtRating.setText(""+rating);
                         break;
                     case 2:
@@ -241,7 +241,7 @@ public class Calificar extends AppCompatActivity {
             else if (!txtExperiencia.isEmpty()){
                     dbProvider.subirValoraciones(txtExperiencia,fecha,"",key, "nil",
                             "nil",id,valor);
-                    Toast.makeText(Calificar.this, "Se  ha calificado la asesoria.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Calificar.this, "Se  ha calificado la asesoría.", Toast.LENGTH_SHORT).show();
                     edtExperiencia.getText().clear();
                     Intent intent=new Intent(Calificar.this, UsuarioPerfil.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -295,7 +295,7 @@ public class Calificar extends AppCompatActivity {
 
                             uploadFile(descripcion,fecha,id_asesoria,id_valoracion,imgAntes,uri.toString(),nombre_usuario,valoracion);
                             progressDialog.dismiss();
-                            Toast.makeText(Calificar.this, "Se ha calificado la asesoria.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Calificar.this, "Se  ha calificado la asesoría.", Toast.LENGTH_SHORT).show();
 
                         }
                     });
@@ -381,7 +381,7 @@ public class Calificar extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(Calificar.this, "No subio bien", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Calificar.this, "Hubo un error al subir las imágenes.", Toast.LENGTH_SHORT).show();
 
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -413,7 +413,7 @@ public class Calificar extends AppCompatActivity {
 
         }
         else {
-            Toast.makeText(Calificar.this, "Permite el permiso", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Calificar.this, "Permite el acceso a la galería.", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -464,7 +464,7 @@ public class Calificar extends AppCompatActivity {
         }
         else {
 
-            Toast.makeText(Calificar.this,"Selecciona archivo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Calificar.this,"Selecciona una imagen", Toast.LENGTH_SHORT).show();
         }
 
 

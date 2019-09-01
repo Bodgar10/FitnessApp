@@ -170,7 +170,7 @@ public class AgregarEjercicios extends AppCompatActivity {
                     Toast.makeText(AgregarEjercicios.this, "Se subio toda la información correctamente.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(AgregarEjercicios.this, "Revisa  que todos los campos esten llenos.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AgregarEjercicios.this, "Revisa  que todos los campos estén llenos.", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -219,7 +219,7 @@ public class AgregarEjercicios extends AppCompatActivity {
                                 //ejerciciosSolos
                                 //dbProvider.subirEjercicios(nombre_ejercicio,rondas,repeticiones,uri.toString(),id_ejercicio);
                                 progressDialog.dismiss();
-                                Toast.makeText(AgregarEjercicios.this, "Se subio correctamente la informacion", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AgregarEjercicios.this, "Se subió correctamente la información", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -229,7 +229,7 @@ public class AgregarEjercicios extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
 
-                Toast.makeText(AgregarEjercicios.this, "Hubo un error al subir el video.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AgregarEjercicios.this, "Hubo un error al subir el vídeo.", Toast.LENGTH_SHORT).show();
 
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -274,7 +274,7 @@ public class AgregarEjercicios extends AppCompatActivity {
 
                             uploadImage2(keyPlan,keyEjercicio,img1,img2,uri.toString());
                            // progressDialog.dismiss();
-                            Toast.makeText(AgregarEjercicios.this, "Se subieron las imagenes correctamente. ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AgregarEjercicios.this, "Se subierón las imágenes correctamente. ", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -283,7 +283,7 @@ public class AgregarEjercicios extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(AgregarEjercicios.this, "Hubo un error al subir las imagenes.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AgregarEjercicios.this, "Hubo un error al subir las imágenes.", Toast.LENGTH_SHORT).show();
 
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -342,7 +342,7 @@ public class AgregarEjercicios extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(AgregarEjercicios.this, "No subio bien", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AgregarEjercicios.this, "Hubo un error al subir las imágenes.", Toast.LENGTH_SHORT).show();
 
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -403,7 +403,7 @@ public class AgregarEjercicios extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(AgregarEjercicios.this, "No subio bien", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AgregarEjercicios.this, "Hubo un error al subir las imágenes.", Toast.LENGTH_SHORT).show();
 
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -449,7 +449,7 @@ public class AgregarEjercicios extends AppCompatActivity {
 
         }
         else {
-            Toast.makeText(AgregarEjercicios.this, "Permite el acceso", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AgregarEjercicios.this, "Permite el acceso a la galería.", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -537,7 +537,7 @@ public class AgregarEjercicios extends AppCompatActivity {
         }
 
         else {
-            Toast.makeText(AgregarEjercicios.this,"Selecciona archivo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AgregarEjercicios.this,"Selecciona un archivo", Toast.LENGTH_SHORT).show();
         }
 
 

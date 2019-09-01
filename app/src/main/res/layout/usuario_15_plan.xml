@@ -37,7 +37,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="Recetas"
+                android:text="@string/recetas"
                 android:textColor="@color/blanco" />
 
 
@@ -50,7 +50,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="Workouts" />
+                android:text="@string/workouts" />
 
         </LinearLayout>
 
@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Desayuno"
+            android:text="@string/desayuno"
             android:textAllCaps="false"
             android:textColor="@android:color/darker_gray"
             android:textSize="15sp"
@@ -105,7 +105,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:gravity="center"
-            android:text="Comida"
+            android:text="@string/almuerzo"
             android:textAllCaps="false"
             android:textColor="@android:color/darker_gray"
             android:textSize="15sp"
@@ -127,7 +127,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:text="Cena"
+                    android:text="@string/cena"
                     android:textAllCaps="false"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="15sp"

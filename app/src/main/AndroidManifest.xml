@@ -10,8 +10,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission  android:name="android.permission.WAKE_LOCK"  />
-    <uses-permission  android:name="android.permission.WRITE_SETTINGS"  />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="com.android.vending.BILLING" />
 
 
     <application
@@ -22,6 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
 
         <activity android:name=".Login.SplashPantalla">
             <intent-filter>
@@ -34,65 +36,72 @@
         <activity
             android:name=".Login.Registro"
             android:parentActivityName=".Login.IniciarSesion" />
-        <activity android:name=".Usuario.UsuarioHome"
-            android:screenOrientation="portrait"
-            />
+        <activity
+            android:name=".Usuario.UsuarioHome"
+            android:screenOrientation="portrait" />
         <activity android:name=".viewPdf" />
-
-        <activity android:name=".Usuario.UsuarioPerfil"
+        <activity
+            android:name=".Usuario.UsuarioPerfil"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Usuario.UsuarioChat"
-            android:screenOrientation="portrait" />
         <activity
-            android:name=".Usuario.PantallaPDF" />
+            android:name=".Usuario.UsuarioChat"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Usuario.PantallaPDF" />
         <activity android:name=".Usuario.Imagen" />
         <activity
             android:name=".Usuario.Video"
             android:theme="@style/TemaVideo" />
         <activity android:name=".Usuario.ChatActivityUsuario" />
-        <activity android:name=".Usuario.Asesoria"
+        <activity
+            android:name=".Usuario.Asesoria"
             android:screenOrientation="portrait" />
-        <activity android:name=".Usuario.FeedSinRegistro.HomeSinRegistro"
+        <activity
+            android:name=".Usuario.FeedSinRegistro.HomeSinRegistro"
             android:screenOrientation="portrait" />
         <activity android:name=".Usuario.Paypal.PaymentDetails" />
-        <activity android:name=".Usuario.Tarjeta"
+        <activity
+            android:name=".Usuario.Tarjeta"
             android:screenOrientation="portrait" />
-        <activity android:name=".Usuario.MetodoPago"
+        <activity
+            android:name=".Usuario.MetodoPago"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.Calificar"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Usuario.UsuarioPerfil" />
-        <activity android:name=".Usuario.DatosUsuario"
+            android:parentActivityName=".Usuario.UsuarioPerfil"
             android:screenOrientation="portrait" />
-        <activity android:name=".Usuario.DetallePdf"
+        <activity
+            android:name=".Usuario.DatosUsuario"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Usuario.DetallePdf"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.DetalleRecetas"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Usuario.UsuarioPlan" />
+            android:parentActivityName=".Usuario.UsuarioPlan"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.EditarPerfil"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.InformacionCompra"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Usuario.DetalleRecetas" />
+            android:parentActivityName=".Usuario.DetalleRecetas"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.RutinaUsuario"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Usuario.UsuarioPlanWorkouts" />
-        <activity android:name=".Usuario.TipoPlanes"
+            android:parentActivityName=".Usuario.UsuarioPlanWorkouts"
             android:screenOrientation="portrait" />
-        <activity android:name=".Usuario.UsuarioPlan"
+        <activity
+            android:name=".Usuario.TipoPlanes"
             android:screenOrientation="portrait" />
-        <activity android:name=".Usuario.UsuarioPlanWorkouts"
+        <activity
+            android:name=".Usuario.UsuarioPlan"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Usuario.UsuarioPlanWorkouts"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.CambiarCorreo"
@@ -100,63 +109,66 @@
         <activity
             android:name=".Usuario.CambiarContrasena"
             android:parentActivityName=".Usuario.EditarPerfil" />
-
-        <activity android:name=".Usuario.Formulario"
-            android:screenOrientation="portrait"
-            ></activity>
-
-        <activity android:name=".videoplayer.VideoPlayer"
-            android:theme="@style/TemaVideo"
-        android:configChanges="orientation|screenSize|keyboardHidden">
-        </activity>
-
-        <!--
-        android:screenOrientation="landscape">
-        -->
-
-
-
-        <activity android:name=".Admin.AsesoriasAdmin"
+        <activity
+            android:name=".Usuario.Formulario"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".videoplayer.VideoPlayer"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/TemaVideo"></activity>
+        <!--         android:screenOrientation="landscape"> -->
+        <activity
+            android:name=".Admin.AsesoriasAdmin"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Admin.AdminPerfil"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Admin.AsesoriasAdmin" />
-        <activity android:name=".Admin.AdminPlanUsuario"
+            android:parentActivityName=".Admin.AsesoriasAdmin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Admin.AdminPlanUsuario"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Admin.AdminRecetaDetalle"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Admin.AdminPlanUsuario" />
-        <activity android:name=".Admin.AsesoriasPendientes"
+            android:parentActivityName=".Admin.AdminPlanUsuario"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Admin.AsesoriasPendientes"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Admin.EscogerPlan"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Admin.SolicitudAsesoria" />
-        <activity android:name=".Admin.PerfilUsuarioAdmin"
+            android:parentActivityName=".Admin.SolicitudAsesoria"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Admin.PerfilUsuarioAdmin"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Admin.RecetasEditar"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Admin.SolicitudAsesoria" />
+            android:parentActivityName=".Admin.SolicitudAsesoria"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Admin.SolicitudAsesoria"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Admin.AsesoriasPendientes" />
+            android:parentActivityName=".Admin.AsesoriasPendientes"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Admin.EditarPerfilAdmin"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Admin.AdminPerfil" />
+            android:parentActivityName=".Admin.AdminPerfil"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Admin.AgregarEjercicios"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Admin.AdminWorkouts"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Admin.AgregarIngredientes"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".Admin.AgregarEjercicios"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Admin.AdminWorkouts"
+        <activity
+            android:name=".Admin.AgregarPasos"
             android:screenOrientation="portrait" />
-        <activity android:name=".Admin.AgregarIngredientes"
-            android:screenOrientation="portrait" />
-        <activity android:name=".Admin.AgregarPasos"
-            android:screenOrientation="portrait" />
+
+        <activity android:name=".Compra.Compra"></activity>
+
 
     </application>
 

@@ -231,7 +231,7 @@ public class RecetasEditar extends AppCompatActivity {
                         uploadImage(key, id, imgUri.toString(),
                                 calorias + " Kcal", tiempo + " min", cantidad + " porciones",
                                 nombre, "desayuno", "200", "$100");
-                        dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
+                        //dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
 
 
 
@@ -244,7 +244,7 @@ public class RecetasEditar extends AppCompatActivity {
                         uploadImage(key, id, imgUri.toString(),
                                 calorias + " Kcal", tiempo + " min", cantidad + " porciones",
                                 nombre, "almuerzo", "$200", "100");
-                        dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
+                        //dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
 
 
                         Intent intent1 = new Intent(RecetasEditar.this, AgregarIngredientes.class);
@@ -256,7 +256,7 @@ public class RecetasEditar extends AppCompatActivity {
                         uploadImage(key, id, imgUri.toString(),
                                 calorias + " Kcal", tiempo + " min", cantidad + " porciones",
                                 nombre, "cena", "200", "100");
-                        dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
+                       // dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
 
 
                         Intent intent2 = new Intent(RecetasEditar.this, AgregarIngredientes.class);
@@ -320,7 +320,7 @@ public class RecetasEditar extends AppCompatActivity {
                                     kilocalorias , min_alimentos, porciones,
                                     nombre_alimento, tipo_alimento, precioAlto, precioBajo);
                             progressDialog.dismiss();
-                            Toast.makeText(RecetasEditar.this, "Se subio correctamen la información. ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RecetasEditar.this, "Se subio correctamente la información. ", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -385,7 +385,7 @@ public class RecetasEditar extends AppCompatActivity {
 
         }
         else {
-            Toast.makeText(RecetasEditar.this,"Selecciona archivo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RecetasEditar.this,"Selecciona un archivo", Toast.LENGTH_SHORT).show();
         }
 
 

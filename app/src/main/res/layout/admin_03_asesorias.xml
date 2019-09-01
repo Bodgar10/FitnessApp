@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_weight="1"
-                android:text="Activos"/>
+                android:text="@string/activos"/>
 
 
             <TextView
@@ -66,7 +66,7 @@
                 android:layout_marginEnd="15dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Pendientes" />
+                android:text="@string/pendientes" />
 
 
         </LinearLayout>
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAllCaps="true"
-            android:text="Estado de membresia:" />
+            android:text="@string/estado_de_membresia" />
 
 
         <TextView
@@ -101,7 +101,7 @@
             android:textStyle="bold"
             android:layout_weight="1"
             android:textAllCaps="true"
-            android:text="Por finalizar" />
+            android:text="@string/por_finalizar" />
 
 
     </LinearLayout>
@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAllCaps="true"
-            android:text="Estado de membresia:" />
+            android:text="@string/estado_de_membresia" />
 
 
         <TextView
@@ -142,7 +142,7 @@
             android:textStyle="bold"
             android:layout_weight="1"
             android:textAllCaps="true"
-            android:text="Recientes" />
+            android:text="@string/recientes" />
 
 
     </LinearLayout>

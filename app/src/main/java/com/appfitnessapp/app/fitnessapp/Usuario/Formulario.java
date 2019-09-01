@@ -233,6 +233,7 @@ public class Formulario extends AppCompatActivity {
 
         progressDialog.setMessage("Cargando Información...");
         progressDialog.show();
+        progressDialog.setCancelable(false);
         dbProvider.formulario().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

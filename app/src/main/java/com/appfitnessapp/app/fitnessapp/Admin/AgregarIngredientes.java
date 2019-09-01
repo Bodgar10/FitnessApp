@@ -112,7 +112,7 @@ public class AgregarIngredientes extends AppCompatActivity {
     }
 
     private void aceptar() {
-        Toast t=Toast.makeText(this,"Los inredientes se subieron.", Toast.LENGTH_SHORT);
+        Toast t=Toast.makeText(this,"Los ingredientes  se subieron.", Toast.LENGTH_SHORT);
         t.show();
         Intent intent = new Intent(AgregarIngredientes.this, AgregarPasos.class);
         Bundle bundle = new Bundle();

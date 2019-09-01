@@ -29,7 +29,7 @@
                 android:layout_marginEnd="10dp"
                 android:gravity="end"
                 android:padding="5dp"
-                android:text="Siguiente"
+                android:text="@string/siguiente"
                 android:textAllCaps="true"
                 android:textColor="@color/naranja"
                 android:textSize="15sp"
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_weight="1"
-                android:text="Recetas"/>
+                android:text="@string/recetas"/>
 
 
             <TextView
@@ -75,7 +75,7 @@
                 android:layout_marginEnd="15dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Workouts"/>
+                android:text="@string/workouts"/>
 
         </LinearLayout>
 
@@ -100,7 +100,7 @@
                 android:gravity="center"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
-                android:text="Seleccionar imagen"
+                android:text="@string/seleccionar_imagen"
                 android:textColor="@color/blanco"
                 android:textSize="14sp"
                 android:textAllCaps="true" />
@@ -125,7 +125,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:text="Nombre de la comida"
+        android:text="@string/nombre_de_la_comida"
         android:textAllCaps="false"
         android:textColor="@android:color/darker_gray"
         android:textSize="15sp" />
@@ -139,7 +139,7 @@
         android:ems="10"
         android:textSize="13sp"
         android:textColor="@color/negro"
-        android:hint="Nombre"
+        android:hint="@string/nombre"
         android:inputType="textCapSentences" />
 
 
@@ -151,7 +151,7 @@
         android:padding="8dp"
         android:gravity="start"
         android:background="@android:color/darker_gray"
-        android:text="INFORMACIÓN DE LA RECETA"
+        android:text="@string/informaci_n_de_la_receta"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
         android:textSize="13sp" />
@@ -169,7 +169,7 @@
         android:background="@drawable/boton_gris_margen"
         android:padding="10dp"
         android:textColor="@color/negro"
-        android:hint="Tiempo de coccion"
+        android:hint="@string/tiempo_de_coccion"
         android:inputType="number" />
 
     <EditText
@@ -184,7 +184,7 @@
         android:background="@drawable/boton_gris_margen"
         android:padding="10dp"
         android:textColor="@color/negro"
-        android:hint="Cantidad de porciones"
+        android:hint="@string/cantidad_de_porciones"
         android:inputType="number" />
 
     <EditText
@@ -199,7 +199,7 @@
         android:background="@drawable/boton_gris_margen"
         android:padding="10dp"
         android:textColor="@color/negro"
-        android:hint="Calorias aproximadas"
+        android:hint="@string/calorias_aproximadas"
         android:inputType="number" />
 
 
@@ -211,7 +211,7 @@
             android:padding="8dp"
             android:gravity="start"
             android:background="@android:color/darker_gray"
-            android:text="TIPO COMIDA"
+            android:text="@string/tipo_comida"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
             android:textSize="13sp" />
@@ -231,7 +231,7 @@
                 android:buttonTint="@color/naranja"
                 android:shadowColor="@color/naranja"
                 android:layout_weight="1"
-                android:text="Desayuno" />
+                android:text="@string/desayuno" />
             <RadioButton
                 android:id="@+id/checkComida"
                 android:layout_weight="1"
@@ -241,7 +241,7 @@
                 android:shadowColor="@color/naranja"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Almuerzo" />
+                android:text="@string/almuerzo" />
 
             <RadioButton
                 android:id="@+id/checkCena"
@@ -251,7 +251,7 @@
                 android:shadowColor="@color/naranja"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cena" />
+                android:text="@string/cena" />
 
         </LinearLayout>
 
@@ -382,7 +382,7 @@
         android:padding="8dp"
         android:gravity="start"
         android:background="@android:color/darker_gray"
-        android:text="Donde encontraras los ingredientes"
+        android:text="@string/donde_encuentras_los_ingredientes"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
         android:textSize="13sp" />

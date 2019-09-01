@@ -34,6 +34,7 @@ public class AgregarPasos extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.admin_06_agregarpasos);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         Toolbar toolbarback=findViewById(R.id.toolbar);
@@ -65,7 +66,7 @@ public class AgregarPasos extends AppCompatActivity {
 
                 if (!descripcion.isEmpty()&&!paso.isEmpty()){
                     dbProvider.subirPreparacion(key, paso, descripcion);
-                    Toast.makeText(AgregarPasos.this, "Se subio el paso."+edtPaso, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AgregarPasos.this, "Se subio el paso: "+edtPaso, Toast.LENGTH_SHORT).show();
                     edtDescripcion.getText().clear();
                     edtPaso.getText().clear();
 
@@ -82,7 +83,7 @@ public class AgregarPasos extends AppCompatActivity {
             public void onClick(View v) {
 
                 AlertDialog.Builder dialogo1 = new AlertDialog.Builder(AgregarPasos.this);
-                dialogo1.setTitle("Ingredientes");
+                dialogo1.setTitle("Pasos");
                 dialogo1.setMessage("¿Se pusieron todos los pasos?");
                 dialogo1.setCancelable(false);
                 dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {

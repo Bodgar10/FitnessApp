@@ -150,7 +150,7 @@ public class EditarPerfil extends AppCompatActivity {
         spinnerPeso.setAdapter(Speso);
         spinnerPeso.setPrompt("¿Cual es tu peso?");
         spinnerBuscando.setAdapter(Sbuscando);
-        spinnerBuscando.setPrompt("¿Que estas objetivos?");
+        spinnerBuscando.setPrompt("¿Qué estas buscando?");
 
         spinnerEstatura.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -230,7 +230,7 @@ public class EditarPerfil extends AppCompatActivity {
                 }
                 if (!telefono.equals(editTelefono)){
                     dbProvider.updatePhone(editTelefono, id);
-                    Toast.makeText(EditarPerfil.this, "Se actualizo el telefono.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditarPerfil.this, "Se actualizo el teléfono.", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(EditarPerfil.this, UsuarioPerfil.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -411,7 +411,7 @@ public class EditarPerfil extends AppCompatActivity {
 
         }
         else {
-            Toast.makeText(EditarPerfil.this,"Selecciona archivo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditarPerfil.this,"Selecciona una imagen", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -424,7 +424,7 @@ public class EditarPerfil extends AppCompatActivity {
             selectImage();
         }
         else {
-            Toast.makeText(EditarPerfil.this, "Permite el permiso", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditarPerfil.this, "Permite el acceso a la galería.", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -462,7 +462,7 @@ public class EditarPerfil extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(EditarPerfil.this, "Se ha cambiado el correo correctamente.Inicia sesion de nuevo.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditarPerfil.this, "Se ha cambiado el correo correctamente.Inicia sesión de nuevo.", Toast.LENGTH_LONG).show();
                     dbProvider.updateEmail(id,email);
                     mAuth.signOut();
                     Intent intent=new Intent(EditarPerfil.this, SplashPantalla.class);

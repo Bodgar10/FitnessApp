@@ -1,3 +1,112 @@
 <resources>
-    <string name="app_name">FitnessApp</string>
+    <string name="app_name">A&amp;F</string>
+    <string name="omitir">Omitir</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="iniciar_sesi_n">Iniciar Sesión</string>
+    <string name="correo_electronico">Correo electrónico</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="nombre">Nombre</string>
+    <string name="telefono">Teléfono</string>
+    <string name="ya_tienes_una_cuenta">¿Ya tienes una cuenta?</string>
+    <string name="a_n_no_tienes_una_cuenta">¿Aún no tienes una cuenta?</string>
+    <string name="asesorias">Asesorías</string>
+    <string name="precio">Precio</string>
+    <string name="califaci_n">Calificación</string>
+    <string name="descripci_n">Descripción</string>
+    <string name="que_incluye_el_plan">Que incluye el plan</string>
+    <string name="rutina_de_ejercicios">Rutina de ejercicios</string>
+    <string name="lista_de_alimentos">Lista de alimentos</string>
+    <string name="comentarios_de_los_usuarios">Comentarios de los usuarios</string>
+    <string name="comprar">Comprar</string>
+    <string name="que_te_parecio_la_asesoria">¿Como te pareció la asesoría?</string>
+    <string name="cuentanos_tu_experiencia">Cuéntanos tu experiencia</string>
+    <string name="como_te_parecio_el_plan">¿Cómo te pareció el plan?</string>
+    <string name="subir_foto_antes">Subir foto antes</string>
+    <string name="subir_foto_despues">Subir foto después</string>
+    <string name="calificar">Calificar</string>
+
+    <string name="guardar">Guardar</string>
+    <string name="datos_del_usuario">Datos del usuario</string>
+    <string name="cuanto_mides">¿Cuanto mides?</string>
+    <string name="cual_es_tu_peso">¿Cual es tu peso?</string>
+    <string name="que_estas_buscando">¿Qué estas buscando?</string>
+
+
+    <string name="editar">Editar</string>
+    <string name="ingredientes">Ingredientes</string>
+    <string name="total_inversion">Total inversión:</string>
+    <string name="preparaci_n">Preparación</string>
+    <string name="a_adir_foto_de_perfil">Añadir foto de perfil</string>
+    <string name="informaci_n_de_perfil">Información de perfil</string>
+    <string name="estatura">Estatura</string>
+    <string name="qu_estas_buscando">¿Qué estas buscando?</string>
+    <string name="actualizar_informaci_n">Actualizar Información</string>
+    <string name="donde_encuentras_los_ingredientes">Donde encuentras los ingredientes</string>
+    <string name="supermercados">Supermercados</string>
+    <string name="seleccionar_un_metodo_de_pago">Seleccionar un método de pago</string>
+    <string name="tarjeta_de_credito">Tarjeta de crédito</string>
+    <string name="paypal">Paypal</string>
+    <string name="resumen_de_compra">Resumen de compra</string>
+    <string name="tipo_de_plan">Tipo de plan</string>
+    <string name="total_a_pagar">Total a pagar</string>
+    <string name="realizar_pago">Realizar pago</string>
+    <string name="rutina_de_entrenamiento">Rutina de entrenamiento</string>
+    <string name="peso_actual">Peso actual</string>
+    <string name="objetivo">Objetivo</string>
+    <string name="recetas">Recetas</string>
+    <string name="desayuno">Desayuno</string>
+    <string name="almuerzo">Almuerzo</string>
+    <string name="cena">Cena</string>
+    <string name="completos">Completos</string>
+    <string name="duraci_n">Duración</string>
+    <string name="incompletos">Incompletos</string>
+    <string name="calificar_asesoria">Calificar asesoría</string>
+    <string name="cerrar_sesi_n">Cerrar Sesión</string>
+    <string name="workouts">Workouts</string>
+
+    <string name="ganancias_totales">Ganancias totales</string>
+    <string name="siguiente">Siguiente</string>
+    <string name="seleccionar_video">Seleccionar vídeo</string>
+    <string name="datos_del_ejercicio">Datos del ejercicio</string>
+    <string name="nombre_ejercicio">Nombre ejercicio</string>
+    <string name="repeticiones">Repeticiones</string>
+    <string name="rondas">Rondas</string>
+    <string name="demostraci_n_de_los_ejercicios">Demostración de los ejercicios</string>
+    <string name="subir_foto">Subir foto</string>
+
+
+    <string name="datos_de_los_ingredientes">Datos de los ingredientes</string>
+    <string name="nombre_ingrediente">Nombre ingrediente</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="subir_ingredientes">Subir ingredientes</string>
+    <string name="datos_de_los_pasos">Datos de los pasos</string>
+    <string name="paso">Paso</string>
+    <string name="subir_pasos">Subir pasos</string>
+
+
+    <string name="activos">Activos</string>
+    <string name="pendientes">Pendientes</string>
+    <string name="estado_de_membresia">Estado de membresía:</string>
+    <string name="por_finalizar">Por finalizar</string>
+    <string name="recientes">Recientes</string>
+
+
+    <string name="minutos">Minutos</string>
+    <string name="numero_de_ejercicios">Número de ejercicios</string>
+    <string name="dia_del_ejercicio">Día del ejercicio</string>
+    <string name="enviar_mensaje">Enviar mensaje</string>
+    <string name="ver_plan">Ver plan</string>
+    <string name="entrenamiento">Entrenamiento</string>
+
+
+    <string name="seleccionar_imagen">Seleccionar imagen</string>
+    <string name="nombre_de_la_comida">Nombre de la comida</string>
+    <string name="informaci_n_de_la_receta">INFORMACIÓN DE LA RECETA</string>
+    <string name="tiempo_de_coccion">Tiempo de cocción</string>
+    <string name="cantidad_de_porciones">Cantidad de porciones</string>
+    <string name="calorias_aproximadas">Calorías aproximadas</string>
+    <string name="tipo_comida">TIPO COMIDA</string>
+    <string name="comenzar_asesoria">Comenzar asesoría</string>
+
+
 </resources>

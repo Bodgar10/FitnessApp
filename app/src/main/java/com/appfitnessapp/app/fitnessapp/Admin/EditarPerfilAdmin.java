@@ -175,7 +175,7 @@ public class EditarPerfilAdmin extends AppCompatActivity {
                 }
                 if (!telefono.equals(editTelefono)){
                     dbProvider.updatePhone(editTelefono, id);
-                    Toast.makeText(EditarPerfilAdmin.this, "Se actualizo el telefono.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditarPerfilAdmin.this, "Se actualizo el teléfono.", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(EditarPerfilAdmin.this, AdminPerfil.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -202,6 +202,7 @@ public class EditarPerfilAdmin extends AppCompatActivity {
 
         progressDialog.setMessage("Cargando Información...");
         progressDialog.show();
+        progressDialog.setCancelable(false);
 
         dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
             @Override
@@ -301,7 +302,7 @@ public class EditarPerfilAdmin extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(EditarPerfilAdmin.this, "Hubo un problema intenta de nuevo.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditarPerfilAdmin.this, "Hubo un problema al subir la foto intenta de nuevo.", Toast.LENGTH_SHORT).show();
 
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -336,7 +337,7 @@ public class EditarPerfilAdmin extends AppCompatActivity {
 
         }
         else {
-            Toast.makeText(EditarPerfilAdmin.this,"Selecciona archivo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditarPerfilAdmin.this,"Selecciona un archivo", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -349,7 +350,7 @@ public class EditarPerfilAdmin extends AppCompatActivity {
             selectImage();
         }
         else {
-            Toast.makeText(EditarPerfilAdmin.this, "Permite el permiso", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditarPerfilAdmin.this, "Permite el acceso a la galería.", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -374,7 +375,7 @@ public class EditarPerfilAdmin extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(EditarPerfilAdmin.this, "Se ha cambiado el correo correctamente.Inicia sesion de nuevo.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditarPerfilAdmin.this, "Se ha cambiado el correo correctamente.Inicia sesión de nuevo.", Toast.LENGTH_LONG).show();
                     dbProvider.updateEmail(id,email);
                     mAuth.signOut();
                     Intent intent=new Intent(EditarPerfilAdmin.this, SplashPantalla.class);

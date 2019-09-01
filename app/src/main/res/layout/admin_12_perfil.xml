@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:gravity="center"
-                android:text="Asesorias"
+                android:text="@string/asesorias"
                 android:textAllCaps="false"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="14sp" />
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:gravity="center"
-                android:text="Precio"
+                android:text="@string/precio"
                 android:textAllCaps="false"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="14sp" />
@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:gravity="center"
-                android:text="Califación"
+                android:text="@string/califaci_n"
                 android:textAllCaps="false"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="14sp" />
@@ -286,7 +286,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:text="Email"
+                    android:text="@string/correo_electronico"
                     android:textAllCaps="false"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="14sp" />
@@ -347,7 +347,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:text="Contraseña"
+                    android:text="@string/contrase_a"
                     android:textAllCaps="false"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="14sp" />
@@ -408,7 +408,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:text="Ganancias totales"
+                    android:text="@string/ganancias_totales"
                     android:textAllCaps="false"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="14sp" />
@@ -438,7 +438,7 @@
             android:gravity="center"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:text="Cerrar Sesión"
+            android:text="@string/cerrar_sesi_n"
             android:textColor="@color/blanco"
             android:textSize="14sp"
             android:textAllCaps="true" />
