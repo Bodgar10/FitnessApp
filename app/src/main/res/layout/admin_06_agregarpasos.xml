@@ -48,7 +48,7 @@
         android:textSize="13sp" />
 
     <EditText
-        android:id="@+id/edtNombreEjercicio"
+        android:id="@+id/edtPaso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -63,7 +63,7 @@
         android:inputType="number" />
 
     <EditText
-        android:id="@+id/edtRepeticiones"
+        android:id="@+id/edtDescripcionPaso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"

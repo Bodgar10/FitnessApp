@@ -104,6 +104,8 @@ public class DBProvider {
                            String timestamp,String descripcion){
         Map<String, Object> updates = new HashMap<>();
 
+        String key = tablaFeed().push().getKey();
+
         updates.put(Contants.TIPO_FEED, tipo_feed);
         updates.put(Contants.IS_GRATIS, is_gratis);
         updates.put(Contants.IMAGEN_FEED, imagen_feed);
@@ -112,7 +114,7 @@ public class DBProvider {
         updates.put(Contants.TIMESTAMP, timestamp);
         updates.put(Contants.DESCRIPCION, descripcion);
 
-        tablaFeed().child(tipo_feed).updateChildren(updates);
+        tablaFeed().child(key).updateChildren(updates);
 
 
 

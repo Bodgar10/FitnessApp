@@ -114,6 +114,7 @@ public class Registro extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (!task.isSuccessful()) {
                     Toast.makeText(Registro.this, "Hubo un error, Revisa si el correo no esta ya existente.", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
                 if (task.isSuccessful()) {
                     FirebaseUser user = task.getResult().getUser();
@@ -127,58 +128,6 @@ public class Registro extends AppCompatActivity {
     }
 
 
-    /*
-
-    public void bajarUsuarios(){
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Log.e(TAG,"Usuarios 2: ");
-        dbProvider = new DBProvider();
-
-        dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.e(TAG,"Usuarios 4: ");
-
-
-                if (dataSnapshot.exists()){
-
-
-                    for (DataSnapshot snapshot: dataSnapshot.getChildren()){
-                        Usuarios usuarios = snapshot.getValue(Usuarios.class);
-
-                        //Log.e(TAG,"Usuarios: "+ snapshot);
-                        Log.e(TAG,"Usuarios: "+ snapshot);
-                        if (usuarios.getId_usuario().equals(user.getUid())){
-                            yaCreado = true;
-                            progressDialog.dismiss();
-
-                            if (usuarios.getTipo_usuario().equals(Contants.USUARIO)){
-                                progressDialog.dismiss();
-                                Intent intent = new Intent(Registro.this, UsuarioHome.class);
-                                startActivity(intent);
-                                Registro.this.finish();
-                            }
-
-                        }
-
-                    }
-                }else{
-                    Log.e(TAG,"Usuarios 3: ");
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG,"ERROR: ");
-            }
-        });
-
-        if (!yaCreado){
-            dbProvider.createUser(email,user.getUid(),name,"nil","","",refreshedToken,Contants.USUARIO);
-        }
-    }
-
-*/
 
 
 }

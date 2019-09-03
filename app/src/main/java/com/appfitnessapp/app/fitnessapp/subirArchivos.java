@@ -182,6 +182,8 @@ public class subirArchivos extends AppCompatActivity {
         if (requestCode==9 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
             selectPDF();
         }
+
+
         else {
             Toast.makeText(subirArchivos.this, "Permite el permiso", Toast.LENGTH_SHORT).show();
         }
@@ -203,7 +205,7 @@ public class subirArchivos extends AppCompatActivity {
             txtprueba.setText("pdf"+data.getData().getLastPathSegment());
         }
         else {
-            Toast.makeText(subirArchivos.this,"Selecciona archivo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(subirArchivos.this,"Selecciona un archivo", Toast.LENGTH_SHORT).show();
         }
 
 

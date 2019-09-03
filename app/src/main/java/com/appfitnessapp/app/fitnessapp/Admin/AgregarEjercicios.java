@@ -196,6 +196,7 @@ public class AgregarEjercicios extends AppCompatActivity {
         progressDialog.setTitle("Subiendo...");
         progressDialog.setProgress(0);
         progressDialog.show();
+        progressDialog.setCancelable(false);
 
         final String fileName =System.currentTimeMillis()+"";
         final StorageReference storageReference1 =  mStorage.child(Contants.EJERCICIOS).child(fileName);

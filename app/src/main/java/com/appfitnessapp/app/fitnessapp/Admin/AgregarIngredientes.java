@@ -92,7 +92,7 @@ public class AgregarIngredientes extends AppCompatActivity {
                 });
                 dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogo1, int id) {
-                        cancelar();
+                        dialogo1.dismiss();
                     }
                 });
                 dialogo1.show();
@@ -104,12 +104,7 @@ public class AgregarIngredientes extends AppCompatActivity {
 
     }
 
-    private void cancelar() {
 
-        finish();
-
-
-    }
 
     private void aceptar() {
         Toast t=Toast.makeText(this,"Los ingredientes  se subieron.", Toast.LENGTH_SHORT);

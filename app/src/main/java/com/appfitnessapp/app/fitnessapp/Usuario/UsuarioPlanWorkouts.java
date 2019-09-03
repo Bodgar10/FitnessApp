@@ -268,6 +268,12 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
                                 }
                             }
                         }
+
+                        else {
+                            Toast.makeText(UsuarioPlanWorkouts.this, "No tienes ejercicios por hoy.", Toast.LENGTH_SHORT).show();
+                            imgVideo.setVisibility(View.GONE);
+
+                        }
                     }
                 }
                 else {

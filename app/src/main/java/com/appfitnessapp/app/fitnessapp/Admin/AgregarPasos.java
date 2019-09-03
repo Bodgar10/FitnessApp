@@ -50,8 +50,8 @@ public class AgregarPasos extends AppCompatActivity {
             key = extras.getString("key");
         }
 
-        edtDescripcion=findViewById(R.id.edtNombreIngrediente);
-        edtPaso=findViewById(R.id.edtCantidad);
+        edtDescripcion=findViewById(R.id.edtDescripcionPaso);
+        edtPaso=findViewById(R.id.edtPaso);
 
         btnGuardar=findViewById(R.id.txtGuardar);
 
@@ -66,7 +66,7 @@ public class AgregarPasos extends AppCompatActivity {
 
                 if (!descripcion.isEmpty()&&!paso.isEmpty()){
                     dbProvider.subirPreparacion(key, paso, descripcion);
-                    Toast.makeText(AgregarPasos.this, "Se subio el paso: "+edtPaso, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AgregarPasos.this, "Se subio el paso: "+paso, Toast.LENGTH_SHORT).show();
                     edtDescripcion.getText().clear();
                     edtPaso.getText().clear();
 
@@ -93,7 +93,9 @@ public class AgregarPasos extends AppCompatActivity {
                 });
                 dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogo1, int id) {
-                        cancelar();
+
+                        dialogo1.dismiss();
+
                     }
                 });
                 dialogo1.show();
@@ -102,17 +104,13 @@ public class AgregarPasos extends AppCompatActivity {
 
     }
 
-    private void cancelar() {
 
-        finish();
-
-
-    }
 
     private void aceptar() {
         Toast t=Toast.makeText(this,"Plan alimenticio completo.", Toast.LENGTH_SHORT);
         t.show();
         Intent intent = new Intent(AgregarPasos.this, AsesoriasAdmin.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
 

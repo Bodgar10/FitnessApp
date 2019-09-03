@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Admin.AgregarImagen">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        android:elevation="10dp"
+        android:theme="@style/Toolbar"
+        app:titleTextAppearance="@style/Toolbar.TitleText"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <TextView
+            android:id="@+id/txtSubir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:padding="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="end"
+            android:textStyle="bold"
+            android:text="SUBIR"
+            android:textAllCaps="true"
+            android:textColor="@color/naranja"
+            android:textSize="15sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <LinearLayout
+        android:id="@+id/btnAgregarFoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/boton_naranja_completo"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="@string/seleccionar_imagen"
+            android:textColor="@color/blanco"
+            android:textSize="14sp"
+            android:textAllCaps="true" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgFeed"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginEnd="20dp"
+        android:scaleType="centerInside"
+        android:visibility="gone"
+        android:layout_marginStart="20dp" />
+
+
+    <EditText
+        android:id="@+id/edtDescripcionImagen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:textSize="13sp"
+        android:background="@drawable/boton_gris_margen"
+        android:padding="10dp"
+        android:textColor="@color/negro"
+        android:hint="@string/descripci_n"
+        android:inputType="textMultiLine" />
+
+</LinearLayout>
