@@ -22,7 +22,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Admin.AgregarImagen"></activity>
         <activity android:name=".Login.SplashPantalla">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -126,7 +125,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Admin.AdminRecetaDetalle"
-            android:parentActivityName=".Admin.AdminPlanUsuario"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Admin.AsesoriasPendientes"
@@ -163,6 +161,12 @@
             android:name=".Admin.AgregarPasos"
             android:screenOrientation="portrait" />
         <activity android:name=".Compra.Compra" />
+
+        <activity android:name=".Admin.AgregarVideo"></activity>
+        <activity android:name=".Admin.AgregarPdf"></activity>
+        <activity android:name=".Admin.AgregarImagen"></activity>
+        <activity android:name=".Admin.AdminAgregarFeed"></activity>
+
     </application>
 
 </manifest>

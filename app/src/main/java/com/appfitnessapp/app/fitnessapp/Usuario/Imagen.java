@@ -38,7 +38,6 @@ public class Imagen extends AppCompatActivity {
         setContentView(R.layout.usuario_14_feed_imagen);
 
 
-
         Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("");
@@ -77,6 +76,7 @@ public class Imagen extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
 
     @Override

@@ -118,6 +118,7 @@ public class SplashPantalla extends AppCompatActivity {
                                 if (usuario.getTipo_usuario().equals(Contants.USUARIO)) {
                                     progressDialog.dismiss();
                                     Intent intent = new Intent(SplashPantalla.this, UsuarioHome.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                     SplashPantalla.this.finish();
                                 }
@@ -125,6 +126,7 @@ public class SplashPantalla extends AppCompatActivity {
                                 else if (usuario.getTipo_usuario().equals(Contants.ADMIN)) {
                                     progressDialog.dismiss();
                                     Intent intent = new Intent(SplashPantalla.this, AsesoriasAdmin.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                     SplashPantalla.this.finish();
                                 }else{

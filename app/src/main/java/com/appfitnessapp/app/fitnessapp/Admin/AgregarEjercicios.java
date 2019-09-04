@@ -46,7 +46,7 @@ import java.io.IOException;
 public class AgregarEjercicios extends AppCompatActivity {
 
 
-    TextView txtPrueba,btnGuardar;
+    TextView txtPrueba,btnGuardar,txtSiguiente;
     ImageView btnAgregarEjercicio,img1,img2,img3;
     EditText edtNombreEjercicio,edtRepeticiones,edtRonda;
 
@@ -109,7 +109,7 @@ public class AgregarEjercicios extends AppCompatActivity {
 
         txtPrueba=findViewById(R.id.txtprueba);
         btnGuardar=findViewById(R.id.txtGuardar);
-
+        txtSiguiente=findViewById(R.id.txtSiguiente);
 
         btnAgregarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,12 +167,25 @@ public class AgregarEjercicios extends AppCompatActivity {
                 if (!nombre.isEmpty()&&!ronda.isEmpty()&&!repeticiones.isEmpty()){
                     uploadVideo(nombre,ronda,repeticiones,key);
                     Log.e(TAG, "Ejercicio2: " + idEjercicio);
-                    Toast.makeText(AgregarEjercicios.this, "Se subio toda la información correctamente.", Toast.LENGTH_SHORT).show();
+                    btnGuardar.setVisibility(View.GONE);
+                    txtSiguiente.setVisibility(View.VISIBLE);
                 }
                 else {
                     Toast.makeText(AgregarEjercicios.this, "Revisa  que todos los campos estén llenos.", Toast.LENGTH_SHORT).show();
 
                 }
+            }
+        });
+
+        txtSiguiente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i  = new Intent(AgregarEjercicios.this,AsesoriasAdmin.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                finish();
+
             }
         });
 
@@ -215,8 +228,6 @@ public class AgregarEjercicios extends AppCompatActivity {
                                 idEjercicio = key;
                                 dbProvider.subirEjerciciosPlan(nombre_ejercicio, rondas, repeticiones, uri.toString(), id_ejercicio,key);
                                 uploadImage3(id_ejercicio,idEjercicio,imagen1Uri.toString(),imagen2Uri.toString(),imagen3Uri.toString());
-
-
                                 //ejerciciosSolos
                                 //dbProvider.subirEjercicios(nombre_ejercicio,rondas,repeticiones,uri.toString(),id_ejercicio);
                                 progressDialog.dismiss();

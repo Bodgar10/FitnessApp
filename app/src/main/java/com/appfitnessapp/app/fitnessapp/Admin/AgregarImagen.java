@@ -2,7 +2,9 @@ package com.appfitnessapp.app.fitnessapp.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -14,6 +16,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -28,6 +31,7 @@ import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.subirArchivos;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -45,8 +49,7 @@ public class AgregarImagen extends AppCompatActivity {
     StorageReference mStorage;
     Uri imgUri;
     ProgressDialog progressDialog;
-    TextView txtSubir;
-
+    TextView txtSubir,txtSiguiente;
 
 
 
@@ -56,12 +59,22 @@ public class AgregarImagen extends AppCompatActivity {
         setContentView(R.layout.admin_agregar_imagen);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
+        Toolbar toolbarback = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbarback);
+        getSupportActionBar().setTitle("Agregar Imagen");
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
+        mStorage= FirebaseStorage.getInstance().getReference();
+        dbProvider = new DBProvider();
 
 
         btnAgregarFoto=findViewById(R.id.btnAgregarFoto);
         edtDescripcion=findViewById(R.id.edtDescripcionImagen);
         imgFeed=findViewById(R.id.imgFeed);
         txtSubir=findViewById(R.id.txtSubir);
+        txtSiguiente=findViewById(R.id.txtSiguiente);
 
 
         btnAgregarFoto.setOnClickListener(new View.OnClickListener() {
@@ -90,13 +103,25 @@ public class AgregarImagen extends AppCompatActivity {
                 
                 
                 if (!descripcion.isEmpty()&&imgUri!=null){
-                    
                     uploadImagenFeed(descripcion,imgUri.toString(),imgUri.toString(),currentTimeStamp);
+                    txtSiguiente.setVisibility(View.VISIBLE);
+                    txtSubir.setVisibility(View.GONE);
                 }
                 
                 else{
                     Toast.makeText(AgregarImagen.this, "Revisa que tengas una descripción y la imagen.", Toast.LENGTH_SHORT).show();
                 } 
+            }
+        });
+
+        txtSiguiente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i  = new Intent(AgregarImagen.this,AdminAgregarFeed.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                finish();
             }
         });
 
@@ -113,6 +138,7 @@ public class AgregarImagen extends AppCompatActivity {
         progressDialog.setTitle("Subiendo...");
         progressDialog.setProgress(0);
         progressDialog.show();
+        progressDialog.setCancelable(false);
 
         final String fileName =System.currentTimeMillis()+"";
         final StorageReference storageReference1 =  mStorage.child(Contants.TABLA_FEED).child(fileName);
@@ -133,8 +159,11 @@ public class AgregarImagen extends AppCompatActivity {
                     storageReference1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            dbProvider.subirFeed(Contants.IMAGEN_FEED,false,uri.toString(),"0",uri.toString(),timestamp,
+                            dbProvider.subirFeed(Contants.IMAGEN,false,uri.toString(),"0",uri.toString(),timestamp,
                                     descripcion);
+                            progressDialog.dismiss();
+                            Toast.makeText(AgregarImagen.this, "Se ha subido la imagen correctamente.", Toast.LENGTH_SHORT).show();
+
 
                         }
                     });
@@ -208,6 +237,23 @@ public class AgregarImagen extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
 }

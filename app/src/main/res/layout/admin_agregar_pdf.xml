@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Admin.AgregarImagen">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        android:elevation="10dp"
+        android:theme="@style/Toolbar"
+        app:titleTextAppearance="@style/Toolbar.TitleText"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <TextView
+            android:id="@+id/txtSubir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:padding="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="end"
+            android:textStyle="bold"
+            android:text="SUBIR"
+            android:textAllCaps="true"
+            android:textColor="@color/naranja"
+            android:textSize="15sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <LinearLayout
+        android:id="@+id/btnImagenPrincipal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/boton_naranja_completo"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="Seleccionar imagen principal"
+            android:textColor="@color/blanco"
+            android:textSize="14sp"
+            android:textAllCaps="true" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgPdf"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginEnd="20dp"
+        android:scaleType="centerInside"
+        android:visibility="gone"
+        android:layout_marginStart="20dp" />
+
+
+    <EditText
+        android:id="@+id/edtDescripcionPDF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:textSize="13sp"
+        android:background="@drawable/boton_gris_margen"
+        android:padding="10dp"
+        android:textColor="@color/negro"
+        android:hint="@string/descripci_n"
+        android:inputType="textMultiLine" />
+
+
+    <LinearLayout
+        android:id="@+id/btnAgregarPdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/boton_naranja_completo"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="Seleccionar PDF"
+            android:textColor="@color/blanco"
+            android:textSize="14sp"
+            android:textAllCaps="true" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtNombrePdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text=""
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:padding="8dp"
+        android:gravity="start"
+        android:background="@android:color/darker_gray"
+        android:text="El pdf de que tipo sera:"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="13sp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/checkGratis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="35dp"
+            android:layout_gravity="center"
+            android:buttonTint="@color/naranja"
+            android:shadowColor="@color/naranja"
+            android:text="GRATIS" />
+        <RadioButton
+            android:id="@+id/checkPago"
+            android:buttonTint="@color/naranja"
+            android:shadowColor="@color/naranja"
+            android:layout_marginStart="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PAGO" />
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/edtDescripcionImagen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginStart="85dp"
+        android:layout_marginEnd="85dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:textSize="13sp"
+        android:background="@drawable/boton_gris_margen"
+        android:padding="10dp"
+        android:textColor="@color/negro"
+        android:hint="@string/precio"
+        android:inputType="number" />
+
+</LinearLayout>

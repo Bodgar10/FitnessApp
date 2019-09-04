@@ -30,9 +30,24 @@
                 android:layout_marginEnd="10dp"
                 android:layout_gravity="end"
                 android:textStyle="bold"
-                android:text="@string/siguiente"
+                android:text="Subir"
                 android:textAllCaps="true"
                 android:textColor="@color/naranja"
+                android:textSize="15sp" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/txtSiguiente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:padding="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="end"
+                android:textStyle="bold"
+                android:text="Finalizar"
+                android:textAllCaps="true"
+                android:textColor="@color/azul"
                 android:textSize="15sp" />
 
 

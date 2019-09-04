@@ -18,13 +18,14 @@ public class AdminAgregarFeed extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.usuario_17_desayuno);
+        setContentView(R.layout.admin_opcion_feed);
 
         Toolbar toolbarback = findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Feed");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         btnImagen=findViewById(R.id.btnImagen);
         btnPdf=findViewById(R.id.btnPdf);

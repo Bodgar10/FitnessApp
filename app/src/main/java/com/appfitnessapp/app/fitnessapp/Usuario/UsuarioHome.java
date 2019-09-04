@@ -8,6 +8,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -63,6 +64,7 @@ public class UsuarioHome  extends AppCompatActivity {
     RecyclerView recyclerView;
 
     private static FirebaseAuth mAuth;
+    LinearLayoutManager linearLayout;
 
     String id;
 
@@ -96,15 +98,15 @@ public class UsuarioHome  extends AppCompatActivity {
 
 
         if (user==null){
-
+            mAuth.signOut();
             Intent intent=new Intent(UsuarioHome.this, SplashPantalla.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+            finish();
 
         }
-        else if (user!=null){
+        else {
             id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
         }
 
         imgPlan=findViewById(R.id.imgPlan);
@@ -149,7 +151,13 @@ public class UsuarioHome  extends AppCompatActivity {
 
 
         recyclerView=findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        linearLayout =new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayout);
+        //poner orden inverso el recycler
+        linearLayout.setReverseLayout(true);
+        linearLayout.setStackFromEnd(true);
+
         feeds=new ArrayList<>();
         adapterFeed=new AdapterFeed(feeds);
         recyclerView.setAdapter(adapterFeed);

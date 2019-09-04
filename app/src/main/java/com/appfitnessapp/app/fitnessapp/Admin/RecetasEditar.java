@@ -56,7 +56,7 @@ import java.util.Objects;
 
 public class RecetasEditar extends AppCompatActivity {
 
-    TextView btnWorkouts,btnGuardar;
+    TextView btnWorkouts,btnGuardar,txtSiguiente;
     EditText edtNombreComida,edtTiempo,edtCantidad, edtCalorias;
     ImageButton btnIngrediente,btnPaso;
     RadioButton checkDesayuno,checkComida,checkCena;
@@ -122,6 +122,7 @@ public class RecetasEditar extends AppCompatActivity {
         recyclerPreparacion=findViewById(R.id.recyclerPreparacion);
         recyclerviewIngrediente=findViewById(R.id.recyclerviewIngrediente);
 
+        txtSiguiente=findViewById(R.id.txtSiguiente);
 
         recyclerviewIngrediente.setLayoutManager(new LinearLayoutManager(this));
         recyclerPreparacion.setLayoutManager(new LinearLayoutManager(this));
@@ -232,38 +233,27 @@ public class RecetasEditar extends AppCompatActivity {
                                 calorias + " Kcal", tiempo + " min", cantidad + " porciones",
                                 nombre, "desayuno", "200", "$100");
                         //dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
+                        btnGuardar.setVisibility(View.GONE);
+                        txtSiguiente.setVisibility(View.VISIBLE);
 
 
-
-                        Intent intent = new Intent(RecetasEditar.this, AgregarIngredientes.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("key",keyPlan);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
                     } else if (checkComida.isChecked()) {
                         uploadImage(key, id, imgUri.toString(),
                                 calorias + " Kcal", tiempo + " min", cantidad + " porciones",
                                 nombre, "almuerzo", "$200", "100");
                         //dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
+                        btnGuardar.setVisibility(View.GONE);
+                        txtSiguiente.setVisibility(View.VISIBLE);
 
 
-                        Intent intent1 = new Intent(RecetasEditar.this, AgregarIngredientes.class);
-                        Bundle bundle1 = new Bundle();
-                        bundle1.putString("key",keyPlan);
-                        intent1.putExtras(bundle1);
-                        startActivity(intent1);
                     } else if (checkCena.isChecked()) {
                         uploadImage(key, id, imgUri.toString(),
                                 calorias + " Kcal", tiempo + " min", cantidad + " porciones",
                                 nombre, "cena", "200", "100");
                        // dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
-
-
-                        Intent intent2 = new Intent(RecetasEditar.this, AgregarIngredientes.class);
-                        Bundle bundle2 = new Bundle();
-                        bundle2.putString("key",keyPlan);
-                        intent2.putExtras(bundle2);
-                        startActivity(intent2);
+                        btnGuardar.setVisibility(View.GONE);
+                        txtSiguiente.setVisibility(View.VISIBLE);
+                        
                     }
                     else {
                         Toast.makeText(RecetasEditar.this, "Selecciona un tipo de comida", Toast.LENGTH_SHORT).show();
@@ -279,6 +269,17 @@ public class RecetasEditar extends AppCompatActivity {
             }
         });
 
+        txtSiguiente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(RecetasEditar.this, AgregarIngredientes.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("key",keyPlan);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -295,6 +296,7 @@ public class RecetasEditar extends AppCompatActivity {
         progressDialog.setTitle("Subiendo...");
         progressDialog.setProgress(0);
         progressDialog.show();
+        progressDialog.setCancelable(false);
 
         final String fileName =System.currentTimeMillis()+"";
         final StorageReference storageReference1 =  mStorage.child(Contants.TABLA_PLAN_ALIMENTICIO).child(fileName);

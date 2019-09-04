@@ -79,14 +79,14 @@ public class AsesoriasAdmin extends AppCompatActivity {
 
 
         if (user==null){
-
+            mAuth.signOut();
             Intent intent=new Intent(AsesoriasAdmin.this, SplashPantalla.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-
+            finish();
         }
 
-        else if (user!=null){
+        else{
             id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         }
@@ -153,7 +153,7 @@ public class AsesoriasAdmin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(AsesoriasAdmin.this, AdminPerfil.class);
+                Intent intent = new Intent(AsesoriasAdmin.this, AdminAgregarFeed.class);
                 startActivity(intent);
 
             }
