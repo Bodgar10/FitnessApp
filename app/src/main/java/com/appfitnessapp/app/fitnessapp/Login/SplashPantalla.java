@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -41,6 +42,10 @@ public class SplashPantalla extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
     private static FirebaseAuth mAuth;
+
+    private AlphaAnimation buttonClick = new AlphaAnimation(3F, 0.9F);
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +84,7 @@ public class SplashPantalla extends AppCompatActivity {
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(buttonClick);
                 Intent intent = new Intent(SplashPantalla.this, IniciarSesion.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -92,6 +98,7 @@ public class SplashPantalla extends AppCompatActivity {
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(buttonClick);
                 Intent intent = new Intent(SplashPantalla.this, Registro.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -106,6 +113,7 @@ public class SplashPantalla extends AppCompatActivity {
         btnOmitir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(buttonClick);
                 Intent intent = new Intent(SplashPantalla.this, HomeSinRegistro.class);
                 startActivity(intent);
 

@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -118,8 +119,11 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
 
     String fecha = dateFormat.format(date);
+    private AlphaAnimation buttonClick = new AlphaAnimation(3F, 0.9F);
 
-       @Override
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_21_perfil);
@@ -127,8 +131,8 @@ public class UsuarioPerfil  extends AppCompatActivity {
            Toolbar toolbarback=findViewById(R.id.toolbarU);
            setSupportActionBar(toolbarback);
            getSupportActionBar().setTitle("");
-           ActionBar actionBar=getSupportActionBar();
-           actionBar.setDisplayHomeAsUpEnabled(true);
+          // ActionBar actionBar=getSupportActionBar();
+           //actionBar.setDisplayHomeAsUpEnabled(true);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
@@ -201,7 +205,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
         btnCalificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                v.startAnimation(buttonClick);
                 Intent intent = new Intent(UsuarioPerfil.this, Calificar.class);
                 startActivity(intent);
 
@@ -251,8 +255,8 @@ public class UsuarioPerfil  extends AppCompatActivity {
            linearCerrar.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
-
                    if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                       v.startAnimation(buttonClick);
                        mAuth.signOut();
                        Toast.makeText(UsuarioPerfil.this, "Se ha cerrado la sesión correctamente.", Toast.LENGTH_SHORT).show();
                        Intent intent = new Intent(UsuarioPerfil.this, SplashPantalla.class);
@@ -788,14 +792,16 @@ public class UsuarioPerfil  extends AppCompatActivity {
         }
     }
 
+
+
     @Override
     public void onBackPressed() {
         Intent intent;
         intent = new Intent(this, UsuarioHome.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        finish();
         startActivity(intent);
+        finish();
         overridePendingTransition(
                 getIntent().getIntExtra("anim id in", R.anim.move_in),
                 getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));

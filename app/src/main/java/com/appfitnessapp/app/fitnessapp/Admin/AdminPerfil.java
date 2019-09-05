@@ -93,13 +93,15 @@ public class AdminPerfil extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                mAuth.signOut();
-                Toast.makeText(AdminPerfil.this, "Se ha cerrado la sesión correctamente.", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(AdminPerfil.this, SplashPantalla.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
-
+                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                    mAuth.signOut();
+                    Toast.makeText(AdminPerfil.this, "Se ha cerrado la sesión correctamente.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(AdminPerfil.this, SplashPantalla.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -191,6 +193,10 @@ public class AdminPerfil extends AppCompatActivity {
                 Abrir();
                 return true;
 
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -198,9 +204,25 @@ public class AdminPerfil extends AppCompatActivity {
 
     private void Abrir() {
         Intent intent=new Intent(AdminPerfil.this,EditarPerfilAdmin.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        finish();
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent;
+        intent = new Intent(this, AsesoriasAdmin.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(
+                getIntent().getIntExtra("anim id in", R.anim.move_in),
+                getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
+
+    }
 
 }

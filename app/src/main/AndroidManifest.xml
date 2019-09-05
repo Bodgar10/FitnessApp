@@ -121,10 +121,11 @@
             android:theme="@style/TemaVideo" /> <!-- android:screenOrientation="landscape"> -->
         <activity
             android:name=".Admin.AsesoriasAdmin"
+            android:theme="@style/YourTheme"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Admin.AdminPerfil"
-            android:parentActivityName=".Admin.AsesoriasAdmin"
+            android:theme="@style/YourTheme"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Admin.AdminPlanUsuario"
@@ -134,6 +135,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Admin.AsesoriasPendientes"
+            android:theme="@style/YourTheme"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Admin.EscogerPlan"
@@ -152,6 +154,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Admin.EditarPerfilAdmin"
+            android:theme="@style/YourTheme"
             android:parentActivityName=".Admin.AdminPerfil"
             android:screenOrientation="portrait" />
         <activity

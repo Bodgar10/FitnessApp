@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -93,6 +94,8 @@ public class EditarPerfil extends AppCompatActivity {
     ArrayAdapter<String> Sbuscando;
 
     int selectionEstatura,selectionPeso,selectionObjetivo;
+
+    private AlphaAnimation buttonClick = new AlphaAnimation(3F, 0.9F);
 
 
     @Override
@@ -191,6 +194,7 @@ public class EditarPerfil extends AppCompatActivity {
         btnAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.startAnimation(buttonClick);
                 String edtNombre = Objects.requireNonNull(edtNombreUsuario.getText()).toString();
                 String edtContra = Objects.requireNonNull(editContrasena.getText()).toString();
                 String editCorreo = Objects.requireNonNull(edtCorreo.getText()).toString();
@@ -214,8 +218,7 @@ public class EditarPerfil extends AppCompatActivity {
                     dbProvider.updateName(edtNombre, id);
                     Toast.makeText(EditarPerfil.this, "Se actualizo el nombre.", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(EditarPerfil.this, UsuarioPerfil.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
                 }

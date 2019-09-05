@@ -140,7 +140,13 @@ public class AsesoriasAdmin extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(AsesoriasAdmin.this, AsesoriasPendientes.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+
 
             }
         });
@@ -149,8 +155,12 @@ public class AsesoriasAdmin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(AsesoriasAdmin.this, AdminAgregarFeed.class);
+                Intent intent = new Intent(AsesoriasAdmin.this, AdminPerfil.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
 
             }
         });

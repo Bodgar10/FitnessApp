@@ -22,6 +22,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -105,7 +106,7 @@ public class AsesoriasPendientes extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AsesoriasPendientes.this, AsesoriasAdmin.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             }
@@ -116,8 +117,10 @@ public class AsesoriasPendientes extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(AsesoriasPendientes.this, AdminPerfil.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-
+                finish();
             }
         });
 
@@ -179,7 +182,9 @@ public class AsesoriasPendientes extends AppCompatActivity {
                                 progressDialog.dismiss();
                             }
 
-                            else if (usuarios.getTipo_usuario().equals(Contants.ADMIN)){
+                            else if (usuarios.getTipo_usuario().equals(Contants.ADMIN)) {
+
+                                if (usuarios.getId_usuario().equals(id)) {
 
                                 if (usuarios.getFoto_usuario().equals("nil")) {
                                     try {
@@ -197,8 +202,7 @@ public class AsesoriasPendientes extends AppCompatActivity {
                                     progressDialog.dismiss();
                                 }
 
-
-
+                                }
                             }
 
                         }
@@ -220,5 +224,19 @@ public class AsesoriasPendientes extends AppCompatActivity {
         Picasso.get().load(url).into(imgPostPersona);
     }
 
+
+    @Override
+    public void onBackPressed() {
+        Intent intent;
+        intent = new Intent(this, AsesoriasAdmin.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(
+                getIntent().getIntExtra("anim id in", R.anim.move_in),
+                getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
+
+    }
 
 }

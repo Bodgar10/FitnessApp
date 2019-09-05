@@ -144,7 +144,7 @@ public class EditarPerfilAdmin extends AppCompatActivity {
                 String editTelefono = Objects.requireNonNull(edtTelefono.getText()).toString();
 
 
-                if (imgUri!=null){
+                if (!imagen.equals(imgPersona)&&imgUri!=null){
                     uploadImage(id,imgUri.toString());
                     Intent intent=new Intent(EditarPerfilAdmin.this, AdminPerfil.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -437,7 +437,30 @@ public class EditarPerfilAdmin extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent;
+        intent = new Intent(this, AdminPerfil.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(
+                getIntent().getIntExtra("anim id in", R.anim.move_in),
+                getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
+
+    }
 
 
 }
