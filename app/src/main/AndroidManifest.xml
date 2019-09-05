@@ -18,27 +18,32 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_icon_app_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Login.SplashPantalla">
+        <activity android:name=".Login.SplashPantalla"
+            android:theme="@style/YourTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login.IniciarSesion" />
+        <activity android:name=".Login.IniciarSesion"
+            android:theme="@style/YourTheme" />
         <activity
             android:name=".Login.Registro"
-            android:parentActivityName=".Login.IniciarSesion" />
+            android:theme="@style/YourTheme"/>
         <activity
             android:name=".Usuario.UsuarioHome"
+            android:theme="@style/YourTheme"
             android:screenOrientation="portrait" />
+
         <activity android:name=".viewPdf" />
         <activity
             android:name=".Usuario.UsuarioPerfil"
+            android:theme="@style/YourTheme"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -82,6 +87,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.EditarPerfil"
+            android:theme="@style/YourTheme"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.InformacionCompra"
@@ -162,10 +168,14 @@
             android:screenOrientation="portrait" />
         <activity android:name=".Compra.Compra" />
 
-        <activity android:name=".Admin.AgregarVideo"></activity>
-        <activity android:name=".Admin.AgregarPdf"></activity>
-        <activity android:name=".Admin.AgregarImagen"></activity>
-        <activity android:name=".Admin.AdminAgregarFeed"></activity>
+        <activity android:name=".Admin.AgregarVideo"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Admin.AgregarPdf"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Admin.AgregarImagen"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Admin.AdminAgregarFeed"
+            android:screenOrientation="portrait"/>
 
     </application>
 

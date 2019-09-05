@@ -5,12 +5,15 @@ import android.graphics.Rect;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,6 +63,12 @@ public class UsuarioPlan  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_15_plan);
+
+        Toolbar toolbarback=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbarback);
+        getSupportActionBar().setTitle("");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         dbProvider = new DBProvider();
         bajarInfo = new BajarInfo();
@@ -333,6 +342,19 @@ public class UsuarioPlan  extends AppCompatActivity {
         }
         return inputDate;
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     @Override
     public void onBackPressed() {
         finish();
@@ -341,4 +363,9 @@ public class UsuarioPlan  extends AppCompatActivity {
                 getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
 
     }
+
+
+
+
+
 }

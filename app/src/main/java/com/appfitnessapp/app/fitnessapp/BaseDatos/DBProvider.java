@@ -79,7 +79,7 @@ public class DBProvider {
     //Creacion usuario
     public void createUser( String email, String id,
                            String name, String pass, String phone,
-                           String photo, String token, String type,String pesoActual,String estatura,String objetivo) {
+                           String photo, String token, String type,String pesoActual,String estatura,String objetivo,Boolean isPagado) {
         Map<String, Object> updates = new HashMap<>();
 
         updates.put(Contants.ID_USUARIO, id);
@@ -93,7 +93,7 @@ public class DBProvider {
         updates.put(Contants.PESO_ACTUAL, pesoActual);
         updates.put(Contants.ESTATURA, estatura);
         updates.put(Contants.OBJETIVO, objetivo);
-
+        updates.put(Contants.ISPAGADO, isPagado);
 
 
         usersRef().child(id).updateChildren(updates);
@@ -185,8 +185,6 @@ public class DBProvider {
         usersRef().child(id).updateChildren(updates);
 
     }
-
-
 
 
 

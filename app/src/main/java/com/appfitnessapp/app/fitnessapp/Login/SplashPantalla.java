@@ -4,12 +4,15 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.appfitnessapp.app.fitnessapp.Admin.AsesoriasAdmin;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
@@ -44,6 +47,12 @@ public class SplashPantalla extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_01_splash);
 
+        Toolbar toolbarback=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbarback);
+        getSupportActionBar().setTitle("");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         FirebaseApp.initializeApp(this);
 
@@ -71,7 +80,11 @@ public class SplashPantalla extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SplashPantalla.this, IniciarSesion.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
+
 
             }
         });
@@ -80,7 +93,11 @@ public class SplashPantalla extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SplashPantalla.this, Registro.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
+
 
             }
         });
@@ -120,7 +137,7 @@ public class SplashPantalla extends AppCompatActivity {
                                     Intent intent = new Intent(SplashPantalla.this, UsuarioHome.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
-                                    SplashPantalla.this.finish();
+                                    finish();
                                 }
 
                                 else if (usuario.getTipo_usuario().equals(Contants.ADMIN)) {
@@ -128,7 +145,7 @@ public class SplashPantalla extends AppCompatActivity {
                                     Intent intent = new Intent(SplashPantalla.this, AsesoriasAdmin.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
-                                    SplashPantalla.this.finish();
+                                    finish();
                                 }else{
                                     Toast.makeText(SplashPantalla.this, "Aún tu cuenta no está activa, te contactaremos cuando esté lista.", Toast.LENGTH_SHORT).show();
                                 }
@@ -146,5 +163,24 @@ public class SplashPantalla extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(
+                getIntent().getIntExtra("anim id in", R.anim.move_in),
+                getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
     }
 }

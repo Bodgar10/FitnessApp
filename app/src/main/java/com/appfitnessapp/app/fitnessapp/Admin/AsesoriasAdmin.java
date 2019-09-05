@@ -76,16 +76,12 @@ public class AsesoriasAdmin extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-
         if (user==null){
-            mAuth.signOut();
             Intent intent=new Intent(AsesoriasAdmin.this, SplashPantalla.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
         }
-
         else{
             id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

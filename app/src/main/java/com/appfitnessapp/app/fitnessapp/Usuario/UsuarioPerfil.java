@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -123,9 +124,11 @@ public class UsuarioPerfil  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_21_perfil);
 
-        Toolbar toolbarback=findViewById(R.id.toolbarU);
-        setSupportActionBar(toolbarback);
-        getSupportActionBar().setTitle("");
+           Toolbar toolbarback=findViewById(R.id.toolbarU);
+           setSupportActionBar(toolbarback);
+           getSupportActionBar().setTitle("");
+           ActionBar actionBar=getSupportActionBar();
+           actionBar.setDisplayHomeAsUpEnabled(true);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
@@ -211,9 +214,11 @@ public class UsuarioPerfil  extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(UsuarioPerfil.this, UsuarioPlan.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
                 finish();
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+
 
             }
         });
@@ -224,8 +229,9 @@ public class UsuarioPerfil  extends AppCompatActivity {
                 Intent intent = new Intent(UsuarioPerfil.this, UsuarioHome.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
                 finish();
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+
             }
         });
 
@@ -233,9 +239,10 @@ public class UsuarioPerfil  extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(UsuarioPerfil.this, UsuarioChat.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                overridePendingTransition(R.anim.move, R.anim.move_leeft);
                 finish();
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
 
             }
         });
@@ -245,12 +252,15 @@ public class UsuarioPerfil  extends AppCompatActivity {
                @Override
                public void onClick(View v) {
 
-                   mAuth.signOut();
-                   Toast.makeText(UsuarioPerfil.this, "Se ha cerrado la sesión correctamente.", Toast.LENGTH_SHORT).show();
-                   Intent intent=new Intent(UsuarioPerfil.this, SplashPantalla.class);
-                   intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                   startActivity(intent);
-                   finish();
+                   if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                       mAuth.signOut();
+                       Toast.makeText(UsuarioPerfil.this, "Se ha cerrado la sesión correctamente.", Toast.LENGTH_SHORT).show();
+                       Intent intent = new Intent(UsuarioPerfil.this, SplashPantalla.class);
+                       intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                       intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                       startActivity(intent);
+                       finish();
+                   }
 
                }
            });
@@ -705,6 +715,9 @@ public class UsuarioPerfil  extends AppCompatActivity {
             case R.id.editar_U:
                 Abrir();
                 return true;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -712,8 +725,10 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
     private void Abrir() {
         Intent intent=new Intent(UsuarioPerfil.this,EditarPerfil.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-
+        overridePendingTransition(R.anim.move, R.anim.move_leeft);
     }
 
 
@@ -775,11 +790,20 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent intent;
+        intent = new Intent(this, UsuarioHome.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         finish();
+        startActivity(intent);
         overridePendingTransition(
                 getIntent().getIntExtra("anim id in", R.anim.move_in),
                 getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
 
     }
+
+
+
+
 
 }

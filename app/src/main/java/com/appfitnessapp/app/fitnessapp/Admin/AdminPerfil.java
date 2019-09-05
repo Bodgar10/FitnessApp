@@ -46,7 +46,7 @@ public class AdminPerfil extends AppCompatActivity {
 
     LinearLayout linearCerrar;
 
-    String id;
+    String id,imgAdmin,correo,contrasena,telefono,nombre;
 
     private static FirebaseAuth mAuth;
 
@@ -64,12 +64,15 @@ public class AdminPerfil extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
 
         dbProvider = new DBProvider();
 
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        bajarUsuarios();
 
 
         txtNombre=findViewById(R.id.txtNombreAdmin);
@@ -84,7 +87,6 @@ public class AdminPerfil extends AppCompatActivity {
 
         linearCerrar=findViewById(R.id.linearCerrar);
 
-        bajarUsuarios();
 
 
         linearCerrar.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +129,12 @@ public class AdminPerfil extends AppCompatActivity {
                             txtNombre.setText(usuarios.getNombre_usuario());
                             txtCorreo.setText(usuarios.getEmail_usuario());
                             txtContrasena.setText(usuarios.getContrasena_usuario());
+
+                            correo=usuarios.getEmail_usuario();
+                            contrasena=usuarios.getContrasena_usuario();
+                            imgAdmin=usuarios.getFoto_usuario();
+                            nombre=usuarios.getNombre_usuario();
+                            telefono=usuarios.getTelefono_usuario();
 
 
                             if (usuarios.getFoto_usuario().equals("nil")) {

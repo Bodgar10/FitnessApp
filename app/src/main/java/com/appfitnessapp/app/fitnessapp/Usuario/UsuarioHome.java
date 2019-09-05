@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -13,7 +14,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +26,7 @@ import com.appfitnessapp.app.fitnessapp.Arrays.Feed;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
+import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
 import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.videoplayer.VideoPlayer;
@@ -73,6 +77,12 @@ public class UsuarioHome  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_14_feed);
 
+        Toolbar toolbarback=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbarback);
+        getSupportActionBar().setTitle("");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         Dexter.withActivity(this)
                 .withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .withListener(new BaseMultiplePermissionsListener(){
@@ -87,27 +97,23 @@ public class UsuarioHome  extends AppCompatActivity {
                     }
                 }).check();
 
+        mAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user==null){
+            Intent intent=new Intent(UsuarioHome.this, IniciarSesion.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }
+        else{
+            id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
 
         bajarFeed();
 
         dbProvider = new DBProvider();
         bajarInfo = new BajarInfo();
 
-        mAuth = FirebaseAuth.getInstance();
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-
-        if (user==null){
-            mAuth.signOut();
-            Intent intent=new Intent(UsuarioHome.this, SplashPantalla.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
-
-        }
-        else {
-            id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        }
 
         imgPlan=findViewById(R.id.imgPlan);
         imgPerfil=findViewById(R.id.imgPerfil);
@@ -122,6 +128,7 @@ public class UsuarioHome  extends AppCompatActivity {
                 Intent intent = new Intent(UsuarioHome.this, UsuarioPlan.class);
                 intent.putExtra("anim id in", R.anim.move_in);
                 intent.putExtra("anim id out", R.anim.move_leeft_in);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 overridePendingTransition(R.anim.move, R.anim.move_leeft);
             }
@@ -133,8 +140,12 @@ public class UsuarioHome  extends AppCompatActivity {
                 Intent intent = new Intent(UsuarioHome.this, UsuarioPerfil.class);
                 intent.putExtra("anim id in", R.anim.move_in);
                 intent.putExtra("anim id out", R.anim.move_leeft_in);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 overridePendingTransition(R.anim.move, R.anim.move_leeft);
+
+
             }
         });
 
@@ -144,6 +155,7 @@ public class UsuarioHome  extends AppCompatActivity {
                 Intent intent = new Intent(UsuarioHome.this, UsuarioChat.class);
                 intent.putExtra("anim id in", R.anim.move_in);
                 intent.putExtra("anim id out", R.anim.move_leeft_in);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 overridePendingTransition(R.anim.move, R.anim.move_leeft);
             }
@@ -273,8 +285,6 @@ public class UsuarioHome  extends AppCompatActivity {
             intent.putExtra("ViewType","storage");
             intent.putExtra("FileUri",selecPdf.toString());
             startActivity(intent);
-
-
         }
 
     }
@@ -333,6 +343,29 @@ public class UsuarioHome  extends AppCompatActivity {
     private void saveTime() {
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         rootRef.child(Contants.TABLA_FEED).child("timestamp").setValue(ServerValue.TIMESTAMP);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        finish();
+        overridePendingTransition(
+                getIntent().getIntExtra("anim id in", R.anim.move_in),
+                getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
+
     }
 
 

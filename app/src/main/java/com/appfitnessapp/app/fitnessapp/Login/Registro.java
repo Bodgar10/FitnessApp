@@ -4,12 +4,15 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
@@ -52,6 +55,12 @@ public class Registro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_05_registro);
 
+        Toolbar toolbarback=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbarback);
+        getSupportActionBar().setTitle("");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
         yaCreado = false;
@@ -78,7 +87,7 @@ public class Registro extends AppCompatActivity {
                     progressDialog.setMessage("Creando cuenta...");
                     progressDialog.show();
                     progressDialog.setCancelable(false);
-                    register(correo,"nil",nombre,contrasena,telefono,"nil",refreshedToken,Contants.USUARIO);
+                    register(correo,nombre,contrasena,telefono,refreshedToken,Contants.USUARIO);
                 }else{
                     Toast.makeText(Registro.this, "Verifica que tengas todos los datos.", Toast.LENGTH_SHORT).show();
                 }
@@ -91,6 +100,7 @@ public class Registro extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Registro.this, IniciarSesion.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             }
@@ -98,9 +108,9 @@ public class Registro extends AppCompatActivity {
 
     }
 
-    public void register( final String email, final String id,
+    public void register( final String email,
                           final String name,final String pass,  final String phone,
-                          final String photo, final String token,final String type) {
+                          final String token,final String type) {
 
         Log.e(TAG, "REGISTRO: " + email);
         mAuth = FirebaseAuth.getInstance();
@@ -118,8 +128,9 @@ public class Registro extends AppCompatActivity {
                 }
                 if (task.isSuccessful()) {
                     FirebaseUser user = task.getResult().getUser();
-                    dbProvider.createUser(email,user.getUid(),name,pass,phone,photo,token,type,"nil","nil","nil");
+                    dbProvider.createUser(email,user.getUid(),name,pass,phone,"nil",token,type,"nil","nil","nil",false);
                     Intent intent = new Intent(Registro.this, UsuarioHome.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
                 }
@@ -128,6 +139,29 @@ public class Registro extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent;
+        intent = new Intent(this, SplashPantalla.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(
+                getIntent().getIntExtra("anim id in", R.anim.move_in),
+                getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
+
+    }
 
 }

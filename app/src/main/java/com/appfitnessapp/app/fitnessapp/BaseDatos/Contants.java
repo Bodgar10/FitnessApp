@@ -22,6 +22,8 @@ public class Contants {
     final public static String  OBJETIVO = "objetivo";
     final public static  String HOMBRE = "hombre";
     final public static String  MUJER = "mujer";
+    final public static String  ISPAGADO = "isPagado";
+
 
 
     //Tipo usuario

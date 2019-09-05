@@ -70,7 +70,7 @@ public class EditarPerfilAdmin extends AppCompatActivity {
 
     private StorageReference mStorage;
     private ProgressDialog progressDialog;
-    private FirebaseAuth mAuth;
+    private static FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener listener;
 
     private static final String TAG = "BAJARINFO:";
@@ -87,7 +87,6 @@ public class EditarPerfilAdmin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_08_perfil_editar);
-
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         Toolbar toolbarback=findViewById(R.id.toolbarU);
@@ -95,7 +94,6 @@ public class EditarPerfilAdmin extends AppCompatActivity {
         getSupportActionBar().setTitle("Editar Perfil");
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
@@ -120,9 +118,9 @@ public class EditarPerfilAdmin extends AppCompatActivity {
         edtCorreo=findViewById(R.id.edtCorreo);
         edtTelefono=findViewById(R.id.edtTelefono);
 
+
+
         btnAceptar=findViewById(R.id.linearAceptar);
-
-
         btnCambiarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,7 +144,7 @@ public class EditarPerfilAdmin extends AppCompatActivity {
                 String editTelefono = Objects.requireNonNull(edtTelefono.getText()).toString();
 
 
-                if (!imagen.equals(imgPersona)&&imgUri!=null){
+                if (imgUri!=null){
                     uploadImage(id,imgUri.toString());
                     Intent intent=new Intent(EditarPerfilAdmin.this, AdminPerfil.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -161,16 +159,19 @@ public class EditarPerfilAdmin extends AppCompatActivity {
                     Intent intent=new Intent(EditarPerfilAdmin.this, AdminPerfil.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    finish();
                 }
 
                 if (!email.equals(editCorreo)){
                     progressDialog.setMessage("Actualizando correo");
                     progressDialog.show();
+                    progressDialog.setCancelable(false);
                     changeEmail(id, editCorreo);
                 }
                 if (!password.equals(edtContra)){
                     progressDialog.setMessage("Actualizando contraseña");
                     progressDialog.show();
+                    progressDialog.setCancelable(false);
                     changePass(id, edtContra);
                 }
                 if (!telefono.equals(editTelefono)){
@@ -179,6 +180,7 @@ public class EditarPerfilAdmin extends AppCompatActivity {
                     Intent intent=new Intent(EditarPerfilAdmin.this, AdminPerfil.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    finish();
                 }
 
                 if (name.equals(edtNombre)&&email.equals(editCorreo)&&password.equals(edtContra)&&telefono.equals(editTelefono)
@@ -196,6 +198,7 @@ public class EditarPerfilAdmin extends AppCompatActivity {
 
 
     }
+
 
     public void bajarUsuarios(){
         dbProvider = new DBProvider();
@@ -262,6 +265,7 @@ public class EditarPerfilAdmin extends AppCompatActivity {
         });
     }
 
+
     private void uploadImage( final String id,final String imagen) {
 
 
@@ -270,6 +274,7 @@ public class EditarPerfilAdmin extends AppCompatActivity {
         progressDialog.setTitle("Subiendo...");
         progressDialog.setProgress(0);
         progressDialog.show();
+        progressDialog.setCancelable(false);
 
         final String fileName =System.currentTimeMillis()+"";
         final StorageReference storageReference1 = mStorage.child(Contants.TABLA_USUARIOS).child(edtNombreUsuario.getText().toString());
@@ -367,6 +372,20 @@ public class EditarPerfilAdmin extends AppCompatActivity {
         Picasso.get().load(url).into(imgPersona);
     }
 
+
+    private void dismissProgressDialog() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        dismissProgressDialog();
+        super.onDestroy();
+    }
+
+
     public void changeEmail(final String id, final String email) {
         mAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -410,7 +429,7 @@ public class EditarPerfilAdmin extends AppCompatActivity {
                     finish();
 
                 } else {
-                    Toast.makeText(EditarPerfilAdmin.this, "Lo siento, hubo un error al cambiar la contraseña", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditarPerfilAdmin.this, "Lo siento, hubo un error al cambiar la contraseña, revisa que la contraseña tenga 6 caracteres o más.", Toast.LENGTH_SHORT).show();
 
                 }
                   progressDialog.dismiss();
@@ -418,18 +437,6 @@ public class EditarPerfilAdmin extends AppCompatActivity {
         });
     }
 
-
-    private void dismissProgressDialog() {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        dismissProgressDialog();
-        super.onDestroy();
-    }
 
 
 

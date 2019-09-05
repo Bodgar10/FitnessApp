@@ -77,6 +77,7 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(UsuarioPlanWorkouts.this, UsuarioPerfil.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
 
@@ -97,6 +98,7 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(UsuarioPlanWorkouts.this, UsuarioChat.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
 

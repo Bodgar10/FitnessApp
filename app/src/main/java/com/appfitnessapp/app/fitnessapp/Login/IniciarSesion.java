@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.appfitnessapp.app.fitnessapp.Admin.AsesoriasAdmin;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
@@ -52,6 +55,12 @@ public class IniciarSesion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_05_inicio_sesion);
 
+        Toolbar toolbarback=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbarback);
+        getSupportActionBar().setTitle("");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
         yaCreado = false;
@@ -68,7 +77,6 @@ public class IniciarSesion extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
 
 
-        yaCreado = false;
 
 
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
@@ -141,17 +149,18 @@ public class IniciarSesion extends AppCompatActivity {
 
                         if (usuario.getId_usuario() != null) {
                             if (usuario.getId_usuario().equals(user.getUid())) {
-                                yaCreado = true;
                                 progressDialog.dismiss();
                                 if (usuario.getTipo_usuario().equals(Contants.USUARIO)) {
                                     progressDialog.dismiss();
                                     Intent intent = new Intent(IniciarSesion.this, UsuarioHome.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                     IniciarSesion.this.finish();
                                 }
                                 else if (usuario.getTipo_usuario().equals(Contants.ADMIN)) {
                                     progressDialog.dismiss();
                                     Intent intent = new Intent(IniciarSesion.this, AsesoriasAdmin.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                     IniciarSesion.this.finish();
                                 }else{
@@ -179,6 +188,31 @@ public class IniciarSesion extends AppCompatActivity {
         }
 
         */
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent;
+        intent = new Intent(this, SplashPantalla.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        finish();
+        startActivity(intent);
+        overridePendingTransition(
+                getIntent().getIntExtra("anim id in", R.anim.move_in),
+                getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
+
     }
 
 }

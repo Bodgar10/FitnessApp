@@ -35,6 +35,7 @@ import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
+import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
 import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -75,7 +76,7 @@ public class EditarPerfil extends AppCompatActivity {
 
     private StorageReference mStorage;
     private ProgressDialog progressDialog;
-    private FirebaseAuth mAuth;
+    private static FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener listener;
 
     private static final String TAG = "BAJARINFO:";
@@ -204,14 +205,17 @@ public class EditarPerfil extends AppCompatActivity {
 
                 if (!imagen.equals(imgPersona)&&imgUri!=null){
                     uploadImage(id,imgUri.toString());
-
+                    Intent intent=new Intent(EditarPerfil.this, UsuarioPerfil.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
                 }
-
                 if (!name.equals(edtNombre)){
                     dbProvider.updateName(edtNombre, id);
                     Toast.makeText(EditarPerfil.this, "Se actualizo el nombre.", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(EditarPerfil.this, UsuarioPerfil.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
                 }
@@ -276,7 +280,6 @@ public class EditarPerfil extends AppCompatActivity {
                         //Log.e(TAG,"Usuarios: "+ snapshot);
                         Log.e(TAG, "Usuarios: " + snapshot);
                         Usuarios usuarios = snapshot.getValue(Usuarios.class);
-
 
                         if (usuarios.getId_usuario() != null){
                             if (usuarios.getId_usuario().equals(id)) {
@@ -465,9 +468,10 @@ public class EditarPerfil extends AppCompatActivity {
                     Toast.makeText(EditarPerfil.this, "Se ha cambiado el correo correctamente.Inicia sesión de nuevo.", Toast.LENGTH_LONG).show();
                     dbProvider.updateEmail(id,email);
                     mAuth.signOut();
-                    Intent intent=new Intent(EditarPerfil.this, SplashPantalla.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    Intent intent=new Intent(EditarPerfil.this, IniciarSesion.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    finish();
 
                 } else {
                     Log.e(TAG, "Correo: " + email);
@@ -489,11 +493,12 @@ public class EditarPerfil extends AppCompatActivity {
                     Toast.makeText(EditarPerfil.this, "Se ha cambiado la contraseña correctamente.Inicia sesión de nuevo.", Toast.LENGTH_LONG).show();
                     dbProvider.updatePass(id,pass);
                     mAuth.signOut();
-                    Intent intent=new Intent(EditarPerfil.this, SplashPantalla.class);
+                    Intent intent=new Intent(EditarPerfil.this, IniciarSesion.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    finish();
                 } else {
-                    Toast.makeText(EditarPerfil.this, "Lo siento, hubo un error al cambiar la contraseña", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditarPerfil.this, "Lo siento, hubo un error al cambiar la contraseña o revisa que la contraseña tenga mas de 6 carateres.", Toast.LENGTH_SHORT).show();
                 }
                 progressDialog.dismiss();
             }
@@ -514,9 +519,17 @@ public class EditarPerfil extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent intent;
+        intent = new Intent(this, UsuarioPerfil.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
         finish();
-    }
+        overridePendingTransition(
+                getIntent().getIntExtra("anim id in", R.anim.move_in),
+                getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
 
+    }
 
 
 }

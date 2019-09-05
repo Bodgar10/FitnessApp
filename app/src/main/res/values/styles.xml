@@ -44,4 +44,9 @@
         <item name="colorAccent">@color/blanco</item>
     </style>
 
+
+    <style name="YourTheme" parent="AppTheme">
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
 </resources>

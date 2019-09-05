@@ -24,11 +24,13 @@ public class Usuarios {
 
     public String  objetivo;
 
+    public Boolean isPagado;
+
 
     public Usuarios() {
     }
 
-    public Usuarios(String nombre_usuario, String telefono_usuario, String email_usuario, String contrasena_usuario, String foto_usuario, String id_usuario, String token_usuario, String tipo_usuario, String peso_actual, String estatura, String objetivo) {
+    public Usuarios(String nombre_usuario, String telefono_usuario, String email_usuario, String contrasena_usuario, String foto_usuario, String id_usuario, String token_usuario, String tipo_usuario, String peso_actual, String estatura, String objetivo, Boolean isPagado) {
         this.nombre_usuario = nombre_usuario;
         this.telefono_usuario = telefono_usuario;
         this.email_usuario = email_usuario;
@@ -40,6 +42,7 @@ public class Usuarios {
         this.peso_actual = peso_actual;
         this.estatura = estatura;
         this.objetivo = objetivo;
+        this.isPagado = isPagado;
     }
 
     public String getNombre_usuario() {
@@ -128,5 +131,13 @@ public class Usuarios {
 
     public void setObjetivo(String objetivo) {
         this.objetivo = objetivo;
+    }
+
+    public Boolean getPagado() {
+        return isPagado;
+    }
+
+    public void setPagado(Boolean pagado) {
+        isPagado = pagado;
     }
 }
