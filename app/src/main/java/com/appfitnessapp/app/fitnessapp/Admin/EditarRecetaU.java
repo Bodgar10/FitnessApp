@@ -2,12 +2,15 @@ package com.appfitnessapp.app.fitnessapp.Admin;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -31,10 +34,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class AdminRecetaDetalle extends AppCompatActivity {
+public class EditarRecetaU extends AppCompatActivity {
 
     ImageView imagen;
-    TextView txtNombreReceta,txtTiempo,txtPorciones,txtCalorias,txtInversion,btnEditar;
+    TextView txtInversion,btnGuardar;
+
+    EditText txtNombreReceta,txtTiempo,txtPorciones,txtCalorias;
 
     AdapterIngredientes adapterIngredientes;
     ArrayList<Ingredientes> ingredientes;
@@ -44,18 +49,19 @@ public class AdminRecetaDetalle extends AppCompatActivity {
 
     RecyclerView recyclerIngredientes,recyclerPasos;
 
-    String imagenComida,nombre,tipo,porciones,calorias,minutos,idReceta,id;
+    String imagenComida,nombre,tipo,porciones,calorias,minutos,idReceta,id_usuario;
+
+    ImageButton btnAgregarIngrediente,btnAgregarPaso;
 
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
     private static final String TAG = "BAJARINFO:";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.usuario_17_desayuno);
-
+        setContentView(R.layout.admin_editar_recetas);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Recetas");
@@ -67,7 +73,7 @@ public class AdminRecetaDetalle extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null){
-            id = extras.getString("id_usuario");
+            id_usuario = extras.getString("id");
             idReceta = extras.getString("id_receta");
             imagenComida = extras.getString("imagen");
             nombre = extras.getString("nombre");
@@ -91,8 +97,10 @@ public class AdminRecetaDetalle extends AppCompatActivity {
         txtCalorias=findViewById(R.id.txtCalorias);
         txtInversion=findViewById(R.id.txtInversion);
 
-        btnEditar=findViewById(R.id.txtEditar);
+        btnGuardar=findViewById(R.id.txtEditar);
 
+        btnAgregarIngrediente=findViewById(R.id.btnAgregarIngrediente);
+        btnAgregarPaso=findViewById(R.id.btnAgregarPaso);
 
         //datos
         txtNombreReceta.setText(nombre);
@@ -120,9 +128,45 @@ public class AdminRecetaDetalle extends AppCompatActivity {
         adapterIngredientes.notifyDataSetChanged();
 
 
+        btnAgregarIngrediente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EditarRecetaU.this, AdminIngredientesUsuario.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("idUsuario",id_usuario);
+                bundle.putString("id_receta",idReceta);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        btnAgregarPaso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(EditarRecetaU.this, AdminPasosUsuario.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("idUsuario",id_usuario);
+                bundle.putString("id_receta",idReceta);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
+
         adapterIngredientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent intent = new Intent(EditarRecetaU.this, EditarIngredientes.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("idUsuario",id_usuario);
+                bundle.putString("id_receta",idReceta);
+                bundle.putString("id",ingredientes.get(recyclerIngredientes.getChildAdapterPosition(v)).getId_ingrediente());
+                bundle.putString("nombre",ingredientes.get(recyclerIngredientes.getChildAdapterPosition(v)).getNombre_ingrediente());
+                bundle.putString("cantidad",ingredientes.get(recyclerIngredientes.getChildAdapterPosition(v)).getCantidad());
+                intent.putExtras(bundle);
+                startActivity(intent);
 
             }
         });
@@ -131,25 +175,92 @@ public class AdminRecetaDetalle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(EditarRecetaU.this, EditarPasos.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("idUsuario",id_usuario);
+                bundle.putString("id_receta",idReceta);
+                bundle.putString("id",pasos.get(recyclerPasos.getChildAdapterPosition(v)).getId_preparacion());
+                bundle.putString("nombre",pasos.get(recyclerPasos.getChildAdapterPosition(v)).getNombre_paso());
+                bundle.putString("descripcion",pasos.get(recyclerPasos.getChildAdapterPosition(v)).getDescripcion_paso());
+                intent.putExtras(bundle);
+                startActivity(intent);
+
             }
         });
 
-        btnEditar.setOnClickListener(new View.OnClickListener() {
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(AdminRecetaDetalle.this,EditarRecetaU.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("id",id);
-                bundle.putString("id_receta",idReceta);
-                bundle.putString("nombre",nombre);
-                bundle.putString("imagen",imagenComida);
-                bundle.putString("tipo",tipo);
-                bundle.putString("calorias",calorias);
-                bundle.putString("minutos",minutos);
-                bundle.putString("porciones",porciones);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                String Snombre=txtNombreReceta.getText().toString();
+                String Scalorias=txtCalorias.getText().toString();
+                String Stiempo=txtTiempo.getText().toString();
+                String Sporciones=txtPorciones.getText().toString();
+
+
+                if (!Snombre.equals(nombre)){
+                    dbProvider.updateNombreReceta(idReceta,Snombre);
+                    Toast.makeText(EditarRecetaU.this, "Se actualizó el nombre.", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(EditarRecetaU.this, AdminPlanUsuario.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id",id_usuario);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    
+                }
+                
+                if (!Scalorias.equals(calorias)){
+                    dbProvider.updateCalorias(idReceta,Scalorias);
+                    Toast.makeText(EditarRecetaU.this, "Se actualizó las calorias.", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(EditarRecetaU.this, AdminPlanUsuario.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id",id_usuario);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+
+                }
+
+                if(!Stiempo.equals(minutos)){
+                    dbProvider.updateMinutos(idReceta,Stiempo);
+                    Toast.makeText(EditarRecetaU.this, "Se actualizó los minutos.", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(EditarRecetaU.this, AdminPlanUsuario.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id",id_usuario);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+
+                }
+                
+                if (!Sporciones.equals(porciones)){
+                    dbProvider.updatePorciones(idReceta,Sporciones);
+                    Toast.makeText(EditarRecetaU.this, "Se actualizó las porciones.", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(EditarRecetaU.this, AdminPlanUsuario.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id",id_usuario);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+
+                }
+
+                if (Snombre.isEmpty()&&Scalorias.isEmpty()&&Stiempo.isEmpty()&&Sporciones.isEmpty()){
+                    Toast.makeText(EditarRecetaU.this, "Necesitas rellenar los campos ", Toast.LENGTH_SHORT).show();
+                }
+                
+                if (Snombre.equals(nombre)&&Scalorias.equals(calorias)&&Stiempo.equals(minutos)&&Sporciones.equals(porciones)){
+                    Intent intent=new Intent(EditarRecetaU.this, AdminPlanUsuario.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id",id_usuario);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
+                }
+                
+
 
             }
         });
@@ -173,6 +284,7 @@ public class AdminRecetaDetalle extends AppCompatActivity {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Ingredientes ingrediente = snapshot.getValue(Ingredientes.class);
 
+
                         if (ingrediente.getId_ingrediente()!=null) {
                             ingredientes.add(ingrediente);
                             adapterIngredientes.notifyDataSetChanged();
@@ -193,8 +305,6 @@ public class AdminRecetaDetalle extends AppCompatActivity {
         });
 
     }
-
-
 
     public void bajarPasos(){
 

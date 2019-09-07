@@ -12,7 +12,6 @@ import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -36,11 +35,8 @@ import com.appfitnessapp.app.fitnessapp.Arrays.Ingredientes;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
-import com.appfitnessapp.app.fitnessapp.Usuario.Calificar;
-import com.appfitnessapp.app.fitnessapp.subirArchivos;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -48,13 +44,10 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Objects;
 
-public class RecetasEditar extends AppCompatActivity {
+public class AgregarRecetas extends AppCompatActivity {
 
     TextView btnWorkouts,btnGuardar,txtSiguiente;
     EditText edtNombreComida,edtTiempo,edtCantidad, edtCalorias;
@@ -146,7 +139,7 @@ public class RecetasEditar extends AppCompatActivity {
         btnWorkouts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RecetasEditar.this, EscogerPlan.class);
+                Intent intent = new Intent(AgregarRecetas.this, EscogerPlan.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("id",id);
                 intent.putExtras(bundle);
@@ -188,11 +181,11 @@ public class RecetasEditar extends AppCompatActivity {
         btnImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(RecetasEditar.this, Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED){
+                if (ContextCompat.checkSelfPermission(AgregarRecetas.this, Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED){
                     selectImage();
                 }
                 else {
-                    ActivityCompat.requestPermissions(RecetasEditar.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},9);
+                    ActivityCompat.requestPermissions(AgregarRecetas.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},9);
                 }
             }
         });
@@ -256,12 +249,12 @@ public class RecetasEditar extends AppCompatActivity {
                         
                     }
                     else {
-                        Toast.makeText(RecetasEditar.this, "Selecciona un tipo de comida", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AgregarRecetas.this, "Selecciona un tipo de comida", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 else {
-                    Toast.makeText(RecetasEditar.this, "Revisa que todos los campos esten llenos.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AgregarRecetas.this, "Revisa que todos los campos esten llenos.", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -273,7 +266,7 @@ public class RecetasEditar extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(RecetasEditar.this, AgregarIngredientes.class);
+                Intent intent = new Intent(AgregarRecetas.this, AgregarIngredientes.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("key",keyPlan);
                 intent.putExtras(bundle);
@@ -322,7 +315,7 @@ public class RecetasEditar extends AppCompatActivity {
                                     kilocalorias , min_alimentos, porciones,
                                     nombre_alimento, tipo_alimento, precioAlto, precioBajo);
                             progressDialog.dismiss();
-                            Toast.makeText(RecetasEditar.this, "Se subio correctamente la información. ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AgregarRecetas.this, "Se subio correctamente la información. ", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -331,7 +324,7 @@ public class RecetasEditar extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(RecetasEditar.this, "Hubo un error al subir la información", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AgregarRecetas.this, "Hubo un error al subir la información", Toast.LENGTH_SHORT).show();
 
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -359,7 +352,7 @@ public class RecetasEditar extends AppCompatActivity {
             selectImage();
         }
         else {
-            Toast.makeText(RecetasEditar.this, "Permite el permiso", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AgregarRecetas.this, "Permite el permiso", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -387,7 +380,7 @@ public class RecetasEditar extends AppCompatActivity {
 
         }
         else {
-            Toast.makeText(RecetasEditar.this,"Selecciona un archivo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AgregarRecetas.this,"Selecciona un archivo", Toast.LENGTH_SHORT).show();
         }
 
 

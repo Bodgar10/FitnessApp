@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,6 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class UsuarioPlan  extends AppCompatActivity {
@@ -42,7 +45,8 @@ public class UsuarioPlan  extends AppCompatActivity {
     RecyclerView recyclerView,recyclerView2,recyclerView3;
     AdapterRecetas adapter,adapter2,adapter3;
     ArrayList<PlanAlimenticio> recetas,recetas2,recetas3;
-    TextView btnWorkouts,txtFechaSiguiente,txtFechaActual;
+    TextView btnWorkouts,txtAlmuerzo,txtCena,txtDesayuno,txtNada;
+    ImageView  imagsplash;
 
 
     String id;
@@ -85,11 +89,21 @@ public class UsuarioPlan  extends AppCompatActivity {
         recyclerView2=findViewById(R.id.recycler2);
         recyclerView3=findViewById(R.id.recycler3);
 
+        txtAlmuerzo=findViewById(R.id.txtAlmuerzo);
+        txtCena=findViewById(R.id.txtCena);
+        txtDesayuno=findViewById(R.id.txtDesayuno);
 
-       // txtFechaActual.setText(fecha);
+        txtNada=findViewById(R.id.txtNada);
+        imagsplash=findViewById(R.id.imagsplash);
+
+
+        // txtFechaActual.setText(fecha);
        // txtFechaSiguiente.setText(getNextDate(fecha));
 
         bajarRecetas();
+
+
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView2.setLayoutManager(new LinearLayoutManager(this));
@@ -124,6 +138,28 @@ public class UsuarioPlan  extends AppCompatActivity {
         recyclerView3.setAdapter(adapter3);
 
 
+        /*
+        txtNada.setVisibility(View.GONE);
+        imagsplash.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+        txtDesayuno.setVisibility(View.VISIBLE);
+        txtAlmuerzo.setVisibility(View.VISIBLE);
+        recyclerView2.setVisibility(View.VISIBLE);
+        txtCena.setVisibility(View.VISIBLE);
+        recyclerView3.setVisibility(View.VISIBLE);
+
+
+
+
+          txtNada.setVisibility(View.VISIBLE);
+                                    imagsplash.setVisibility(View.VISIBLE);
+                                    recyclerView.setVisibility(View.GONE);
+                                    recyclerView2.setVisibility(View.GONE);
+                                    recyclerView3.setVisibility(View.GONE);
+                                    txtAlmuerzo.setVisibility(View.GONE);
+                                    txtCena.setVisibility(View.GONE);
+                                    txtDesayuno.setVisibility(View.GONE);
+*/
 
 
         adapter.setOnClickListener(new View.OnClickListener() {
@@ -233,6 +269,7 @@ public class UsuarioPlan  extends AppCompatActivity {
 
     }
 
+
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
         final private int spanCount, spacing, spacing_top;
         final private boolean includeEdge;
@@ -283,27 +320,27 @@ public class UsuarioPlan  extends AppCompatActivity {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         PlanAlimenticio plan = snapshot.getValue(PlanAlimenticio.class);
 
-                        if (plan.getId_usuario().equals(id)) {
-
-                            if (plan.getTipo_alimento().equals(Contants.DESAYUNO)) {
-                                recetas.add(plan);
-                                adapter.notifyDataSetChanged();
+                        if (plan.getId_plan_alimenticio() != null){
+                            if (plan.getId_usuario().equals(id)) {
+                                if (plan.getTipo_alimento().equals(Contants.DESAYUNO)) {
+                                    recetas.add(plan);
+                                    adapter.notifyDataSetChanged();
+                                }
+                                if (plan.getTipo_alimento().equals(Contants.ALMUERZO)) {
+                                    recetas2.add(plan);
+                                    adapter2.notifyDataSetChanged();
+                                }
+                                if (plan.getTipo_alimento().equals(Contants.CENA)) {
+                                    recetas3.add(plan);
+                                    adapter3.notifyDataSetChanged();
+                                }
                             }
-
-                            if (plan.getTipo_alimento().equals(Contants.ALMUERZO)) {
-                                recetas2.add(plan);
-                                adapter2.notifyDataSetChanged();
-                            }
-
-                            if (plan.getTipo_alimento().equals(Contants.CENA)) {
-
-                                recetas3.add(plan);
-                                adapter3.notifyDataSetChanged();
-
+                            else{
 
                             }
+                    }
 
-                        }
+
 
 
                     }
@@ -320,6 +357,30 @@ public class UsuarioPlan  extends AppCompatActivity {
         });
 
     }
+
+
+    private void updateUi(ArrayList<PlanAlimenticio> books,ArrayList<PlanAlimenticio> books1,ArrayList<PlanAlimenticio> books2) {
+
+        if(books.size() > 0 || books1.size()>0 || books2.size()>0) {
+            txtNada.setVisibility(View.GONE);
+            txtAlmuerzo.setVisibility(View.VISIBLE);
+            txtCena.setVisibility(View.VISIBLE);
+            txtDesayuno.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.VISIBLE);
+            recyclerView2.setVisibility(View.VISIBLE);
+            recyclerView3.setVisibility(View.VISIBLE);
+
+        } else {
+            txtNada.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+            recyclerView2.setVisibility(View.GONE);
+            recyclerView3.setVisibility(View.GONE);
+            txtAlmuerzo.setVisibility(View.GONE);
+            txtCena.setVisibility(View.GONE);
+            txtDesayuno.setVisibility(View.GONE);
+        }
+    }
+
 
 
 

@@ -145,7 +145,7 @@
             android:name=".Admin.PerfilUsuarioAdmin"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Admin.RecetasEditar"
+            android:name=".Admin.AgregarRecetas"
             android:parentActivityName=".Admin.SolicitudAsesoria"
             android:screenOrientation="portrait" />
         <activity
@@ -178,6 +178,16 @@
         <activity android:name=".Admin.AgregarImagen"
             android:screenOrientation="portrait"/>
         <activity android:name=".Admin.AdminAgregarFeed"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Admin.EditarRecetaU"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Admin.EditarIngredientes"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Admin.EditarPasos"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Admin.AdminPasosUsuario"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Admin.AdminIngredientesUsuario"
             android:screenOrientation="portrait"/>
 
     </application>

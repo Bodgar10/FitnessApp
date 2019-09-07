@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,7 +17,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
-import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.google.firebase.database.DataSnapshot;
@@ -79,7 +77,7 @@ public class SolicitudAsesoria extends AppCompatActivity {
         btnComenzarAsesoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SolicitudAsesoria.this, RecetasEditar.class);
+                Intent intent = new Intent(SolicitudAsesoria.this, AgregarRecetas.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("id",id);
                 intent.putExtras(bundle);

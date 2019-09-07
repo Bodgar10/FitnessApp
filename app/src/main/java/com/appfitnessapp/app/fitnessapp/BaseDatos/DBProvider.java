@@ -291,7 +291,38 @@ public class DBProvider {
     }
 
 
+    //actualizar calorias
+    public void updateCalorias(String id, String calorias) {
 
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.KILOCALORIAS, calorias);
+        tablaPlanAlimenticio().child(id).updateChildren(updates);
+    }
+
+    public void updateMinutos(String id, String minutos) {
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.MIN_ALIMENTO, minutos);
+        tablaPlanAlimenticio().child(id).updateChildren(updates);
+    }
+
+    public void updatePorciones(String id, String porciones) {
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.PORCIONES, porciones);
+        tablaPlanAlimenticio().child(id).updateChildren(updates);
+    }
+
+    public void updateNombreReceta(String id, String nombre) {
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.NOMBRE_ALIMENTO, nombre);
+        tablaPlanAlimenticio().child(id).updateChildren(updates);
+    }
 
     //Respuestas
     public void subirRespuestas(String id_pregunta,String id_respuesta, String id_usuario, String respuesta){
@@ -320,6 +351,20 @@ public class DBProvider {
         tablaPlanAlimenticio().child(id_plan_alimenticio).child(Contants.INGREDIENTES).child(key).updateChildren(updates);
     }
 
+    public void actualizarIngredientesNombre(String id_plan_alimenticio,String idIngrediente, String nombre_ingrediente){
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.NOMBRE_INGREDIENTE , nombre_ingrediente);
+        tablaPlanAlimenticio().child(id_plan_alimenticio).child(Contants.INGREDIENTES).child(idIngrediente).updateChildren(updates);
+    }
+
+    public void actualizarIngredientesCantidad(String id_plan_alimenticio,String idIngrediente, String cantidad){
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.CANTIDAD , cantidad);
+        tablaPlanAlimenticio().child(id_plan_alimenticio).child(Contants.INGREDIENTES).child(idIngrediente).updateChildren(updates);
+    }
+
     //preparacion
     public void subirPreparacion(String id_plan_alimenticio, String nombre_paso, String descripcion_paso){
         Map<String, Object> updates = new HashMap<>();
@@ -331,6 +376,15 @@ public class DBProvider {
 
         tablaPlanAlimenticio().child(id_plan_alimenticio).child(Contants.PREPARACION).child(key).updateChildren(updates);
     }
+
+    //preparacionActualizar
+    public void actualizarPreparacionDescripcion(String id_plan_alimenticio,String idPreparacion, String descripcion_paso){
+        Map<String, Object> updates = new HashMap<>();
+        updates.put(Contants.DESCRIPCION_PASO , descripcion_paso);
+
+        tablaPlanAlimenticio().child(id_plan_alimenticio).child(Contants.PREPARACION).child(idPreparacion).updateChildren(updates);
+    }
+
 
 
     //tablaPlanEntrenamiento

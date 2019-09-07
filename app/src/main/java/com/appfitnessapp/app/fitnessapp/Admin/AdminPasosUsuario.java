@@ -19,7 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
 
-public class AgregarPasos extends AppCompatActivity {
+public class AdminPasosUsuario extends AppCompatActivity {
 
     EditText edtPaso,edtDescripcion;
 
@@ -27,7 +27,7 @@ public class AgregarPasos extends AppCompatActivity {
 
     LinearLayout btnSubirPaso;
 
-    String key;
+    String idReceta,id_usuario;
     private static final String TAG = "BAJARINFO:";
     static DBProvider dbProvider;
 
@@ -39,7 +39,7 @@ public class AgregarPasos extends AppCompatActivity {
 
         Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
-        getSupportActionBar().setTitle("Plan Alimenticio");
+        getSupportActionBar().setTitle("Agregar Pasos");
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -47,7 +47,8 @@ public class AgregarPasos extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            key = extras.getString("key");
+            idReceta = extras.getString("id_receta");
+            id_usuario = extras.getString("idUsuario");
         }
 
         edtDescripcion=findViewById(R.id.edtDescripcionPaso);
@@ -65,14 +66,14 @@ public class AgregarPasos extends AppCompatActivity {
                 String paso = edtPaso.getText().toString();
 
                 if (!descripcion.isEmpty()&&!paso.isEmpty()){
-                    dbProvider.subirPreparacion(key, "Paso "+paso, descripcion);
-                    Toast.makeText(AgregarPasos.this, "Se subio el paso: "+paso, Toast.LENGTH_SHORT).show();
+                    dbProvider.subirPreparacion(idReceta, "Paso "+paso, descripcion);
+                    Toast.makeText(AdminPasosUsuario.this, "Se subio el paso: "+paso, Toast.LENGTH_SHORT).show();
                     edtDescripcion.getText().clear();
                     edtPaso.getText().clear();
 
                 }
                 else {
-                    Toast.makeText(AgregarPasos.this, "Revisa que tengas los campos rellenos.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdminPasosUsuario.this, "Revisa que tengas los campos rellenos.", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -82,7 +83,7 @@ public class AgregarPasos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(AgregarPasos.this);
+                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(AdminPasosUsuario.this);
                 dialogo1.setTitle("Pasos");
                 dialogo1.setMessage("¿Se pusieron todos los pasos?");
                 dialogo1.setCancelable(false);
@@ -109,8 +110,11 @@ public class AgregarPasos extends AppCompatActivity {
     private void aceptar() {
         Toast t=Toast.makeText(this,"Plan alimenticio completo.", Toast.LENGTH_SHORT);
         t.show();
-        Intent intent = new Intent(AgregarPasos.this, AsesoriasAdmin.class);
+        Intent intent = new Intent(AdminPasosUsuario.this, AdminPlanUsuario.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Bundle bundle = new Bundle();
+        bundle.putString("id",id_usuario);
+        intent.putExtras(bundle);
         startActivity(intent);
         finish();
 

@@ -129,6 +129,7 @@ public class AdminPlanUsuario extends AppCompatActivity {
 
                 Intent intent = new Intent(AdminPlanUsuario.this, AdminRecetaDetalle.class);
                 Bundle bundle = new Bundle();
+                bundle.putString("id_usuario",id);
                 bundle.putString("id_receta",recetas.get(recyclerView.getChildAdapterPosition(v)).getId_plan_alimenticio());
                 bundle.putString("nombre",recetas.get(recyclerView.getChildAdapterPosition(v)).getNombre_alimento());
                 bundle.putString("imagen",recetas.get(recyclerView.getChildAdapterPosition(v)).getImagen_alimento());
@@ -149,6 +150,7 @@ public class AdminPlanUsuario extends AppCompatActivity {
 
                 Intent intent = new Intent(AdminPlanUsuario.this, AdminRecetaDetalle.class);
                 Bundle bundle = new Bundle();
+                bundle.putString("id_usuario",id);
                 bundle.putString("id_receta",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getId_plan_alimenticio());
                 bundle.putString("nombre",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getNombre_alimento());
                 bundle.putString("imagen",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getImagen_alimento());
@@ -168,6 +170,7 @@ public class AdminPlanUsuario extends AppCompatActivity {
 
                 Intent intent = new Intent(AdminPlanUsuario.this, AdminRecetaDetalle.class);
                 Bundle bundle = new Bundle();
+                bundle.putString("id_usuario",id);
                 bundle.putString("id_receta",recetas3.get(recyclerView3.getChildAdapterPosition(v)).getId_plan_alimenticio());
                 bundle.putString("nombre",recetas3.get(recyclerView3.getChildAdapterPosition(v)).getNombre_alimento());
                 bundle.putString("imagen",recetas3.get(recyclerView3.getChildAdapterPosition(v)).getImagen_alimento());
