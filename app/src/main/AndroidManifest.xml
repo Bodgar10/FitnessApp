@@ -59,7 +59,7 @@
             android:theme="@style/TemaVideo" />
         <activity android:name=".Usuario.ChatActivityUsuario" />
         <activity
-            android:name=".Usuario.Asesoria"
+            android:name=".Usuario.FeedSinRegistro.Asesoria"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.FeedSinRegistro.HomeSinRegistro"
@@ -189,6 +189,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Admin.AdminIngredientesUsuario"
             android:screenOrientation="portrait"/>
+        <activity android:name=".Admin.EjerciciosLista"/>
 
     </application>
 

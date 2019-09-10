@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
@@ -29,19 +30,30 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appfitnessapp.app.fitnessapp.Adapters.AdapterAsesorias;
+import com.appfitnessapp.app.fitnessapp.Adapters.AdapterEjercicios;
+import com.appfitnessapp.app.fitnessapp.Arrays.Ejercicios;
+import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 
 public class AgregarEjercicios extends AppCompatActivity {
 
@@ -64,6 +76,8 @@ public class AgregarEjercicios extends AppCompatActivity {
     static DBProvider dbProvider;
 
     String key,idEjercicio;
+
+
 
 
     @Override
@@ -96,6 +110,9 @@ public class AgregarEjercicios extends AppCompatActivity {
         img1=findViewById(R.id.img1);
         img2=findViewById(R.id.img2);
         img3=findViewById(R.id.img3);
+
+
+
 
 
         btnAgregarFoto=findViewById(R.id.btnAgregarFoto);
@@ -199,6 +216,7 @@ public class AgregarEjercicios extends AppCompatActivity {
 
 
     }
+
 
 
 
@@ -403,6 +421,7 @@ public class AgregarEjercicios extends AppCompatActivity {
                     storageReference1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
+
 
                             //dbProvider.subirImagenes(uri.toString(),key,imagen2,imagen3);
                             dbProvider.subirImagenesEjercicios(uri.toString(),imagen2,imagen3,keyPlan,keyEjercicio);

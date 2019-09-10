@@ -466,19 +466,19 @@ public class DBProvider {
 
 
     //tabla Ejercicios
-    public void subirEjercicios(String nombre_ejercicio,String rondas, String repeticiones, String video_ejercicio,
-                                String id_ejercicio){
+    public void subirEjercicios(String min_ejercicio,String nivel_ejercicio, String num_ejercicios, String descripcion_ejercicios,
+                                String id_plan_ejercicio,String id_usuario,String dia_ejercicio){
         Map<String, Object> updates = new HashMap<>();
 
-        String key = tablaEjercicios().push().getKey();
+        updates.put(Contants.MIN_EJERCICIO , min_ejercicio);
+        updates.put(Contants.NIVEL_EJERCICIO , nivel_ejercicio);
+        updates.put(Contants.NUM_EJERCICIOS , num_ejercicios);
+        updates.put(Contants.DESCRIPCION_EJERCICIOS , descripcion_ejercicios);
+        updates.put(Contants.ID_PLAN_EJERCICIO , id_plan_ejercicio);
+        updates.put(Contants.ID_USUARIO , id_usuario);
+        updates.put(Contants.DIA_EJERCICIO , dia_ejercicio);
 
-        updates.put(Contants.NOMBRE_EJERCICIO , nombre_ejercicio);
-        updates.put(Contants.RONDAS , rondas);
-        updates.put(Contants.REPETICIONES , repeticiones);
-        updates.put(Contants.VIDEO_EJERCICIO , video_ejercicio);
-        updates.put(Contants.ID_EJERCICIO , id_ejercicio);
-
-        tablaEjercicios().child(id_ejercicio).updateChildren(updates);
+        tablaEjercicios().child(id_plan_ejercicio).updateChildren(updates);
     }
 
     //tabla imagenes Ejercicios
@@ -490,16 +490,17 @@ public class DBProvider {
         updates.put(Contants.IMAGEN_3 , imagen3);
 
 
+
         tablaEjercicios().child(id_imagen).child(Contants.IMAGENES_EJERCICIO).updateChildren(updates);
     }
 
 
-    public void subirIncritos(String fecha_limite, String id_inscrito, String id_pendiente,String id_usuario){
+    public void subirIncritos(String fecha_limite, String id_inscrito, Boolean id_pendiente,String id_usuario){
         Map<String, Object> data = new HashMap<>();
         data.put(Contants.FECHA_LIMITE, fecha_limite);
         data.put(Contants.ID_INSCRITO, id_inscrito);
         data.put(Contants.ID_PENDIENTE, id_pendiente);
-        data.put(Contants.ID_USUARIO, id_inscrito);
+        data.put(Contants.ID_USUARIO, id_usuario);
         tablaInscritos().child(id_inscrito).updateChildren(data);
     }
 

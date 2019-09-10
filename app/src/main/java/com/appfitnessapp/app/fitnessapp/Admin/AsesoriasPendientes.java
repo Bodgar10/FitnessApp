@@ -139,16 +139,8 @@ public class AsesoriasPendientes extends AppCompatActivity {
                         Inscritos inscritos = snapshot.getValue(Inscritos.class);
 
                             if (inscritos.getId_pendiente().equals(true)){
-
                                 bajarUsuarios();
-
                             }
-
-
-
-
-
-
                     }
                 }else{
                     Log.e(TAG,"Usuarios 3: ");
@@ -176,7 +168,6 @@ public class AsesoriasPendientes extends AppCompatActivity {
 
                         if (usuarios.getId_usuario() != null){
                             if (usuarios.getTipo_usuario().equals(Contants.USUARIO)) {
-
                                 asesorias.add(usuarios);
                                 adapter.notifyDataSetChanged();
                                 progressDialog.dismiss();

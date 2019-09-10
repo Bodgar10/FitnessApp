@@ -1,22 +1,17 @@
-package com.appfitnessapp.app.fitnessapp.Usuario;
+package com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -26,29 +21,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterComentarios;
-import com.appfitnessapp.app.fitnessapp.Adapters.AdapterPlanes;
 import com.appfitnessapp.app.fitnessapp.Arrays.AsesoriasInfo;
-import com.appfitnessapp.app.fitnessapp.Arrays.Planes;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.Arrays.Valoraciones;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
-import com.appfitnessapp.app.fitnessapp.MyMediaController;
+import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
+import com.appfitnessapp.app.fitnessapp.Login.Registro;
 import com.appfitnessapp.app.fitnessapp.R;
-import com.appfitnessapp.app.fitnessapp.VideoControllerView;
 import com.appfitnessapp.app.fitnessapp.videoplayer.VideoPlayer;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 import com.taufiqrahman.reviewratings.BarLabels;
 import com.taufiqrahman.reviewratings.RatingReviews;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class Asesoria extends AppCompatActivity {
@@ -164,12 +151,26 @@ public class Asesoria extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(Asesoria.this, MetodoPago.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("costo",precioTotal);
-                bundle.putString("meses","Asesoria");
-                intent.putExtras(bundle);
-                startActivity(intent);
+                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(Asesoria.this);
+                dialogo1.setTitle("No has iniciado sesión");
+                dialogo1.setMessage("");
+                dialogo1.setPositiveButton("Iniciar Sesión", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        Intent intent = new Intent(Asesoria.this, IniciarSesion.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                dialogo1.setNegativeButton("Registrarse", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        Intent intent = new Intent(Asesoria.this, Registro.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                dialogo1.show();
 
             }
         });

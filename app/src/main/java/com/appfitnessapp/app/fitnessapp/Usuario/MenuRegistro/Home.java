@@ -1,4 +1,4 @@
-package com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro;
+package com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -27,6 +26,8 @@ import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
 import com.appfitnessapp.app.fitnessapp.Login.Registro;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.DetallePdf;
+import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.Asesoria;
+import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.HomeSinRegistro;
 import com.appfitnessapp.app.fitnessapp.Usuario.Imagen;
 import com.appfitnessapp.app.fitnessapp.Usuario.PantallaPDF;
 import com.appfitnessapp.app.fitnessapp.Usuario.Video;
@@ -36,12 +37,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class HomeSinRegistro  extends AppCompatActivity {
+public class Home   extends AppCompatActivity {
 
-    LinearLayout linearAsesoria ;
-    private static final int PDF_CODE = 1000 ;
+    LinearLayout linearAsesoria;
+    private static final int PDF_CODE = 1000;
 
-    ImageButton imgAsesoria,imgPerfil;
+    ImageButton imgAsesoria, imgPerfil;
 
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
@@ -68,38 +69,19 @@ public class HomeSinRegistro  extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
 
 
-        imgAsesoria=findViewById(R.id.btnAsesoria);
-        imgPerfil=findViewById(R.id.imgPerfil);
+        imgAsesoria = findViewById(R.id.btnAsesoria);
+        imgPerfil = findViewById(R.id.imgPerfil);
 
-        linearAsesoria=findViewById(R.id.linearAsesoria);
-
+        linearAsesoria = findViewById(R.id.linearAsesoria);
 
 
         imgPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(HomeSinRegistro.this);
-                dialogo1.setTitle("No has iniciado sesión");
-                dialogo1.setMessage("");
-                dialogo1.setPositiveButton("Iniciar Sesión", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialogo1, int id) {
-                        Intent intent = new Intent(HomeSinRegistro.this, IniciarSesion.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-                dialogo1.setNegativeButton("Registrarse", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialogo1, int id) {
-                        Intent intent = new Intent(HomeSinRegistro.this, Registro.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-                dialogo1.show();
-
+                Intent intent = new Intent(Home.this, AsesoriaRegistro.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
 
@@ -108,73 +90,68 @@ public class HomeSinRegistro  extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(HomeSinRegistro.this, Asesoria.class);
+                Intent intent = new Intent(Home.this, AsesoriaRegistro.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
         imgAsesoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(HomeSinRegistro.this, Asesoria.class);
+                Intent intent = new Intent(Home.this, AsesoriaRegistro.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-
+                finish();
             }
         });
 
 
-
-        recyclerView=findViewById(R.id.recyclerview);
+        recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        feeds=new ArrayList<>();
-        adapterFeed=new AdapterFeed(feeds);
+        feeds = new ArrayList<>();
+        adapterFeed = new AdapterFeed(feeds);
         recyclerView.setAdapter(adapterFeed);
         adapterFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.VIDEO)){
+                if (feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.VIDEO)) {
 
-                    Intent intent = new Intent(HomeSinRegistro.this, Video.class);
+                    Intent intent = new Intent(Home.this, Video.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("video",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
+                    bundle.putString("video", feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
                     intent.putExtras(bundle);
                     startActivity(intent);
-                }
+                } else if (feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.IMAGEN)) {
 
-                else if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.IMAGEN)){
-
-                    Intent intent = new Intent(HomeSinRegistro.this, Imagen.class);
+                    Intent intent = new Intent(Home.this, Imagen.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("imagen",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
+                    bundle.putString("imagen", feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
                     intent.putExtras(bundle);
                     startActivity(intent);
-                }
+                } else if (feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.PDF)) {
 
-                else if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.PDF)){
-
-                    if (feeds.get(recyclerView.getChildAdapterPosition(view)).getIs_gratis()){
-                        Intent intent = new Intent(HomeSinRegistro.this, PantallaPDF.class);
-                        intent.putExtra("ViewType","internet");
+                    if (feeds.get(recyclerView.getChildAdapterPosition(view)).getIs_gratis()) {
+                        Intent intent = new Intent(Home.this, PantallaPDF.class);
+                        intent.putExtra("ViewType", "internet");
                         Bundle bundle = new Bundle();
-                        bundle.putString("pdf",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
+                        bundle.putString("pdf", feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
                         intent.putExtras(bundle);
                         startActivity(intent);
-                    }
-                    else {
-                        Intent intent = new Intent(HomeSinRegistro.this, DetallePdf.class);
+                    } else {
+                        Intent intent = new Intent(Home.this, DetallePdf.class);
                         Bundle bundle = new Bundle();
-                        bundle.putString("pdf",feeds.get(recyclerView.getChildAdapterPosition(view)).getDescripcion());
-                        bundle.putString("precio",feeds.get(recyclerView.getChildAdapterPosition(view)).getCosto_pdf());
+                        bundle.putString("pdf", feeds.get(recyclerView.getChildAdapterPosition(view)).getDescripcion());
+                        bundle.putString("precio", feeds.get(recyclerView.getChildAdapterPosition(view)).getCosto_pdf());
 
                         intent.putExtras(bundle);
                         startActivity(intent);
 
                     }
 
-                }
-
-                else {
+                } else {
 
 
                 }
@@ -184,10 +161,9 @@ public class HomeSinRegistro  extends AppCompatActivity {
         });
 
 
-
     }
 
-    public void bajarFeed(){
+    public void bajarFeed() {
 
         //  feeds.removeAll(feeds);
 
@@ -210,10 +186,7 @@ public class HomeSinRegistro  extends AppCompatActivity {
                     }
 
 
-                }
-
-
-                else {
+                } else {
                     Log.e(TAG, "Feed: ");
 
                 }
@@ -230,23 +203,20 @@ public class HomeSinRegistro  extends AppCompatActivity {
     }
 
 
-
-
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==PDF_CODE && resultCode == RESULT_OK && data != null){
+        if (requestCode == PDF_CODE && resultCode == RESULT_OK && data != null) {
 
-            Uri selecPdf=data.getData();
-            Intent intent=new Intent(HomeSinRegistro.this,PantallaPDF.class);
-            intent.putExtra("ViewType","storage");
-            intent.putExtra("FileUri",selecPdf.toString());
+            Uri selecPdf = data.getData();
+            Intent intent = new Intent(Home.this, PantallaPDF.class);
+            intent.putExtra("ViewType", "storage");
+            intent.putExtra("FileUri", selecPdf.toString());
             startActivity(intent);
 
 
         }
 
     }
+
 }

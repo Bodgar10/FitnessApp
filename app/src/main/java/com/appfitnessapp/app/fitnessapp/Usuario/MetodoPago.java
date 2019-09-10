@@ -15,9 +15,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.Paypal.Config;
 import com.appfitnessapp.app.fitnessapp.Usuario.Paypal.PaymentDetails;
+import com.google.firebase.auth.FirebaseAuth;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -36,6 +38,9 @@ public class MetodoPago extends AppCompatActivity {
     LinearLayout btnPagar;
     TextView txtTotal;
 
+    DBProvider dbProvider;
+
+
     public static final int PAYPAL_REQUEST_CODE=7171;
 
     private static PayPalConfiguration config=new PayPalConfiguration()
@@ -45,7 +50,7 @@ public class MetodoPago extends AppCompatActivity {
 
     String amount="";
 
-    String pago,meses;
+    String pago,meses,id;
 
     @Override
     protected void onDestroy() {
@@ -68,17 +73,25 @@ public class MetodoPago extends AppCompatActivity {
         txtPlan=findViewById(R.id.txtTipoPlan);
         txtTotal=findViewById(R.id.txtTotalPago);
 
+        dbProvider = new DBProvider();
+
         btnPagar=findViewById(R.id.linearRealizarPago);
 
         btnPaypal=findViewById(R.id.btnPaypal);
         btnTarjeta=findViewById(R.id.btnTarjeta);
 
 
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         Bundle extras = getIntent().getExtras();
-        assert extras != null;
-        pago =extras.getString("costo");
-        meses =extras.getString("meses");
+        if (extras != null) {
+            pago =extras.getString("costo");
+            meses =extras.getString("meses");
+        }
+
+
+
+
 
 
         String simbolo="$";
@@ -179,29 +192,38 @@ public class MetodoPago extends AppCompatActivity {
                 if (confirmation != null){
 
                     try {
+
                         String paymentDetails = confirmation.toJSONObject().toString(4);
                         startActivity(new Intent(this,PaymentDetails.class)
                         .putExtra("PaymentDetails",paymentDetails)
                         .putExtra("PaymentAmount",amount)
-                        );
+                                .putExtra("id_usuario",id)
+                                .putExtra("meses",meses));
+
+
+
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
                 }
+
+
 
 
             }
 
             else if(resultCode == Activity.RESULT_CANCELED) {
 
-                Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Se cancelo la compra.", Toast.LENGTH_SHORT).show();
             }
 
         }
 
         else if(resultCode == PaymentActivity.RESULT_EXTRAS_INVALID){
 
-            Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Invalido", Toast.LENGTH_SHORT).show();
 
         }
     }

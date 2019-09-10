@@ -1,11 +1,9 @@
-package com.appfitnessapp.app.fitnessapp.Usuario;
+package com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,19 +16,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.appfitnessapp.app.fitnessapp.Admin.AdminPerfil;
 import com.appfitnessapp.app.fitnessapp.Arrays.EstadisticaAlimentos;
 import com.appfitnessapp.app.fitnessapp.Arrays.EstadisticaEjercicio;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
-import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.Usuario.Calificar;
+import com.appfitnessapp.app.fitnessapp.Usuario.CustomBarChartRender;
+import com.appfitnessapp.app.fitnessapp.Usuario.EditarPerfil;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioChat;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioPerfil;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioPlan;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
@@ -44,8 +46,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
@@ -60,12 +60,14 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
-public class UsuarioPerfil  extends AppCompatActivity {
+public class Perfil  extends AppCompatActivity {
 
-    ImageButton imgHome,imgPlan,imgChat,btnDerecha,btnIzquierda;
+    ImageButton imgHome,imgAsesoria,btnDerecha,btnIzquierda;
     CircularImageView imgPersona;
     TextView txtNombre,txtPeso,txtAltura,txtObjetivo,txtDiasSemana;
     LinearLayout btnCalificar;
+
+    LinearLayout linearAsesoria;
 
     private ProgressDialog progressDialog;
     private static final String TAG = "BAJARINFO:";
@@ -106,16 +108,14 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
 
 
-    int porcentDesayuno=0;
-    int porcentComida=0;
-    int porcentCena=0;
+    int porcentDesayuno,porcentComida,porcentCena;
 
 
     int porcentDomingo,porcentLunes,porcentMartes,porcentMiercoles,porcentJueves,porcentViernes,porcentSabado;
 
 
 
-    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
+    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
     Date date = new Date();
     Calendar cal = Calendar.getInstance();
     int semanaActual,mesActual;
@@ -131,11 +131,11 @@ public class UsuarioPerfil  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_21_perfil);
 
-           Toolbar toolbarback=findViewById(R.id.toolbarU);
-           setSupportActionBar(toolbarback);
-           getSupportActionBar().setTitle("");
-          // ActionBar actionBar=getSupportActionBar();
-           //actionBar.setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbarback=findViewById(R.id.toolbarU);
+        setSupportActionBar(toolbarback);
+        getSupportActionBar().setTitle("");
+        // ActionBar actionBar=getSupportActionBar();
+        //actionBar.setDisplayHomeAsUpEnabled(true);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
@@ -143,28 +143,27 @@ public class UsuarioPerfil  extends AppCompatActivity {
         dbProvider = new DBProvider();
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-
         bajarUsuarios();
-       // bajarEstadisticasEjercicios();
         bajarEstadisticasAlimentos();
-
+        // bajarEstadisticasEjercicios();
 
         imgHome=findViewById(R.id.imgHome);
-        imgPlan=findViewById(R.id.imgPlan);
-        imgChat=findViewById(R.id.imgChat);
+
+        imgAsesoria = findViewById(R.id.btnAsesoria);
+        linearAsesoria = findViewById(R.id.linearAsesoria);
 
         btnDerecha=findViewById(R.id.btnDerecha);
         btnIzquierda=findViewById(R.id.btnIzquierda);
 
 
-           imgPersona=findViewById(R.id.imgPersona);
-           linearCerrar=findViewById(R.id.linearCerrar);
+        imgPersona=findViewById(R.id.imgPersona);
+        linearCerrar=findViewById(R.id.linearCerrar);
 
-           mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
 
 
-           txtNombre=findViewById(R.id.txtNombreUsuario);
+        txtNombre=findViewById(R.id.txtNombreUsuario);
         txtPeso=findViewById(R.id.txtPesoActual);
         txtAltura=findViewById(R.id.txtEstatura);
         txtObjetivo=findViewById(R.id.txtObjetivo);
@@ -178,64 +177,73 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
 
 
+        linearAsesoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Perfil.this, AsesoriaRegistro.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+        imgAsesoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Perfil.this, AsesoriaRegistro.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
         btnIzquierda.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   String fecha = "";
+            @Override
+            public void onClick(View v) {
+                String fecha = "";
 
-                   if (btnIzquierda.isClickable()){
+                if (btnIzquierda.isClickable()){
 
-                       txtDiasSemana.setText(getPreviousDate(fecha));
+                    txtDiasSemana.setText(getPreviousDate(fecha));
 
 
-                   }
+                }
 
-               }
-           });
+            }
+        });
 
         btnDerecha.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
 
-                   if (btnIzquierda.isClickable()){
-                       String fecha = "";
-                       txtDiasSemana.setText(getNextDate(fecha));
-                   }
+                if (btnIzquierda.isClickable()){
+                    String fecha = "";
+                    txtDiasSemana.setText(getNextDate(fecha));
+                }
 
-               }
-           });
+            }
+        });
 
 
 
         btnCalificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
                 v.startAnimation(buttonClick);
                 Intent intent = new Intent(UsuarioPerfil.this, Calificar.class);
                 startActivity(intent);
-
+                */
             }
         });
 
-
-        imgPlan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(UsuarioPerfil.this, UsuarioPlan.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
-                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
-
-
-            }
-        });
 
         imgHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UsuarioPerfil.this, UsuarioHome.class);
+                Intent intent = new Intent(Perfil.this, Home.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
@@ -244,46 +252,33 @@ public class UsuarioPerfil  extends AppCompatActivity {
             }
         });
 
-        imgChat.setOnClickListener(new View.OnClickListener() {
+
+
+        linearCerrar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(UsuarioPerfil.this, UsuarioChat.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
-                overridePendingTransition(R.anim.move, R.anim.move_leeft);
+            public void onClick(View v) {
+                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                    v.startAnimation(buttonClick);
+                    mAuth.signOut();
+                    Toast.makeText(Perfil.this, "Se ha cerrado la sesión correctamente.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Perfil.this, SplashPantalla.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
 
             }
         });
-
-
-           linearCerrar.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                       v.startAnimation(buttonClick);
-                       mAuth.signOut();
-                       Toast.makeText(UsuarioPerfil.this, "Se ha cerrado la sesión correctamente.", Toast.LENGTH_SHORT).show();
-                       Intent intent = new Intent(UsuarioPerfil.this, SplashPantalla.class);
-                       intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                       intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                       startActivity(intent);
-                       finish();
-                   }
-
-               }
-           });
 
 
 
 
         //________________________________________________________________________________________________
 
-           chart = (BarChart) findViewById(R.id.chart1);
-           chartHorizontal = (BarChart) findViewById(R.id.chartHorizontal);
-
-
-           CustomBarChartRender barChartRender = new CustomBarChartRender(chart,chart.getAnimator(), chart.getViewPortHandler());
+        chart = (BarChart) findViewById(R.id.chart1);
+        chartHorizontal = (BarChart) findViewById(R.id.chartHorizontal);
+        CustomBarChartRender barChartRender = new CustomBarChartRender(chart,chart.getAnimator(), chart.getViewPortHandler());
         barChartRender.setRadius(10);
         CustomBarChartRender barChartRenderH = new CustomBarChartRender(chartHorizontal,chartHorizontal.getAnimator(),
                 chartHorizontal.getViewPortHandler());
@@ -312,12 +307,22 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
 
         //////////////////////////////////////////////////////////////////////////////////////////
-           //horizontal
+        //horizontal
+        int[] colors = {Color.rgb(255, 255, 255),Color.rgb(255, 50, 0), Color.rgb(0, 194, 176),
+                Color.rgb(18, 27, 34), Color.rgb(255, 255, 255)};
 
-           //BARENTRYH = new ArrayList<>();
+        BARENTRYH = new ArrayList<>();
         BarEntryLabelsH = new ArrayList<String>();
+        AddValuesToBARENTRYHorizontal();
         AddValuesToBarEntryLabelsHorizontal();
-        //AddValuesToBARENTRYHorizontal();
+        ArrayList<IBarDataSet> dataSetsH = new ArrayList<>();
+        setHorizontal = new BarDataSet(BARENTRYH, "");
+        setHorizontal.setColors(colors);
+        //eliminar texto arriba
+        setHorizontal.setDrawValues(false);
+        dataSetsH.add(setHorizontal);
+        BarData dataHorizontal = new BarData(dataSetsH);
+        dataHorizontal.setBarWidth(0.5f);
 
 
 //____________________________________________________________________________________________
@@ -344,7 +349,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
         chart.getXAxis().setDrawGridLines(false);
         chart.getDescription().setEnabled(false);
         chart.setDescription(null);
-        chart.animateY(2000);
+        chart.animateY(3000);
         chart.setData(data);
         chart.invalidate();
 
@@ -389,7 +394,8 @@ public class UsuarioPerfil  extends AppCompatActivity {
         chartHorizontal.getXAxis().setDrawGridLines(false);
         chartHorizontal.getDescription().setEnabled(false);
         chartHorizontal.setDescription(null);
-        chartHorizontal.animateY(2000);
+        chartHorizontal.animateY(3000);
+        chartHorizontal.setData(dataHorizontal);
         chartHorizontal.invalidate();
 
 
@@ -410,6 +416,61 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
 
     }
+
+    public void AddValuesToBARENTRY(){
+
+        BARENTRY.add(new BarEntry(0, 45));
+        BARENTRY.add(new BarEntry(1, 20));
+        BARENTRY.add(new BarEntry(2,  68));
+        BARENTRY.add(new BarEntry(3, 80));
+        BARENTRY.add(new BarEntry(4, 40));
+        BARENTRY.add(new BarEntry(5, 50));
+        BARENTRY.add(new BarEntry(6, 68));
+
+    }
+
+    public void AddValuesToBarEntryLabels(){
+
+        BarEntryLabels.add("D");
+        BarEntryLabels.add("L");
+        BarEntryLabels.add("M");
+        BarEntryLabels.add("Mi");
+        BarEntryLabels.add("J");
+        BarEntryLabels.add("V");
+        BarEntryLabels.add("S");
+    }
+
+
+
+    //////////////////////////////////////////////////////////7
+    public void AddValuesToBARENTRYHorizontal(){
+
+        BARENTRYH.add(new BarEntry(0, 0));
+        BARENTRYH.add(new BarEntry(1, 50));
+        BARENTRYH.add(new BarEntry(2,  70));
+        BARENTRYH.add(new BarEntry(3,  100));
+        BARENTRYH.add(new BarEntry(4,  0));
+
+    }
+
+
+    public void AddValuesToBarEntryLabelsHorizontal(){
+
+        BarEntryLabelsH.add("");
+        BarEntryLabelsH.add("");
+        BarEntryLabelsH.add("");
+        BarEntryLabelsH.add("");
+        BarEntryLabelsH.add("");
+
+
+    }
+///////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
     public void bajarUsuarios(){
         dbProvider = new DBProvider();
@@ -475,77 +536,52 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
     public void bajarEstadisticasAlimentos(){
         dbProvider = new DBProvider();
+
         dbProvider.estadisticaAlimentos().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                BARENTRYH = new ArrayList<>();
-
                 Log.e(TAG, "Usuarios 4: ");
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        //Log.e(TAG,"Usuarios: "+ snapshot);
                         Log.e(TAG, "Usuarios: " + snapshot);
                         EstadisticaAlimentos estadisticaAlimentos = snapshot.getValue(EstadisticaAlimentos.class);
 
-                        //semana actual y mes
                         cal.setTime(date);
                         semanaActual = cal.get(Calendar.WEEK_OF_MONTH);
                         mesActual = cal.get(Calendar.MONTH);
 
-                        //fecha base datos
+
                         String semanaBase =estadisticaAlimentos.getFecha_cumplida();
                         DateFormat dateFormattt = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
+                        // Date convertedDate = new Date();
                         try {
                             Date convertedDate=dateFormattt.parse(semanaBase);
+                            // Date neww=new java.sql.Date(dateFormattt.parse(semanaBase).getTime());
                             Calendar c = Calendar.getInstance();
                             c.setTime(convertedDate);
-                            //sacar mes y semana base
                             int diaBase = c.get(Calendar.WEEK_OF_MONTH);
                             int mesBase = c.get(Calendar.MONTH);
 
                             if (estadisticaAlimentos.getId_usuario().equals(id)) {
                                 // Toast.makeText(UsuarioPerfil.this, "hoy"+semanaActual+"base"+diaBase, Toast.LENGTH_SHORT).show();
                                 if (semanaActual==diaBase&&mesActual==mesBase){
+
+
                                     if (estadisticaAlimentos.getTipo_alimento().equals(Contants.ALMUERZO)){
                                         index_almuerzo +=1;
-                                        porcentComida=index_almuerzo;
-
+                                        porcentComida = (index_almuerzo/7)*100;
                                     }
                                     else if(estadisticaAlimentos.getTipo_alimento().equals(Contants.DESAYUNO)){
                                         index_desayuno +=1;
-                                        porcentDesayuno = index_desayuno;
+                                        porcentDesayuno = (index_desayuno/7)*100;
 
                                     }
                                     else {
                                         index_cena +=1;
-                                        porcentCena = index_cena;
+                                        porcentCena = (index_cena/7)*100;
 
                                     }
-
-                                    Log.e(TAG,"Datos:1 "+ porcentDesayuno);
-                                    Log.e(TAG,"Datos:2 "+ porcentCena);
-                                    Log.e(TAG,"Datos:3 "+ porcentComida);
-
-                                    BARENTRYH.add(new BarEntry(0, 0));
-                                    BARENTRYH.add(new BarEntry(1, porcentDesayuno));
-                                    BARENTRYH.add(new BarEntry(2,  porcentComida));
-                                    BARENTRYH.add(new BarEntry(3,  porcentCena));
-                                    BARENTRYH.add(new BarEntry(4,  0));
-                                    setHorizontal = new BarDataSet(BARENTRYH, "");
-                                    int[] colors = {
-                                            Color.rgb(255, 255, 255),
-                                            Color.rgb(255, 50, 0),
-                                            Color.rgb(0, 194, 176),
-                                            Color.rgb(18, 27, 34),
-                                            Color.rgb(255, 255, 255)};
-                                    ArrayList<IBarDataSet> dataSetsH = new ArrayList<>();
-                                    setHorizontal.setColors(colors);
-                                    //eliminar texto arriba
-                                    setHorizontal.setDrawValues(false);
-                                    dataSetsH.add(setHorizontal);
-                                    BarData dataHorizontal = new BarData(dataSetsH);
-                                    dataHorizontal.setBarWidth(0.5f);
-                                    chartHorizontal.setData(dataHorizontal);
 
                                 }
 
@@ -567,65 +603,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
                 Log.e(TAG, "ERROR: ");
             }
         });
-
-        new CountDownTimer(2000,1){
-
-            @Override
-            public void onTick(long l) {
-
-            }
-
-            @Override
-            public void onFinish() {
-
-
-            }
-        }.start();
     }
-
-
-
-    public void AddValuesToBARENTRY(){
-
-        BARENTRY.add(new BarEntry(0, 45));
-        BARENTRY.add(new BarEntry(1, 20));
-        BARENTRY.add(new BarEntry(2,  68));
-        BARENTRY.add(new BarEntry(3, 80));
-        BARENTRY.add(new BarEntry(4, 40));
-        BARENTRY.add(new BarEntry(5, 50));
-        BARENTRY.add(new BarEntry(6, 68));
-
-    }
-
-    public void AddValuesToBarEntryLabels(){
-
-        BarEntryLabels.add("D");
-        BarEntryLabels.add("L");
-        BarEntryLabels.add("M");
-        BarEntryLabels.add("Mi");
-        BarEntryLabels.add("J");
-        BarEntryLabels.add("V");
-        BarEntryLabels.add("S");
-    }
-
-
-    public void AddValuesToBarEntryLabelsHorizontal(){
-
-        BarEntryLabelsH.add("");
-        BarEntryLabelsH.add("");
-        BarEntryLabelsH.add("");
-        BarEntryLabelsH.add("");
-        BarEntryLabelsH.add("");
-
-
-    }
-///////////////////////////////////////////////////////////////////
-
-
-
-
-
-
 
 
     public void bajarEstadisticasEjercicios(){
@@ -668,44 +646,44 @@ public class UsuarioPerfil  extends AppCompatActivity {
                                 switch (day) {
 
 
-                  case Calendar.SUNDAY:
-                 index_domingo +=1;
-                 porcentDomingo =(index_domingo/index_ejercicio)*100;
-                 break;
+                                    case Calendar.SUNDAY:
+                                        index_domingo +=1;
+                                        porcentDomingo =(index_domingo/index_ejercicio)*100;
+                                        break;
 
-               case Calendar.MONDAY:
-                   index_lunes +=1;
-                   porcentLunes =(index_lunes/index_ejercicio)*100;
+                                    case Calendar.MONDAY:
+                                        index_lunes +=1;
+                                        porcentLunes =(index_lunes/index_ejercicio)*100;
 
-                   break;
-               case Calendar.TUESDAY:
-                   index_martes +=1;
-                   porcentMartes =(index_martes/index_ejercicio)*100;
+                                        break;
+                                    case Calendar.TUESDAY:
+                                        index_martes +=1;
+                                        porcentMartes =(index_martes/index_ejercicio)*100;
 
-                   break;
-               case Calendar.WEDNESDAY:
-                   index_miercoles +=1;
-                   porcentMiercoles =(index_miercoles/index_ejercicio)*100;
+                                        break;
+                                    case Calendar.WEDNESDAY:
+                                        index_miercoles +=1;
+                                        porcentMiercoles =(index_miercoles/index_ejercicio)*100;
 
-                   break;
+                                        break;
 
-               case Calendar.THURSDAY:
-                   index_jueves +=1;
-                   porcentJueves =(index_jueves/index_ejercicio)*100;
+                                    case Calendar.THURSDAY:
+                                        index_jueves +=1;
+                                        porcentJueves =(index_jueves/index_ejercicio)*100;
 
-                   break;
-               case Calendar.FRIDAY:
-                   index_viernes +=1;
-                   porcentViernes =(index_viernes/index_ejercicio)*100;
-                   break;
+                                        break;
+                                    case Calendar.FRIDAY:
+                                        index_viernes +=1;
+                                        porcentViernes =(index_viernes/index_ejercicio)*100;
+                                        break;
 
-               case Calendar.SATURDAY:
-                   index_sabado +=1;
-                   porcentSabado =(index_sabado/index_ejercicio)*100;
-                   break;
-           }
-                }
-                    }
+                                    case Calendar.SATURDAY:
+                                        index_sabado +=1;
+                                        porcentSabado =(index_sabado/index_ejercicio)*100;
+                                        break;
+                                }
+                            }
+                        }
 
                     }
                 } else {
@@ -752,11 +730,13 @@ public class UsuarioPerfil  extends AppCompatActivity {
     }
 
     private void Abrir() {
-        Intent intent=new Intent(UsuarioPerfil.this,EditarPerfil.class);
+        /*
+        Intent intent=new Intent(UsuarioPerfil.this, EditarPerfil.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         overridePendingTransition(R.anim.move, R.anim.move_leeft);
+        */
     }
 
 
@@ -815,6 +795,8 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
         }
     }
+
+
 
     @Override
     public void onBackPressed() {

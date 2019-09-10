@@ -79,6 +79,7 @@ public class TipoPlanes extends AppCompatActivity {
                 bundle.putString("costo",plan.get(recyclerView.getChildAdapterPosition(v)).getCosto_plan());
                 bundle.putString("meses",plan.get(recyclerView.getChildAdapterPosition(v)).getMeses_plan());
                 intent.putExtras(bundle);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 
 
@@ -89,8 +90,6 @@ public class TipoPlanes extends AppCompatActivity {
 
 
     public void bajarPlanes(){
-
-
         dbProvider = new DBProvider();
         dbProvider.planes().addValueEventListener(new ValueEventListener() {
             @Override
@@ -102,105 +101,13 @@ public class TipoPlanes extends AppCompatActivity {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Planes planes = snapshot.getValue(Planes.class);
 
+                        if (planes.getId_plan()!=null){
+                            plan.add(planes);
+                            adapter.notifyDataSetChanged();
+                        }
                        // costo =String.valueOf(planes.getCosto_plan());
 
-                        plan.add(planes);
-                        adapter.notifyDataSetChanged();
 
-
-                        SimpleDateFormat dateDia = new SimpleDateFormat("dd", Locale.getDefault());
-                        SimpleDateFormat dateMes = new SimpleDateFormat("MM", Locale.getDefault());
-                        SimpleDateFormat dateAnio = new SimpleDateFormat("yyyy", Locale.getDefault());
-
-                        Date date = new Date();
-
-                        String diaHoy = dateDia.format(date);
-                        String mesHoy = dateMes.format(date);
-                        String anioHoy = dateAnio.format(date);
-
-
-
-                        if (planes.getMeses_plan().equals("12")){
-
-                            anioHoy +=1;
-
-
-                        }
-
-                        else if (planes.getMeses_plan().equals("03")){
-
-                            if(mesHoy.equals("12")){
-                                mesHoy= String.valueOf(03);
-                                anioHoy +=1;
-
-                            }
-                            else if (mesHoy.equals("11")){
-
-                                mesHoy= String.valueOf(02);
-                                anioHoy +=1;
-
-                            }
-
-                            else if (mesHoy.equals("10")){
-
-                                mesHoy= String.valueOf(01);
-                                anioHoy +=1;
-
-                            }
-                            else {
-
-                                mesHoy +=3;
-                            }
-
-
-                        }
-
-                        else {
-
-                            if (mesHoy.equals("12")){
-
-                                mesHoy = String.valueOf(06);
-                                anioHoy +=1;
-
-                            }
-                            else if(mesHoy.equals("11")){
-
-                                mesHoy = String.valueOf(05);
-                                anioHoy +=1;
-
-                            }
-
-                            else if (mesHoy.equals("10")){
-
-                                mesHoy = String.valueOf(04);
-                                anioHoy +=1;
-
-                            }
-
-                            else if (mesHoy.equals("09")){
-
-                                mesHoy = String.valueOf(03);
-                                anioHoy +=1;
-
-                            }
-
-                            else if (mesHoy.equals("08")){
-
-                                mesHoy = String.valueOf(02);
-                                anioHoy +=1;
-
-                            }
-                            else if (mesHoy.equals("07")){
-
-                                mesHoy = String.valueOf(01);
-                                anioHoy +=1;
-                            }
-
-                            else {
-
-                                mesHoy+=6;
-                            }
-                        }
 
 
                     }

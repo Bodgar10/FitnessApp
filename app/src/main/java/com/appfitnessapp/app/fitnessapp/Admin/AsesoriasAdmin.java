@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,20 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterAsesorias;
-import com.appfitnessapp.app.fitnessapp.Adapters.AdapterIngredientes;
-import com.appfitnessapp.app.fitnessapp.Arrays.Asesorias;
 import com.appfitnessapp.app.fitnessapp.Arrays.Inscritos;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
-import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
 import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
-import com.appfitnessapp.app.fitnessapp.Usuario.Asesoria;
-import com.appfitnessapp.app.fitnessapp.Usuario.DetalleRecetas;
-import com.appfitnessapp.app.fitnessapp.Usuario.InformacionCompra;
-import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

@@ -17,6 +17,8 @@ import com.appfitnessapp.app.fitnessapp.Arrays.Ejercicios;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class AdapterEjercicios extends RecyclerView.Adapter<AdapterEjercicios.Ej
 
 
 
-        EditText txtTipoEjercicio,txtRepeticiones,txtRondas;
+        TextView txtTipoEjercicio,txtRepeticiones,txtRondas;
 
         public EjericiosViewHolder (View itemView) {
             super(itemView);
@@ -43,8 +45,6 @@ public class AdapterEjercicios extends RecyclerView.Adapter<AdapterEjercicios.Ej
 
 
             txtTipoEjercicio=itemView.findViewById(R.id.edtTipoEjercicio);
-            txtRepeticiones=itemView.findViewById(R.id.edtRepeticiones);
-            txtRondas=itemView.findViewById(R.id.edtRondas);
 
 
 
@@ -73,8 +73,7 @@ public class AdapterEjercicios extends RecyclerView.Adapter<AdapterEjercicios.Ej
         Ejercicios ejercicio = ejercicios.get(position);
 
         holder.txtTipoEjercicio.setText(ejercicio.getNombre_ejercicio());
-        holder.txtRepeticiones.setText(ejercicio.getRepeticiones());
-        holder.txtRondas.setText(ejercicio.getRondas());
+
 
     }
 

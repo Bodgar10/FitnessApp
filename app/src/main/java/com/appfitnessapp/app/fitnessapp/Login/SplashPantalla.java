@@ -21,6 +21,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.Usuario.DatosUsuario;
 import com.appfitnessapp.app.fitnessapp.Usuario.DetallePdf;
 import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.HomeSinRegistro;
 import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
@@ -141,11 +142,22 @@ public class SplashPantalla extends AppCompatActivity {
                                 //yaCreado = true;
                                 progressDialog.dismiss();
                                 if (usuario.getTipo_usuario().equals(Contants.USUARIO)) {
-                                    progressDialog.dismiss();
-                                    Intent intent = new Intent(SplashPantalla.this, UsuarioHome.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intent);
-                                    finish();
+                                    if (!usuario.getPagado()==false){
+                                        progressDialog.dismiss();
+                                        Intent intent = new Intent(SplashPantalla.this, UsuarioHome.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                        finish();
+
+                                    }
+                                    else {
+                                        progressDialog.dismiss();
+                                        Intent intent = new Intent(SplashPantalla.this, DatosUsuario.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                        SplashPantalla.this.finish();
+                                    }
+
                                 }
 
                                 else if (usuario.getTipo_usuario().equals(Contants.ADMIN)) {
