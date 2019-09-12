@@ -214,8 +214,6 @@ public class DatosUsuario extends AppCompatActivity {
 
                 }
 
-
-
             }
         });
 
@@ -227,6 +225,7 @@ public class DatosUsuario extends AppCompatActivity {
 
         progressDialog.setMessage("Cargando Información...");
         progressDialog.show();
+        progressDialog.setCancelable(false);
 
         dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
             @Override
@@ -239,8 +238,6 @@ public class DatosUsuario extends AppCompatActivity {
                         Usuarios usuarios = snapshot.getValue(Usuarios.class);
 
                         if (usuarios.getId_usuario().equals(id)) {
-
-
                             //para bajar la info y ponerle en el spinner
                             selectionEstatura= altura.getPosition(usuarios.getEstatura());
                             spinnerAltura.setSelection(selectionEstatura);
@@ -250,8 +247,7 @@ public class DatosUsuario extends AppCompatActivity {
 
                             selectionObjetivo= buscando.getPosition(usuarios.getObjetivo());
                             spinnerBuscando.setSelection(selectionObjetivo);
-
-
+                            progressDialog.dismiss();
                         }
 
                     }

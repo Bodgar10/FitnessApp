@@ -1,7 +1,11 @@
 package com.appfitnessapp.app.fitnessapp.Usuario;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +20,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterPreguntas;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterRespuestas;
+import com.appfitnessapp.app.fitnessapp.Admin.AgregarIngredientes;
 import com.appfitnessapp.app.fitnessapp.Arrays.Preguntas;
 import com.appfitnessapp.app.fitnessapp.Arrays.Respuestas;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
@@ -99,130 +104,141 @@ public class Formulario extends AppCompatActivity {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String key = dbProvider.respuestas().getKey();
 
-                if (id_1!="No"){
+                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(Formulario.this);
+                dialogo1.setTitle("");
+                dialogo1.setMessage("¿Todas las preguntas se contestarón?");
+                dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        aceptar();
+                        Toast.makeText(Formulario.this, "Se subio la información correctamente.", Toast.LENGTH_SHORT).show();
+                        new CountDownTimer(1000,1){
+                            @Override
+                            public void onTick(long l) {
+                            }
 
-                    String respuesta1=edtRespuesta1.getText().toString();
-                    if (respuesta1.isEmpty()){
-                        Toast.makeText(Formulario.this, "Falta información. Revisa que tengas todo.", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        dbProvider.subirRespuestas(id_1,key,id,respuesta1);
-                    }
+                            @Override
+                            public void onFinish() {
+                                Intent intent=new Intent(Formulario.this, UsuarioHome.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
 
-                }
-                if (id_2!="No"){
+                            }
+                        }.start();
 
-                    String respuesta2=edtRespuesta2.getText().toString();
-                    if (respuesta2.isEmpty()){
-                        Toast.makeText(Formulario.this, "Falta información. Revisa que tengas todo.", Toast.LENGTH_SHORT).show();
-
-                    }
-                    else {
-                        dbProvider.subirRespuestas(id_2,key,id,respuesta2);
-                    }
-
-                }
-                if (id_3!="No"){
-
-                    String respuesta3=edtRespuesta3.getText().toString();
-                    if (respuesta3.isEmpty()){
-                        Toast.makeText(Formulario.this, "Falta información. Revisa que tengas todo.", Toast.LENGTH_SHORT).show();
 
                     }
-                    else {
-                        dbProvider.subirRespuestas(id_3,key,id,respuesta3);
+                });
+                dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        dialogo1.dismiss();
                     }
+                });
+                dialogo1.show();
 
-                }
-                if (id_4!="No"){
 
-                    String respuesta4=edtRespuesta4.getText().toString();
-                    if (respuesta4.isEmpty()){
-                        Toast.makeText(Formulario.this, "Falta información. Revisa que tengas todo.", Toast.LENGTH_SHORT).show();
-
-                    }
-                    else {
-                        dbProvider.subirRespuestas(id_4,key,id,respuesta4);
-                    }
-
-                }
-                if (id_5!="No"){
-
-                    String respuesta5=edtRespuesta5.getText().toString();
-                    if (respuesta5.isEmpty()){
-                        Toast.makeText(Formulario.this, "Falta información. Revisa que tengas todo.", Toast.LENGTH_SHORT).show();
-
-                    }
-                    else {
-                        dbProvider.subirRespuestas(id_5,key,id,respuesta5);
-                    }
-
-                }
-                if (id_6!="No"){
-
-                    String respuesta6=edtRespuesta6.getText().toString();
-                    if (respuesta6.isEmpty()){
-                        Toast.makeText(Formulario.this, "Falta información. Revisa que tengas todo.", Toast.LENGTH_SHORT).show();
-
-                    }
-                    else {
-                        dbProvider.subirRespuestas(id_6,key,id,respuesta6);
-                    }
-
-                }
-                if (id_7!="No"){
-
-                    String respuesta7=edtRespuesta7.getText().toString();
-                    if (respuesta7.isEmpty()){
-                        Toast.makeText(Formulario.this, "Falta información. Revisa que tengas todo.", Toast.LENGTH_SHORT).show();
-
-                    }
-                    else {
-                        dbProvider.subirRespuestas(id_7,key,id,respuesta7);
-                    }
-
-                }
-                if (id_8!="No"){
-
-                    String respuesta8=edtRespuesta8.getText().toString();
-                    if (respuesta8.isEmpty()){
-                        Toast.makeText(Formulario.this, "Falta información. Revisa que tengas todo.", Toast.LENGTH_SHORT).show();
-
-                    }
-                    else {
-                        dbProvider.subirRespuestas(id_8,key,id,respuesta8);
-                    }
-
-                }
-                if (id_9!="No"){
-
-                    String respuesta9=edtRespuesta9.getText().toString();
-                    if (respuesta9.isEmpty()){
-                        Toast.makeText(Formulario.this, "Falta información. Revisa que tengas todo.", Toast.LENGTH_SHORT).show();
-
-                    }
-                    else {
-                        dbProvider.subirRespuestas(id_9,key,id,respuesta9);
-                    }
-
-                }
-                if (id_10!="No"){
-
-                    String respuesta10=edtRespuesta10.getText().toString();
-                    if (respuesta10.isEmpty()){
-                        Toast.makeText(Formulario.this, "Falta información. Revisa que tengas todo.", Toast.LENGTH_SHORT).show();
-
-                    }
-                    else {
-                        dbProvider.subirRespuestas(id_10,key,id,respuesta10);
-                    }
-
-                }
             }
         });
 
+
+
+    }
+
+    private void aceptar() {
+
+        String key = dbProvider.respuestas().push().getKey();
+        String key2 = dbProvider.respuestas().push().getKey();
+        String key3 = dbProvider.respuestas().push().getKey();
+        String key4 = dbProvider.respuestas().push().getKey();
+        String key5 = dbProvider.respuestas().push().getKey();
+        String key6 = dbProvider.respuestas().push().getKey();
+        String key7 = dbProvider.respuestas().push().getKey();
+        String key8 = dbProvider.respuestas().push().getKey();
+        String key9 = dbProvider.respuestas().push().getKey();
+        String key10 = dbProvider.respuestas().push().getKey();
+
+
+        String respuesta1 = edtRespuesta1.getText().toString();
+        String respuesta2 = edtRespuesta2.getText().toString();
+        String respuesta3 = edtRespuesta3.getText().toString();
+        String respuesta4 = edtRespuesta4.getText().toString();
+        String respuesta5 = edtRespuesta5.getText().toString();
+        String respuesta6 = edtRespuesta6.getText().toString();
+        String respuesta7 = edtRespuesta7.getText().toString();
+        String respuesta8 = edtRespuesta8.getText().toString();
+        String respuesta9 = edtRespuesta9.getText().toString();
+        String respuesta10 = edtRespuesta10.getText().toString();
+
+
+        if (!id_1.equals("No")){
+            if (!respuesta1.isEmpty()){
+                dbProvider.subirRespuestas(id_1,key,id,respuesta1);
+
+            }
+        }
+
+        if (!id_2.equals("No")){
+            if (!respuesta2.isEmpty()){
+                dbProvider.subirRespuestas(id_2,key2,id,respuesta2);
+
+            }
+        }
+        if (!id_3.equals("No")){
+            if (!respuesta3.isEmpty()){
+                dbProvider.subirRespuestas(id_3,key3,id,respuesta3);
+
+            }
+
+        }
+        if (!id_4.equals("No")){
+            if (!respuesta4.isEmpty()){
+                dbProvider.subirRespuestas(id_4,key4,id,respuesta4);
+
+            }
+
+        }
+        if (!id_5.equals("No")){
+            if (!respuesta5.isEmpty()){
+                dbProvider.subirRespuestas(id_5,key5,id,respuesta5);
+
+            }
+
+        }
+        if (!id_6.equals("No")){
+            if (!respuesta6.isEmpty()){
+                dbProvider.subirRespuestas(id_6,key6,id,respuesta6);
+
+            }
+
+        }
+        if (!id_7.equals("No")){
+            if (!respuesta7.isEmpty()){
+                dbProvider.subirRespuestas(id_7,key7,id,respuesta7);
+
+            }
+
+        }
+        if (!id_8.equals("No")){
+            if (!respuesta8.isEmpty()){
+                dbProvider.subirRespuestas(id_8,key8,id,respuesta8);
+
+            }
+
+        }
+        if (!id_9.equals("No")){
+            if (!respuesta9.isEmpty()){
+                dbProvider.subirRespuestas(id_9,key9,id,respuesta9);
+
+            }
+        }
+
+        if (!id_10.equals("No")){
+            if (!respuesta10.isEmpty()){
+                dbProvider.subirRespuestas(id_10,key10,id,respuesta10);
+
+            }
+        }
 
 
     }
@@ -249,7 +265,7 @@ public class Formulario extends AppCompatActivity {
                                 id_1=preguntas.getId_pregunta();
                                 txtPregunta1.setVisibility(View.VISIBLE);
                                 edtRespuesta1.setVisibility(View.VISIBLE);
-
+                                Log.e(TAG, "Id1:"+id_1);
                                 break;
 
                             case Contants.PREGUNTA_2:
@@ -257,6 +273,8 @@ public class Formulario extends AppCompatActivity {
                                 id_2=preguntas.getId_pregunta();
                                 txtPregunta2.setVisibility(View.VISIBLE);
                                 edtRespuesta2.setVisibility(View.VISIBLE);
+                                Log.e(TAG, "Id2:"+id_2);
+
                                 break;
 
                             case Contants.PREGUNTA_3:
@@ -264,12 +282,16 @@ public class Formulario extends AppCompatActivity {
                                 id_3=preguntas.getId_pregunta();
                                 txtPregunta3.setVisibility(View.VISIBLE);
                                 edtRespuesta3.setVisibility(View.VISIBLE);
+                                Log.e(TAG, "Id3:"+id_3);
+
                                 break;
                             case Contants.PREGUNTA_4:
                                 txtPregunta4.setText(preguntas.getPregunta());
                                 id_4=preguntas.getId_pregunta();
                                 txtPregunta4.setVisibility(View.VISIBLE);
                                 edtRespuesta4.setVisibility(View.VISIBLE);
+                                Log.e(TAG, "I4:"+id_4);
+
                                 break;
 
                             case Contants.PREGUNTA_5:
@@ -277,6 +299,8 @@ public class Formulario extends AppCompatActivity {
                                 id_5=preguntas.getId_pregunta();
                                 txtPregunta5.setVisibility(View.VISIBLE);
                                 edtRespuesta5.setVisibility(View.VISIBLE);
+                                Log.e(TAG, "Id5:"+id_5);
+
                                 break;
 
                             case Contants.PREGUNTA_6:
@@ -284,6 +308,7 @@ public class Formulario extends AppCompatActivity {
                                 id_6=preguntas.getId_pregunta();
                                 txtPregunta6.setVisibility(View.VISIBLE);
                                 edtRespuesta6.setVisibility(View.VISIBLE);
+                                Log.e(TAG, "Id6:"+id_6);
                                 break;
 
                             case Contants.PREGUNTA_7:
@@ -291,6 +316,8 @@ public class Formulario extends AppCompatActivity {
                                 id_7=preguntas.getId_pregunta();
                                 txtPregunta7.setVisibility(View.VISIBLE);
                                 edtRespuesta7.setVisibility(View.VISIBLE);
+                                Log.e(TAG, "Id7:"+id_7);
+
                                 break;
 
                             case Contants.PREGUNTA_8:

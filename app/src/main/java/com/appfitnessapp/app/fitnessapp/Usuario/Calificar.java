@@ -269,6 +269,7 @@ public class Calificar extends AppCompatActivity {
         progressDialog.setTitle("Subiendo...");
         progressDialog.setProgress(0);
         progressDialog.show();
+        progressDialog.setCancelable(false);
 
         final String fileName =System.currentTimeMillis()+id;
        final StorageReference storageReference1 =  mStorage.child(Contants.TABLA_VALORACIONES_ASESORIA).child(fileName);

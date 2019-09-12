@@ -328,14 +328,12 @@ public class DBProvider {
     public void subirRespuestas(String id_pregunta,String id_respuesta, String id_usuario, String respuesta){
         Map<String, Object> updates = new HashMap<>();
 
-
-        String key = respuestas().push().getKey();
         updates.put(Contants.ID_PREGUNTA , id_pregunta);
-        updates.put(Contants.ID_RESPUESTA , key);
+        updates.put(Contants.ID_RESPUESTA , id_respuesta);
         updates.put(Contants.ID_USUARIO , id_usuario);
         updates.put(Contants.RESPUESTA , respuesta);
 
-        respuestas().child(key).updateChildren(updates);
+        respuestas().child(id_respuesta).updateChildren(updates);
     }
 
 
