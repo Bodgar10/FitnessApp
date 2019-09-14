@@ -177,27 +177,15 @@
             android:id="@+id/spinnerDia"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginBottom="5dp"
             android:spinnerMode="dialog" />
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="10dp"
-            android:background="@android:color/darker_gray"
-            android:gravity="start"
-            android:padding="8dp"
-            android:text="rutina de ejercicios"
-            android:textAllCaps="true"
-            android:textColor="@android:color/black"
-            android:textSize="13sp"
-            tools:visibility="gone" />
 
     <include
+        android:visibility="gone"
         layout="@layout/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -241,9 +229,6 @@
 
 
         </LinearLayout>
-
-
-
 
     </LinearLayout>
 

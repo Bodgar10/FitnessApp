@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -22,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
+import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -59,17 +61,24 @@ public class DatosUsuario extends AppCompatActivity {
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            id =extras.getString("id");
+
+
+        }
+
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
 
 
-        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
         dbProvider = new DBProvider();
 
 
-        bajarUsuarios();
+        //bajarUsuarios();
 
 
 
@@ -183,6 +192,15 @@ public class DatosUsuario extends AppCompatActivity {
 
 
                 if (imgHombre.isClickable()){
+
+                    dbProvider.updateObjetivo(objetivo, id);
+                    dbProvider.updateEstatura(estatura, id);
+                    dbProvider.updatePeso(peso,id);
+
+
+
+
+                    /*
                     if (!String.valueOf(selectionObjetivo).equals(objetivo)){
                         dbProvider.updateObjetivo(objetivo, id);
                     }
@@ -192,13 +210,36 @@ public class DatosUsuario extends AppCompatActivity {
                     if (!String.valueOf(selectionPeso).equals(peso)){
                         dbProvider.updatePeso(peso,id);
                     }
-                    Intent intent=new Intent(DatosUsuario.this, Formulario.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+                    */
+
+                    new CountDownTimer(1000,1){
+                        @Override
+                        public void onTick(long l) {
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            Intent intent=new Intent(DatosUsuario.this, Formulario.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("id",id);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            finish();
+
+                        }
+                    }.start();
+
                 }
 
                 else if (imgMujer.isClickable()){
 
+
+                    dbProvider.updateObjetivo(objetivo, id);
+                    dbProvider.updateEstatura(estatura, id);
+                    dbProvider.updatePeso(peso,id);
+
+                    /*
                     if (!String.valueOf(selectionObjetivo).equals(objetivo)){
                         dbProvider.updateObjetivo(objetivo, id);
                     }
@@ -208,9 +249,25 @@ public class DatosUsuario extends AppCompatActivity {
                     if (!String.valueOf(selectionPeso).equals(peso)){
                         dbProvider.updatePeso(peso,id);
                     }
-                    Intent intent=new Intent(DatosUsuario.this, Formulario.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+                    */
+
+                    new CountDownTimer(1000,1){
+                        @Override
+                        public void onTick(long l) {
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            Intent intent=new Intent(DatosUsuario.this, Formulario.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("id",id);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            finish();
+
+                        }
+                    }.start();
 
                 }
 

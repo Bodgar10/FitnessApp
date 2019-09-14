@@ -94,7 +94,7 @@
             android:textColor="@android:color/black" />
 
 
-        <Button
+        <TextView
             android:id="@+id/btnSeleccionar"
             android:layout_width="match_parent"
             android:layout_height="50dp"

@@ -175,6 +175,8 @@ public class UsuarioPlan  extends AppCompatActivity {
                 bundle.putString("calorias",recetas.get(recyclerView.getChildAdapterPosition(v)).getKilocalorias());
                 bundle.putString("minutos",recetas.get(recyclerView.getChildAdapterPosition(v)).getMin_alimento());
                 bundle.putString("porciones",recetas.get(recyclerView.getChildAdapterPosition(v)).getPorciones());
+                bundle.putString("id_usuario",id);
+
                 intent.putExtras(bundle);
                 startActivity(intent);
 
@@ -196,6 +198,7 @@ public class UsuarioPlan  extends AppCompatActivity {
                 bundle.putString("calorias",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getKilocalorias());
                 bundle.putString("minutos",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getMin_alimento());
                 bundle.putString("porciones",recetas2.get(recyclerView2.getChildAdapterPosition(v)).getPorciones());
+                bundle.putString("id_usuario",id);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -214,6 +217,7 @@ public class UsuarioPlan  extends AppCompatActivity {
                 bundle.putString("calorias",recetas3.get(recyclerView3.getChildAdapterPosition(v)).getKilocalorias());
                 bundle.putString("minutos",recetas3.get(recyclerView3.getChildAdapterPosition(v)).getMin_alimento());
                 bundle.putString("porciones",recetas3.get(recyclerView3.getChildAdapterPosition(v)).getPorciones());
+                bundle.putString("id_usuario",id);
                 intent.putExtras(bundle);
                 startActivity(intent);
 
@@ -249,7 +253,7 @@ public class UsuarioPlan  extends AppCompatActivity {
         imgChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UsuarioPlan.this, UsuarioChat.class);
+                Intent intent = new Intent(UsuarioPlan.this, ChatActivityUsuario.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.move, R.anim.move_leeft);
                 finish();

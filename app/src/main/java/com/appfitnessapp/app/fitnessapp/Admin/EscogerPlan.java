@@ -135,6 +135,13 @@ public class EscogerPlan extends AppCompatActivity {
         btnRecetas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(EscogerPlan.this, AgregarRecetas.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id",id);
+                intent.putExtras(bundle);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
 
             }
         });
@@ -179,8 +186,8 @@ public class EscogerPlan extends AppCompatActivity {
                             bundle.putString("key",keyPlan);
                             bundle.putString("id",id);
                             intent.putExtras(bundle);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
-                            //dbProvider.subirImagenesEjercicios("nil","nil","nil",key);
                             break;
                         case "Lunes":
                             dbProvider.subirPlanEjercicio(tiempo, nivelEjercicio, ejercicios, descripcion, key, id, "2");
@@ -189,6 +196,7 @@ public class EscogerPlan extends AppCompatActivity {
                             bundle1.putString("key",keyPlan);
                             bundle1.putString("id",id);
                             intent1.putExtras(bundle1);
+                            intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent1);
 
                             break;
@@ -199,15 +207,17 @@ public class EscogerPlan extends AppCompatActivity {
                             bundle2.putString("key",keyPlan);
                             bundle2.putString("id",id);
                             intent2.putExtras(bundle2);
+                            intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent2);
                             break;
-                        case "Miercoles":
+                        case "Miércoles":
                             dbProvider.subirPlanEjercicio(tiempo, nivelEjercicio, ejercicios, descripcion, key, id, "4");
                             Intent intent3 = new Intent(EscogerPlan.this, EjerciciosLista.class);
                             Bundle bundle3 = new Bundle();
                             bundle3.putString("key",keyPlan);
                             bundle3.putString("id",id);
                             intent3.putExtras(bundle3);
+                            intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent3);
 
                             break;
@@ -218,6 +228,7 @@ public class EscogerPlan extends AppCompatActivity {
                             bundle4.putString("key",keyPlan);
                             bundle4.putString("id",id);
                             intent4.putExtras(bundle4);
+                            intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent4);
 
                             break;
@@ -228,16 +239,18 @@ public class EscogerPlan extends AppCompatActivity {
                             bundle5.putString("key",keyPlan);
                             bundle5.putString("id",id);
                             intent5.putExtras(bundle5);
+                            intent5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent5);
 
                             break;
-                        case "Sabado":
+                        case "Sábado":
                             dbProvider.subirPlanEjercicio(tiempo, nivelEjercicio, ejercicios, descripcion, key, id, "7");
                             Intent intent6 = new Intent(EscogerPlan.this, EjerciciosLista.class);
                             Bundle bundle6 = new Bundle();
                             bundle6.putString("key",keyPlan);
                             bundle6.putString("id",id);
                             intent6.putExtras(bundle6);
+                            intent6.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent6);
 
                             break;

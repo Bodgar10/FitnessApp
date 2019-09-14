@@ -8,7 +8,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
+import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.Usuario.DatosUsuario;
 import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -138,8 +140,15 @@ public class PaymentDetails extends AppCompatActivity {
             Toast.makeText(this, "La compra se realizo", Toast.LENGTH_SHORT).show();
             String key = dbProvider.tablaInscritos().push().getKey();
             dbProvider.subirIncritos(diaHoy+"-"+mesHoy+"-"+anioHoy,key,false,idUsuario);
-            Intent intent =new Intent(PaymentDetails.this, UsuarioHome.class);
+            dbProvider.updateIsPagado(idUsuario,true);
+            Intent intent =new Intent(PaymentDetails.this, SplashPantalla.class);
+            /*
+            Bundle bundle = new Bundle();
+            bundle.putString("id",idUsuario);
+            intent.putExtras(bundle);
+            */
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(intent);
             finish();
 

@@ -24,6 +24,7 @@ import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.DatosUsuario;
 import com.appfitnessapp.app.fitnessapp.Usuario.DetallePdf;
 import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.HomeSinRegistro;
+import com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro.Home;
 import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -152,7 +153,7 @@ public class SplashPantalla extends AppCompatActivity {
                                     }
                                     else {
                                         progressDialog.dismiss();
-                                        Intent intent = new Intent(SplashPantalla.this, DatosUsuario.class);
+                                        Intent intent = new Intent(SplashPantalla.this, Home.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
                                         SplashPantalla.this.finish();

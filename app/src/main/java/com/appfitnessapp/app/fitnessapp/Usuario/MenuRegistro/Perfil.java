@@ -129,7 +129,7 @@ public class Perfil  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.usuario_21_perfil);
+        setContentView(R.layout.usuario_perfil_asesoria);
 
         Toolbar toolbarback=findViewById(R.id.toolbarU);
         setSupportActionBar(toolbarback);
@@ -801,7 +801,7 @@ public class Perfil  extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent;
-        intent = new Intent(this, UsuarioHome.class);
+        intent = new Intent(this, Home.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

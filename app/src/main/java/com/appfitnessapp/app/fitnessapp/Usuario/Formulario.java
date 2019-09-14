@@ -26,6 +26,7 @@ import com.appfitnessapp.app.fitnessapp.Arrays.Respuestas;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
+import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -67,10 +68,16 @@ public class Formulario extends AppCompatActivity {
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            id =extras.getString("id");
+
+
+        }
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
 
-        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         bajarPreguntas();
 
@@ -109,7 +116,7 @@ public class Formulario extends AppCompatActivity {
                 dialogo1.setTitle("");
                 dialogo1.setMessage("¿Todas las preguntas se contestarón?");
                 dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialogo1, int id) {
+                    public void onClick(DialogInterface dialogo1, int id_) {
                         aceptar();
                         Toast.makeText(Formulario.this, "Se subio la información correctamente.", Toast.LENGTH_SHORT).show();
                         new CountDownTimer(1000,1){
@@ -119,7 +126,7 @@ public class Formulario extends AppCompatActivity {
 
                             @Override
                             public void onFinish() {
-                                Intent intent=new Intent(Formulario.this, UsuarioHome.class);
+                                Intent intent=new Intent(Formulario.this, SplashPantalla.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                                 finish();
@@ -360,4 +367,10 @@ public class Formulario extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Por favor llena el formulario para continuar.", Toast.LENGTH_SHORT).show();
+        
+    }
+    
 }

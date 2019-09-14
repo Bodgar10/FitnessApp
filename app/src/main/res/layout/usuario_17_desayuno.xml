@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -35,6 +37,14 @@
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
 
+            <Switch
+                android:visibility="gone"
+                android:id="@+id/switchComida"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Listo" />
 
         </androidx.appcompat.widget.Toolbar>
 

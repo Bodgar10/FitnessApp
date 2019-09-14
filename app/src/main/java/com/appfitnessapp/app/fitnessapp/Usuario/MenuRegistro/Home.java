@@ -79,9 +79,13 @@ public class Home   extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(Home.this, AsesoriaRegistro.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Intent intent = new Intent(Home.this, Perfil.class);
+                intent.putExtra("anim id in", R.anim.move_in);
+                intent.putExtra("anim id out", R.anim.move_leeft_in);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
             }
         });
 
@@ -91,9 +95,12 @@ public class Home   extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(Home.this, AsesoriaRegistro.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("anim id in", R.anim.move_in);
+                intent.putExtra("anim id out", R.anim.move_leeft_in);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                finish();
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
             }
         });
         imgAsesoria.setOnClickListener(new View.OnClickListener() {
@@ -101,9 +108,12 @@ public class Home   extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(Home.this, AsesoriaRegistro.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("anim id in", R.anim.move_in);
+                intent.putExtra("anim id out", R.anim.move_leeft_in);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                finish();
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
             }
         });
 

@@ -81,6 +81,7 @@ public class SolicitudAsesoria extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("id",id);
                 intent.putExtras(bundle);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 
 
@@ -164,10 +165,13 @@ public class SolicitudAsesoria extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         finish();
+
     }
+
 }

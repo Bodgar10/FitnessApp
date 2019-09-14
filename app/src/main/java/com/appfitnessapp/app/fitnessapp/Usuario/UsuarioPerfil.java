@@ -247,7 +247,7 @@ public class UsuarioPerfil  extends AppCompatActivity {
         imgChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UsuarioPerfil.this, UsuarioChat.class);
+                Intent intent = new Intent(UsuarioPerfil.this, ChatActivityUsuario.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
@@ -313,11 +313,8 @@ public class UsuarioPerfil  extends AppCompatActivity {
 
         //////////////////////////////////////////////////////////////////////////////////////////
            //horizontal
-
-           //BARENTRYH = new ArrayList<>();
         BarEntryLabelsH = new ArrayList<String>();
         AddValuesToBarEntryLabelsHorizontal();
-        //AddValuesToBARENTRYHorizontal();
 
 
 //____________________________________________________________________________________________

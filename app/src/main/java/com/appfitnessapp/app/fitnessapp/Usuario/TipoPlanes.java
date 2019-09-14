@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +23,8 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
 import com.appfitnessapp.app.fitnessapp.Login.Registro;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro.AsesoriaRegistro;
+import com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro.Home;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -48,6 +53,11 @@ public class TipoPlanes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_06_planes);
 
+        Toolbar toolbarback=findViewById(R.id.include);
+        setSupportActionBar(toolbarback);
+        getSupportActionBar().setTitle("Escoge un plan");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         bajarInfo = new BajarInfo();
         dbProvider = new DBProvider();
 
@@ -79,8 +89,12 @@ public class TipoPlanes extends AppCompatActivity {
                 bundle.putString("costo",plan.get(recyclerView.getChildAdapterPosition(v)).getCosto_plan());
                 bundle.putString("meses",plan.get(recyclerView.getChildAdapterPosition(v)).getMeses_plan());
                 intent.putExtras(bundle);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
+
 
 
             }
@@ -158,6 +172,32 @@ public class TipoPlanes extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent;
+        intent = new Intent(this, AsesoriaRegistro.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(
+                getIntent().getIntExtra("anim id in", R.anim.move_in),
+                getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
+
     }
 
 }

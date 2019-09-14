@@ -3,6 +3,7 @@ package com.appfitnessapp.app.fitnessapp.Usuario;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -17,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro.AsesoriaRegistro;
 import com.appfitnessapp.app.fitnessapp.Usuario.Paypal.Config;
 import com.appfitnessapp.app.fitnessapp.Usuario.Paypal.PaymentDetails;
 import com.google.firebase.auth.FirebaseAuth;
@@ -179,6 +181,7 @@ public class MetodoPago extends AppCompatActivity {
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payPalPayment);
         startActivityForResult(intent,PAYPAL_REQUEST_CODE);
 
+
     }
 
     @Override
@@ -199,6 +202,7 @@ public class MetodoPago extends AppCompatActivity {
                         .putExtra("PaymentAmount",amount)
                                 .putExtra("id_usuario",id)
                                 .putExtra("meses",meses));
+                        finish();
 
 
 
@@ -227,4 +231,31 @@ public class MetodoPago extends AppCompatActivity {
 
         }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent;
+        intent = new Intent(this, TipoPlanes.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(
+                getIntent().getIntExtra("anim id in", R.anim.move_in),
+                getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
+
+    }
+
 }

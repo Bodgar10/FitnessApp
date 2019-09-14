@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -87,7 +88,9 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
 
 
 
-    int porcentDesayuno,porcentComida,porcentCena;
+    int porcentDesayuno=0;
+    int porcentComida=0;
+    int porcentCena=0;
 
 
     int porcentDomingo,porcentLunes,porcentMartes,porcentMiercoles,porcentJueves,porcentViernes,porcentSabado;
@@ -121,6 +124,8 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
         }
 
         bajarUsuarios();
+        bajarEstadisticasAlimentos();
+
         imgPersona=findViewById(R.id.imgPersona);
         txtNombre=findViewById(R.id.txtNombreUsuario);
         txtPeso=findViewById(R.id.txtPesoActual);
@@ -146,6 +151,9 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
         btnMensaje.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent intent = new Intent(PerfilUsuarioAdmin.this, ChatActivityAdmin.class);
+                startActivity(intent);
 
             }
         });
@@ -188,21 +196,9 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
 
         //////////////////////////////////////////////////////////////////////////////////////////
         //horizontal
-        int[] colors = {Color.rgb(255, 255, 255),Color.rgb(255, 50, 0), Color.rgb(0, 194, 176),
-                Color.rgb(18, 27, 34), Color.rgb(255, 255, 255)};
-
-        BARENTRYH = new ArrayList<>();
+        //horizontal
         BarEntryLabelsH = new ArrayList<String>();
-        AddValuesToBARENTRYHorizontal();
         AddValuesToBarEntryLabelsHorizontal();
-        ArrayList<IBarDataSet> dataSetsH = new ArrayList<>();
-        setHorizontal = new BarDataSet(BARENTRYH, "");
-        setHorizontal.setColors(colors);
-        //eliminar texto arriba
-        setHorizontal.setDrawValues(false);
-        dataSetsH.add(setHorizontal);
-        BarData dataHorizontal = new BarData(dataSetsH);
-        dataHorizontal.setBarWidth(0.5f);
 
 
 //____________________________________________________________________________________________
@@ -229,7 +225,7 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
         chart.getXAxis().setDrawGridLines(false);
         chart.getDescription().setEnabled(false);
         chart.setDescription(null);
-        chart.animateY(3000);
+        chart.animateY(2000);
         chart.setData(data);
         chart.invalidate();
 
@@ -274,8 +270,7 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
         chartHorizontal.getXAxis().setDrawGridLines(false);
         chartHorizontal.getDescription().setEnabled(false);
         chartHorizontal.setDescription(null);
-        chartHorizontal.animateY(3000);
-        chartHorizontal.setData(dataHorizontal);
+        chartHorizontal.animateY(2000);
         chartHorizontal.invalidate();
 
 
@@ -298,53 +293,7 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
     }
 
 
-    public void AddValuesToBARENTRY(){
 
-        BARENTRY.add(new BarEntry(0, 45));
-        BARENTRY.add(new BarEntry(1, 20));
-        BARENTRY.add(new BarEntry(2,  68));
-        BARENTRY.add(new BarEntry(3, 80));
-        BARENTRY.add(new BarEntry(4, 40));
-        BARENTRY.add(new BarEntry(5, 50));
-        BARENTRY.add(new BarEntry(6, 68));
-
-    }
-
-    public void AddValuesToBarEntryLabels(){
-
-        BarEntryLabels.add("D");
-        BarEntryLabels.add("L");
-        BarEntryLabels.add("M");
-        BarEntryLabels.add("Mi");
-        BarEntryLabels.add("J");
-        BarEntryLabels.add("V");
-        BarEntryLabels.add("S");
-    }
-
-
-
-    //////////////////////////////////////////////////////////7
-    public void AddValuesToBARENTRYHorizontal(){
-
-        BARENTRYH.add(new BarEntry(0, 0));
-        BARENTRYH.add(new BarEntry(1, 50));
-        BARENTRYH.add(new BarEntry(2,  70));
-        BARENTRYH.add(new BarEntry(3,  100));
-        BARENTRYH.add(new BarEntry(4,  0));
-
-    }
-
-
-    public void AddValuesToBarEntryLabelsHorizontal(){
-
-        BarEntryLabelsH.add("");
-        BarEntryLabelsH.add("");
-        BarEntryLabelsH.add("");
-        BarEntryLabelsH.add("");
-        BarEntryLabelsH.add("");
-
-
-    }
 ///////////////////////////////////////////////////////////////////
 
 
@@ -417,52 +366,77 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
 
     public void bajarEstadisticasAlimentos(){
         dbProvider = new DBProvider();
-
         dbProvider.estadisticaAlimentos().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                BARENTRYH = new ArrayList<>();
+
                 Log.e(TAG, "Usuarios 4: ");
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        //Log.e(TAG,"Usuarios: "+ snapshot);
                         Log.e(TAG, "Usuarios: " + snapshot);
                         EstadisticaAlimentos estadisticaAlimentos = snapshot.getValue(EstadisticaAlimentos.class);
 
+                        //semana actual y mes
                         cal.setTime(date);
                         semanaActual = cal.get(Calendar.WEEK_OF_MONTH);
                         mesActual = cal.get(Calendar.MONTH);
 
-
+                        //fecha base datos
                         String semanaBase =estadisticaAlimentos.getFecha_cumplida();
-                        DateFormat dateFormattt = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-                        // Date convertedDate = new Date();
+                        DateFormat dateFormattt = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
                         try {
                             Date convertedDate=dateFormattt.parse(semanaBase);
-                            // Date neww=new java.sql.Date(dateFormattt.parse(semanaBase).getTime());
                             Calendar c = Calendar.getInstance();
                             c.setTime(convertedDate);
+                            //sacar mes y semana base
                             int diaBase = c.get(Calendar.WEEK_OF_MONTH);
                             int mesBase = c.get(Calendar.MONTH);
 
                             if (estadisticaAlimentos.getId_usuario().equals(id)) {
                                 // Toast.makeText(UsuarioPerfil.this, "hoy"+semanaActual+"base"+diaBase, Toast.LENGTH_SHORT).show();
                                 if (semanaActual==diaBase&&mesActual==mesBase){
-
-
                                     if (estadisticaAlimentos.getTipo_alimento().equals(Contants.ALMUERZO)){
                                         index_almuerzo +=1;
-                                        porcentComida = (index_almuerzo/7)*100;
+                                        porcentComida=index_almuerzo;
+
                                     }
                                     else if(estadisticaAlimentos.getTipo_alimento().equals(Contants.DESAYUNO)){
                                         index_desayuno +=1;
-                                        porcentDesayuno = (index_desayuno/7)*100;
+                                        porcentDesayuno = index_desayuno;
 
                                     }
                                     else {
                                         index_cena +=1;
-                                        porcentCena = (index_cena/7)*100;
+                                        porcentCena = index_cena;
 
                                     }
+
+                                    Log.e(TAG,"Datos:1 "+ porcentDesayuno);
+                                    Log.e(TAG,"Datos:2 "+ porcentCena);
+                                    Log.e(TAG,"Datos:3 "+ porcentComida);
+
+                                    BARENTRYH.add(new BarEntry(0, 0));
+                                    BARENTRYH.add(new BarEntry(1, porcentDesayuno));
+                                    BARENTRYH.add(new BarEntry(2,  porcentComida));
+                                    BARENTRYH.add(new BarEntry(3,  porcentCena));
+                                    BARENTRYH.add(new BarEntry(4,  0));
+                                    setHorizontal = new BarDataSet(BARENTRYH, "");
+                                    int[] colors = {
+                                            Color.rgb(255, 255, 255),
+                                            Color.rgb(255, 50, 0),
+                                            Color.rgb(0, 194, 176),
+                                            Color.rgb(18, 27, 34),
+                                            Color.rgb(255, 255, 255)};
+                                    ArrayList<IBarDataSet> dataSetsH = new ArrayList<>();
+                                    setHorizontal.setColors(colors);
+                                    //eliminar texto arriba
+                                    setHorizontal.setDrawValues(false);
+                                    dataSetsH.add(setHorizontal);
+                                    BarData dataHorizontal = new BarData(dataSetsH);
+                                    dataHorizontal.setBarWidth(0.5f);
+                                    chartHorizontal.setData(dataHorizontal);
 
                                 }
 
@@ -484,6 +458,7 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
                 Log.e(TAG, "ERROR: ");
             }
         });
+
     }
 
 
@@ -578,6 +553,41 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
                 Log.e(TAG, "ERROR: ");
             }
         });
+    }
+
+    public void AddValuesToBARENTRY(){
+
+        BARENTRY.add(new BarEntry(0, 45));
+        BARENTRY.add(new BarEntry(1, 20));
+        BARENTRY.add(new BarEntry(2,  68));
+        BARENTRY.add(new BarEntry(3, 80));
+        BARENTRY.add(new BarEntry(4, 40));
+        BARENTRY.add(new BarEntry(5, 50));
+        BARENTRY.add(new BarEntry(6, 68));
+
+    }
+
+    public void AddValuesToBarEntryLabels(){
+
+        BarEntryLabels.add("D");
+        BarEntryLabels.add("L");
+        BarEntryLabels.add("M");
+        BarEntryLabels.add("Mi");
+        BarEntryLabels.add("J");
+        BarEntryLabels.add("V");
+        BarEntryLabels.add("S");
+    }
+
+
+    public void AddValuesToBarEntryLabelsHorizontal(){
+
+        BarEntryLabelsH.add("");
+        BarEntryLabelsH.add("");
+        BarEntryLabelsH.add("");
+        BarEntryLabelsH.add("");
+        BarEntryLabelsH.add("");
+
+
     }
 
 

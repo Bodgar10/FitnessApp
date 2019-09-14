@@ -17,8 +17,8 @@ public class ChatPresenterUsuario implements ChatContractUsuario.Presenter, Chat
     }
 
     @Override
-    public void sendMessage(Context context, Chats chat, String receiverFirebaseToken, String id_usuario, String id_servicio) {
-        mChatInteractor.sendMessageToFirebaseUser(context, chat, receiverFirebaseToken, id_usuario,id_servicio);
+    public void sendMessage(Context context, Chats chat, String receiverFirebaseToken, String id_usuario, String id_admin) {
+        mChatInteractor.sendMessageToFirebaseUser(context, chat, receiverFirebaseToken, id_usuario,id_admin);
     }
 
     @Override

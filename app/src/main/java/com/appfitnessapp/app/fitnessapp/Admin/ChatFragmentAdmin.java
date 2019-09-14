@@ -1,21 +1,29 @@
-package com.appfitnessapp.app.fitnessapp.Usuario;
+package com.appfitnessapp.app.fitnessapp.Admin;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.appfitnessapp.app.fitnessapp.Adapters.ChatRecyclerAdapter;
+
+import com.appfitnessapp.app.fitnessapp.Adapters.ChatRecyclerAdapterUsuario;
 import com.appfitnessapp.app.fitnessapp.Arrays.Chat;
 import com.appfitnessapp.app.fitnessapp.Arrays.Chats;
 import com.appfitnessapp.app.fitnessapp.Arrays.PushNotificationEvent;
@@ -30,44 +38,44 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
-public class ChatFragmentUsuario extends AppCompatActivity implements ChatContractUsuario.View, TextView.OnEditorActionListener, ChatContractUsuario.Interactor {
+public class ChatFragmentAdmin extends AppCompatActivity implements ChatContractUsuario.View, TextView.OnEditorActionListener, ChatContractUsuario.Interactor {
 
 
-    CircularImageView imgAdmin;
-    TextView txtNombreAdmin;
-    String id;
+
+    private static final String TAG = "INGRESAR:";
+
     private RecyclerView mRecyclerViewChat;
     private EditText mETxtMessage;
 
     private ProgressDialog mProgressDialog;
 
-    private ChatRecyclerAdapter mChatRecyclerAdapter;
+    private ChatRecyclerAdapterUsuario mChatRecyclerAdapter;
 
     private ChatPresenterUsuario mChatPresenter;
-
-
-    ImageButton imgHome,imgPlan,imgPerfil;
 
     ArrayList<Usuarios> usuarios;
     ArrayList<Chats> chats;
     static DBProvider dbProvider;
 
-    private String id_relper, id_usuario;
+    private String id_relper, id_usuario, id_servicio ;
     private FirebaseAuth mAuth;
 
-  String name, uid, id_admin,  token, id_servicio1;
+    String name, uid, id_admin,  token, id_servicio1;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.usuario_23_chat);
+        setContentView(R.layout.admin_chat);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null){
@@ -78,44 +86,32 @@ public class ChatFragmentUsuario extends AppCompatActivity implements ChatContra
             id_servicio1 = extras.getString("id_servicio");
         }
 
-        mRecyclerViewChat = (RecyclerView) findViewById(R.id.recycler_view_chat);
 
-        imgAdmin = findViewById(R.id.imgAdmin);
-        txtNombreAdmin =  findViewById(R.id.txtNombreUsuarioChat);
+        mRecyclerViewChat = findViewById(R.id.recycler_view_chat);
         mRecyclerViewChat.setLayoutManager(new LinearLayoutManager(this));
-        mETxtMessage = findViewById(R.id.edit_text_message);
-
-        imgHome=findViewById(R.id.imgHome);
-        imgPlan=findViewById(R.id.imgPlan);
-        imgPerfil=findViewById(R.id.imgPerfil);
-
-
-        mAuth = FirebaseAuth.getInstance();
-        chats = new ArrayList<>();
-
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        mETxtMessage =  findViewById(R.id.edit_text_message);
 
         init();
 
+        mAuth = FirebaseAuth.getInstance();
+        chats = new ArrayList<>();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+
         id_relper = Contants.ARG_FIREBASE_TOKEN;
+        id_servicio = Contants.ID_SERVICIO;
+        id_usuario = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        mChatRecyclerAdapter = new ChatRecyclerAdapterUsuario(chats);
+        mRecyclerViewChat.setAdapter(mChatRecyclerAdapter);
 
         usuarios = new ArrayList<>();
 
-        id_usuario = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        mChatRecyclerAdapter = new ChatRecyclerAdapter(chats);
 
-        mRecyclerViewChat.setAdapter(mChatRecyclerAdapter);
-
-
-
-
-        //chats.removeAll(chats);
         database.getReference().child(Contants.CHATS)
                 .child(id_usuario)
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
-                        if (dataSnapshot.exists()) {
+                        if (dataSnapshot.exists()){
                             Chats chat = dataSnapshot.getValue(Chats.class);
                             if (chat.getText() != null) {
 
@@ -150,44 +146,6 @@ public class ChatFragmentUsuario extends AppCompatActivity implements ChatContra
 
 
 
-        imgPlan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(ChatFragmentUsuario.this, UsuarioPlan.class);
-                startActivity(intent);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
-                finish();
-
-            }
-        });
-
-        imgPerfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ChatFragmentUsuario.this, UsuarioPerfil.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
-                finish();
-            }
-        });
-
-        imgHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ChatFragmentUsuario.this, UsuarioHome.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
-                finish();
-
-            }
-        });
-
-
-
     }
 
 
@@ -200,7 +158,16 @@ public class ChatFragmentUsuario extends AppCompatActivity implements ChatContra
         mETxtMessage.setOnEditorActionListener(this);
 
         mChatPresenter = new ChatPresenterUsuario(this);
-        mChatPresenter.getMessage(id_relper,Contants.ARG_RECEIVER_UID);
+        mChatPresenter.getMessage(id_relper, Contants.ARG_RECEIVER_UID);
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_SEND) {
+            sendMessage();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -213,15 +180,7 @@ public class ChatFragmentUsuario extends AppCompatActivity implements ChatContra
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
-    }
 
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (actionId == EditorInfo.IME_ACTION_SEND) {
-            sendMessage();
-            return true;
-        }
-        return false;
     }
 
     private void sendMessage() {
@@ -231,7 +190,7 @@ public class ChatFragmentUsuario extends AppCompatActivity implements ChatContra
         String token_vendedor = Contants.TOKEN;
         Chats chat = new Chats(id_usuario, senderUid, text,id_admin);
 
-        mChatPresenter.sendMessage(this, chat, token_vendedor, senderUid,id_admin);
+        mChatPresenter.sendMessage(this, chat, token_vendedor, senderUid, id_admin);
     }
 
     @Override
@@ -247,6 +206,7 @@ public class ChatFragmentUsuario extends AppCompatActivity implements ChatContra
 
     @Override
     public void onGetMessagesSuccess(Chat chat) {
+
     }
 
 
@@ -270,7 +230,45 @@ public class ChatFragmentUsuario extends AppCompatActivity implements ChatContra
     @Override
     public void getMessageFromFirebaseUser(String uid_vendedor, String uid_usuario) {
 
+        System.out.println("UIDDDD: "+uid_vendedor+" "+uid_usuario);
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database.getReference().child(Contants.CHAT)
+                .child(id_servicio)
+                .addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        if (dataSnapshot.exists()){
+                            chats.removeAll(chats);
+                            Chats chat = dataSnapshot.getValue(Chats.class);
+                            System.out.println("SE ENCONTRARON MENSAJES DEL USUARIO.");
+                            chats.add(chat);
+                            mChatRecyclerAdapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
     }
+
+
 
 
 

@@ -152,7 +152,7 @@ public class UsuarioHome  extends AppCompatActivity {
         imgChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UsuarioHome.this, UsuarioChat.class);
+                Intent intent = new Intent(UsuarioHome.this, ChatActivityUsuario.class);
                 intent.putExtra("anim id in", R.anim.move_in);
                 intent.putExtra("anim id out", R.anim.move_leeft_in);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -207,6 +207,13 @@ public class DBProvider {
         usersRef().child(id).updateChildren(updates);
     }
 
+    public void updateIsPagado(String id, Boolean isPagado) {
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.ISPAGADO, isPagado);
+        usersRef().child(id).updateChildren(updates);
+    }
 
     //Asesoria
     public void subirAsesoria(String alimentos_descripcion,String alimentos_imagen, String costo_asesoria, String descripcion_asesoria,
@@ -453,13 +460,14 @@ public class DBProvider {
 
 
 
-    public void subirChats(String id_servicio, String senderid, String text){
+    public void subirChats(String id_admin,String id_usuario, String senderid, String text){
         Map<String, Object> data = new HashMap<>();
         String key = chatRef().push().getKey();
-        data.put(Contants.ID_SERVICIO, id_servicio);
+        data.put(Contants.ID_ADMIN, id_admin);
+        data.put(Contants.ID_USUARIO, id_usuario);
         data.put(Contants.SENDERID, senderid);
         data.put(Contants.TEXT, text);
-        chatRef().child(id_servicio).child(key).updateChildren(data);
+        chatRef().child(id_usuario).child(key).updateChildren(data);
     }
 
 
@@ -502,4 +510,12 @@ public class DBProvider {
         tablaInscritos().child(id_inscrito).updateChildren(data);
     }
 
+
+    public void subirEstadisticaAlimentos(String fecha_cumplida, String tipo_alimento,String id_usuario,String key){
+        Map<String, Object> data = new HashMap<>();
+        data.put(Contants.FECHA_CUMPLIDA, fecha_cumplida);
+        data.put(Contants.TIPO_ALIMENTO, tipo_alimento);
+        data.put(Contants.ID_USUARIO, id_usuario);
+        estadisticaAlimentos().child(key).updateChildren(data);
+    }
 }

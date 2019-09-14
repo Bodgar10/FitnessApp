@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,6 +29,10 @@ import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
 import com.appfitnessapp.app.fitnessapp.Login.Registro;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.Asesoria;
+import com.appfitnessapp.app.fitnessapp.Usuario.MetodoPago;
+import com.appfitnessapp.app.fitnessapp.Usuario.TipoPlanes;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioPerfil;
 import com.appfitnessapp.app.fitnessapp.videoplayer.VideoPlayer;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -157,6 +162,12 @@ public class AsesoriaRegistro extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Intent intent = new Intent(AsesoriaRegistro.this, TipoPlanes.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
 
 
             }
@@ -318,6 +329,32 @@ public class AsesoriaRegistro extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent;
+        intent = new Intent(this, Home.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(
+                getIntent().getIntExtra("anim id in", R.anim.move_in),
+                getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
+
+    }
 
 
 }

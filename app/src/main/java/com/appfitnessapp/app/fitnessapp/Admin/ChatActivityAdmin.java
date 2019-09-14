@@ -1,9 +1,8 @@
-package com.appfitnessapp.app.fitnessapp.Usuario;
+package com.appfitnessapp.app.fitnessapp.Admin;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,13 +11,16 @@ import androidx.fragment.app.FragmentTransaction;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.FirebaseChatMainApp;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.Usuario.ChatActivityUsuario;
+import com.appfitnessapp.app.fitnessapp.Usuario.ChatFragmentUsuario;
 
-public class ChatActivityUsuario extends AppCompatActivity {
+public class ChatActivityAdmin extends AppCompatActivity {
 
+    private Toolbar mToolbar;
 
     public static void startActivity(Context context,
                                      String name, String uid, String id_admin, String id_servicio) {
-        Intent intent = new Intent(context, ChatActivityUsuario.class);
+        Intent intent = new Intent(context, ChatActivityAdmin.class);
         intent.putExtra(Contants.ARG_RECEIVER, name);
         intent.putExtra(Contants.ARG_RECEIVER_UID, uid);
         intent.putExtra(Contants.ARG_FIREBASE_TOKEN, id_admin);
@@ -35,7 +37,7 @@ public class ChatActivityUsuario extends AppCompatActivity {
     }
 
     private void init() {
-        Intent intent = new Intent(ChatActivityUsuario.this, ChatFragmentUsuario.class);
+        Intent intent = new Intent(ChatActivityAdmin.this, ChatFragmentAdmin.class);
         Bundle bundle = new Bundle();
         bundle.putString("name",Contants.ARG_RECEIVER);
         bundle.putString("uid",Contants.ARG_RECEIVER_UID);
@@ -48,8 +50,8 @@ public class ChatActivityUsuario extends AppCompatActivity {
         startActivity(intent);
         finish();
         overridePendingTransition(R.anim.move, R.anim.move_leeft);
-
     }
+
 
 
     @Override
@@ -63,5 +65,4 @@ public class ChatActivityUsuario extends AppCompatActivity {
         super.onPause();
         FirebaseChatMainApp.setChatActivityOpen(false);
     }
-
 }

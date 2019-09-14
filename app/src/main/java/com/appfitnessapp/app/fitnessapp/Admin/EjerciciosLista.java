@@ -124,7 +124,7 @@ public class EjerciciosLista extends AppCompatActivity {
         View sheetView = this.getLayoutInflater().inflate(R.layout.admin_alerta_ejercicios, null);
         mBottomSheetDialog.setContentView(sheetView);
         mBottomSheetDialog.getWindow().findViewById(R.id.design_bottom_sheet)
-                .setBackgroundResource(android.R.color.transparent);
+                .setBackgroundResource(android.R.color.white);
         mBottomSheetDialog.show();
         final EditText edtRondasAlerta =  sheetView.findViewById(R.id.edtRondasAlerta);
         final EditText edtRepeticonesAlerta =  sheetView.findViewById(R.id.edtRepeticonesAlerta);
@@ -144,7 +144,7 @@ public class EjerciciosLista extends AppCompatActivity {
                     dbProvider.subirEjerciciosPlan(nombre,rondas,repeticiones,video,key,id_ejercicio);
                     dbProvider.subirImagenesEjercicios(img1,img2,img3,key,id_ejercicio);
                     Toast.makeText(EjerciciosLista.this, "Se subio la información", Toast.LENGTH_SHORT).show();
-                    Intent i  = new Intent(EjerciciosLista.this,AsesoriasAdmin.class);
+                    Intent i  = new Intent(EjerciciosLista.this,AsesoriasPendientes.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
                     finish();

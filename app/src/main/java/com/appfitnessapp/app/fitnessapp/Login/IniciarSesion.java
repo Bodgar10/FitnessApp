@@ -21,6 +21,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.DatosUsuario;
+import com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro.Home;
 import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -162,7 +163,7 @@ public class IniciarSesion extends AppCompatActivity {
                                     }
                                     else {
                                         progressDialog.dismiss();
-                                        Intent intent = new Intent(IniciarSesion.this, DatosUsuario.class);
+                                        Intent intent = new Intent(IniciarSesion.this, Home.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
                                         IniciarSesion.this.finish();

@@ -31,7 +31,7 @@ public class ChatInteractorUsuario implements ChatContractUsuario.Interactor {
     }
 
     @Override
-    public void sendMessageToFirebaseUser(Context context, Chats chat, String receiverFirebaseToken, String id_usuario, String id_servicio) {
+    public void sendMessageToFirebaseUser(Context context, Chats chat, String receiverFirebaseToken, String id_usuario, String id_admin) {
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
         DBProvider dbProvider =  new DBProvider();
@@ -50,7 +50,7 @@ public class ChatInteractorUsuario implements ChatContractUsuario.Interactor {
             }
         });
 
-        dbProvider.subirChats(id_servicio,chat.getSenderid(),chat.getText());
+        dbProvider.subirChats(id_admin,id_usuario,chat.getSenderid(),chat.getText());
 
         // send push notification to the receiver
         sendPushNotificationToReceiver("Nuevo mensaje",
@@ -78,11 +78,7 @@ public class ChatInteractorUsuario implements ChatContractUsuario.Interactor {
 
     @Override
     public void getMessageFromFirebaseUser(final String uid_vendedor, final String uid_usuario) {
-        //final String room_type_1 = senderUid + "_" + receiverUid;
-        //final String room_type_2 = receiverUid + "_" + senderUid;
-
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-
 
         databaseReference.child(Contants.CHAT).getRef().addValueEventListener(new ValueEventListener() {
             @Override

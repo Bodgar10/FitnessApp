@@ -70,6 +70,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.MetodoPago"
+            android:theme="@style/YourTheme"
+            android:parentActivityName=".Usuario.TipoPlanes"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.Calificar"
@@ -99,6 +101,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.TipoPlanes"
+            android:theme="@style/YourTheme"
+            android:parentActivityName=".Usuario.MenuRegistro.AsesoriaRegistro"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.UsuarioPlan"
@@ -119,6 +123,18 @@
             android:name=".videoplayer.VideoPlayer"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:theme="@style/TemaVideo" /> <!-- android:screenOrientation="landscape"> -->
+
+        <activity android:name=".Usuario.MenuRegistro.Home"
+            android:theme="@style/YourTheme" />
+        <activity android:name=".Usuario.MenuRegistro.AsesoriaRegistro"
+            android:theme="@style/YourTheme" />
+        <activity android:name=".Usuario.MenuRegistro.Perfil"
+            android:theme="@style/YourTheme" />
+
+        <activity android:name=".Usuario.ChatFragmentUsuario"></activity>
+
+
+
         <activity
             android:name=".Admin.AsesoriasAdmin"
             android:theme="@style/YourTheme"
@@ -190,6 +206,9 @@
         <activity android:name=".Admin.AdminIngredientesUsuario"
             android:screenOrientation="portrait"/>
         <activity android:name=".Admin.EjerciciosLista"/>
+
+        <activity android:name=".Admin.ChatFragmentAdmin"></activity>
+        <activity android:name=".Admin.ChatActivityAdmin"></activity>
 
     </application>
 
