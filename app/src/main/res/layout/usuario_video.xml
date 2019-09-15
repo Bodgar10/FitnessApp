@@ -26,7 +26,7 @@
             android:id="@+id/srface_view"
             android:layout_width="match_parent"
             android:layout_gravity="center"
-            android:layout_height="300dp"/>
+            android:layout_height="400dp"/>
 
     </com.google.android.exoplayer.AspectRatioFrameLayout>
 

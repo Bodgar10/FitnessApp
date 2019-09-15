@@ -65,6 +65,7 @@
             android:name=".Usuario.FeedSinRegistro.HomeSinRegistro"
             android:screenOrientation="portrait" />
         <activity android:name=".Usuario.Paypal.PaymentDetails" />
+        <activity android:name=".Usuario.Paypal.PaymentPdf"></activity>
         <activity
             android:name=".Usuario.Tarjeta"
             android:screenOrientation="portrait" />
@@ -125,13 +126,19 @@
             android:theme="@style/TemaVideo" /> <!-- android:screenOrientation="landscape"> -->
 
         <activity android:name=".Usuario.MenuRegistro.Home"
-            android:theme="@style/YourTheme" />
+            android:theme="@style/YourTheme"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Usuario.MenuRegistro.AsesoriaRegistro"
-            android:theme="@style/YourTheme" />
+            android:theme="@style/YourTheme"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Usuario.MenuRegistro.Perfil"
-            android:theme="@style/YourTheme" />
+            android:theme="@style/YourTheme"
+            android:screenOrientation="portrait"/>
 
-        <activity android:name=".Usuario.ChatFragmentUsuario"></activity>
+        <activity android:name=".Usuario.ChatFragmentUsuario"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Usuario.MetodoPagoPdf"
+            android:screenOrientation="portrait" />
 
 
 

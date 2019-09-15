@@ -75,7 +75,7 @@ public class AgregarEjercicios extends AppCompatActivity {
     private static final String TAG = "BAJARINFO:";
     static DBProvider dbProvider;
 
-    String key,idEjercicio;
+    String key,idEjercicio,idEjercicioSolo;
 
 
 
@@ -198,9 +198,10 @@ public class AgregarEjercicios extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i  = new Intent(AgregarEjercicios.this,AsesoriasAdmin.class);
+                Intent i  = new Intent(AgregarEjercicios.this,AsesoriasPendientes.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
+                Toast.makeText(AgregarEjercicios.this, "Se subio correctamente tu plan.", Toast.LENGTH_SHORT).show();
                 finish();
 
             }
@@ -243,11 +244,14 @@ public class AgregarEjercicios extends AppCompatActivity {
 
                                 String key = dbProvider.tablaPlanEntrenamiento().child(id_ejercicio).child(Contants.EJERCICIOS).push().getKey();
 
+                                String keyEjercicioSolo = dbProvider.tablaEjercicios().push().getKey();
+
                                 idEjercicio = key;
+                                idEjercicioSolo=keyEjercicioSolo;
                                 dbProvider.subirEjerciciosPlan(nombre_ejercicio, rondas, repeticiones, uri.toString(), id_ejercicio,key);
                                 uploadImage3(id_ejercicio,idEjercicio,imagen1Uri.toString(),imagen2Uri.toString(),imagen3Uri.toString());
                                 //ejerciciosSolos
-                                //dbProvider.subirEjercicios(nombre_ejercicio,rondas,repeticiones,uri.toString(),id_ejercicio);
+                                dbProvider.subirEjerciciosSolos(nombre_ejercicio,rondas,repeticiones,uri.toString(),idEjercicioSolo);
                                 progressDialog.dismiss();
                                 Toast.makeText(AgregarEjercicios.this, "Se subió correctamente la información", Toast.LENGTH_SHORT).show();
                             }
@@ -423,8 +427,9 @@ public class AgregarEjercicios extends AppCompatActivity {
                         public void onSuccess(Uri uri) {
 
 
-                            //dbProvider.subirImagenes(uri.toString(),key,imagen2,imagen3);
                             dbProvider.subirImagenesEjercicios(uri.toString(),imagen2,imagen3,keyPlan,keyEjercicio);
+                            dbProvider.subirImagenes(uri.toString(),imagen2,imagen3,idEjercicioSolo);
+
 
                         }
                     });

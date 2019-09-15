@@ -144,138 +144,110 @@ public class UsuarioPlanWorkouts extends AppCompatActivity {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         PlanEntrenamiento planEntrenamiento = snapshot.getValue(PlanEntrenamiento.class);
 
-                        if (planEntrenamiento.getId_usuario().equals(id)){
 
-                            Date date = new Date();
-                            //diaBase
-                            String dia = planEntrenamiento.getDia_ejercicio();
-                            //diaSemana
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.setTime(date);
-                            int fechaAc = calendar.get(Calendar.DAY_OF_WEEK);
-                            if (fechaAc==1){
-                                if (dia.equals("1")){
-                                    idEjercicio=planEntrenamiento.getId_plan_ejercicio();
-                                    descripcion=planEntrenamiento.getDescripcion_ejercicios();
-                                    txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
-                                    txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
-                                    txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio()+" Intensidad");
-                                    imgVideo.setVisibility(View.VISIBLE);
+                            if (planEntrenamiento.getId_plan_ejercicio()!=null) {
+                                if (planEntrenamiento.getId_usuario().equals(id)) {
+                                    Date date = new Date();
+                                    //diaBase
+                                    String dia = planEntrenamiento.getDia_ejercicio();
+                                    //diaSemana
+                                    Calendar calendar = Calendar.getInstance();
+                                    calendar.setTime(date);
+                                    int fechaAc = calendar.get(Calendar.DAY_OF_WEEK);
+                                    if (fechaAc == 1) {
+                                        if (dia.equals("1")) {
+                                            idEjercicio = planEntrenamiento.getId_plan_ejercicio();
+                                            descripcion = planEntrenamiento.getDescripcion_ejercicios();
+                                            txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
+                                            txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
+                                            txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
+                                            imgVideo.setVisibility(View.VISIBLE);
 
-                                }  else {
-                                    Toast.makeText(UsuarioPlanWorkouts.this, "No tienes ejercicios por hoy", Toast.LENGTH_SHORT).show();
-                                    imgVideo.setVisibility(View.GONE);
+                                        }
 
+                                    }
+
+                                   else if (fechaAc == 2) {
+                                        if (dia.equals("2")) {
+                                            idEjercicio = planEntrenamiento.getId_plan_ejercicio();
+                                            descripcion = planEntrenamiento.getDescripcion_ejercicios();
+                                            txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
+                                            txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
+                                            txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
+                                            imgVideo.setVisibility(View.VISIBLE);
+
+                                        }
+
+
+                                    }
+
+                                    else if (fechaAc == 3) {
+                                        if (dia.equals("3")) {
+                                            idEjercicio = planEntrenamiento.getId_plan_ejercicio();
+                                            descripcion = planEntrenamiento.getDescripcion_ejercicios();
+                                            txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
+                                            txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
+                                            txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
+                                            imgVideo.setVisibility(View.VISIBLE);
+
+                                        }
+
+                                    }
+                                   else if (fechaAc == 4) {
+                                        if (dia.equals("4")) {
+                                            idEjercicio = planEntrenamiento.getId_plan_ejercicio();
+                                            descripcion = planEntrenamiento.getDescripcion_ejercicios();
+                                            txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
+                                            txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
+                                            txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
+                                            imgVideo.setVisibility(View.VISIBLE);
+
+                                        }
+                                    }
+
+                                   else if (fechaAc == 5) {
+                                        if (dia.equals("5")) {
+                                            idEjercicio = planEntrenamiento.getId_plan_ejercicio();
+                                            descripcion = planEntrenamiento.getDescripcion_ejercicios();
+                                            txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
+                                            txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
+                                            txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
+                                            imgVideo.setVisibility(View.VISIBLE);
+
+                                        }
+                                    }
+
+
+                                   else if (fechaAc == 6) {
+                                        if (dia.equals("6")) {
+                                            idEjercicio = planEntrenamiento.getId_plan_ejercicio();
+                                            descripcion = planEntrenamiento.getDescripcion_ejercicios();
+                                            txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
+                                            txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
+                                            txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
+                                            imgVideo.setVisibility(View.VISIBLE);
+
+                                        }
+                                    }
+
+
+                                   else if (fechaAc == 7) {
+                                        if (dia.equals("7")) {
+                                            idEjercicio = planEntrenamiento.getId_plan_ejercicio();
+                                            descripcion = planEntrenamiento.getDescripcion_ejercicios();
+                                            txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
+                                            txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
+                                            txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
+                                            imgVideo.setVisibility(View.VISIBLE);
+
+                                        }
+
+                                    }
                                 }
+
 
                             }
-                            if (fechaAc==2){
-                                if (dia.equals("2")){
-                                    idEjercicio=planEntrenamiento.getId_plan_ejercicio();
-                                    descripcion=planEntrenamiento.getDescripcion_ejercicios();
-                                    txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
-                                    txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
-                                    txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio()+" Intensidad");
-                                    imgVideo.setVisibility(View.VISIBLE);
 
-                                }
-                                else {
-                                    Toast.makeText(UsuarioPlanWorkouts.this, "No tienes ejercicios por hoy", Toast.LENGTH_SHORT).show();
-                                    imgVideo.setVisibility(View.GONE);
-
-                                }
-
-                            }
-
-                            if (fechaAc==3){
-                                if (dia.equals("3")){
-                                    idEjercicio=planEntrenamiento.getId_plan_ejercicio();
-                                    descripcion=planEntrenamiento.getDescripcion_ejercicios();
-                                    txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
-                                    txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
-                                    txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio()+" Intensidad");
-                                    imgVideo.setVisibility(View.VISIBLE);
-
-                                }  else {
-                                    Toast.makeText(UsuarioPlanWorkouts.this, "No tienes ejercicios por hoy", Toast.LENGTH_SHORT).show();
-                                    imgVideo.setVisibility(View.GONE);
-
-                                }
-
-                            }
-                            if (fechaAc==4){
-                                if (dia.equals("4")){
-                                    idEjercicio=planEntrenamiento.getId_plan_ejercicio();
-                                    descripcion=planEntrenamiento.getDescripcion_ejercicios();
-                                    txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
-                                    txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
-                                    txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio()+" Intensidad");
-                                    imgVideo.setVisibility(View.VISIBLE);
-
-                                }  else {
-                                    Toast.makeText(UsuarioPlanWorkouts.this, "No tienes ejercicios por hoy", Toast.LENGTH_SHORT).show();
-                                    imgVideo.setVisibility(View.GONE);
-
-                                }
-                            }
-
-                            if (fechaAc==5){
-                                if (dia.equals("5")){
-                                    idEjercicio=planEntrenamiento.getId_plan_ejercicio();
-                                    descripcion=planEntrenamiento.getDescripcion_ejercicios();
-                                    txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
-                                    txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
-                                    txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio()+" Intensidad");
-                                    imgVideo.setVisibility(View.VISIBLE);
-
-                                }  else {
-                                    Toast.makeText(UsuarioPlanWorkouts.this, "No tienes ejercicios por hoy", Toast.LENGTH_SHORT).show();
-                                    imgVideo.setVisibility(View.GONE);
-
-                                }
-                            }
-
-
-                            if (fechaAc==6){
-                                if (dia.equals("6")){
-                                    idEjercicio=planEntrenamiento.getId_plan_ejercicio();
-                                    descripcion=planEntrenamiento.getDescripcion_ejercicios();
-                                    txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
-                                    txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
-                                    txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio()+" Intensidad");
-                                    imgVideo.setVisibility(View.VISIBLE);
-
-                                }
-                                else {
-                                    Toast.makeText(UsuarioPlanWorkouts.this, "No tienes ejercicios por hoy", Toast.LENGTH_SHORT).show();
-                                    imgVideo.setVisibility(View.GONE);
-
-                                }
-                            }
-
-
-                            if (fechaAc==7){
-                                if (dia.equals("7")){
-                                    idEjercicio=planEntrenamiento.getId_plan_ejercicio();
-                                    descripcion=planEntrenamiento.getDescripcion_ejercicios();
-                                    txtTiempo.setText(planEntrenamiento.getMin_ejercicio()+" min");
-                                    txtEjericios.setText(planEntrenamiento.getNum_ejercicios()+" ejercicios");
-                                    txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio()+" Intensidad");
-                                    imgVideo.setVisibility(View.VISIBLE);
-
-                                }
-                                else {
-                                    Toast.makeText(UsuarioPlanWorkouts.this, "No tienes ejercicios por hoy", Toast.LENGTH_SHORT).show();
-                                    imgVideo.setVisibility(View.GONE);
-                                }
-                            }
-                        }
-
-                        else {
-                            Toast.makeText(UsuarioPlanWorkouts.this, "No tienes ejercicios por hoy.", Toast.LENGTH_SHORT).show();
-                            imgVideo.setVisibility(View.GONE);
-
-                        }
                     }
                 }
                 else {

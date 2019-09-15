@@ -85,7 +85,7 @@ public class DetallePdf extends AppCompatActivity {
         btnComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(DetallePdf.this,MetodoPago.class);
+                Intent intent=new Intent(DetallePdf.this,MetodoPagoPdf.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("costo",precio);
                 bundle.putString("meses",txtTitulo.getText().toString());

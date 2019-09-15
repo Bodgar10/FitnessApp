@@ -321,6 +321,8 @@ public class VideoPlayer extends AppCompatActivity implements HlsSampleSource.Ev
 
         surface = (SurfaceView) findViewById(R.id.srface_view);
 
+
+
         currentTrackIndex=0;
 
         video_type = "others";

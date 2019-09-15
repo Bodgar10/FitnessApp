@@ -426,6 +426,22 @@ public class DBProvider {
 
 
     //tabla Ejercicios
+    public void subirEjerciciosSolos(String nombre_ejercicio,String rondas, String repeticiones, String video_ejercicio,
+                                    String id_ejercicio){
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.NOMBRE_EJERCICIO , nombre_ejercicio);
+        updates.put(Contants.RONDAS , rondas);
+        updates.put(Contants.REPETICIONES , repeticiones);
+        updates.put(Contants.VIDEO_EJERCICIO , video_ejercicio);
+        updates.put(Contants.ID_EJERCICIO , id_ejercicio);
+
+        tablaEjercicios().child(id_ejercicio).updateChildren(updates);
+    }
+
+
+
+    //tabla Ejercicios solos
     public void subirImagenesEjercicios(String imagen1,String imagen2,String imagen3,String id_plan,String id_ejercicio){
         Map<String, Object> updates = new HashMap<>();
 
@@ -435,6 +451,17 @@ public class DBProvider {
 
 
         tablaPlanEntrenamiento().child(id_plan).child(Contants.EJERCICIOS).child(id_ejercicio).child(Contants.IMAGENES_EJERCICIO).updateChildren(updates);
+    }
+
+    //tabla imagenes Ejercicios
+    public void subirImagenes(String imagen1,String imagen2,String imagen3,String id_ejercicio){
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.IMAGEN_1 , imagen1);
+        updates.put(Contants.IMAGEN_2 , imagen2);
+        updates.put(Contants.IMAGEN_3 , imagen3);
+
+        tablaEjercicios().child(id_ejercicio).child(Contants.IMAGENES_EJERCICIO).updateChildren(updates);
     }
 
 
@@ -487,18 +514,10 @@ public class DBProvider {
         tablaEjercicios().child(id_plan_ejercicio).updateChildren(updates);
     }
 
-    //tabla imagenes Ejercicios
-    public void subirImagenes(String imagen1,String id_imagen,String imagen2,String imagen3){
-        Map<String, Object> updates = new HashMap<>();
-
-        updates.put(Contants.IMAGEN_1 , imagen1);
-        updates.put(Contants.IMAGEN_2 , imagen2);
-        updates.put(Contants.IMAGEN_3 , imagen3);
 
 
 
-        tablaEjercicios().child(id_imagen).child(Contants.IMAGENES_EJERCICIO).updateChildren(updates);
-    }
+
 
 
     public void subirIncritos(String fecha_limite, String id_inscrito, Boolean id_pendiente,String id_usuario){
