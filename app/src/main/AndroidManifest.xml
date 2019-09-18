@@ -212,10 +212,15 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Admin.AdminIngredientesUsuario"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Admin.EjerciciosLista"/>
+        <activity android:name=".Admin.EjerciciosLista"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".Admin.ChatFragmentAdmin"></activity>
-        <activity android:name=".Admin.ChatActivityAdmin"></activity>
+        <activity android:name=".Admin.ChatFragmentAdmin"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Admin.ChatActivityAdmin"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Admin.ListaChat"
+            android:screenOrientation="portrait" />
 
     </application>
 

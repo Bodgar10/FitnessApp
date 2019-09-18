@@ -2,6 +2,7 @@ package com.appfitnessapp.app.fitnessapp.Admin;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -22,6 +23,10 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +41,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -55,6 +61,11 @@ public class AsesoriasAdmin extends AppCompatActivity {
     String id;
 
     private static FirebaseAuth mAuth;
+
+    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
+    Date date = new Date();
+    Calendar cal = Calendar.getInstance();
+    int anioActual,mesActual;
 
 
     @Override
@@ -81,7 +92,8 @@ public class AsesoriasAdmin extends AppCompatActivity {
 
 
 
-        bajarUsuarios();
+        bajarInscritos();
+        //bajarInscritos2();
 
 
 
@@ -111,7 +123,6 @@ public class AsesoriasAdmin extends AppCompatActivity {
 
 
 
-      //  adapter.notifyDataSetChanged();
 
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +136,20 @@ public class AsesoriasAdmin extends AppCompatActivity {
 
             }
         });
+
+        adapter2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(AsesoriasAdmin.this, PerfilUsuarioAdmin.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id",asesorias2.get(recyclerReciente.getChildAdapterPosition(v)).getId_usuario());
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
+
 
 
         txtPendientes.setOnClickListener(new View.OnClickListener() {
@@ -161,7 +186,121 @@ public class AsesoriasAdmin extends AppCompatActivity {
     }
 
 
-    public void bajarUsuarios(){
+
+    public void bajarInscritos(){
+        dbProvider = new DBProvider();
+
+        dbProvider.tablaInscritos().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                        Log.e(TAG, "Usuarios: " + snapshot);
+                        Inscritos inscritos = snapshot.getValue(Inscritos.class);
+
+
+                        //semana actual y mes
+                        cal.setTime(date);
+                        anioActual = cal.get(Calendar.YEAR);
+                        mesActual = cal.get(Calendar.MONTH);
+
+                        String fechaBase =inscritos.getFecha_limite();
+                        DateFormat dateFormattt = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
+                        try {
+                            Date convertedDate=dateFormattt.parse(fechaBase);
+                            Calendar c = Calendar.getInstance();
+                            c.setTime(convertedDate);
+                            //sacar mes y anio base
+                            int anioBase = c.get(Calendar.YEAR);
+                            int mesBase = c.get(Calendar.MONTH);
+
+                            if (inscritos.getId_pendiente().equals(true)){
+                                if (anioBase>=anioActual && mesBase>=mesActual){
+                                    bajarUsuarios2(inscritos.getId_usuario());
+                                }
+                                if (anioActual==anioBase&&mesActual==mesBase) {
+                                        bajarUsuarios(inscritos.getId_usuario());
+                                }
+
+                            }
+
+
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }else{
+                    Log.e(TAG,"Usuarios 3: ");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG,"ERROR: ");
+            }
+        });
+    }
+
+    /*
+    public void bajarInscritos2(){
+        dbProvider = new DBProvider();
+
+        dbProvider.tablaInscritos().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                        Log.e(TAG, "Usuarios: " + snapshot);
+                        Inscritos inscritos = snapshot.getValue(Inscritos.class);
+
+
+                        //semana actual y mes
+                        cal.setTime(date);
+                        anioActual = cal.get(Calendar.YEAR);
+                        mesActual = cal.get(Calendar.MONTH);
+
+                        String fechaBase =inscritos.getFecha_limite();
+                        DateFormat dateFormattt = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
+                        try {
+                            Date convertedDate=dateFormattt.parse(fechaBase);
+                            Calendar c = Calendar.getInstance();
+                            c.setTime(convertedDate);
+                            //sacar mes y anio base
+                            int anioBase = c.get(Calendar.YEAR);
+                            int mesBase = c.get(Calendar.MONTH);
+
+
+                            if (inscritos.getId_pendiente().equals(true)){
+                                if (anioBase>=anioActual && mesBase>mesActual){
+                                        bajarUsuarios2(inscritos.getId_usuario());
+                                }
+                            }
+
+
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }else{
+                    Log.e(TAG,"Usuarios 3: ");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG,"ERROR: ");
+            }
+        });
+    }
+
+*/
+    public void bajarUsuarios(final String id_usuario){
         Log.e(TAG,"Usuarios 2: ");
         dbProvider = new DBProvider();
 
@@ -176,17 +315,17 @@ public class AsesoriasAdmin extends AppCompatActivity {
                         Usuarios usuarios = snapshot.getValue(Usuarios.class);
 
                         if (usuarios.getId_usuario()!=null) {
-
                             if (usuarios.getTipo_usuario().equals(Contants.USUARIO)) {
+                                if (usuarios.getId_usuario().equals(id_usuario)) {
+                                    asesorias.add(usuarios);
+                                    adapter.notifyDataSetChanged();
+                                    asesorias2.add(usuarios);
+                                    adapter2.notifyDataSetChanged();
+                                    progressDialog.dismiss();
+                                }
 
-                                bajarInscritos();
-                                asesorias.add(usuarios);
-                                asesorias2.add(usuarios);
-                                adapter.notifyDataSetChanged();
-                                adapter2.notifyDataSetChanged();
-                                progressDialog.dismiss();
-
-                            } else if (usuarios.getTipo_usuario().equals(Contants.ADMIN)) {
+                            }
+                            else if (usuarios.getTipo_usuario().equals(Contants.ADMIN)) {
 
                                 if (usuarios.getId_usuario().equals(id)) {
 
@@ -224,62 +363,30 @@ public class AsesoriasAdmin extends AppCompatActivity {
         });
     }
 
-    public void bajarInscritos(){
+
+    public void bajarUsuarios2(final String id_usuario2){
+        Log.e(TAG,"Usuarios 2: ");
         dbProvider = new DBProvider();
 
-        dbProvider.tablaInscritos().addValueEventListener(new ValueEventListener() {
+        dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                asesorias2.clear();
+                Log.e(TAG,"Usuarios 4: ");
                 if (dataSnapshot.exists()){
                     for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
                         Log.e(TAG, "Usuarios: " + snapshot);
-                        Inscritos inscritos = snapshot.getValue(Inscritos.class);
+                        Usuarios usuarios = snapshot.getValue(Usuarios.class);
 
-
-
-                        //fechaHoy
-                        SimpleDateFormat dateMes = new SimpleDateFormat("MM", Locale.getDefault());
-                        SimpleDateFormat dateAnio = new SimpleDateFormat("yyyy", Locale.getDefault());
-                        Date date = new Date();
-                        String mesHoy = dateMes.format(date);
-                        String anioHoy = dateAnio.format(date);
-
-
-                        //fechaBase
-                        String fechaBase=inscritos.getFecha_limite();
-                        SimpleDateFormat format1=new SimpleDateFormat("dd/MM/yyyy");
-                        Date dt1;
-                        try {
-                            dt1 = format1.parse(fechaBase);
-                            DateFormat format2=new SimpleDateFormat("MM");
-                            DateFormat format3=new SimpleDateFormat("yyyy");
-                            String mesBase=format2.format(dt1);
-                            String AnioBase=format3.format(dt1);
-
-                                if (inscritos.getId_pendiente().equals(false)){
-                                    if (mesBase.equals(mesHoy)&&anioHoy.equals(AnioBase)) {
-
-
-                                            adapter.notifyDataSetChanged();
-
-
-                                    }
-
-                                    else {
-
-                                        adapter2.notifyDataSetChanged();
-
-                                    }
+                        if (usuarios.getId_usuario()!=null) {
+                            if (usuarios.getTipo_usuario().equals(Contants.USUARIO)) {
+                                if (usuarios.getId_usuario().equals(id_usuario2)) {
+                                    asesorias2.add(usuarios);
+                                    adapter2.notifyDataSetChanged();
+                                    progressDialog.dismiss();
                                 }
-
-
-
-
-                        } catch (ParseException e) {
-                            e.printStackTrace();
+                            }
                         }
-
-
 
                     }
                 }else{
@@ -293,6 +400,8 @@ public class AsesoriasAdmin extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void loadImageFromUrl(String url) {
 

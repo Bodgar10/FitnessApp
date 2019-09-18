@@ -54,6 +54,8 @@ public class AsesoriasPendientes extends AppCompatActivity {
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,8 +140,10 @@ public class AsesoriasPendientes extends AppCompatActivity {
                         Log.e(TAG, "Usuarios: " + snapshot);
                         Inscritos inscritos = snapshot.getValue(Inscritos.class);
 
-                            if (inscritos.getId_pendiente().equals(true)){
-                                bajarUsuarios();
+                            if(inscritos.getId_inscrito()!=null) {
+                                if (inscritos.getId_pendiente().equals(false)) {
+                                    bajarUsuarios(inscritos.getId_usuario());
+                                }
                             }
                     }
                 }else{
@@ -154,7 +158,7 @@ public class AsesoriasPendientes extends AppCompatActivity {
         });
     }
 
-    public void bajarUsuarios(){
+    public void bajarUsuarios(final String id_usuario){
         dbProvider = new DBProvider();
         dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
             @Override
@@ -168,9 +172,11 @@ public class AsesoriasPendientes extends AppCompatActivity {
 
                         if (usuarios.getId_usuario() != null){
                             if (usuarios.getTipo_usuario().equals(Contants.USUARIO)) {
-                                asesorias.add(usuarios);
-                                adapter.notifyDataSetChanged();
-                                progressDialog.dismiss();
+                                if (usuarios.getId_usuario().equals(id_usuario)) {
+                                    asesorias.add(usuarios);
+                                    adapter.notifyDataSetChanged();
+                                    progressDialog.dismiss();
+                                }
                             }
 
                             else if (usuarios.getTipo_usuario().equals(Contants.ADMIN)) {
