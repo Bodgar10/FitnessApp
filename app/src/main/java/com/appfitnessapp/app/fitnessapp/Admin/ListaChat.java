@@ -52,7 +52,7 @@ public class ListaChat extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_lista_chat);
 
-        Toolbar toolbarback=findViewById(R.id.toolbar);
+        Toolbar toolbarback=findViewById(R.id.include);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Chats");
         ActionBar actionBar=getSupportActionBar();
@@ -141,7 +141,7 @@ public class ListaChat extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent;
-        intent = new Intent(this, AsesoriasAdmin.class);
+        intent = new Intent(this, AdminPerfil.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

@@ -41,7 +41,7 @@ public class AdapterChat  extends RecyclerView.Adapter<AdapterChat.ChatViewHolde
             txtNombre=itemView.findViewById(R.id.txtNombreDiseno);
             txtMensaje=itemView.findViewById(R.id.txtMensaje);
 
-            imagen=itemView.findViewById(R.id.imgPersonaDiseno);
+            imagen=itemView.findViewById(R.id.imgPersona);
 
 
 

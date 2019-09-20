@@ -146,6 +146,10 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
         int nowMes = Integer.parseInt(MesHoy);
 
 
+        SimpleDateFormat sfdAnio = new SimpleDateFormat("yyyy", Locale.getDefault());
+        String AnioHoy = sfdAnio.format(Calendar.getInstance().getTime());
+        int nowAnio = Integer.parseInt(AnioHoy);
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
@@ -174,13 +178,25 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
         int MESPRUEBAFINAL = Integer.parseInt(textMESPRUEBA);
 
 
+        SimpleDateFormat anio = new SimpleDateFormat("yyyy", Locale.getDefault());
+        java.util.Date currenTimeZoneAnio = new java.util.Date((long) Double.parseDouble(timest.trim())* 1000);
+        String textAnio = anio.format(currenTimeZoneAnio);
+        int anioFinal = Integer.parseInt(textAnio);
+
+
 
 
         SimpleDateFormat mes = new SimpleDateFormat("MMMM", Locale.getDefault());
         java.util.Date currenTimeZoneMes = new java.util.Date((long) Double.parseDouble(timest.trim())* 1000);
         String textMes = mes.format(currenTimeZoneMes);
-//        int Mes = Integer.parseInt(textMes);
         String mesCompleto= String.valueOf(textMes);
+
+        SimpleDateFormat yearCompleto = new SimpleDateFormat("YYYY", Locale.getDefault());
+        java.util.Date currenTimeZoneYear = new java.util.Date((long) Double.parseDouble(timest.trim())* 1000);
+        String textYear = yearCompleto.format(currenTimeZoneYear);
+        String yearComplet= String.valueOf(textYear);
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -197,27 +213,26 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
 
 
 
-        if (nowMes == MESPRUEBAFINAL){
+        if (nowAnio==anioFinal) {
+            if (nowMes == MESPRUEBAFINAL) {
+                if (daysTotal >= 7) {
+                    holder.txtHora.setText(days + " de " + mesCompleto + " a las " + hour + ":" + min + ". ");
+                } else if (daysTotal < 7) {
+                    if (daysTotal == 1) {
+                        holder.txtHora.setText("Ayer a las " + hour + ":" + min + ". ");
 
-            if (daysTotal>=7) {
-                holder.txtHora.setText(days +" de " + mesCompleto+" a las " + hour + ":"+min+". ");
-            }
-            else if (daysTotal<7){
-                if (daysTotal==1){
-                    holder.txtHora.setText("Ayer a las " +hour+ ":" + min +". ");
+                    } else
+                        holder.txtHora.setText("Hace " + daysTotal + " dias.");
+                    if (daysTotal == 0) {
+                        if (hourTotal >= 1 && hourTotal < 24) {
+                            holder.txtHora.setText("Hace " + hourTotal + "  hr.");
 
-                }
-                else
-                    holder.txtHora.setText("Hace " + daysTotal + " dias.");
-                if (daysTotal==0) {
-                    if (hourTotal >= 1 && hourTotal < 24) {
-                        holder.txtHora.setText("Hace " + hourTotal + "  hr.");
+                        } else if (hourTotal < 1) {
 
-                    }
-                    else if (hourTotal <1) {
+                            if (minTotal < 60) {
+                                holder.txtHora.setText("Hace " + minTotal + "  min.");
 
-                        if (minTotal <60) {
-                            holder.txtHora.setText("Hace " + minTotal+ "  min.");
+                            }
 
                         }
 
@@ -226,12 +241,12 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
                 }
 
             }
-
+            else if (nowMes != MESPRUEBAFINAL) {
+                holder.txtHora.setText(days + " de " + mesCompleto + " a las " + hour + ":" + min + ". ");
+            }
         }
-
-        else if (nowMes != MESPRUEBAFINAL){
-
-            holder.txtHora.setText(days +" de " + mesCompleto+" a las " + hour + ":"+min+". ");
+        else {
+            holder.txtHora.setText(days + " de " + mesCompleto + " de " + yearComplet);
 
         }
 

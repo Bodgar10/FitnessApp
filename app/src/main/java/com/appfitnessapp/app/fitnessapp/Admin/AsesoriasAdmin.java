@@ -95,8 +95,6 @@ public class AsesoriasAdmin extends AppCompatActivity {
         bajarInscritos();
         //bajarInscritos2();
 
-
-
         dbProvider = new DBProvider();
         bajarInfo = new BajarInfo();
         progressDialog = new ProgressDialog(this);
@@ -244,62 +242,7 @@ public class AsesoriasAdmin extends AppCompatActivity {
         });
     }
 
-    /*
-    public void bajarInscritos2(){
-        dbProvider = new DBProvider();
 
-        dbProvider.tablaInscritos().addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                        Log.e(TAG, "Usuarios: " + snapshot);
-                        Inscritos inscritos = snapshot.getValue(Inscritos.class);
-
-
-                        //semana actual y mes
-                        cal.setTime(date);
-                        anioActual = cal.get(Calendar.YEAR);
-                        mesActual = cal.get(Calendar.MONTH);
-
-                        String fechaBase =inscritos.getFecha_limite();
-                        DateFormat dateFormattt = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
-                        try {
-                            Date convertedDate=dateFormattt.parse(fechaBase);
-                            Calendar c = Calendar.getInstance();
-                            c.setTime(convertedDate);
-                            //sacar mes y anio base
-                            int anioBase = c.get(Calendar.YEAR);
-                            int mesBase = c.get(Calendar.MONTH);
-
-
-                            if (inscritos.getId_pendiente().equals(true)){
-                                if (anioBase>=anioActual && mesBase>mesActual){
-                                        bajarUsuarios2(inscritos.getId_usuario());
-                                }
-                            }
-
-
-
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    }
-                }else{
-                    Log.e(TAG,"Usuarios 3: ");
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG,"ERROR: ");
-            }
-        });
-    }
-
-*/
     public void bajarUsuarios(final String id_usuario){
         Log.e(TAG,"Usuarios 2: ");
         dbProvider = new DBProvider();
@@ -400,8 +343,6 @@ public class AsesoriasAdmin extends AppCompatActivity {
             }
         });
     }
-
-
 
     private void loadImageFromUrl(String url) {
 
