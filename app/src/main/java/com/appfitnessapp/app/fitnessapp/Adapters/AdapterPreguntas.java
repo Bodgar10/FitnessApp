@@ -25,15 +25,19 @@ public class AdapterPreguntas extends RecyclerView.Adapter<AdapterPreguntas.Preg
     private View.OnClickListener listener;
     ArrayList<Preguntas> preguntas;
 
+    private final int limit = 10;
+
 
     public static class PreguntasViewHolder extends RecyclerView.ViewHolder{
 
 
-        TextView txtPregunta;
+        TextView txtPregunta,numPregunta;
 
         public PreguntasViewHolder (View itemView) {
             super(itemView);
             txtPregunta=itemView.findViewById(R.id.txtPregunta);
+            numPregunta=itemView.findViewById(R.id.numPregunta);
+
 
         }
 
@@ -58,8 +62,7 @@ public class AdapterPreguntas extends RecyclerView.Adapter<AdapterPreguntas.Preg
     public void onBindViewHolder(@NonNull AdapterPreguntas.PreguntasViewHolder holder, final int position) {
         Preguntas pregunta = preguntas.get(position);
 
-
-
+        holder.numPregunta.setText(pregunta.getNombre_pregunta());
         holder.txtPregunta.setText(pregunta.getPregunta());
 
 
@@ -71,7 +74,14 @@ public class AdapterPreguntas extends RecyclerView.Adapter<AdapterPreguntas.Preg
 
     @Override
     public int getItemCount() {
-        return preguntas.size();
+        if(preguntas.size() > limit){
+            return limit;
+        }
+        else
+        {
+            return preguntas.size();
+        }
+
     }
 
     public void updateList(List<Preguntas> student)

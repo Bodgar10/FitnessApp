@@ -310,7 +310,6 @@ public class Asesoria extends AppCompatActivity {
         dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                plan.clear();
                 Log.e(TAG, "Usuarios 4: ");
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {

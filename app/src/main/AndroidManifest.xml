@@ -222,6 +222,16 @@
         <activity android:name=".Admin.ListaChat"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".Admin.FormularioUsuario"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".Admin.FormularioLista"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Admin.AgregarPregunta"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Admin.EditarPregunta"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

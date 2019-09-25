@@ -5,86 +5,64 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <LinearLayout
         android:orientation="vertical"
+        android:layout_marginBottom="55dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/white"
+            android:elevation="10dp"
+            android:theme="@style/Toolbar"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/white"
-        android:elevation="10dp"
-        android:theme="@style/Toolbar"
-        app:titleTextAppearance="@style/Toolbar.TitleText"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
+            <TextView
+                android:id="@+id/txtAgregar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="10dp"
+                android:gravity="end"
+                android:padding="5dp"
+                android:text="Agregar"
+                android:textAllCaps="true"
+                android:textColor="@color/naranja"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/imgPostPersona"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="4dp"
-            android:layout_gravity="end"
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_imgnull"
-            app:civ_border_color="@color/naranja"
-            app:civ_border_width="1dp" />
-
-
-    </androidx.appcompat.widget.Toolbar>
-
-
-
-    <LinearLayout
-        android:id="@+id/linearBoton"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/tag_menu_pendiente"
-        android:layout_marginBottom="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <TextView
-            android:id="@+id/txtActivos"
-            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:textColor="@color/negro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_weight="1"
-            android:text="@string/activos" />
+            android:text="Presiona una pregunta para editarla."
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
 
 
-        <TextView
-            android:padding="10dp"
-            android:gravity="center"
-            android:textColor="@color/blanco"
-            android:layout_marginEnd="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/pendientes" />
+        <include
+            layout="@layout/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </include>
+
 
 
     </LinearLayout>
-
-    <include
-        layout="@layout/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </include>
-
-    </LinearLayout>
-
 
     <LinearLayout
         android:layout_gravity="bottom"
@@ -109,7 +87,7 @@
 
 
             <LinearLayout
-                android:id="@+id/btnPlan"
+                android:id="@+id/btnAesoria"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -129,7 +107,7 @@
                     android:layout_marginBottom="3dp"
                     android:background="@null"
                     android:scaleType="centerInside"
-                    android:tint="@color/naranja"
+                    android:tint="@android:color/darker_gray"
                     app:srcCompat="@drawable/ic_miplan_icono" />
 
                 <TextView
@@ -138,13 +116,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Asesorias"
-                    android:textColor="@color/naranja"
+                    android:textColor="@android:color/darker_gray"
                     android:textSize="12sp" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/btnFormulario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -156,23 +133,21 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/imgFormulario"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginBottom="3dp"
                     android:background="@null"
                     android:scaleType="centerCrop"
-                    android:tint="@android:color/darker_gray"
+                    android:tint="@color/naranja"
                     app:srcCompat="@drawable/ic_formulario" />
 
                 <TextView
-                    android:id="@+id/txtChat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
                     android:text="Formulario"
-                    android:textColor="@android:color/darker_gray"
+                    android:textColor="@color/naranja"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -182,6 +157,7 @@
 
 
     </LinearLayout>
+
 
 
 

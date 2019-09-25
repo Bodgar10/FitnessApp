@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,6 +48,9 @@ public class AsesoriasPendientes extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView txtActivos;
     CircularImageView imgPostPersona;
+    LinearLayout btnFormulario;
+    ImageButton imgFormulario;
+
 
     String id;
 
@@ -87,6 +92,8 @@ public class AsesoriasPendientes extends AppCompatActivity {
         adapter=new AdapterAsesorias(asesorias);
         recyclerView.setAdapter(adapter);
 
+        btnFormulario=findViewById(R.id.btnFormulario);
+        imgFormulario=findViewById(R.id.imgFormulario);
 
 
 
@@ -126,6 +133,25 @@ public class AsesoriasPendientes extends AppCompatActivity {
             }
         });
 
+        btnFormulario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AsesoriasPendientes.this, FormularioLista.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+            }
+        });
+
+        imgFormulario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AsesoriasPendientes.this, FormularioLista.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+            }
+        });
     }
 
 
@@ -141,7 +167,7 @@ public class AsesoriasPendientes extends AppCompatActivity {
                         Inscritos inscritos = snapshot.getValue(Inscritos.class);
 
                             if(inscritos.getId_inscrito()!=null) {
-                                if (inscritos.getId_pendiente().equals(false)) {
+                                if (inscritos.getId_pendiente().equals(true)) {
                                     bajarUsuarios(inscritos.getId_usuario());
                                 }
                             }
@@ -163,7 +189,7 @@ public class AsesoriasPendientes extends AppCompatActivity {
         dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                asesorias.clear();
+                //asesorias.clear();
                 Log.e(TAG,"Usuarios 4: ");
                 if (dataSnapshot.exists()){
                     for (DataSnapshot snapshot: dataSnapshot.getChildren()) {

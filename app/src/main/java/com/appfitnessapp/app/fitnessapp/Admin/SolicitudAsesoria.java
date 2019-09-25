@@ -31,7 +31,7 @@ import java.net.URL;
 public class SolicitudAsesoria extends AppCompatActivity {
 
     CircularImageView imagen;
-    TextView txtPeso,txtEstatura,txtObjetivo,txtNombre;
+    TextView txtPeso,txtEstatura,txtObjetivo,txtNombre,btnRevisarFormulario;
     LinearLayout btnComenzarAsesoria;
 
 
@@ -71,6 +71,8 @@ public class SolicitudAsesoria extends AppCompatActivity {
         txtObjetivo=findViewById(R.id.txtObjetivo);
         txtNombre=findViewById(R.id.txtNombreUsuario);
 
+        btnRevisarFormulario=findViewById(R.id.txtRevisarFormulario);
+
 
         btnComenzarAsesoria=findViewById(R.id.linearAceptar);
 
@@ -85,6 +87,19 @@ public class SolicitudAsesoria extends AppCompatActivity {
                 startActivity(intent);
 
 
+            }
+        });
+
+        btnRevisarFormulario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(SolicitudAsesoria.this, FormularioUsuario.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id",id);
+                intent.putExtras(bundle);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
 

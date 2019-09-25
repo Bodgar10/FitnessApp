@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
 
-    <EditText
+    <TextView
         android:id="@+id/edtRespuesta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,8 +32,6 @@
         android:layout_marginEnd="10dp"
         android:background="@drawable/boton_redondo_blanco"
         android:ems="10"
-        android:hint="Escribe tu respuesta"
-        android:inputType="textMultiLine"
         android:padding="10dp"
         android:textColor="@android:color/black" />
 

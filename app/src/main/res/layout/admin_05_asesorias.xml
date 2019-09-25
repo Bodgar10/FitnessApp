@@ -237,6 +237,22 @@
         </LinearLayout>
 
 
+
+        <TextView
+            android:id="@+id/txtRevisarFormulario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="Revisar Formulario"
+            android:textAllCaps="false"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="18sp" />
+
+
     </LinearLayout>
 
 

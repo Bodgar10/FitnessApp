@@ -537,4 +537,20 @@ public class DBProvider {
         data.put(Contants.ID_USUARIO, id_usuario);
         estadisticaAlimentos().child(key).updateChildren(data);
     }
+
+    //preparacion
+    public void subirPreguntas(String id_pregunta, String nombre_pregunta, String pregunta){
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.ID_PREGUNTA , id_pregunta);
+        updates.put(Contants.NOMBRE_PREGUNTA , nombre_pregunta);
+        updates.put(Contants.PREGUNTA , pregunta);
+
+        formulario().child(id_pregunta).updateChildren(updates);
+    }
+    public void actualizarPregunta(String id_pregunta,String nombre_pregunta, String pregunta){
+        Map<String, Object> updates = new HashMap<>();
+        updates.put(Contants.PREGUNTA , pregunta);
+        formulario().child(id_pregunta).updateChildren(updates);
+    }
 }

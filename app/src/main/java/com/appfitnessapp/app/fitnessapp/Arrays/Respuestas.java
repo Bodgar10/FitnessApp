@@ -6,14 +6,12 @@ public class Respuestas {
     public String id_respuesta;
     public String id_pregunta;
     public String respuesta;
-    public String pregunta;
     public String id_usuario;
 
-    public Respuestas(String id_respuesta, String id_pregunta, String respuesta, String pregunta, String id_usuario) {
+    public Respuestas(String id_respuesta, String id_pregunta, String respuesta, String id_usuario) {
         this.id_respuesta = id_respuesta;
         this.id_pregunta = id_pregunta;
         this.respuesta = respuesta;
-        this.pregunta = pregunta;
         this.id_usuario = id_usuario;
     }
 
@@ -43,13 +41,6 @@ public class Respuestas {
         this.respuesta = respuesta;
     }
 
-    public String getPregunta() {
-        return pregunta;
-    }
-
-    public void setPregunta(String pregunta) {
-        this.pregunta = pregunta;
-    }
 
     public String getId_usuario() {
         return id_usuario;

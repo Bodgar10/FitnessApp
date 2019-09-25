@@ -17,19 +17,6 @@
         app:titleTextAppearance="@style/Toolbar.TitleText"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
-        <TextView
-            android:id="@+id/txtGuardar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:padding="5dp"
-            android:layout_marginEnd="10dp"
-            android:layout_gravity="end"
-            android:textStyle="bold"
-            android:text="@string/guardar"
-            android:textAllCaps="true"
-            android:textColor="@color/naranja"
-            android:textSize="15sp" />
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -43,12 +30,12 @@
         android:padding="8dp"
         android:gravity="start"
         android:background="@android:color/darker_gray"
-        android:text="@string/datos_de_los_pasos"
+        android:text="Preguntas"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
         android:textSize="13sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/edtPaso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,11 +44,8 @@
         android:layout_marginTop="5dp"
         android:ems="10"
         android:textSize="13sp"
-        android:background="@drawable/boton_gris_margen"
         android:padding="10dp"
-        android:textColor="@color/negro"
-        android:hint="@string/paso"
-        android:inputType="number" />
+        android:textColor="@color/negro" />
 
     <TextView
         android:visibility="gone"
@@ -87,7 +71,7 @@
         android:background="@drawable/boton_gris_margen"
         android:padding="10dp"
         android:textColor="@color/negro"
-        android:hint="@string/descripci_n"
+        android:hint="Pregunta"
         android:inputType="textMultiLine" />
 
 
@@ -109,7 +93,7 @@
             android:gravity="center"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:text="@string/subir_pasos"
+            android:text="Actualizar pregunta"
             android:textColor="@color/blanco"
             android:textSize="14sp"
             android:textAllCaps="true" />

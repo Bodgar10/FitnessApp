@@ -2,6 +2,7 @@ package com.appfitnessapp.app.fitnessapp.Usuario.Paypal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -139,18 +140,25 @@ public class PaymentDetails extends AppCompatActivity {
 
             Toast.makeText(this, "La compra se realizo", Toast.LENGTH_SHORT).show();
             String key = dbProvider.tablaInscritos().push().getKey();
-            dbProvider.subirIncritos(diaHoy+"-"+mesHoy+"-"+anioHoy,key,false,idUsuario);
+            dbProvider.subirIncritos(diaHoy+"-"+mesHoy+"-"+anioHoy,key,true,idUsuario);
             dbProvider.updateIsPagado(idUsuario,true);
-            Intent intent =new Intent(PaymentDetails.this, SplashPantalla.class);
-            /*
-            Bundle bundle = new Bundle();
-            bundle.putString("id",idUsuario);
-            intent.putExtras(bundle);
-            */
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(intent);
-            finish();
+            new CountDownTimer(2000,1){
+
+                @Override
+                public void onTick(long l) {
+
+                }
+
+                @Override
+                public void onFinish() {
+                    Intent intent =new Intent(PaymentDetails.this, SplashPantalla.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(intent);
+                    finish();
+
+                }
+            }.start();
 
 
             //txtId.setText(response.getString("id"));

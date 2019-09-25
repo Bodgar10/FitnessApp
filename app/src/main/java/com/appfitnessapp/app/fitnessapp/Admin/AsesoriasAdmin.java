@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.Usuario.Formulario;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -52,6 +55,8 @@ public class AsesoriasAdmin extends AppCompatActivity {
     RecyclerView recyclerReciente,recyclerFinalizar;
     TextView txtPendientes;
     CircularImageView imgPostPersona;
+    LinearLayout btnFormulario;
+    ImageButton  imgFormulario;
 
     private ProgressDialog progressDialog;
     private static final String TAG = "BAJARINFO:";
@@ -100,6 +105,7 @@ public class AsesoriasAdmin extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
 
+        btnFormulario=findViewById(R.id.btnFormulario);
 
 
         recyclerFinalizar=findViewById(R.id.recyclerFinalizar);
@@ -107,6 +113,7 @@ public class AsesoriasAdmin extends AppCompatActivity {
         txtPendientes=findViewById(R.id.txtPendientes);
 
         imgPostPersona=findViewById(R.id.imgPostPersona);
+        imgFormulario=findViewById(R.id.imgFormulario);
 
 
 
@@ -181,6 +188,25 @@ public class AsesoriasAdmin extends AppCompatActivity {
         });
 
 
+        btnFormulario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AsesoriasAdmin.this, FormularioLista.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+            }
+        });
+
+        imgFormulario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AsesoriasAdmin.this, FormularioLista.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+            }
+        });
     }
 
 
@@ -212,7 +238,7 @@ public class AsesoriasAdmin extends AppCompatActivity {
                             int anioBase = c.get(Calendar.YEAR);
                             int mesBase = c.get(Calendar.MONTH);
 
-                            if (inscritos.getId_pendiente().equals(true)){
+                            if (inscritos.getId_pendiente().equals(false)){
                                 if (anioBase>=anioActual && mesBase>=mesActual){
                                     bajarUsuarios2(inscritos.getId_usuario());
                                 }

@@ -3,6 +3,7 @@ package com.appfitnessapp.app.fitnessapp.Login;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.appfitnessapp.app.fitnessapp.Admin.AsesoriasAdmin;
+import com.appfitnessapp.app.fitnessapp.Arrays.Inscritos;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
@@ -31,7 +33,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class SplashPantalla extends AppCompatActivity {
 
@@ -42,11 +55,20 @@ public class SplashPantalla extends AppCompatActivity {
     BajarInfo bajarInfo;
     DBProvider dbProvider;
 
+
     private ProgressDialog progressDialog;
     private static FirebaseAuth mAuth;
 
     private AlphaAnimation buttonClick = new AlphaAnimation(3F, 0.9F);
 
+    Boolean isPagado =false;
+
+    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
+    Date date = new Date();
+    Calendar cal = Calendar.getInstance();
+    int anioActual,mesActual;
+
+    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
     @Override
@@ -70,11 +92,27 @@ public class SplashPantalla extends AppCompatActivity {
         bajarInfo = new BajarInfo();
         dbProvider = new DBProvider();
 
+
+        isPagado=true;
+
         if (FirebaseAuth.getInstance().getCurrentUser() != null){
             progressDialog.setMessage("Recopilando información importante...");
             progressDialog.show();
             progressDialog.setCancelable(false);
-            bajarUsuarios();
+            bajarInscritos(user.getUid());
+            new CountDownTimer(2000,1){
+
+                @Override
+                public void onTick(long l) {
+
+                }
+
+                @Override
+                public void onFinish() {
+
+                    bajarUsuarios();
+                }
+            }.start();
         }
 
 
@@ -124,6 +162,75 @@ public class SplashPantalla extends AppCompatActivity {
         });
     }
 
+    public void bajarInscritos(final String id_usuario){
+        dbProvider = new DBProvider();
+
+        dbProvider.tablaInscritos().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                        Log.e(TAG, "Usuarios: " + snapshot);
+                        Inscritos inscritos = snapshot.getValue(Inscritos.class);
+
+
+                        //semana actual y mes
+                        cal.setTime(date);
+                        anioActual = cal.get(Calendar.YEAR);
+                        mesActual = cal.get(Calendar.MONTH);
+
+                        String fechaBase =inscritos.getFecha_limite();
+                        DateFormat dateFormattt = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                        try {
+                            Date convertedDate=dateFormattt.parse(fechaBase);
+                            Calendar c = Calendar.getInstance();
+                            c.setTime(convertedDate);
+                            //sacar mes y anio base
+                            int anioBase = c.get(Calendar.YEAR);
+                            int mesBase = c.get(Calendar.MONTH);
+
+                                if (inscritos.getId_usuario().equals(id_usuario)) {
+                                    if (anioActual == anioBase) {
+                                        if (mesBase < mesActual) {
+                                            dbProvider.updateIsPagado(id_usuario, false);
+                                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                                            Query inscitos = ref.child(Contants.TABLA_INSCRITOS).orderByChild(Contants.ID_USUARIO).equalTo(id_usuario);
+                                            inscitos.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                    for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
+                                                        appleSnapshot.getRef().removeValue();
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+                                                    Log.e(TAG, "onCancelled", databaseError.toException());
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+
+
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }else{
+                    Log.e(TAG,"Usuarios 3: ");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG,"ERROR: ");
+            }
+        });
+    }
     public void bajarUsuarios(){
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Log.e(TAG,"Usuarios 2: ");
@@ -140,7 +247,7 @@ public class SplashPantalla extends AppCompatActivity {
                         Usuarios usuario = snapshot.getValue(Usuarios.class);
 
                             if (usuario.getId_usuario().equals(user.getUid())) {
-                                //yaCreado = true;
+                                isPagado = true;
                                 progressDialog.dismiss();
                                 if (usuario.getTipo_usuario().equals(Contants.USUARIO)) {
                                     if (!usuario.getPagado()==false){
@@ -178,13 +285,21 @@ public class SplashPantalla extends AppCompatActivity {
                 }
             }
 
+
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(TAG,"ERROR: ");
             }
         });
 
+
     }
+
+
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -34,7 +34,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/image/ic_edit_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_help_outline_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -55,10 +55,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="assetType" value="IMAGE" />
-                                      <entry key="outputName" value="ic_edit_u" />
+                                      <entry key="outputName" value="ic_formulario" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="fff5fa" />
+                                      <entry key="themeColor" value="ff3200" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -87,7 +86,6 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="060105" />
                                       <entry key="backgroundLayerName" value="ic_icon_back" />
                                       <entry key="foregroundImage" value="C:\Users\USUARIO\Desktop\logo.png" />
                                       <entry key="foregroundLayerName" value="ic_icon_fore" />
@@ -139,6 +137,11 @@
                                 </PersistentState>
                               </value>
                             </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.appfitnessapp.app.fitnessapp.Arrays.Preguntas;
 import com.appfitnessapp.app.fitnessapp.Arrays.Respuestas;
 import com.appfitnessapp.app.fitnessapp.R;
 
@@ -25,17 +26,16 @@ public class AdapterRespuestas  extends RecyclerView.Adapter<AdapterRespuestas.R
     ArrayList<Respuestas> respuestas;
 
 
-
     public static class RespuestasViewHolder extends RecyclerView.ViewHolder{
 
 
         TextView txtPregunta;
-        EditText edtRespuesta;
+        TextView edtRespuesta;
 
         public RespuestasViewHolder (View itemView) {
             super(itemView);
             txtPregunta=itemView.findViewById(R.id.txtPregunta);
-            edtRespuesta=itemView.findViewById(R.id.edtPregunta);
+            edtRespuesta=itemView.findViewById(R.id.edtRespuesta);
 
 
         }
@@ -62,8 +62,9 @@ public class AdapterRespuestas  extends RecyclerView.Adapter<AdapterRespuestas.R
         Respuestas respuesta = respuestas.get(position);
 
 
-        holder.txtPregunta.setText(respuesta.getPregunta());
-      //  holder.edtRespuesta.setText(respuesta.getRespuesta());
+        holder.txtPregunta.setText(respuesta.getId_pregunta());
+        holder.edtRespuesta.setText(respuesta.getRespuesta());
+
 
 
 
