@@ -97,8 +97,7 @@ public class AsesoriasAdmin extends AppCompatActivity {
 
 
 
-        bajarInscritos();
-        //bajarInscritos2();
+
 
         dbProvider = new DBProvider();
         bajarInfo = new BajarInfo();
@@ -207,26 +206,33 @@ public class AsesoriasAdmin extends AppCompatActivity {
                 overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
             }
         });
+
+        bajarInscritos();
+
     }
 
 
 
     public void bajarInscritos(){
+
         dbProvider = new DBProvider();
 
         dbProvider.tablaInscritos().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
+                    asesorias.clear();
+                    asesorias2.clear();
+                    adapter.notifyDataSetChanged();
+                    adapter2.notifyDataSetChanged();
                     for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
                         Log.e(TAG, "Usuarios: " + snapshot);
                         Inscritos inscritos = snapshot.getValue(Inscritos.class);
 
-
                         //semana actual y mes
                         cal.setTime(date);
                         anioActual = cal.get(Calendar.YEAR);
-                        mesActual = cal.get(Calendar.MONTH);
+                        mesActual = cal.get(Calendar.MONTH) + 1;
 
                         String fechaBase =inscritos.getFecha_limite();
                         DateFormat dateFormattt = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
@@ -235,17 +241,27 @@ public class AsesoriasAdmin extends AppCompatActivity {
                             Calendar c = Calendar.getInstance();
                             c.setTime(convertedDate);
                             //sacar mes y anio base
+
                             int anioBase = c.get(Calendar.YEAR);
-                            int mesBase = c.get(Calendar.MONTH);
+                            int mesBase = c.get(Calendar.MONTH) + 1;
+                            int diaBase = c.get(Calendar.DAY_OF_MONTH);
 
                             if (inscritos.getId_pendiente().equals(false)){
-                                if (anioBase>=anioActual && mesBase>=mesActual){
-                                    bajarUsuarios2(inscritos.getId_usuario());
-                                }
-                                if (anioActual==anioBase&&mesActual==mesBase) {
-                                        bajarUsuarios(inscritos.getId_usuario());
-                                }
+                                Log.e(TAG, "INSCRITOS AÑO Y MES DEL USUARIO: " + anioBase + " " + mesBase + " " + diaBase + " " + fechaBase);
+                                Log.e(TAG, "INSCRITOS AÑO Y MES DEL HOY: " + anioActual + " " + mesActual);
 
+                                if (anioBase == anioActual) {
+                                    if (mesBase == mesActual) {
+                                        Log.e(TAG, "INSCRITOS BIEN: " + snapshot);
+                                        bajarUsuarios2(inscritos.getId_usuario());
+                                    }else if (mesBase > mesActual) {
+                                        Log.e(TAG, "INSCRITOS BIEN 2: " + snapshot);
+                                        bajarUsuarios(inscritos.getId_usuario());
+                                    }
+                                }else if (anioBase > anioActual) {
+                                    Log.e(TAG, "INSCRITOS BIEN 2: " + snapshot);
+                                    bajarUsuarios(inscritos.getId_usuario());
+                                }
                             }
 
 
@@ -276,7 +292,6 @@ public class AsesoriasAdmin extends AppCompatActivity {
         dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                asesorias.clear();
                 Log.e(TAG,"Usuarios 4: ");
                 if (dataSnapshot.exists()){
                     for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
@@ -286,8 +301,6 @@ public class AsesoriasAdmin extends AppCompatActivity {
                         if (usuarios.getId_usuario()!=null) {
                             if (usuarios.getTipo_usuario().equals(Contants.USUARIO)) {
                                 if (usuarios.getId_usuario().equals(id_usuario)) {
-                                    asesorias.add(usuarios);
-                                    adapter.notifyDataSetChanged();
                                     asesorias2.add(usuarios);
                                     adapter2.notifyDataSetChanged();
                                     progressDialog.dismiss();
@@ -334,26 +347,24 @@ public class AsesoriasAdmin extends AppCompatActivity {
 
 
     public void bajarUsuarios2(final String id_usuario2){
-        Log.e(TAG,"Usuarios 2: ");
+        Log.e(TAG,"Pendiente 2: ");
         dbProvider = new DBProvider();
 
         dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                asesorias2.clear();
-                Log.e(TAG,"Usuarios 4: ");
+                Log.e(TAG,"Pendiente 4: ");
                 if (dataSnapshot.exists()){
                     for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                        Log.e(TAG, "Usuarios: " + snapshot);
+                        Log.e(TAG, "Pendiente: " + snapshot);
                         Usuarios usuarios = snapshot.getValue(Usuarios.class);
 
                         if (usuarios.getId_usuario()!=null) {
-                            if (usuarios.getTipo_usuario().equals(Contants.USUARIO)) {
-                                if (usuarios.getId_usuario().equals(id_usuario2)) {
-                                    asesorias2.add(usuarios);
-                                    adapter2.notifyDataSetChanged();
-                                    progressDialog.dismiss();
-                                }
+                            if (usuarios.getId_usuario().equals(id_usuario2)) {
+                                Log.e(TAG, "Pendiente Bien: " + snapshot);
+                                asesorias.add(usuarios);
+                                adapter.notifyDataSetChanged();
+                                progressDialog.dismiss();
                             }
                         }
 
@@ -374,7 +385,6 @@ public class AsesoriasAdmin extends AppCompatActivity {
 
         Picasso.get().load(url).into(imgPostPersona);
     }
-
 
 
 }

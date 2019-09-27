@@ -81,8 +81,8 @@ public class ListaChat extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(ListaChat.this, ChatActivityAdmin.class);
-                startActivity(intent);
+                ChatActivityAdmin.startActivity(getApplicationContext(),"nil",asesorias.get(recyclerView.getChildAdapterPosition(v)).getId_usuario(),id,"nil");
+
 
             }
         });

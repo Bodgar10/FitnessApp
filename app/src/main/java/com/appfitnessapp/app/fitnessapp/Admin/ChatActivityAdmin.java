@@ -37,19 +37,15 @@ public class ChatActivityAdmin extends AppCompatActivity {
     }
 
     private void init() {
-        Intent intent = new Intent(ChatActivityAdmin.this, ChatFragmentAdmin.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("name",Contants.ARG_RECEIVER);
-        bundle.putString("uid",Contants.ARG_RECEIVER_UID);
-        bundle.putString("id_admin",Contants.ARG_FIREBASE_TOKEN);
-        bundle.putString("token",Contants.TOKEN);
-        bundle.putString("id_servicio",Contants.ID_SERVICIO);
-        intent.putExtras(bundle);
-        intent.putExtra("anim id in", R.anim.down_in);
-        intent.putExtra("anim id out", R.anim.down_out);
-        startActivity(intent);
-        finish();
-        overridePendingTransition(R.anim.move, R.anim.move_leeft);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout_content_chat,
+                ChatFragmentAdmin.newInstance(getIntent().getExtras().getString(Contants.ARG_RECEIVER),
+                        getIntent().getExtras().getString(Contants.ARG_RECEIVER_UID),
+                        getIntent().getExtras().getString(Contants.ARG_FIREBASE_TOKEN),
+                        getIntent().getExtras().getString(Contants.TOKEN),
+                        getIntent().getExtras().getString(Contants.ID_SERVICIO)),
+                ChatFragmentAdmin.class.getSimpleName());
+        fragmentTransaction.commit();
     }
 
 

@@ -30,10 +30,15 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class ChatFragmentUsuario extends AppCompatActivity implements ChatContractUsuario.View, TextView.OnEditorActionListener, ChatContractUsuario.Interactor {
@@ -61,7 +66,7 @@ public class ChatFragmentUsuario extends AppCompatActivity implements ChatContra
     private String id_relper, id_usuario;
     private FirebaseAuth mAuth;
 
-  String name, uid, id_admin,  token, id_servicio1;
+    String name, uid, id_admin,  token, id_servicio1;
 
 
     @Override
@@ -106,6 +111,7 @@ public class ChatFragmentUsuario extends AppCompatActivity implements ChatContra
 
         mRecyclerViewChat.setAdapter(mChatRecyclerAdapter);
 
+        bajarUsuarios();
 
 
 
@@ -226,7 +232,6 @@ public class ChatFragmentUsuario extends AppCompatActivity implements ChatContra
 
     private void sendMessage() {
         String text = mETxtMessage.getText().toString();
-        String id_admin = Contants.ID_ADMIN;
         String senderUid = id_usuario;
         String token_vendedor = Contants.TOKEN;
         Chats chat = new Chats(id_usuario, senderUid, text,id_admin);
@@ -272,6 +277,52 @@ public class ChatFragmentUsuario extends AppCompatActivity implements ChatContra
 
     }
 
+    public void bajarUsuarios(){
+        dbProvider = new DBProvider();
+
+        dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                        Usuarios usuarios = snapshot.getValue(Usuarios.class);
+
+                        if (usuarios.getId_usuario()!=null) {
+
+                            if (usuarios.getTipo_usuario().equals(Contants.ADMIN)) {
+
+                                id_admin = usuarios.getId_usuario();
+                                txtNombreAdmin.setText(usuarios.getNombre_usuario());
+
+                                if (!usuarios.getFoto_usuario().equals("nil")) {
+                                    try {
+                                        URL urlfeed = new URL(usuarios.getFoto_usuario());
+                                        Picasso.get().load(String.valueOf(urlfeed))
+                                                .error(R.mipmap.ic_launcher)
+                                                .fit()
+                                                .noFade()
+                                                .into(imgAdmin);
+                                    } catch (MalformedURLException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                            }
+
+
+                        }
+
+                    }
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
 
 
 }

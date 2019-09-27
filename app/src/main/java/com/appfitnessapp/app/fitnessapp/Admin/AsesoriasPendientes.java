@@ -163,14 +163,15 @@ public class AsesoriasPendientes extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
                     for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                        Log.e(TAG, "Usuarios: " + snapshot);
+                        Log.e(TAG, "INSCRITOS: " + snapshot);
                         Inscritos inscritos = snapshot.getValue(Inscritos.class);
 
-                            if(inscritos.getId_inscrito()!=null) {
-                                if (inscritos.getId_pendiente().equals(true)) {
-                                    bajarUsuarios(inscritos.getId_usuario());
-                                }
+                        if(inscritos.getId_usuario()!=null) {
+                            if (inscritos.getId_pendiente().equals(true)) {
+                                Log.e(TAG, "INSCRITOS true: " + inscritos);
+                                bajarUsuarios(inscritos.getId_usuario());
                             }
+                        }
                     }
                 }else{
                     Log.e(TAG,"Usuarios 3: ");
@@ -189,7 +190,6 @@ public class AsesoriasPendientes extends AppCompatActivity {
         dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //asesorias.clear();
                 Log.e(TAG,"Usuarios 4: ");
                 if (dataSnapshot.exists()){
                     for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
@@ -209,21 +209,21 @@ public class AsesoriasPendientes extends AppCompatActivity {
 
                                 if (usuarios.getId_usuario().equals(id)) {
 
-                                if (usuarios.getFoto_usuario().equals("nil")) {
-                                    try {
-                                        URL urlfeed = new URL(usuarios.getFoto_usuario());
-                                        Picasso.get().load(String.valueOf(urlfeed))
-                                                .error(R.mipmap.ic_launcher)
-                                                .fit()
-                                                .noFade()
-                                                .into(imgPostPersona);
-                                    } catch (MalformedURLException e) {
-                                        e.printStackTrace();
+                                    if (usuarios.getFoto_usuario().equals("nil")) {
+                                        try {
+                                            URL urlfeed = new URL(usuarios.getFoto_usuario());
+                                            Picasso.get().load(String.valueOf(urlfeed))
+                                                    .error(R.mipmap.ic_launcher)
+                                                    .fit()
+                                                    .noFade()
+                                                    .into(imgPostPersona);
+                                        } catch (MalformedURLException e) {
+                                            e.printStackTrace();
+                                        }
+                                    } else {
+                                        loadImageFromUrl(usuarios.getFoto_usuario());
+                                        progressDialog.dismiss();
                                     }
-                                } else {
-                                    loadImageFromUrl(usuarios.getFoto_usuario());
-                                    progressDialog.dismiss();
-                                }
 
                                 }
                             }

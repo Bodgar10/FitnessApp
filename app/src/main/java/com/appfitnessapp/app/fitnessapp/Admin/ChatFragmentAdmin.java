@@ -45,9 +45,11 @@ import com.squareup.picasso.Picasso;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
-public class ChatFragmentAdmin extends AppCompatActivity implements ChatContractUsuario.View, TextView.OnEditorActionListener, ChatContractUsuario.Interactor {
+public class ChatFragmentAdmin extends Fragment implements ChatContractUsuario.View, TextView.OnEditorActionListener, ChatContractUsuario.Interactor {
 
 
 
@@ -62,6 +64,9 @@ public class ChatFragmentAdmin extends AppCompatActivity implements ChatContract
 
     private ChatPresenterUsuario mChatPresenter;
 
+    TextView txtNombreUsuarioChat;
+    CircularImageView imgAdmin;
+
     ArrayList<Usuarios> usuarios;
     ArrayList<Chats> chats;
     static DBProvider dbProvider;
@@ -72,40 +77,58 @@ public class ChatFragmentAdmin extends AppCompatActivity implements ChatContract
     String name, uid, id_admin,  token, id_servicio1;
 
 
+    public static ChatFragmentAdmin newInstance(String name,
+                                                String uid,
+                                                String id_relper, String token, String id_servicio) {
+        Bundle args = new Bundle();
+        args.putString(Contants.ARG_RECEIVER, name);
+        args.putString(Contants.ARG_RECEIVER_UID, uid);
+        args.putString(Contants.ARG_FIREBASE_TOKEN, id_relper);
+        args.putString(Contants.TOKEN, token);
+        args.putString(Contants.ID_SERVICIO, id_servicio);
+        ChatFragmentAdmin fragment = new ChatFragmentAdmin();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.admin_chat);
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null){
-            name = extras.getString("name");
-            uid = extras.getString("uid");
-            id_admin = extras.getString("id_admin");
-            token = extras.getString("token");
-            id_servicio1 = extras.getString("id_servicio");
-        }
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View fragmentView = inflater.inflate(R.layout.admin_chat, container, false);
 
-        mRecyclerViewChat = findViewById(R.id.recycler_view_chat);
-        mRecyclerViewChat.setLayoutManager(new LinearLayoutManager(this));
-        mETxtMessage =  findViewById(R.id.edit_text_message);
+        mRecyclerViewChat = fragmentView.findViewById(R.id.recycler_view_chat);
+        mRecyclerViewChat.setLayoutManager(new LinearLayoutManager(getContext()));
+        mETxtMessage =  fragmentView.findViewById(R.id.edit_text_message);
 
+        txtNombreUsuarioChat = fragmentView.findViewById(R.id.txtNombreUsuarioChat);
+        imgAdmin = fragmentView.findViewById(R.id.imgAdmin);
         init();
 
         mAuth = FirebaseAuth.getInstance();
         chats = new ArrayList<>();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        id_relper = Contants.ARG_FIREBASE_TOKEN;
-        id_servicio = Contants.ID_SERVICIO;
-        id_usuario = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        id_relper = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        id_usuario = getArguments().getString(Contants.ARG_RECEIVER_UID);
         mChatRecyclerAdapter = new ChatRecyclerAdapterUsuario(chats);
         mRecyclerViewChat.setAdapter(mChatRecyclerAdapter);
 
         usuarios = new ArrayList<>();
 
-
+        bajarUsuarios();
         database.getReference().child(Contants.CHATS)
                 .child(id_usuario)
                 .addChildEventListener(new ChildEventListener() {
@@ -144,13 +167,12 @@ public class ChatFragmentAdmin extends AppCompatActivity implements ChatContract
                     }
                 });
 
-
-
+        return fragmentView;
     }
 
 
     private void init() {
-        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog = new ProgressDialog(getContext());
         mProgressDialog.setTitle("Cargando...");
         mProgressDialog.setMessage("Por favor, espere");
         mProgressDialog.setIndeterminate(true);
@@ -170,38 +192,25 @@ public class ChatFragmentAdmin extends AppCompatActivity implements ChatContract
         return false;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
-
-    }
-
     private void sendMessage() {
         String text = mETxtMessage.getText().toString();
-        String id_admin = Contants.ID_ADMIN;
-        String senderUid = id_usuario;
+        String id_admin = id_relper;
+        String senderUid = id_admin;
         String token_vendedor = Contants.TOKEN;
-        Chats chat = new Chats(id_usuario, senderUid, text,id_admin);
+        Chats chat = new Chats(id_admin, senderUid, text,id_admin);
 
-        mChatPresenter.sendMessage(this, chat, token_vendedor, senderUid, id_admin);
+        mChatPresenter.sendMessage(getContext(), chat, token_vendedor, id_usuario, id_admin);
     }
 
     @Override
     public void onSendMessageSuccess() {
         mETxtMessage.setText("");
-        Toast.makeText(this, "Message sent", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Message sent", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onSendMessageFailure(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -269,7 +278,55 @@ public class ChatFragmentAdmin extends AppCompatActivity implements ChatContract
     }
 
 
+    public void bajarUsuarios(){
+        Log.e(TAG,"Usuarios 2: ");
+        dbProvider = new DBProvider();
 
+        dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e(TAG,"Usuarios 4: ");
+                if (dataSnapshot.exists()){
+                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                        Log.e(TAG, "Usuarios: " + snapshot);
+                        Usuarios usuarios = snapshot.getValue(Usuarios.class);
+
+                        if (usuarios.getId_usuario()!=null) {
+
+                            if (usuarios.getId_usuario().equals(id_usuario)) {
+
+                                txtNombreUsuarioChat.setText(usuarios.getNombre_usuario());
+
+                                if (!usuarios.getFoto_usuario().equals("nil")) {
+                                    try {
+                                        URL urlfeed = new URL(usuarios.getFoto_usuario());
+                                        Picasso.get().load(String.valueOf(urlfeed))
+                                                .error(R.mipmap.ic_launcher)
+                                                .fit()
+                                                .noFade()
+                                                .into(imgAdmin);
+                                    } catch (MalformedURLException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                            }
+
+
+                        }
+
+                    }
+                }else{
+                    Log.e(TAG,"Usuarios 3: ");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG,"ERROR: ");
+            }
+        });
+    }
 
 
 }
