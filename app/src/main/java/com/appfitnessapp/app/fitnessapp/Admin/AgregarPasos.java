@@ -109,7 +109,7 @@ public class AgregarPasos extends AppCompatActivity {
     private void aceptar() {
         Toast t=Toast.makeText(this,"Plan alimenticio completo.", Toast.LENGTH_SHORT);
         t.show();
-        Intent intent = new Intent(AgregarPasos.this, AsesoriasAdmin.class);
+        Intent intent = new Intent(AgregarPasos.this, AsesoriasPendientes.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();

@@ -66,7 +66,7 @@ public class SplashPantalla extends AppCompatActivity {
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
     Date date = new Date();
     Calendar cal = Calendar.getInstance();
-    int anioActual,mesActual;
+    int anioActual,mesActual,diaActual;
 
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -177,7 +177,9 @@ public class SplashPantalla extends AppCompatActivity {
                         //semana actual y mes
                         cal.setTime(date);
                         anioActual = cal.get(Calendar.YEAR);
-                        mesActual = cal.get(Calendar.MONTH);
+                        mesActual = cal.get(Calendar.MONTH)+1;
+                        diaActual = cal.get(Calendar.DAY_OF_MONTH);
+
 
                         String fechaBase =inscritos.getFecha_limite();
                         DateFormat dateFormattt = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -187,19 +189,22 @@ public class SplashPantalla extends AppCompatActivity {
                             c.setTime(convertedDate);
                             //sacar mes y anio base
                             int anioBase = c.get(Calendar.YEAR);
-                            int mesBase = c.get(Calendar.MONTH);
+                            int mesBase = c.get(Calendar.MONTH)+1;
+                            int diaBase = c.get(Calendar.DAY_OF_MONTH);
 
-                                if (inscritos.getId_usuario().equals(id_usuario)) {
+
+                            if (inscritos.getId_usuario().equals(id_usuario)) {
                                     if (anioActual == anioBase) {
-                                        if (mesBase < mesActual) {
-                                            dbProvider.updateIsPagado(id_usuario, false);
+                                        if (mesBase == mesActual) {
+                                            if (diaBase<diaActual){
+                                                dbProvider.updateIsPagado(id_usuario, false);
                                             DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
                                             Query inscitos = ref.child(Contants.TABLA_INSCRITOS).orderByChild(Contants.ID_USUARIO).equalTo(id_usuario);
                                             inscitos.addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                                    for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
-                                                        appleSnapshot.getRef().removeValue();
+                                                    for (DataSnapshot inscritosSnapshot : dataSnapshot.getChildren()) {
+                                                        inscritosSnapshot.getRef().removeValue();
                                                     }
                                                 }
 
@@ -209,7 +214,28 @@ public class SplashPantalla extends AppCompatActivity {
                                                 }
                                             });
                                         }
+                                        }
+                                       else if (mesBase < mesActual) {
+                                            dbProvider.updateIsPagado(id_usuario, false);
+                                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                                            Query inscitos = ref.child(Contants.TABLA_INSCRITOS).orderByChild(Contants.ID_USUARIO).equalTo(id_usuario);
+                                            inscitos.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                    for (DataSnapshot inscritosSnapshot: dataSnapshot.getChildren()) {
+                                                        inscritosSnapshot.getRef().removeValue();
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+                                                    Log.e(TAG, "onCancelled", databaseError.toException());
+                                                }
+                                            });
+                                        }
+
                                     }
+
                                 }
 
 

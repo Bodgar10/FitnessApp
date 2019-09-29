@@ -126,7 +126,7 @@ public class AgregarVideo extends AppCompatActivity {
                 if (!descripcion.isEmpty()&&videoUri!=null&&imgUri!=null){
                   uploadVideo(descripcion,imgUri.toString(),currentTimeStamp,videoUri.toString());
                     txtSiguiente.setVisibility(View.VISIBLE);
-                    txtSubir.setVisibility(View.GONE);
+                    btnSubir.setVisibility(View.GONE);
                 }
                 else {
                     Toast.makeText(AgregarVideo.this, "Revisa que tengas todos los campos completos.", Toast.LENGTH_SHORT).show();

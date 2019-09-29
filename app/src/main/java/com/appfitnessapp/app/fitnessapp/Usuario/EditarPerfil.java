@@ -97,6 +97,12 @@ public class EditarPerfil extends AppCompatActivity {
 
     private AlphaAnimation buttonClick = new AlphaAnimation(3F, 0.9F);
 
+    int isFirstTimePeso = 0;
+    Boolean isFirstTimeEStatura = true;
+    Boolean isFirstTimeObjetivo = true;
+
+
+    String peso="nil";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +173,14 @@ public class EditarPerfil extends AppCompatActivity {
             @Override
             public void onGlobalLayout() {
                 ((TextView) spinnerPeso.getSelectedView()).setTextColor(Color.GRAY);
+                if (isFirstTimePeso==0){
+                    isFirstTimePeso+=1;
+                }
+
+                else {
+                    peso = spinnerPeso.getSelectedItem().toString();
+
+                }
             }
         });
         spinnerBuscando.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -204,7 +218,7 @@ public class EditarPerfil extends AppCompatActivity {
                 //seleccionar el texto que se pone en el spinner
                 String objetivo = spinnerBuscando.getSelectedItem().toString();
                 String estatura = spinnerEstatura.getSelectedItem().toString();
-                String peso = spinnerPeso.getSelectedItem().toString();
+
 
 
                 if (!imagen.equals(imgPersona)&&imgUri!=null){
@@ -245,12 +259,18 @@ public class EditarPerfil extends AppCompatActivity {
                 if (!String.valueOf(selectionObjetivo).equals(objetivo)){
                     dbProvider.updateObjetivo(objetivo, id);
                 }
+
                 if (!String.valueOf(selectionEstatura).equals(estatura)){
                     dbProvider.updateEstatura(estatura, id);
                 }
-                if (!String.valueOf(selectionPeso).equals(peso)){
-                    dbProvider.updatePeso(peso,id);
+
+
+                if (!peso.equals("nil")){
+                    dbProvider.updatePeso(peso, id);
                 }
+
+
+
                 if (name.equals(edtNombre)&&email.equals(editCorreo)&&password.equals(edtContra)&&telefono.equals(editTelefono)
                         &&imgUri==null){
 

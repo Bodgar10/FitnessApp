@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -31,12 +32,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterIngredientes;
+import com.appfitnessapp.app.fitnessapp.Arrays.AsesoriasInfo;
 import com.appfitnessapp.app.fitnessapp.Arrays.Ingredientes;
+import com.appfitnessapp.app.fitnessapp.Arrays.Inscritos;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -65,10 +71,11 @@ public class AgregarRecetas extends AppCompatActivity {
     RecyclerView recyclerView,recyclerPreparacion,recyclerviewIngrediente;
     AdapterIngredientes adapterIngredientes;
 
-
     String id;
     private static final String TAG = "BAJARINFO:";
     static DBProvider dbProvider;
+
+    String id_inscrito;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +94,7 @@ public class AgregarRecetas extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             id = extras.getString("id");
+            bajarInscritos();
         }
 
         mStorage= FirebaseStorage.getInstance().getReference();
@@ -225,7 +233,7 @@ public class AgregarRecetas extends AppCompatActivity {
                         uploadImage(key, id, imgUri.toString(),
                                 calorias + " Kcal", tiempo + " min", cantidad + " porciones",
                                 nombre, "desayuno", "200", "$100");
-                        //dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
+                        dbProvider.actualizarPendiente(id_inscrito,false);
                         btnGuardar.setVisibility(View.GONE);
                         txtSiguiente.setVisibility(View.VISIBLE);
 
@@ -234,7 +242,7 @@ public class AgregarRecetas extends AppCompatActivity {
                         uploadImage(key, id, imgUri.toString(),
                                 calorias + " Kcal", tiempo + " min", cantidad + " porciones",
                                 nombre, "almuerzo", "$200", "100");
-                        //dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
+                        dbProvider.actualizarPendiente(id_inscrito,false);
                         btnGuardar.setVisibility(View.GONE);
                         txtSiguiente.setVisibility(View.VISIBLE);
 
@@ -243,7 +251,7 @@ public class AgregarRecetas extends AppCompatActivity {
                         uploadImage(key, id, imgUri.toString(),
                                 calorias + " Kcal", tiempo + " min", cantidad + " porciones",
                                 nombre, "cena", "200", "100");
-                       // dbProvider.subirPreparacion(key, "Paso 1", "Picar la verdura que ocuparas");
+                        dbProvider.actualizarPendiente(id_inscrito,false);
                         btnGuardar.setVisibility(View.GONE);
                         txtSiguiente.setVisibility(View.VISIBLE);
                         
@@ -342,6 +350,45 @@ public class AgregarRecetas extends AppCompatActivity {
         }
 
 
+    }
+
+
+
+    public void bajarInscritos(){
+        dbProvider = new DBProvider();
+
+        dbProvider.tablaInscritos().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e(TAG, "Usuarios 4: ");
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        //Log.e(TAG,"Usuarios: "+ snapshot);
+                        Inscritos inscritos = snapshot.getValue(Inscritos.class);
+
+                        if (inscritos.getId_inscrito()!=null){
+
+                            if (inscritos.getId_usuario().equals(id)){
+
+                                id_inscrito=inscritos.getId_inscrito();
+
+                            }
+                        }
+
+
+
+                    }
+                } else {
+                    Log.e(TAG, "Usuarios 3: ");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "ERROR: ");
+            }
+        });
     }
 
 

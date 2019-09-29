@@ -54,6 +54,9 @@ public class Home   extends AppCompatActivity {
     RecyclerView recyclerView;
     private ProgressDialog progressDialog;
 
+    LinearLayoutManager linearLayout;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,8 +121,16 @@ public class Home   extends AppCompatActivity {
         });
 
 
+
+
         recyclerView = findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        linearLayout =new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayout);
+        //poner orden inverso el recycler
+        linearLayout.setReverseLayout(true);
+        linearLayout.setStackFromEnd(true);
+
         feeds = new ArrayList<>();
         adapterFeed = new AdapterFeed(feeds);
         recyclerView.setAdapter(adapterFeed);

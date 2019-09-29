@@ -126,8 +126,9 @@ public class Formulario extends AppCompatActivity {
 
                             @Override
                             public void onFinish() {
-                                Intent intent=new Intent(Formulario.this, SplashPantalla.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                Intent intent=new Intent(Formulario.this, UsuarioHome.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 finish();
 

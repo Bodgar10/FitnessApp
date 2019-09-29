@@ -520,14 +520,6 @@ public class DBProvider {
 
 
 
-    public void subirIncritos(String fecha_limite, String id_inscrito, Boolean id_pendiente,String id_usuario){
-        Map<String, Object> data = new HashMap<>();
-        data.put(Contants.FECHA_LIMITE, fecha_limite);
-        data.put(Contants.ID_INSCRITO, id_inscrito);
-        data.put(Contants.ID_PENDIENTE, id_pendiente);
-        data.put(Contants.ID_USUARIO, id_usuario);
-        tablaInscritos().child(id_inscrito).updateChildren(data);
-    }
 
 
     public void subirEstadisticaAlimentos(String fecha_cumplida, String tipo_alimento,String id_usuario,String key){
@@ -536,6 +528,14 @@ public class DBProvider {
         data.put(Contants.TIPO_ALIMENTO, tipo_alimento);
         data.put(Contants.ID_USUARIO, id_usuario);
         estadisticaAlimentos().child(key).updateChildren(data);
+    }
+
+    public void subirEstadisticaEjercicio(String fecha_cumplida, String ejercicios_realizados,String id_usuario,String key){
+        Map<String, Object> data = new HashMap<>();
+        data.put(Contants.FECHA_CUMPLIDA, fecha_cumplida);
+        data.put(Contants.EJERCICIOS_REALIZADOS, ejercicios_realizados);
+        data.put(Contants.ID_USUARIO, id_usuario);
+        estadisticaEjercicios().child(key).updateChildren(data);
     }
 
     //preparacion
@@ -552,5 +552,21 @@ public class DBProvider {
         Map<String, Object> updates = new HashMap<>();
         updates.put(Contants.PREGUNTA , pregunta);
         formulario().child(id_pregunta).updateChildren(updates);
+    }
+
+
+    public void subirIncritos(String fecha_limite, String id_inscrito, Boolean id_pendiente,String id_usuario){
+        Map<String, Object> data = new HashMap<>();
+        data.put(Contants.FECHA_LIMITE, fecha_limite);
+        data.put(Contants.ID_INSCRITO, id_inscrito);
+        data.put(Contants.ID_PENDIENTE, id_pendiente);
+        data.put(Contants.ID_USUARIO, id_usuario);
+        tablaInscritos().child(id_inscrito).updateChildren(data);
+    }
+
+    public void actualizarPendiente(String id_inscrito,Boolean id_pendiente){
+        Map<String, Object> updates = new HashMap<>();
+        updates.put(Contants.ID_PENDIENTE , id_pendiente);
+        tablaInscritos().child(id_inscrito).updateChildren(updates);
     }
 }

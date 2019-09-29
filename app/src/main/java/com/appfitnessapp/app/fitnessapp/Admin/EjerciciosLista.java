@@ -144,10 +144,7 @@ public class EjerciciosLista extends AppCompatActivity {
                     dbProvider.subirEjerciciosPlan(nombre,rondas,repeticiones,video,key,id_ejercicio);
                     dbProvider.subirImagenesEjercicios(img1,img2,img3,key,id_ejercicio);
                     Toast.makeText(EjerciciosLista.this, "Se subio la información", Toast.LENGTH_SHORT).show();
-                    Intent i  = new Intent(EjerciciosLista.this,AsesoriasPendientes.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(i);
-                    finish();
+
 
                 }
                 else {

@@ -125,6 +125,7 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
 
         bajarUsuarios();
         bajarEstadisticasAlimentos();
+        bajarEstadisticasEjercicios();
 
         imgPersona=findViewById(R.id.imgPersona);
         txtNombre=findViewById(R.id.txtNombreUsuario);
@@ -152,8 +153,8 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(PerfilUsuarioAdmin.this, ChatActivityAdmin.class);
-                startActivity(intent);
+                ChatActivityAdmin.startActivity(getApplicationContext(),"nil",id,id,"nil");
+
 
             }
         });
@@ -176,26 +177,18 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
         chartHorizontal.setRenderer(barChartRenderH);
 
 
+
         //normal
-        BARENTRY = new ArrayList<>();
         BarEntryLabels = new ArrayList<String>();
-        AddValuesToBARENTRY();
         AddValuesToBarEntryLabels();
-        ArrayList<IBarDataSet> dataSets = new ArrayList<>();
-        set = new BarDataSet(BARENTRY, "");
-        set.setColors(Collections.singletonList(Color.BLACK));
-        //eliminar texto arriba
-        set.setDrawValues(false);
-        dataSets.add(set);
-        BarData data = new BarData(dataSets);
-        data.setBarWidth(0.5f);
+
+
 
 //_____________________________________________________________________________________________
 
 
 
         //////////////////////////////////////////////////////////////////////////////////////////
-        //horizontal
         //horizontal
         BarEntryLabelsH = new ArrayList<String>();
         AddValuesToBarEntryLabelsHorizontal();
@@ -226,7 +219,6 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
         chart.getDescription().setEnabled(false);
         chart.setDescription(null);
         chart.animateY(2000);
-        chart.setData(data);
         chart.invalidate();
 
 
@@ -318,8 +310,24 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
 
                             if (usuarios.getId_usuario().equals(id)) {
 
-                                txtPeso.setText(usuarios.getPeso_actual());
-                                txtAltura.setText(usuarios.getEstatura());
+                                if (usuarios.getEstatura().equals("nil")){
+                                    txtAltura.setText("");
+
+                                }
+                                else {
+                                    txtAltura.setText(usuarios.getEstatura());
+
+                                }
+
+
+                                if (usuarios.getPeso_actual().equals("nil")){
+                                    txtPeso.setText("");
+
+                                }
+                                else {
+                                    txtPeso.setText(usuarios.getPeso_actual());
+
+                                }
                                 txtNombre.setText(usuarios.getNombre_usuario());
                                 txtEmail.setText(usuarios.getEmail_usuario());
 
@@ -468,6 +476,8 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
         dbProvider.estadisticaEjercicios().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                BARENTRY = new ArrayList<>();
+
                 Log.e(TAG, "Usuarios 4: ");
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -475,71 +485,105 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
                         Log.e(TAG, "Usuarios: " + snapshot);
                         EstadisticaEjercicio estadisticaEjercicio = snapshot.getValue(EstadisticaEjercicio.class);
 
+                        //semana actual y mes
                         cal.setTime(date);
                         semanaActual = cal.get(Calendar.WEEK_OF_MONTH);
                         mesActual = cal.get(Calendar.MONTH);
-                        String semana= String.valueOf(semanaActual);
-                        String mes= String.valueOf(mesActual);
 
+                        //fecha base datos
                         String semanaBase =estadisticaEjercicio.getFecha_cumplida();
-                        SimpleDateFormat dateFormattt = new SimpleDateFormat("dd/MM/yyyy");
-                        Date convertedDate = new Date();
+                        DateFormat dateFormattt = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
                         try {
-                            convertedDate=dateFormattt.parse(semanaBase);
+                            Date convertedDate=dateFormattt.parse(semanaBase);
+                            Calendar c = Calendar.getInstance();
+                            c.setTime(convertedDate);
+                            //sacar mes y semana base
+                            int semanaMesBase = c.get(Calendar.WEEK_OF_MONTH);
+                            int mesBase = c.get(Calendar.MONTH);
+                            int diaBase=c.get(Calendar.DAY_OF_WEEK);
+
+                            Log.e(TAG, "Dia"+diaBase);
+
+
+
+                            if (estadisticaEjercicio.getId_usuario().equals(id)) {
+                                if (semanaActual==semanaMesBase&&mesActual==mesBase){
+                                    if (diaBase==1){
+                                        index_domingo +=1;
+                                        porcentDomingo =index_domingo;
+
+                                    }
+
+                                    else if (diaBase==2){
+                                        index_lunes +=1;
+                                        porcentLunes =index_lunes;
+
+                                    }
+
+                                    else if (diaBase==3){
+                                        index_martes +=1;
+                                        porcentMartes =index_martes;
+
+
+                                    }
+                                    else if (diaBase==4){
+                                        index_miercoles +=1;
+                                        porcentMiercoles =index_miercoles;
+
+
+                                    }
+                                    else if (diaBase==5){
+                                        index_jueves +=1;
+                                        porcentJueves =index_jueves;
+
+                                    }
+                                    else if (diaBase==6){
+
+                                        index_viernes +=1;
+                                        porcentViernes =index_viernes;
+                                    }
+                                    else if (diaBase==7){
+                                        index_sabado +=1;
+                                        porcentSabado =index_sabado;
+
+                                    }
+
+
+                                    Log.e(TAG, "Lunes"+porcentLunes);
+                                    Log.e(TAG, "Martes"+porcentMartes);
+                                    Log.e(TAG, "Miercoles"+porcentMiercoles);
+                                    Log.e(TAG, "Jueves"+porcentJueves);
+                                    Log.e(TAG, "Viernes"+porcentViernes);
+                                    Log.e(TAG, "Sabado"+porcentSabado);
+                                    Log.e(TAG, "Domingo"+porcentDomingo);
+
+                                    BARENTRY.add(new BarEntry(0, porcentDomingo));
+                                    BARENTRY.add(new BarEntry(1, porcentLunes));
+                                    BARENTRY.add(new BarEntry(2, porcentMartes));
+                                    BARENTRY.add(new BarEntry(3,  porcentMiercoles));
+                                    BARENTRY.add(new BarEntry(4, porcentJueves));
+                                    BARENTRY.add(new BarEntry(5, porcentViernes));
+                                    BARENTRY.add(new BarEntry(6, porcentSabado));
+                                    set = new BarDataSet(BARENTRY, "");
+                                    ArrayList<IBarDataSet> dataSets = new ArrayList<>();
+                                    set.setColors(Collections.singletonList(Color.BLACK));
+                                    //eliminar texto arriba
+                                    set.setDrawValues(false);
+                                    dataSets.add(set);
+                                    BarData data = new BarData(dataSets);
+                                    data.setBarWidth(0.5f);
+                                    chart.setData(data);
+
+
+                                }
+                            }
+
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        Calendar c = Calendar.getInstance();
-                        c.setTime(convertedDate);
-                        int diaBase = c.get(Calendar.WEEK_OF_MONTH);
-                        int mesBase = c.get(Calendar.MONTH);
-
-                        if (estadisticaEjercicio.getId_usuario().equals(id)) {
-                            if (semana.equals(diaBase)&&mes.equals(mesBase)){
-                                index_ejercicio +=1;
-                                Calendar calendar = Calendar.getInstance();
-                                int day = calendar.get(Calendar.DAY_OF_WEEK);
-                                switch (day) {
 
 
-                                    case Calendar.SUNDAY:
-                                        index_domingo +=1;
-                                        porcentDomingo =(index_domingo/index_ejercicio)*100;
-                                        break;
 
-                                    case Calendar.MONDAY:
-                                        index_lunes +=1;
-                                        porcentLunes =(index_lunes/index_ejercicio)*100;
-
-                                        break;
-                                    case Calendar.TUESDAY:
-                                        index_martes +=1;
-                                        porcentMartes =(index_martes/index_ejercicio)*100;
-
-                                        break;
-                                    case Calendar.WEDNESDAY:
-                                        index_miercoles +=1;
-                                        porcentMiercoles =(index_miercoles/index_ejercicio)*100;
-
-                                        break;
-
-                                    case Calendar.THURSDAY:
-                                        index_jueves +=1;
-                                        porcentJueves =(index_jueves/index_ejercicio)*100;
-
-                                        break;
-                                    case Calendar.FRIDAY:
-                                        index_viernes +=1;
-                                        porcentViernes =(index_viernes/index_ejercicio)*100;
-                                        break;
-
-                                    case Calendar.SATURDAY:
-                                        index_sabado +=1;
-                                        porcentSabado =(index_sabado/index_ejercicio)*100;
-                                        break;
-                                }
-                            }
-                        }
 
                     }
                 } else {
@@ -555,17 +599,6 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
         });
     }
 
-    public void AddValuesToBARENTRY(){
-
-        BARENTRY.add(new BarEntry(0, 45));
-        BARENTRY.add(new BarEntry(1, 20));
-        BARENTRY.add(new BarEntry(2,  68));
-        BARENTRY.add(new BarEntry(3, 80));
-        BARENTRY.add(new BarEntry(4, 40));
-        BARENTRY.add(new BarEntry(5, 50));
-        BARENTRY.add(new BarEntry(6, 68));
-
-    }
 
     public void AddValuesToBarEntryLabels(){
 
@@ -589,6 +622,7 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
 
 
     }
+///////////////////////////////////////////////////////////////////
 
 
     private String getPreviousDate(String inputDate){

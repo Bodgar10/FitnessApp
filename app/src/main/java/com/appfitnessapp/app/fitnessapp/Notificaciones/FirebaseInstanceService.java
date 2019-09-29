@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.RingtoneManager;
 import android.os.Build;
 import android.util.Log;
 
@@ -64,6 +65,7 @@ public class FirebaseInstanceService extends FirebaseMessagingService {
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.drawable.ic_notificacion)
                 .setContentTitle(title)
+                .setSound (RingtoneManager.getDefaultUri (RingtoneManager.TYPE_NOTIFICATION))
                 .setContentText(body)
                 .setContentInfo("Info");
 

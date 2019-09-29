@@ -30,18 +30,25 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.appfitnessapp.app.fitnessapp.Arrays.Asesorias;
+import com.appfitnessapp.app.fitnessapp.Arrays.AsesoriasInfo;
+import com.appfitnessapp.app.fitnessapp.Arrays.Preguntas;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.Asesoria;
 import com.appfitnessapp.app.fitnessapp.subirArchivos;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -87,6 +94,7 @@ public class Calificar extends AppCompatActivity {
 
     String semana ="";
 
+    String id_asesoria;
 
 
     @Override
@@ -102,6 +110,7 @@ public class Calificar extends AppCompatActivity {
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        bajarAsesoria();
 
 
         //cal.setTime(date);
@@ -228,7 +237,7 @@ public class Calificar extends AppCompatActivity {
 
                 else if (!txtExperiencia.isEmpty()&&pdfUri!=null&&pdfUri2!=null){
                    // uploadFile(pdfUri,key,txtExperiencia,fecha,"",key,"",id,valor);
-                    uploadFile2(key,txtExperiencia,fecha,"",key,pdfUri2.toString(),pdfUri.toString(),
+                    uploadFile2(key,txtExperiencia,fecha,id_asesoria,key,pdfUri2.toString(),pdfUri.toString(),
                             id,valor);
                     edtExperiencia.getText().clear();
                     Intent intent=new Intent(Calificar.this, UsuarioPerfil.class);
@@ -239,7 +248,7 @@ public class Calificar extends AppCompatActivity {
                 }
 
             else if (!txtExperiencia.isEmpty()){
-                    dbProvider.subirValoraciones(txtExperiencia,fecha,"",key, "nil",
+                    dbProvider.subirValoraciones(txtExperiencia,fecha,id_asesoria,key, "nil",
                             "nil",id,valor);
                     Toast.makeText(Calificar.this, "Se  ha calificado la asesoría.", Toast.LENGTH_SHORT).show();
                     edtExperiencia.getText().clear();
@@ -434,6 +443,38 @@ public class Calificar extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent,87);
     }
+
+    public void bajarAsesoria(){
+        dbProvider = new DBProvider();
+
+        dbProvider.asesoriaInfo().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e(TAG, "Usuarios 4: ");
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        //Log.e(TAG,"Usuarios: "+ snapshot);
+                        AsesoriasInfo asesoria = snapshot.getValue(AsesoriasInfo.class);
+                            id_asesoria=asesoria.getId_asesoria();
+
+
+
+
+                    }
+                } else {
+                    Log.e(TAG, "Usuarios 3: ");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "ERROR: ");
+            }
+        });
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 

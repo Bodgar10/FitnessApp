@@ -12,6 +12,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.DatosUsuario;
+import com.appfitnessapp.app.fitnessapp.Usuario.Formulario;
 import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -151,7 +152,7 @@ public class PaymentDetails extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    Intent intent =new Intent(PaymentDetails.this, SplashPantalla.class);
+                    Intent intent =new Intent(PaymentDetails.this, Formulario.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     startActivity(intent);

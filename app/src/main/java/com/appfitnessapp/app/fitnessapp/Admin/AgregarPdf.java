@@ -153,7 +153,7 @@ public class AgregarPdf extends AppCompatActivity {
                 if (!descripcion.isEmpty()&&pdfUri!=null&&imgUri!=null){
 
                     if (rdGratis.isChecked()){
-                        uploadPDF(descripcion,imgUri.toString(),currentTimeStamp,"",true);
+                        uploadPDF(descripcion,imgUri.toString(),currentTimeStamp,"nil",true);
                         txtSiguiente.setVisibility(View.VISIBLE);
                         btnSubir.setVisibility(View.GONE);
                     }

@@ -15,6 +15,8 @@ public class EstadisticaEjercicio {
         this.id_estadistica = id_estadistica;
     }
 
+    public EstadisticaEjercicio(){}
+
     public String getId_usuario() {
         return id_usuario;
     }
