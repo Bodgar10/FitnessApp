@@ -29,7 +29,9 @@ import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.DetallePdf;
 import com.appfitnessapp.app.fitnessapp.Usuario.Imagen;
 import com.appfitnessapp.app.fitnessapp.Usuario.PantallaPDF;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
 import com.appfitnessapp.app.fitnessapp.Usuario.Video;
+import com.appfitnessapp.app.fitnessapp.videoplayer.VideoPlayer;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -144,7 +146,7 @@ public class HomeSinRegistro  extends AppCompatActivity {
 
                 if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.VIDEO)){
 
-                    Intent intent = new Intent(HomeSinRegistro.this, Video.class);
+                    Intent intent = new Intent(HomeSinRegistro.this, VideoPlayer.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("video",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
                     intent.putExtras(bundle);

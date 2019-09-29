@@ -30,7 +30,9 @@ import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.Asesoria;
 import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.HomeSinRegistro;
 import com.appfitnessapp.app.fitnessapp.Usuario.Imagen;
 import com.appfitnessapp.app.fitnessapp.Usuario.PantallaPDF;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
 import com.appfitnessapp.app.fitnessapp.Usuario.Video;
+import com.appfitnessapp.app.fitnessapp.videoplayer.VideoPlayer;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -140,9 +142,9 @@ public class Home   extends AppCompatActivity {
 
                 if (feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.VIDEO)) {
 
-                    Intent intent = new Intent(Home.this, Video.class);
+                    Intent intent = new Intent(Home.this, VideoPlayer.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("video", feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
+                    bundle.putString("video",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } else if (feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.IMAGEN)) {

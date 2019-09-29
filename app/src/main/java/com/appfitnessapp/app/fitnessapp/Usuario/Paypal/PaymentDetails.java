@@ -155,6 +155,9 @@ public class PaymentDetails extends AppCompatActivity {
                     Intent intent =new Intent(PaymentDetails.this, Formulario.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id",idUsuario);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
 
