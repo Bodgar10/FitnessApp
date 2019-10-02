@@ -44,7 +44,7 @@ public class AdminRecetaDetalle extends AppCompatActivity {
 
     RecyclerView recyclerIngredientes,recyclerPasos;
 
-    String imagenComida,nombre,tipo,porciones,calorias,minutos,idReceta,id;
+    String imagenComida,nombre,tipo,porciones,calorias,minutos,idReceta,id,descripcion;
 
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
@@ -148,6 +148,7 @@ public class AdminRecetaDetalle extends AppCompatActivity {
                 bundle.putString("calorias",calorias);
                 bundle.putString("minutos",minutos);
                 bundle.putString("porciones",porciones);
+
                 intent.putExtras(bundle);
                 startActivity(intent);
 

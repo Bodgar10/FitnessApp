@@ -22,7 +22,7 @@ import com.appfitnessapp.app.fitnessapp.R;
 public class AdminIngredientesUsuario extends AppCompatActivity {
 
 
-    EditText edtNombre, edtCantidad;
+    EditText edtNombre, edtCantidad,edtDescripcion;
     TextView btnGuardar;
     String idReceta,id_usuario;
     LinearLayout btnSubirIngredientes;
@@ -52,6 +52,8 @@ public class AdminIngredientesUsuario extends AppCompatActivity {
 
         edtNombre = findViewById(R.id.edtNombreIngrediente);
         edtCantidad = findViewById(R.id.edtCantidad);
+        edtDescripcion = findViewById(R.id.edtDescripcion);
+
 
         btnGuardar = findViewById(R.id.txtGuardar);
 
@@ -64,13 +66,14 @@ public class AdminIngredientesUsuario extends AppCompatActivity {
 
                 String nombre = edtNombre.getText().toString();
                 String cantidad = edtCantidad.getText().toString();
+                String descripcion=edtDescripcion.getText().toString();
 
                 if (!nombre.isEmpty() && !cantidad.isEmpty()) {
-                    dbProvider.subirIngredientes(idReceta, nombre, cantidad);
+                    dbProvider.subirIngredientes(idReceta, nombre, cantidad,descripcion);
                     Toast.makeText(AdminIngredientesUsuario.this, "Se subieron los ingredientes.", Toast.LENGTH_SHORT).show();
                     edtNombre.getText().clear();
                     edtCantidad.getText().clear();
-
+                    edtDescripcion.getText().clear();
 
                 } else {
                     Toast.makeText(AdminIngredientesUsuario.this, "Revisa que tengas todo completo.", Toast.LENGTH_SHORT).show();

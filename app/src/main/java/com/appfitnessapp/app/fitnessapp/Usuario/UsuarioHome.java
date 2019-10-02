@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -67,6 +68,8 @@ public class UsuarioHome  extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
+    TextView txtComprado;
+
     private static FirebaseAuth mAuth;
     LinearLayoutManager linearLayout;
 
@@ -80,9 +83,6 @@ public class UsuarioHome  extends AppCompatActivity {
         Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("");
-        ActionBar actionBar=getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
         Dexter.withActivity(this)
                 .withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .withListener(new BaseMultiplePermissionsListener(){
@@ -120,6 +120,8 @@ public class UsuarioHome  extends AppCompatActivity {
         imgChat=findViewById(R.id.imgChat);
 
         imgHome=findViewById(R.id.imgHome);
+        txtComprado=findViewById(R.id.txtComprado);
+
 
         imgPlan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,7 +176,18 @@ public class UsuarioHome  extends AppCompatActivity {
         adapterFeed=new AdapterFeed(feeds);
         recyclerView.setAdapter(adapterFeed);
 
+        txtComprado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UsuarioHome.this, ListaComprado.class);
+                intent.putExtra("anim id in", R.anim.move_in);
+                intent.putExtra("anim id out", R.anim.move_leeft_in);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
 
+            }
+        });
 
 
 
@@ -214,7 +227,8 @@ public class UsuarioHome  extends AppCompatActivity {
                     else {
                         Intent intent = new Intent(UsuarioHome.this, DetallePdf.class);
                         Bundle bundle = new Bundle();
-                        bundle.putString("pdf",feeds.get(recyclerView.getChildAdapterPosition(view)).getDescripcion());
+                        bundle.putString("url",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
+                        bundle.putString("descripcion",feeds.get(recyclerView.getChildAdapterPosition(view)).getDescripcion());
                         bundle.putString("precio",feeds.get(recyclerView.getChildAdapterPosition(view)).getCosto_pdf());
 
                         intent.putExtras(bundle);

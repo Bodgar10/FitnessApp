@@ -140,6 +140,9 @@
         <activity android:name=".Usuario.MetodoPagoPdf"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".Usuario.ListaComprado"
+            android:screenOrientation="portrait" />
+
 
 
         <activity

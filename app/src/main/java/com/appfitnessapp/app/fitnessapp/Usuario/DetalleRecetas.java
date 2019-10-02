@@ -1,16 +1,23 @@
 package com.appfitnessapp.app.fitnessapp.Usuario;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +44,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -57,7 +66,7 @@ public class DetalleRecetas extends AppCompatActivity {
 
     RecyclerView recyclerIngredientes,recyclerPasos;
 
-    String imagenComida,nombre,tipo,porciones,calorias,minutos,idReceta,id_usuario;
+    String imagenComida,nombre,tipo,porciones,calorias,minutos,idReceta,id_usuario,nombreIngrediente,descripcionIngrediente;
 
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
@@ -146,16 +155,9 @@ public class DetalleRecetas extends AppCompatActivity {
         adapterIngredientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(DetalleRecetas.this, InformacionCompra.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("nombre",ingredientes.get(recyclerIngredientes.getChildAdapterPosition(v)).getNombre_ingrediente());
-                bundle.putString("cantidad",ingredientes.get(recyclerIngredientes.getChildAdapterPosition(v)).getCantidad());
-                intent.putExtras(bundle);
-                intent.putExtra("anim id in", R.anim.down_in);
-                intent.putExtra("anim id out", R.anim.down_out);
-                startActivity(intent);
-                overridePendingTransition(R.anim.up_in, R.anim.up_out);
+                nombreIngrediente= ingredientes.get(recyclerIngredientes.getChildAdapterPosition(v)).getNombre_ingrediente();
+                descripcionIngrediente= ingredientes.get(recyclerIngredientes.getChildAdapterPosition(v)).getDescripcion_ingredientes();
+                showDialog();
 
             }
         });
@@ -195,6 +197,31 @@ public class DetalleRecetas extends AppCompatActivity {
     }
 
 
+    public void showDialog() {
+
+            final Dialog dialog = new Dialog(DetalleRecetas.this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.usuario_17_alerta_ingrediente);
+            LinearLayout cancleButton = dialog.findViewById(R.id.btnAceptar);
+            final TextView nombre=dialog.findViewById(R.id.txtNombreIngrediente);
+            final TextView descripcion=dialog.findViewById(R.id.descripcionIngrediente);
+            nombre.setText(nombreIngrediente);
+            descripcion.setText(descripcionIngrediente);
+
+            cancleButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+
+        }
+
+
+
+
     public void bajarIngredientes(){
         Log.e(TAG, "Receta: " + idReceta);
         dbProvider.tablaPlanAlimenticio().child(idReceta).child(Contants.INGREDIENTES).addValueEventListener(new ValueEventListener() {
@@ -228,8 +255,6 @@ public class DetalleRecetas extends AppCompatActivity {
 
     }
 
-
-
     public void bajarPasos(){
 
         dbProvider.tablaPlanAlimenticio().child(idReceta).child(Contants.PREPARACION).addValueEventListener(new ValueEventListener() {
@@ -260,8 +285,6 @@ public class DetalleRecetas extends AppCompatActivity {
         });
 
     }
-
-
 
     private void loadImageFromUrl(String url) {
 

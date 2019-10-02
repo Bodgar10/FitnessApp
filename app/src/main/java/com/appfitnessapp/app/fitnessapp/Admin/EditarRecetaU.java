@@ -165,6 +165,8 @@ public class EditarRecetaU extends AppCompatActivity {
                 bundle.putString("id",ingredientes.get(recyclerIngredientes.getChildAdapterPosition(v)).getId_ingrediente());
                 bundle.putString("nombre",ingredientes.get(recyclerIngredientes.getChildAdapterPosition(v)).getNombre_ingrediente());
                 bundle.putString("cantidad",ingredientes.get(recyclerIngredientes.getChildAdapterPosition(v)).getCantidad());
+                bundle.putString("descripcion",ingredientes.get(recyclerIngredientes.getChildAdapterPosition(v)).getDescripcion_ingredientes());
+
                 intent.putExtras(bundle);
                 startActivity(intent);
 

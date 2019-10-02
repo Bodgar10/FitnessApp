@@ -203,7 +203,7 @@ public class AgregarRecetas extends AppCompatActivity {
             public void onClick(View v) {
 
                 RecyclerView.LayoutManager lmmanager = new LinearLayoutManager(getApplicationContext()); recyclerviewIngrediente.setLayoutManager(lmmanager);
-                ingredientes.add(new Ingredientes("","",""));
+                ingredientes.add(new Ingredientes("","","",""));
                 adapterIngredientes = new AdapterIngredientes(ingredientes);
                 recyclerviewIngrediente.setAdapter(adapterIngredientes);
             }

@@ -66,6 +66,9 @@ public class DBProvider {
 
     public DatabaseReference tablaInscritos() {return dbRef().child(Contants.TABLA_INSCRITOS);}
 
+    public DatabaseReference tablaPdf() {return dbRef().child(Contants.TABLA_PDF);}
+
+
 
 
 
@@ -345,13 +348,15 @@ public class DBProvider {
 
 
     //ingredientes
-    public void subirIngredientes(String id_plan_alimenticio, String nombre_ingrediente, String cantidad){
+    public void subirIngredientes(String id_plan_alimenticio, String nombre_ingrediente, String cantidad,String descripcion){
         Map<String, Object> updates = new HashMap<>();
 
         String key = tablaPlanAlimenticio().child(id_plan_alimenticio).child(Contants.INGREDIENTES).push().getKey();
         updates.put(Contants.ID_INGREDIENTE , key);
         updates.put(Contants.NOMBRE_INGREDIENTE , nombre_ingrediente);
         updates.put(Contants.CANTIDAD , cantidad);
+        updates.put(Contants.DESCRIPCION_INGREDIENTE , descripcion);
+
 
         tablaPlanAlimenticio().child(id_plan_alimenticio).child(Contants.INGREDIENTES).child(key).updateChildren(updates);
     }
@@ -367,6 +372,13 @@ public class DBProvider {
         Map<String, Object> updates = new HashMap<>();
 
         updates.put(Contants.CANTIDAD , cantidad);
+        tablaPlanAlimenticio().child(id_plan_alimenticio).child(Contants.INGREDIENTES).child(idIngrediente).updateChildren(updates);
+    }
+
+    public void actualizarDescripcipcionIngrediente(String id_plan_alimenticio,String idIngrediente, String descripcion_ingrediente){
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.DESCRIPCION_INGREDIENTE , descripcion_ingrediente);
         tablaPlanAlimenticio().child(id_plan_alimenticio).child(Contants.INGREDIENTES).child(idIngrediente).updateChildren(updates);
     }
 
@@ -568,5 +580,14 @@ public class DBProvider {
         Map<String, Object> updates = new HashMap<>();
         updates.put(Contants.ID_PENDIENTE , id_pendiente);
         tablaInscritos().child(id_inscrito).updateChildren(updates);
+    }
+
+    public void crearTablaPdf(String id_pdf,String id_usuario,String url_pdf,String descripcion){
+        Map<String, Object> updates = new HashMap<>();
+        updates.put(Contants.ID_PDF , id_pdf);
+        updates.put(Contants.ID_USUARIO , id_usuario);
+        updates.put(Contants.URL_PDF , url_pdf);
+        updates.put(Contants.DESCRIPCION , descripcion);
+        tablaPdf().child(id_pdf).updateChildren(updates);
     }
 }

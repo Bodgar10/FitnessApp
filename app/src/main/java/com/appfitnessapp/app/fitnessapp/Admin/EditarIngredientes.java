@@ -21,9 +21,9 @@ import com.appfitnessapp.app.fitnessapp.R;
 
 public class EditarIngredientes extends AppCompatActivity {
 
-    EditText edtNombre, edtCantidad;
+    EditText edtNombre, edtCantidad,edtDescripcion;
     TextView btnGuardar;
-    String id_receta,id_ingrediente,nombre,cantidad,idUsuario;
+    String id_receta,id_ingrediente,nombre,cantidad,idUsuario,descripcion;
     LinearLayout btnSubirIngredientes;
 
     private static final String TAG = "BAJARINFO:";
@@ -50,14 +50,20 @@ public class EditarIngredientes extends AppCompatActivity {
             id_receta = extras.getString("id_receta");
             nombre = extras.getString("nombre");
             cantidad = extras.getString("cantidad");
+            descripcion = extras.getString("descripcion");
+
 
         }
 
         edtNombre = findViewById(R.id.edtNombreIngrediente);
         edtCantidad = findViewById(R.id.edtCantidad);
+        edtDescripcion = findViewById(R.id.edtDescripcion);
+
 
         edtNombre.setText(nombre);
         edtCantidad.setText(cantidad);
+        edtDescripcion.setText(descripcion);
+
 
         btnGuardar = findViewById(R.id.txtGuardar);
 
@@ -71,8 +77,10 @@ public class EditarIngredientes extends AppCompatActivity {
 
                 String Snombre = edtNombre.getText().toString();
                 String Scantidad = edtCantidad.getText().toString();
+                String Sdescripcion = edtDescripcion.getText().toString();
 
-                if (!Snombre.equals(nombre)&&!Snombre.isEmpty()&&!Scantidad.isEmpty()){
+
+                if (!Snombre.equals(nombre)&&!Snombre.isEmpty()&&!Scantidad.isEmpty()&&Sdescripcion.isEmpty()){
                     dbProvider.actualizarIngredientesNombre(id_receta,id_ingrediente, Snombre);
                     Toast.makeText(EditarIngredientes.this, "Se actualizo el ingrediente: ", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(EditarIngredientes.this, AdminPlanUsuario.class);
@@ -83,7 +91,7 @@ public class EditarIngredientes extends AppCompatActivity {
                     startActivity(intent);
                 }
 
-                if (!Scantidad.equals(cantidad)&&!Scantidad.isEmpty()&&!Snombre.isEmpty()) {
+                if (!Scantidad.equals(cantidad)&&!Scantidad.isEmpty()&&!Snombre.isEmpty()&&Sdescripcion.isEmpty()) {
                     dbProvider.actualizarIngredientesCantidad(id_receta,id_ingrediente, Scantidad);
                     Toast.makeText(EditarIngredientes.this, "Se actualizo la cantidad", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(EditarIngredientes.this, AdminPlanUsuario.class);
@@ -94,7 +102,18 @@ public class EditarIngredientes extends AppCompatActivity {
                     startActivity(intent);
                 }
 
-                if (Scantidad.equals(cantidad)&&Snombre.equals(nombre)){
+                if (!Sdescripcion.equals(descripcion)&&!Scantidad.isEmpty()&&!Snombre.isEmpty()&&Sdescripcion.isEmpty()) {
+                    dbProvider.actualizarDescripcipcionIngrediente(id_receta,id_ingrediente, Sdescripcion);
+                    Toast.makeText(EditarIngredientes.this, "Se actualizo la descripción", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(EditarIngredientes.this, AdminPlanUsuario.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id",idUsuario);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+
+                if (Scantidad.equals(cantidad)&&Snombre.equals(nombre)&&Sdescripcion.equals(descripcion)){
                     Intent intent=new Intent(EditarIngredientes.this, AdminPlanUsuario.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     Bundle bundle = new Bundle();

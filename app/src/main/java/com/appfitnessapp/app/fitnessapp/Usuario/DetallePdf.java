@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.prueba;
 import com.appfitnessapp.app.fitnessapp.viewPdf;
+import com.google.firebase.auth.FirebaseAuth;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -36,7 +37,7 @@ public class DetallePdf extends AppCompatActivity {
     private static final int PDF_CODE = 1000 ;
 
 
-    String descripcion,precio;
+    String descripcion,precio,url,id;
 
 
     @Override
@@ -50,11 +51,15 @@ public class DetallePdf extends AppCompatActivity {
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        Bundle extras = getIntent().getExtras();
-        assert extras != null;
-        descripcion  =extras.getString("pdf");
-        precio  =extras.getString("precio");
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null){
+            descripcion  =extras.getString("descripcion");
+            precio  =extras.getString("precio");
+            url  =extras.getString("url");
+        }
 
         Dexter.withActivity(this)
                 .withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -88,7 +93,9 @@ public class DetallePdf extends AppCompatActivity {
                 Intent intent=new Intent(DetallePdf.this,MetodoPagoPdf.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("costo",precio);
+                bundle.putString("descripcion",descripcion);
                 bundle.putString("meses",txtTitulo.getText().toString());
+                bundle.putString("url",url);
                 intent.putExtras(bundle);
                 startActivity(intent);
 

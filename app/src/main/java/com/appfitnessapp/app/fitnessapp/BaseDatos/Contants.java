@@ -153,6 +153,7 @@ public class Contants {
     final public static String INGREDIENTES = "ingredientes";
     final public static String NOMBRE_INGREDIENTE = "nombre_ingrediente";
     final public static String CANTIDAD = "cantidad";
+    final public static String DESCRIPCION_INGREDIENTE = "descripcion_ingredientes";
     final public static String ID_INGREDIENTE = "id_ingrediente";
 
 
@@ -189,6 +190,11 @@ public class Contants {
     final public static String IMAGEN_1 = "imagen_1";
     final public static String IMAGEN_2 = "imagen_2";
     final public static String IMAGEN_3 = "imagen_3";
+
+
+    final public static String TABLA_PDF="tabla_pdf_comprados";
+    final public static String ID_PDF="id_pdf";
+    final public static String URL_PDF="url_pdf";
 
 
 

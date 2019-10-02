@@ -5,14 +5,16 @@ public class Ingredientes {
     public String nombre_ingrediente;
     public String cantidad;
     public String id_ingrediente;
+    public String descripcion_ingredientes;
 
 
     public Ingredientes(){}
 
-    public Ingredientes(String nombre_ingrediente, String cantidad, String id_ingrediente) {
+    public Ingredientes(String nombre_ingrediente, String cantidad, String id_ingrediente, String descripcion_ingredientes) {
         this.nombre_ingrediente = nombre_ingrediente;
         this.cantidad = cantidad;
         this.id_ingrediente = id_ingrediente;
+        this.descripcion_ingredientes = descripcion_ingredientes;
     }
 
     public String getNombre_ingrediente() {
@@ -37,5 +39,13 @@ public class Ingredientes {
 
     public void setId_ingrediente(String id_ingrediente) {
         this.id_ingrediente = id_ingrediente;
+    }
+
+    public String getDescripcion_ingredientes() {
+        return descripcion_ingredientes;
+    }
+
+    public void setDescripcion_ingredientes(String descripcion_ingredientes) {
+        this.descripcion_ingredientes = descripcion_ingredientes;
     }
 }

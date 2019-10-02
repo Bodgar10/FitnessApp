@@ -51,11 +51,11 @@ public class MetodoPagoPdf extends AppCompatActivity {
 
     String amount="";
 
-    String pago,meses,id;
+    String pago,meses,id,url,descripcion;
 
     @Override
     protected void onDestroy() {
-        stopService(new Intent(this, PayPalService.class));
+        stopService(new Intent(this,PayPalService.class));
         super.onDestroy();
     }
 
@@ -88,6 +88,10 @@ public class MetodoPagoPdf extends AppCompatActivity {
         if (extras != null) {
             pago =extras.getString("costo");
             meses =extras.getString("meses");
+            url  =extras.getString("url");
+            descripcion  =extras.getString("descripcion");
+
+
         }
 
 
@@ -175,7 +179,7 @@ public class MetodoPagoPdf extends AppCompatActivity {
         PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(amount)),"MXN",txtPlan.getText().toString(),
                 PayPalPayment.PAYMENT_INTENT_SALE);
 
-        Intent intent = new Intent(this, PaymentActivity.class);
+        Intent intent = new Intent(this,PaymentActivity.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payPalPayment);
         startActivityForResult(intent,PAYPAL_REQUEST_CODE);
@@ -196,11 +200,12 @@ public class MetodoPagoPdf extends AppCompatActivity {
                     try {
 
                         String paymentDetails = confirmation.toJSONObject().toString(4);
-                        startActivity(new Intent(this, PaymentPdf.class)
+                        startActivity(new Intent(this,PaymentPdf.class)
                                 .putExtra("PaymentDetails",paymentDetails)
                                 .putExtra("PaymentAmount",amount)
                                 .putExtra("id_usuario",id)
-                                .putExtra("meses",meses));
+                                .putExtra("descripcion",descripcion)
+                                .putExtra("url",url));
                         finish();
 
 
@@ -245,6 +250,11 @@ public class MetodoPagoPdf extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent intent;
+        intent = new Intent(this, DetallePdf.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
         finish();
         overridePendingTransition(
                 getIntent().getIntExtra("anim id in", R.anim.move_in),
