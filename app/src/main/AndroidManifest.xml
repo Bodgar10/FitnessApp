@@ -16,7 +16,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_icon_app_round"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_icon_app_round"
         android:supportsRtl="true"
@@ -142,6 +142,28 @@
 
         <activity android:name=".Usuario.ListaComprado"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".Usuario.ListaRecordatorio"
+            android:screenOrientation="portrait"/>
+
+
+        <activity android:name=".Alarma.AlarmaDesayuno"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".Alarma.AlarmaComida"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".Alarma.AlarmaCena"
+            android:screenOrientation="portrait" />
+
+        <receiver android:name=".Alarma.AlertaRecibidaDesayuno" />
+        <receiver android:name=".Alarma.AlertaRecibidaComida" />
+        <receiver android:name=".Alarma.AlertaRecibidaCena" />
+
+
+
+
+
 
 
 

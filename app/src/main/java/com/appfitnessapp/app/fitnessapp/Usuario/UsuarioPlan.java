@@ -46,7 +46,7 @@ public class UsuarioPlan  extends AppCompatActivity {
     AdapterRecetas adapter,adapter2,adapter3;
     ArrayList<PlanAlimenticio> recetas,recetas2,recetas3;
     TextView btnWorkouts,txtAlmuerzo,txtCena,txtDesayuno,txtNada;
-    ImageView  imagsplash;
+    ImageView  btnRecordatorio;
 
 
     String id;
@@ -55,12 +55,6 @@ public class UsuarioPlan  extends AppCompatActivity {
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
     private static final String TAG = "BAJARINFO:";
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-    Date date = new Date();
-
-    String fecha = dateFormat.format(date);
-
 
 
     @Override
@@ -71,8 +65,7 @@ public class UsuarioPlan  extends AppCompatActivity {
         Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("");
-        ActionBar actionBar=getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         dbProvider = new DBProvider();
         bajarInfo = new BajarInfo();
@@ -94,11 +87,8 @@ public class UsuarioPlan  extends AppCompatActivity {
         txtDesayuno=findViewById(R.id.txtDesayuno);
 
         txtNada=findViewById(R.id.txtNada);
-        imagsplash=findViewById(R.id.imagsplash);
 
-
-        // txtFechaActual.setText(fecha);
-       // txtFechaSiguiente.setText(getNextDate(fecha));
+        btnRecordatorio=findViewById(R.id.btnRecordatorio);
 
         bajarRecetas();
 
@@ -161,6 +151,17 @@ public class UsuarioPlan  extends AppCompatActivity {
                                     txtDesayuno.setVisibility(View.GONE);
 */
 
+
+        btnRecordatorio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UsuarioPlan.this, ListaRecordatorio.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+
+            }
+        });
 
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
