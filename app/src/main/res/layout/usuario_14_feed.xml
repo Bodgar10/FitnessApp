@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/white"
@@ -14,18 +15,6 @@
         app:titleTextAppearance="@style/Toolbar.TitleText"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
-        <TextView
-            android:id="@+id/txtComprado"
-            android:layout_width="wrap_content"
-            android:layout_height="25sp"
-            android:layout_marginEnd="10dp"
-            android:layout_gravity="end"
-            android:textStyle="bold"
-            android:text="Comprado"
-            android:textAllCaps="true"
-            android:textColor="@color/naranja"
-            android:textSize="15sp" />
-
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -33,7 +22,6 @@
         layout="@layout/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
         android:layout_marginBottom="49dp"
         >
 

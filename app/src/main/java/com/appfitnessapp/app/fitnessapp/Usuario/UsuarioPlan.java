@@ -46,7 +46,6 @@ public class UsuarioPlan  extends AppCompatActivity {
     AdapterRecetas adapter,adapter2,adapter3;
     ArrayList<PlanAlimenticio> recetas,recetas2,recetas3;
     TextView btnWorkouts,txtAlmuerzo,txtCena,txtDesayuno,txtNada;
-    ImageView  btnRecordatorio;
 
 
     String id;
@@ -88,7 +87,6 @@ public class UsuarioPlan  extends AppCompatActivity {
 
         txtNada=findViewById(R.id.txtNada);
 
-        btnRecordatorio=findViewById(R.id.btnRecordatorio);
 
         bajarRecetas();
 
@@ -152,16 +150,6 @@ public class UsuarioPlan  extends AppCompatActivity {
 */
 
 
-        btnRecordatorio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UsuarioPlan.this, ListaRecordatorio.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
-
-            }
-        });
 
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override

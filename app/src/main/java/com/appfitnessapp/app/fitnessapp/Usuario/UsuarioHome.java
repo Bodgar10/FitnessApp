@@ -68,7 +68,6 @@ public class UsuarioHome  extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
-    TextView txtComprado;
 
     private static FirebaseAuth mAuth;
     LinearLayoutManager linearLayout;
@@ -120,7 +119,6 @@ public class UsuarioHome  extends AppCompatActivity {
         imgChat=findViewById(R.id.imgChat);
 
         imgHome=findViewById(R.id.imgHome);
-        txtComprado=findViewById(R.id.txtComprado);
 
 
         imgPlan.setOnClickListener(new View.OnClickListener() {
@@ -175,21 +173,6 @@ public class UsuarioHome  extends AppCompatActivity {
         feeds=new ArrayList<>();
         adapterFeed=new AdapterFeed(feeds);
         recyclerView.setAdapter(adapterFeed);
-
-        txtComprado.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UsuarioHome.this, ListaComprado.class);
-                intent.putExtra("anim id in", R.anim.move_in);
-                intent.putExtra("anim id out", R.anim.move_leeft_in);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                overridePendingTransition(R.anim.move, R.anim.move_leeft);
-
-            }
-        });
-
-
 
 
         adapterFeed.setOnClickListener(new View.OnClickListener() {

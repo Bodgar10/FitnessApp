@@ -65,14 +65,14 @@ public class UsuarioPerfil  extends AppCompatActivity {
     ImageButton imgHome,imgPlan,imgChat,btnDerecha,btnIzquierda;
     CircularImageView imgPersona;
     TextView txtNombre,txtPeso,txtAltura,txtObjetivo,txtDiasSemana;
-    LinearLayout btnCalificar;
+    LinearLayout btnCalificar,btnRecordatorio;
 
     private ProgressDialog progressDialog;
     private static final String TAG = "BAJARINFO:";
     static DBProvider dbProvider;
 
 
-    LinearLayout linearCerrar;
+    LinearLayout linearCerrar,btnPdf;
 
 
     private static FirebaseAuth mAuth;
@@ -156,6 +156,8 @@ public class UsuarioPerfil  extends AppCompatActivity {
         btnDerecha=findViewById(R.id.btnDerecha);
         btnIzquierda=findViewById(R.id.btnIzquierda);
 
+        btnRecordatorio=findViewById(R.id.btnRecordatorio);
+
 
            imgPersona=findViewById(R.id.imgPersona);
            linearCerrar=findViewById(R.id.linearCerrar);
@@ -175,6 +177,8 @@ public class UsuarioPerfil  extends AppCompatActivity {
         txtDiasSemana.setText(fecha);
 
         btnCalificar=findViewById(R.id.linearCalificar);
+
+        btnPdf=findViewById(R.id.btnPdf);
 
 
 
@@ -275,6 +279,29 @@ public class UsuarioPerfil  extends AppCompatActivity {
            });
 
 
+           btnRecordatorio.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+
+                   Intent intent = new Intent(UsuarioPerfil.this, ListaRecordatorio.class);
+                   intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                   startActivity(intent);
+                   overridePendingTransition(R.anim.move, R.anim.move_leeft);
+
+               }
+           });
+
+
+        btnPdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(UsuarioPerfil.this, ListaComprado.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
+            }
+        });
 
 
         //________________________________________________________________________________________________

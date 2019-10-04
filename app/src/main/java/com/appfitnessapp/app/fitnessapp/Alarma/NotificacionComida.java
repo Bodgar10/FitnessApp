@@ -3,12 +3,15 @@ package com.appfitnessapp.app.fitnessapp.Alarma;
 import android.annotation.TargetApi;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
 
+import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
 
 public class NotificacionComida extends ContextWrapper {
@@ -40,9 +43,12 @@ public class NotificacionComida extends ContextWrapper {
     }
 
     public NotificationCompat.Builder getChannelNotification() {
+        Intent intent1 = new Intent(this.getApplicationContext(), SplashPantalla.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent1, 0);
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setContentTitle("Recordatorio Comida")
                 .setContentText("Es hora de revisar tu comida.")
+                .setContentIntent(pIntent)
                 .setSmallIcon(R.drawable.ic_notificacion);
     }
 }
