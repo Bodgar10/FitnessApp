@@ -6,15 +6,63 @@
     android:layout_height="match_parent">
 
 
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="@android:color/white"
+        android:elevation="10dp"
+        android:theme="@style/Toolbar"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:titleTextAppearance="@style/Toolbar.TitleText">
+
+        <TextView
+            android:id="@+id/txtComprado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
+            android:gravity="end"
+            android:padding="5dp"
+            android:text="Comprado"
+            android:textAllCaps="true"
+            android:textColor="@color/naranja"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtSiguiente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
+            android:gravity="end"
+            android:padding="5dp"
+            android:text="Finalizar"
+            android:textAllCaps="true"
+            android:textColor="@color/azul"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
     <include
         layout="@layout/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="49dp">
 
@@ -57,16 +105,17 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
+                android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/imgHome"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginBottom="3dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:background="@null"
                     android:scaleType="centerInside"
                     app:srcCompat="@drawable/ic_homenuevo" />
@@ -88,99 +137,49 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="3dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="3dp"
                 android:layout_marginBottom="4dp"
                 android:layout_weight="1.5"
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <ImageButton
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginBottom="3dp"
-                    android:background="@null"
-                    android:scaleType="centerCrop"
-                    android:tint="@android:color/darker_gray" />
 
-                <TextView
-                    android:id="@+id/txtPlan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:text="Mi plan"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp"
-                    android:visibility="gone" />
 
             </LinearLayout>
 
 
+
             <LinearLayout
-                android:id="@+id/btnPerfil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginEnd="3dp"
+                android:id="@+id/linearAsesoria"
+                android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="3dp"
-                android:layout_marginBottom="4dp"
-                android:layout_weight=".5"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginBottom="3dp"
-                    android:background="@null"
-                    android:scaleType="centerCrop"
-                    android:tint="@android:color/darker_gray" />
-
-                <TextView
-                    android:id="@+id/txtPerfil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:text="Perfil"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp"
-                    android:visibility="gone" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="3dp"
-                android:layout_marginBottom="4dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/imgPerfil"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:id="@+id/btnAsesoria"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginBottom="3dp"
                     android:background="@null"
                     android:scaleType="centerCrop"
                     android:tint="@android:color/darker_gray"
-                    app:srcCompat="@drawable/ic_usuario" />
+                    app:srcCompat="@drawable/ic_asesoria" />
 
                 <TextView
                     android:id="@+id/txtChat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:text="Chat"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp"
-                    android:visibility="gone" />
+                    android:text="Asesoria"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -190,49 +189,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="142dp"
-        android:layout_marginEnd="142dp"
-        android:layout_marginBottom="1dp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/linearAsesoria"
-            android:layout_width="90dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/boton_naranja_feed"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/btnAsesoria"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginTop="3dp"
-                android:background="@null"
-                android:scaleType="centerCrop"
-                android:tint="@android:color/white"
-                app:srcCompat="@drawable/ic_asesoria" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Asesoria"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
 
 
 </RelativeLayout>

@@ -139,11 +139,14 @@ public class ListaComprado extends AppCompatActivity {
                                 progressDialog.dismiss();
 
                             }
+                            else {
+                                progressDialog.dismiss();
+
+                            }
 
                     }
                     }
                 } else {
-                    progressDialog.dismiss();
                     Log.e(TAG, "Usuarios 3: ");
                 }
 
@@ -170,10 +173,6 @@ public class ListaComprado extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent intent;
-        intent = new Intent(this, UsuarioPerfil.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
         finish();
         overridePendingTransition(
                 getIntent().getIntExtra("anim id in", R.anim.move_in),

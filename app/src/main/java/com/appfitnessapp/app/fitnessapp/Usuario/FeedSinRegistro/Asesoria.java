@@ -2,9 +2,12 @@ package com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -12,6 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -28,6 +32,8 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
 import com.appfitnessapp.app.fitnessapp.Login.Registro;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro.AsesoriaRegistro;
+import com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro.DetallesImagen;
 import com.appfitnessapp.app.fitnessapp.videoplayer.VideoPlayer;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,7 +50,7 @@ public class Asesoria extends AppCompatActivity {
     TextView txtAsesorias,txtPrecio,txtCalificacion,txtDescripcion,txtNombre,txtProfesion,
     txtDescripcionRutina,txtPrecioFinal,txtDescripcionAlimentos;
     ImageView videoView,imgVideo;
-    LinearLayout btnComprar;
+    LinearLayout btnComprar,btnAndie,btnFederico;
 
     String id,videoUrl,precioTotal;
 
@@ -123,6 +129,9 @@ public class Asesoria extends AppCompatActivity {
         btnComprar=findViewById(R.id.btnComprarAsesoria);
 
 
+        btnAndie=findViewById(R.id.btnAndie);
+        btnFederico=findViewById(R.id.btnFedrico);
+
         imgVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,6 +144,35 @@ public class Asesoria extends AppCompatActivity {
 
             }
         });
+
+
+
+
+        btnAndie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Asesoria.this, DetallesImagen.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("Nombre","Andie");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+
+        btnFederico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Asesoria.this, DetallesImagen.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("Nombre","Federico");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
 
         recyclerView=findViewById(R.id.recyclerview);
         recyclerView.setNestedScrollingEnabled(false);
@@ -176,16 +214,16 @@ public class Asesoria extends AppCompatActivity {
         });
 
 
-        adapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (isOnline(this)){
+            bajarAsesoria();
+            bajarComentarios();
 
-            }
-        });
+        }
+        else {
+            Toast.makeText(this, "No hay conexion a internet...", Toast.LENGTH_LONG).show();
+            progressDialog.dismiss();
+        }
 
-
-        bajarAsesoria();
-        bajarComentarios();
 
     }
 
@@ -338,6 +376,12 @@ public class Asesoria extends AppCompatActivity {
         });
     }
 
+
+    public static boolean isOnline(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
+    }
 
 
 

@@ -209,6 +209,7 @@
                 android:textStyle="bold" />
 
             <LinearLayout
+                android:id="@+id/btnAndie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -244,7 +245,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         android:gravity="center|start"
-                        android:text="ANDIE ILLANES"
+                        android:text="@string/andie_illanes"
                         android:textAlignment="textStart"
                         android:textColor="@color/negro"
                         android:textSize="13sp"
@@ -257,8 +258,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         android:gravity="center|start"
-                        android:text="L.A.F
-Master Instructor de Commando Studio"
+                        android:text="@string/andie"
                         android:textAlignment="textStart"
                         android:textColor="@android:color/darker_gray"
                         android:textSize="12sp" />
@@ -269,6 +269,7 @@ Master Instructor de Commando Studio"
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btnFedrico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -303,7 +304,7 @@ Master Instructor de Commando Studio"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         android:gravity="center|start"
-                        android:text="FEDERICO BOYSELLE"
+                        android:text="@string/federico_boyselle"
                         android:textAlignment="textStart"
                         android:textColor="@color/negro"
                         android:textSize="13sp"
@@ -316,10 +317,7 @@ Master Instructor de Commando Studio"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         android:gravity="center|start"
-                        android:text="L.A.F. y N.D. Federico Boysselle Hernández
-Licenciado en Acondicionamiento Físico y Nutriólogo Deportivo.
-Director del Centro de Nutrición Deportiva, Estética Corporal y Alto Rendimiento (CENDECAR).
-"
+                        android:text="@string/federico"
                         android:textAlignment="textStart"
                         android:textColor="@android:color/darker_gray"
                         android:textSize="12sp" />
@@ -632,7 +630,7 @@ Director del Centro de Nutrición Deportiva, Estética Corporal y Alto Rendimien
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 android:textAlignment="textStart"
                 android:textStyle="bold"
                 android:text="$1200 USD"
@@ -663,6 +661,8 @@ Director del Centro de Nutrición Deportiva, Estética Corporal y Alto Rendimien
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:background="@null"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
                 android:tint="@color/blanco"
                 android:layout_marginStart="10dp"
                 android:scaleType="centerCrop"

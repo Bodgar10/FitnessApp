@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -51,6 +53,8 @@ public class IniciarSesion extends AppCompatActivity {
     TextInputEditText edtCorreo,edtContrasena;
     LinearLayout btnIniciarSesion,btnRegistrar;
 
+    Button btnOlvidarContrasena;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,14 +83,15 @@ public class IniciarSesion extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
 
 
+        btnOlvidarContrasena=findViewById(R.id.btnOlvidarContrasena);
 
 
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String correo = edtCorreo.getText().toString();
-                String pass = edtContrasena.getText().toString();
+                String correo = edtCorreo.getText().toString().trim();
+                String pass = edtContrasena.getText().toString().trim();
 
                 if (!correo.isEmpty() && !pass.isEmpty()){
                     progressDialog.setMessage("Ingresando...");
@@ -109,6 +114,14 @@ public class IniciarSesion extends AppCompatActivity {
             }
         });
 
+
+        btnOlvidarContrasena.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IniciarSesion.this, OlvidarContrasena.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

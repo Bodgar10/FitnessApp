@@ -107,6 +107,10 @@
     <string name="calorias_aproximadas">Calorías aproximadas</string>
     <string name="tipo_comida">TIPO COMIDA</string>
     <string name="comenzar_asesoria">Comenzar asesoría</string>
+    <string name="federico"><![CDATA[L.A.F. y N.D. Federico Boysselle Hernández Licenciado en Acondicionamiento Físico y Nutriólogo Deportivo. Director del Centro de Nutrición Deportiva, Estética Corporal y Alto Rendimiento (CENDECAR).]]></string>
+    <string name="andie">L.A.F Master Instructor de Commando Studio</string>
+    <string name="andie_illanes">ANDIE ILLANES</string>
+    <string name="federico_boyselle">FEDERICO BOYSELLE</string>
 
 
 </resources>

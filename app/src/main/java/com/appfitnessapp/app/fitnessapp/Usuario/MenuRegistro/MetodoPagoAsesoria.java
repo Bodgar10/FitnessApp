@@ -1,11 +1,10 @@
-package com.appfitnessapp.app.fitnessapp.Usuario;
+package com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -18,9 +17,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
-import com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro.AsesoriaRegistro;
+import com.appfitnessapp.app.fitnessapp.Usuario.DetallePdf;
+import com.appfitnessapp.app.fitnessapp.Usuario.MetodoPagoPdf;
 import com.appfitnessapp.app.fitnessapp.Usuario.Paypal.Config;
-import com.appfitnessapp.app.fitnessapp.Usuario.Paypal.PaymentDetails;
+import com.appfitnessapp.app.fitnessapp.Usuario.Paypal.PaymentAsesoria;
+import com.appfitnessapp.app.fitnessapp.Usuario.Tarjeta;
 import com.google.firebase.auth.FirebaseAuth;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
@@ -32,31 +33,31 @@ import org.json.JSONException;
 
 import java.math.BigDecimal;
 
-public class MetodoPago extends AppCompatActivity {
+public class MetodoPagoAsesoria extends AppCompatActivity {
 
 
-    RadioButton btnTarjeta,btnPaypal;
-    TextView txtResumen,txtPlan;
+    RadioButton btnTarjeta, btnPaypal;
+    TextView txtResumen, txtPlan;
     LinearLayout btnPagar;
     TextView txtTotal;
 
     DBProvider dbProvider;
 
 
-    public static final int PAYPAL_REQUEST_CODE=7171;
+    public static final int PAYPAL_REQUEST_CODE = 7171;
 
-    private static PayPalConfiguration config=new PayPalConfiguration()
+    private static PayPalConfiguration config = new PayPalConfiguration()
             .environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK)
             .clientId(Config.PAYPAL_CLIENTE_ID);
 
 
-    String amount="";
+    String amount = "";
 
-    String pago,meses,id;
+    String pago, id, url, descripcion;
 
     @Override
     protected void onDestroy() {
-        stopService(new Intent(this,PayPalService.class));
+        stopService(new Intent(this, PayPalService.class));
         super.onDestroy();
     }
 
@@ -65,57 +66,55 @@ public class MetodoPago extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_07_metodo_pago);
 
-        Toolbar toolbarback=findViewById(R.id.include);
+        Toolbar toolbarback = findViewById(R.id.include);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Pago");
-        ActionBar actionBar=getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        txtResumen=findViewById(R.id.txtResumen);
-        txtPlan=findViewById(R.id.txtTipoPlan);
-        txtTotal=findViewById(R.id.txtTotalPago);
+        txtResumen = findViewById(R.id.txtResumen);
+        txtPlan = findViewById(R.id.txtTipoPlan);
+        txtTotal = findViewById(R.id.txtTotalPago);
 
         dbProvider = new DBProvider();
 
-        btnPagar=findViewById(R.id.linearRealizarPago);
+        btnPagar = findViewById(R.id.linearRealizarPago);
 
-        btnPaypal=findViewById(R.id.btnPaypal);
-        btnTarjeta=findViewById(R.id.btnTarjeta);
+        btnPaypal = findViewById(R.id.btnPaypal);
+        btnTarjeta = findViewById(R.id.btnTarjeta);
 
 
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            pago =extras.getString("costo");
-            meses =extras.getString("meses");
+            pago = extras.getString("costo");
+            url = extras.getString("url");
+            descripcion = extras.getString("descripcion");
+
+
         }
 
 
+        String simbolo = "$";
+
+        // txtTotal.setText("$ "+pago);
+        txtResumen.setText("$ " + pago);
+        txtPlan.setText("Pdf");
+
+        txtTotal.setText(simbolo + pago);
 
 
-
-
-        String simbolo="$";
-
-       // txtTotal.setText("$ "+pago);
-        txtResumen.setText("$ "+pago);
-        txtPlan.setText(meses+"meses");
-
-        txtTotal.setText(simbolo+pago);
-
-
-        Intent intent =new Intent(this,PayPalService.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
+        Intent intent = new Intent(this, PayPalService.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
         startService(intent);
-
 
 
         btnPaypal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (btnPaypal.isChecked()){
+                if (btnPaypal.isChecked()) {
 
                     btnTarjeta.setChecked(false);
                 }
@@ -127,7 +126,7 @@ public class MetodoPago extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (btnTarjeta.isChecked()){
+                if (btnTarjeta.isChecked()) {
 
                     btnPaypal.setChecked(false);
 
@@ -136,23 +135,20 @@ public class MetodoPago extends AppCompatActivity {
         });
 
 
-
         btnPagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                if (btnPaypal.isChecked()){
+                if (btnPaypal.isChecked()) {
                     btnTarjeta.setChecked(false);
 
                     processPayment();
 
-                }
-
-                else if (btnTarjeta.isChecked()){
+                } else if (btnTarjeta.isChecked()) {
 
                     btnPaypal.setChecked(false);
-                    Intent intent1 =new Intent(MetodoPago.this,Tarjeta.class);
+                    Intent intent1 = new Intent(MetodoPagoAsesoria.this, Tarjeta.class);
                     startActivity(intent1);
 
                 }
@@ -165,46 +161,42 @@ public class MetodoPago extends AppCompatActivity {
     }
 
 
-
-
-    private void processPayment(){
+    private void processPayment() {
 
         amount = pago;
 
 
-
-        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(amount)),"MXN",txtPlan.getText().toString(),
+        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(amount)), "MXN", txtPlan.getText().toString(),
                 PayPalPayment.PAYMENT_INTENT_SALE);
 
-        Intent intent = new Intent(this,PaymentActivity.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
-        intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payPalPayment);
-        startActivityForResult(intent,PAYPAL_REQUEST_CODE);
+        Intent intent = new Intent(this, PaymentActivity.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
+        startActivityForResult(intent, PAYPAL_REQUEST_CODE);
 
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == PAYPAL_REQUEST_CODE){
+        if (requestCode == PAYPAL_REQUEST_CODE) {
 
-            if (resultCode == RESULT_OK){
+            if (resultCode == RESULT_OK) {
 
                 PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
 
-                if (confirmation != null){
+                if (confirmation != null) {
 
                     try {
 
                         String paymentDetails = confirmation.toJSONObject().toString(4);
-                        startActivity(new Intent(this,PaymentDetails.class)
-                        .putExtra("PaymentDetails",paymentDetails)
-                        .putExtra("PaymentAmount",amount)
-                                .putExtra("id_usuario",id)
-                                .putExtra("meses",meses));
+                        startActivity(new Intent(this, PaymentAsesoria.class)
+                                .putExtra("PaymentDetails", paymentDetails)
+                                .putExtra("PaymentAmount", amount)
+                                .putExtra("id_usuario", id)
+                                .putExtra("descripcion", descripcion)
+                                .putExtra("url", url));
                         finish();
-
-
 
 
                     } catch (JSONException e) {
@@ -214,18 +206,12 @@ public class MetodoPago extends AppCompatActivity {
                 }
 
 
-
-
-            }
-
-            else if(resultCode == Activity.RESULT_CANCELED) {
+            } else if (resultCode == Activity.RESULT_CANCELED) {
 
                 Toast.makeText(this, "Se cancelo la compra.", Toast.LENGTH_SHORT).show();
             }
 
-        }
-
-        else if(resultCode == PaymentActivity.RESULT_EXTRAS_INVALID){
+        } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
 
             Toast.makeText(this, "Invalido", Toast.LENGTH_SHORT).show();
 
@@ -247,7 +233,7 @@ public class MetodoPago extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent;
-        intent = new Intent(this, TipoPlanes.class);
+        intent = new Intent(this, DetallePdf.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

@@ -7,13 +7,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,8 +33,10 @@ import com.appfitnessapp.app.fitnessapp.Usuario.DetallePdf;
 import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.Asesoria;
 import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.HomeSinRegistro;
 import com.appfitnessapp.app.fitnessapp.Usuario.Imagen;
+import com.appfitnessapp.app.fitnessapp.Usuario.ListaComprado;
 import com.appfitnessapp.app.fitnessapp.Usuario.PantallaPDF;
 import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioPerfil;
 import com.appfitnessapp.app.fitnessapp.Usuario.Video;
 import com.appfitnessapp.app.fitnessapp.videoplayer.VideoPlayer;
 import com.google.firebase.database.DataSnapshot;
@@ -39,7 +45,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class Home   extends AppCompatActivity {
+public class Home  extends AppCompatActivity {
 
     LinearLayout linearAsesoria;
     private static final int PDF_CODE = 1000;
@@ -58,12 +64,19 @@ public class Home   extends AppCompatActivity {
 
     LinearLayoutManager linearLayout;
 
+    TextView txtComprado;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_02_feed);
+
+        Toolbar toolbarback=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbarback);
+        getSupportActionBar().setTitle("");
+
 
         bajarFeed();
 
@@ -75,10 +88,14 @@ public class Home   extends AppCompatActivity {
 
 
         imgAsesoria = findViewById(R.id.btnAsesoria);
-        imgPerfil = findViewById(R.id.imgPerfil);
+       // imgPerfil = findViewById(R.id.imgPerfil);
 
         linearAsesoria = findViewById(R.id.linearAsesoria);
 
+        txtComprado = findViewById(R.id.txtComprado);
+
+
+/*
 
         imgPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +111,7 @@ public class Home   extends AppCompatActivity {
             }
         });
 
+        */
 
         linearAsesoria.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +140,15 @@ public class Home   extends AppCompatActivity {
             }
         });
 
+        txtComprado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home.this, ListaComprado.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.move, R.anim.move_leeft);
+            }
+        });
 
 
 
@@ -132,6 +159,7 @@ public class Home   extends AppCompatActivity {
         //poner orden inverso el recycler
         linearLayout.setReverseLayout(true);
         linearLayout.setStackFromEnd(true);
+        recyclerView.setHasFixedSize(true);
 
         feeds = new ArrayList<>();
         adapterFeed = new AdapterFeed(feeds);
@@ -166,7 +194,9 @@ public class Home   extends AppCompatActivity {
                     } else {
                         Intent intent = new Intent(Home.this, DetallePdf.class);
                         Bundle bundle = new Bundle();
-                        bundle.putString("pdf", feeds.get(recyclerView.getChildAdapterPosition(view)).getDescripcion());
+                        bundle.putString("HomeInicio","Asesoria");
+                        bundle.putString("descripcion",feeds.get(recyclerView.getChildAdapterPosition(view)).getDescripcion());
+                        bundle.putString("url",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
                         bundle.putString("precio", feeds.get(recyclerView.getChildAdapterPosition(view)).getCosto_pdf());
 
                         intent.putExtras(bundle);
@@ -239,6 +269,29 @@ public class Home   extends AppCompatActivity {
 
 
         }
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        finish();
+        overridePendingTransition(
+                getIntent().getIntExtra("anim id in", R.anim.move_in),
+                getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
 
     }
 

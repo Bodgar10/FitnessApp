@@ -22,7 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Login.SplashPantalla"
+        <activity android:name=".Usuario.MenuRegistro.DetallesImagen"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".Login.SplashPantalla"
             android:theme="@style/YourTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,21 +34,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login.IniciarSesion"
+        <activity
+            android:name=".Login.IniciarSesion"
             android:theme="@style/YourTheme" />
         <activity
             android:name=".Login.Registro"
-            android:theme="@style/YourTheme"/>
+            android:theme="@style/YourTheme" />
         <activity
             android:name=".Usuario.UsuarioHome"
-            android:theme="@style/YourTheme"
-            android:screenOrientation="portrait" />
-
+            android:screenOrientation="portrait"
+            android:theme="@style/YourTheme" />
         <activity android:name=".viewPdf" />
         <activity
             android:name=".Usuario.UsuarioPerfil"
-            android:theme="@style/YourTheme"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/YourTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
@@ -57,7 +61,15 @@
         <activity
             android:name=".Usuario.Video"
             android:theme="@style/TemaVideo" />
-        <activity android:name=".Usuario.ChatActivityUsuario" />
+        <activity android:name=".Usuario.ChatActivityUsuario"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name=".Login.OlvidarContrasena"
+            android:parentActivityName=".Login.IniciarSesion"
+            android:screenOrientation="portrait"
+            ></activity>
+
         <activity
             android:name=".Usuario.FeedSinRegistro.Asesoria"
             android:screenOrientation="portrait" />
@@ -65,15 +77,15 @@
             android:name=".Usuario.FeedSinRegistro.HomeSinRegistro"
             android:screenOrientation="portrait" />
         <activity android:name=".Usuario.Paypal.PaymentDetails" />
-        <activity android:name=".Usuario.Paypal.PaymentPdf"></activity>
+        <activity android:name=".Usuario.Paypal.PaymentPdf" />
+        <activity android:name=".Usuario.Paypal.PaymentAsesoria" />
         <activity
             android:name=".Usuario.Tarjeta"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.MetodoPago"
-            android:theme="@style/YourTheme"
-            android:parentActivityName=".Usuario.TipoPlanes"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/YourTheme" />
         <activity
             android:name=".Usuario.Calificar"
             android:parentActivityName=".Usuario.UsuarioPerfil"
@@ -90,8 +102,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.EditarPerfil"
-            android:theme="@style/YourTheme"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/YourTheme" />
         <activity
             android:name=".Usuario.InformacionCompra"
             android:parentActivityName=".Usuario.DetalleRecetas"
@@ -102,9 +114,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.TipoPlanes"
-            android:theme="@style/YourTheme"
             android:parentActivityName=".Usuario.MenuRegistro.AsesoriaRegistro"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/YourTheme" />
         <activity
             android:name=".Usuario.UsuarioPlan"
             android:screenOrientation="portrait" />
@@ -124,57 +136,55 @@
             android:name=".videoplayer.VideoPlayer"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:theme="@style/TemaVideo" /> <!-- android:screenOrientation="landscape"> -->
-
-        <activity android:name=".Usuario.MenuRegistro.Home"
-            android:theme="@style/YourTheme"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Usuario.MenuRegistro.AsesoriaRegistro"
-            android:theme="@style/YourTheme"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Usuario.MenuRegistro.Perfil"
-            android:theme="@style/YourTheme"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".Usuario.ChatFragmentUsuario"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Usuario.MetodoPagoPdf"
+        <activity
+            android:name=".Usuario.MenuRegistro.Home"
+            android:screenOrientation="portrait"
+            android:theme="@style/YourTheme" />
+        <activity
+            android:name=".Usuario.MenuRegistro.AsesoriaRegistro"
+            android:screenOrientation="portrait"
+            android:theme="@style/YourTheme" />
+        <activity
+            android:name=".Usuario.MenuRegistro.Perfil"
+            android:screenOrientation="portrait"
+            android:theme="@style/YourTheme" />
+        <activity
+            android:name=".Usuario.ChatFragmentUsuario"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".Usuario.ListaComprado"
+        <activity
+            android:name=".Usuario.MetodoPagoPdf"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".Usuario.ListaRecordatorio"
-            android:screenOrientation="portrait"/>
-
-
-        <activity android:name=".Alarma.AlarmaDesayuno"
+        <activity
+            android:name=".Usuario.ListaComprado"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".Alarma.AlarmaComida"
+        <activity
+            android:name=".Usuario.ListaRecordatorio"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".Alarma.AlarmaCena"
+        <activity
+            android:name=".Alarma.AlarmaDesayuno"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Alarma.AlarmaComida"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Alarma.AlarmaCena"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Usuario.MenuRegistro.MetodoPagoAsesoria"
             android:screenOrientation="portrait" />
 
         <receiver android:name=".Alarma.AlertaRecibidaDesayuno" />
         <receiver android:name=".Alarma.AlertaRecibidaComida" />
         <receiver android:name=".Alarma.AlertaRecibidaCena" />
 
-
-
-
-
-
-
-
         <activity
             android:name=".Admin.AsesoriasAdmin"
-            android:theme="@style/YourTheme"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/YourTheme" />
         <activity
             android:name=".Admin.AdminPerfil"
-            android:theme="@style/YourTheme"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/YourTheme" />
         <activity
             android:name=".Admin.AdminPlanUsuario"
             android:screenOrientation="portrait" />
@@ -183,8 +193,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Admin.AsesoriasPendientes"
-            android:theme="@style/YourTheme"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/YourTheme" />
         <activity
             android:name=".Admin.EscogerPlan"
             android:parentActivityName=".Admin.SolicitudAsesoria"
@@ -202,9 +212,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Admin.EditarPerfilAdmin"
-            android:theme="@style/YourTheme"
             android:parentActivityName=".Admin.AdminPerfil"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/YourTheme" />
         <activity
             android:name=".Admin.AgregarEjercicios"
             android:screenOrientation="portrait" />
@@ -218,54 +228,63 @@
             android:name=".Admin.AgregarPasos"
             android:screenOrientation="portrait" />
         <activity android:name=".Compra.Compra" />
-
-        <activity android:name=".Admin.AgregarVideo"
+        <activity
+            android:name=".Admin.AgregarVideo"
             android:screenOrientation="portrait" />
-        <activity android:name=".Admin.AgregarPdf"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Admin.AgregarImagen"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Admin.AdminAgregarFeed"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Admin.EditarRecetaU"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Admin.EditarIngredientes"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Admin.EditarPasos"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Admin.AdminPasosUsuario"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Admin.AdminIngredientesUsuario"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Admin.EjerciciosLista"
+        <activity
+            android:name=".Admin.AgregarPdf"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".Admin.ChatFragmentAdmin"
+        <activity
+            android:name=".Admin.AgregarImagen"
             android:screenOrientation="portrait" />
-        <activity android:name=".Admin.ChatActivityAdmin"
+        <activity
+            android:name=".Admin.AdminAgregarFeed"
             android:screenOrientation="portrait" />
-        <activity android:name=".Admin.ListaChat"
+        <activity
+            android:name=".Admin.EditarRecetaU"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".Admin.FormularioUsuario"
+        <activity
+            android:name=".Admin.EditarIngredientes"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".Admin.FormularioLista"
+        <activity
+            android:name=".Admin.EditarPasos"
             android:screenOrientation="portrait" />
-        <activity android:name=".Admin.AgregarPregunta"
+        <activity
+            android:name=".Admin.AdminPasosUsuario"
             android:screenOrientation="portrait" />
-        <activity android:name=".Admin.EditarPregunta"
+        <activity
+            android:name=".Admin.AdminIngredientesUsuario"
             android:screenOrientation="portrait" />
-        
+        <activity
+            android:name=".Admin.EjerciciosLista"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Admin.ChatFragmentAdmin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Admin.ChatActivityAdmin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Admin.ListaChat"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Admin.FormularioUsuario"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Admin.FormularioLista"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Admin.AgregarPregunta"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Admin.EditarPregunta"
+            android:screenOrientation="portrait" />
 
         <service android:name=".Notificaciones.FirebaseInstanceService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-
         </service>
-
     </application>
 
 </manifest>

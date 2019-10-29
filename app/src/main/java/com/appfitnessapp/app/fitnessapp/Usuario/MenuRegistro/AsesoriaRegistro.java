@@ -2,16 +2,21 @@ package com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -34,6 +39,7 @@ import com.appfitnessapp.app.fitnessapp.Usuario.TipoPlanes;
 import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
 import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioPerfil;
 import com.appfitnessapp.app.fitnessapp.videoplayer.VideoPlayer;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -48,14 +54,16 @@ public class AsesoriaRegistro extends AppCompatActivity {
     ImageView imgAsesoria,imgEjercicios,imgAlimentos;
     TextView txtAsesorias,txtPrecio,txtCalificacion,txtDescripcion,txtNombre,txtProfesion,
             txtDescripcionRutina,txtPrecioFinal,txtDescripcionAlimentos;
-    ImageView videoView,imgVideo;
-    LinearLayout btnComprar;
+    ImageView videoView,imgVideo,imgAsesor1;
+    LinearLayout btnComprar,btnAndie,btnFederico;
 
     String id,videoUrl,precioTotal;
 
     RecyclerView recyclerView;
     AdapterComentarios adapter;
     ArrayList<Valoraciones> plan;
+
+
 
     int valor,valor1,valor2,valor3,valor4;
 
@@ -72,12 +80,27 @@ public class AsesoriaRegistro extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
 
 
-
         dbProvider = new DBProvider();
 
 
-        bajarAsesoria();
-        bajarComentarios();
+
+        videoView=findViewById(R.id.videoViewAsesoria);
+        imgVideo=findViewById(R.id.imgVideo);
+
+        if (isOnline(this)){
+            bajarAsesoria();
+            bajarComentarios();
+            imgVideo.setVisibility(View.VISIBLE);
+
+
+        }
+        else {
+            imgVideo.setVisibility(View.GONE);
+            Toast.makeText(this, "No hay conexion a internet...", Toast.LENGTH_LONG).show();
+            progressDialog.dismiss();
+        }
+
+
 
         RatingReviews ratingReviews = (RatingReviews) findViewById(R.id.rating_reviews);
 
@@ -128,10 +151,39 @@ public class AsesoriaRegistro extends AppCompatActivity {
         txtDescripcionAlimentos=findViewById(R.id.txtDescripcionAlimentos);
 
 
-        videoView=findViewById(R.id.videoViewAsesoria);
-        imgVideo=findViewById(R.id.imgVideo);
+
 
         btnComprar=findViewById(R.id.btnComprarAsesoria);
+
+        btnAndie=findViewById(R.id.btnAndie);
+        btnFederico=findViewById(R.id.btnFedrico);
+
+
+        btnAndie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(AsesoriaRegistro.this, DetallesImagen.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("Nombre","Andie");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+
+        btnFederico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(AsesoriaRegistro.this, DetallesImagen.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("Nombre","Federico");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
 
 
         imgVideo.setOnClickListener(new View.OnClickListener() {
@@ -180,6 +232,12 @@ public class AsesoriaRegistro extends AppCompatActivity {
 
     }
 
+    public static boolean isOnline(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
+    }
+
 
     public void bajarAsesoria(){
         dbProvider = new DBProvider();
@@ -223,6 +281,7 @@ public class AsesoriaRegistro extends AppCompatActivity {
                     }
                 } else {
                     Log.e(TAG, "Usuarios 3: ");
+
                 }
 
             }
@@ -230,6 +289,9 @@ public class AsesoriaRegistro extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(TAG, "ERROR: ");
+
+                progressDialog.dismiss();
+
             }
         });
     }
@@ -284,7 +346,9 @@ public class AsesoriaRegistro extends AppCompatActivity {
                         }
                     }
                 } else {
-                    Log.e(TAG, "Valoracion 3: "); }
+                    Log.e(TAG, "Valoracion 3: ");
+
+                }
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -354,6 +418,8 @@ public class AsesoriaRegistro extends AppCompatActivity {
                 getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
 
     }
+
+
 
 
 }

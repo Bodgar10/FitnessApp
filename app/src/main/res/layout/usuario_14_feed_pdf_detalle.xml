@@ -24,21 +24,6 @@
 
 
             <TextView
-                android:id="@+id/txtTituloPDF"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="5dp"
-                android:textColor="@color/negro"
-                android:textStyle="bold"
-                android:text="PDF"
-                android:textAlignment="textStart"
-                android:textSize="15sp" />
-
-
-
-            <TextView
                 android:id="@+id/txtDescripcionPDF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -45,13 +45,13 @@ public class MetodoPagoPdf extends AppCompatActivity {
     public static final int PAYPAL_REQUEST_CODE=7171;
 
     private static PayPalConfiguration config=new PayPalConfiguration()
-            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+            .environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK)
             .clientId(Config.PAYPAL_CLIENTE_ID);
 
 
     String amount="";
 
-    String pago,meses,id,url,descripcion;
+    String pago,id,url,descripcion;
 
     @Override
     protected void onDestroy() {
@@ -87,7 +87,6 @@ public class MetodoPagoPdf extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             pago =extras.getString("costo");
-            meses =extras.getString("meses");
             url  =extras.getString("url");
             descripcion  =extras.getString("descripcion");
 
@@ -103,7 +102,7 @@ public class MetodoPagoPdf extends AppCompatActivity {
 
         // txtTotal.setText("$ "+pago);
         txtResumen.setText("$ "+pago);
-        txtPlan.setText(meses);
+        txtPlan.setText("Pdf");
 
         txtTotal.setText(simbolo+pago);
 

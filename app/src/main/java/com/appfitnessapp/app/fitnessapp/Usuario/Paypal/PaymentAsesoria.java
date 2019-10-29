@@ -11,23 +11,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
-import com.appfitnessapp.app.fitnessapp.Usuario.Formulario;
+import com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro.Home;
 import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+public class PaymentAsesoria extends AppCompatActivity {
 
-
-public class PaymentPdf extends AppCompatActivity {
-
-    TextView txtId, txtAmount, txtStatus;
+    TextView txtId,txtAmount,txtStatus;
     DBProvider dbProvider;
 
-    String id, idUsuario, url, descripcion;
+    String id,idUsuario,url,descripcion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,28 +32,28 @@ public class PaymentPdf extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            idUsuario = extras.getString("id_usuario");
-            url = extras.getString("url");
-            descripcion = extras.getString("descripcion");
+            idUsuario =extras.getString("id_usuario");
+            url =extras.getString("url");
+            descripcion =extras.getString("descripcion");
 
         }
 
 
-        Log.e("descripcion:", "descr" + descripcion);
+        Log.e("descripcion:","descr"+descripcion);
 
         dbProvider = new DBProvider();
 
 
-        txtId = findViewById(R.id.txtId);
-        txtAmount = findViewById(R.id.txtAmount);
-        txtStatus = findViewById(R.id.txtStatus);
+        txtId=findViewById(R.id.txtId);
+        txtAmount=findViewById(R.id.txtAmount);
+        txtStatus=findViewById(R.id.txtStatus);
 
-        Intent intent = getIntent();
+        Intent intent =getIntent();
 
 
         try {
             JSONObject jsonObject = new JSONObject(intent.getStringExtra("PaymentDetails"));
-            showDetails(jsonObject.getJSONObject("response"), intent.getStringExtra("PaymentAmount"));
+            showDetails(jsonObject.getJSONObject("response"),intent.getStringExtra("PaymentAmount"));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -71,8 +66,8 @@ public class PaymentPdf extends AppCompatActivity {
 
             Toast.makeText(this, "La compra se realizo", Toast.LENGTH_SHORT).show();
             String key = dbProvider.tablaPdf().push().getKey();
-            dbProvider.crearTablaPdf(key, idUsuario, url, descripcion);
-            new CountDownTimer(2000, 1) {
+            dbProvider.crearTablaPdf(key,idUsuario,url,descripcion);
+            new CountDownTimer(2000,1){
 
                 @Override
                 public void onTick(long l) {
@@ -81,7 +76,7 @@ public class PaymentPdf extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    Intent intent = new Intent(PaymentPdf.this, UsuarioHome.class);
+                    Intent intent =new Intent(PaymentAsesoria.this, Home.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     startActivity(intent);

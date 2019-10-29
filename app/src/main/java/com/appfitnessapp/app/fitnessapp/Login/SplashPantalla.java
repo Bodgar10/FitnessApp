@@ -1,7 +1,10 @@
 package com.appfitnessapp.app.fitnessapp.Login;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -95,25 +98,36 @@ public class SplashPantalla extends AppCompatActivity {
 
         isPagado=true;
 
-        if (FirebaseAuth.getInstance().getCurrentUser() != null){
-            progressDialog.setMessage("Recopilando información importante...");
-            progressDialog.show();
-            progressDialog.setCancelable(false);
-            bajarInscritos(user.getUid());
-            new CountDownTimer(2000,1){
 
-                @Override
-                public void onTick(long l) {
+        if (isOnline(this)){
 
-                }
+            if (FirebaseAuth.getInstance().getCurrentUser() != null){
+                progressDialog.setMessage("Recopilando información importante...");
+                progressDialog.show();
+                progressDialog.setCancelable(false);
+                bajarInscritos(user.getUid());
+                new CountDownTimer(2000,1){
 
-                @Override
-                public void onFinish() {
+                    @Override
+                    public void onTick(long l) {
 
-                    bajarUsuarios();
-                }
-            }.start();
+                    }
+
+                    @Override
+                    public void onFinish() {
+
+                        bajarUsuarios();
+                    }
+                }.start();
+            }
         }
+        else {
+            Toast.makeText(this, "No hay conexion a internet...", Toast.LENGTH_LONG).show();
+            progressDialog.dismiss();
+        }
+
+
+
 
 
         btnIniciarSesion=findViewById(R.id.btnIniciarSesionsplash);
@@ -160,6 +174,8 @@ public class SplashPantalla extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     public void bajarInscritos(final String id_usuario){
@@ -254,6 +270,8 @@ public class SplashPantalla extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(TAG,"ERROR: ");
+                progressDialog.dismiss();
+
             }
         });
     }
@@ -308,6 +326,8 @@ public class SplashPantalla extends AppCompatActivity {
                     }
                 }else{
                     Log.e(TAG,"Usuarios 3: ");
+                    progressDialog.dismiss();
+
                 }
             }
 
@@ -322,7 +342,11 @@ public class SplashPantalla extends AppCompatActivity {
 
     }
 
-
+    public static boolean isOnline(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
+    }
 
 
 

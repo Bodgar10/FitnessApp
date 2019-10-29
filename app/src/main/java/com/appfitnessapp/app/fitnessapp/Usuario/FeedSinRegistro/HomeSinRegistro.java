@@ -2,8 +2,11 @@ package com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -11,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -57,12 +61,17 @@ public class HomeSinRegistro  extends AppCompatActivity {
 
     LinearLayoutManager linearLayout;
 
+    Toolbar toolbar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_02_feed);
+
+        toolbar=findViewById(R.id.toolbar);
+
+        toolbar.setVisibility(View.GONE);
 
         bajarFeed();
 
@@ -74,12 +83,12 @@ public class HomeSinRegistro  extends AppCompatActivity {
 
 
         imgAsesoria=findViewById(R.id.btnAsesoria);
-        imgPerfil=findViewById(R.id.imgPerfil);
+       // imgPerfil=findViewById(R.id.imgPerfil);
 
         linearAsesoria=findViewById(R.id.linearAsesoria);
 
 
-
+/*
         imgPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,6 +117,7 @@ public class HomeSinRegistro  extends AppCompatActivity {
             }
         });
 
+        */
 
         linearAsesoria.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,6 +145,7 @@ public class HomeSinRegistro  extends AppCompatActivity {
         //poner orden inverso el recycler
         linearLayout.setReverseLayout(true);
         linearLayout.setStackFromEnd(true);
+        recyclerView.setHasFixedSize(true);
 
         feeds=new ArrayList<>();
         adapterFeed=new AdapterFeed(feeds);
@@ -173,20 +184,31 @@ public class HomeSinRegistro  extends AppCompatActivity {
                         startActivity(intent);
                     }
                     else {
-                        Intent intent = new Intent(HomeSinRegistro.this, DetallePdf.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("pdf",feeds.get(recyclerView.getChildAdapterPosition(view)).getDescripcion());
-                        bundle.putString("precio",feeds.get(recyclerView.getChildAdapterPosition(view)).getCosto_pdf());
 
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-
+                        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(HomeSinRegistro.this);
+                        dialogo1.setTitle("No has iniciado sesión");
+                        dialogo1.setMessage("");
+                        dialogo1.setPositiveButton("Iniciar Sesión", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogo1, int id) {
+                                Intent intent = new Intent(HomeSinRegistro.this, IniciarSesion.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                        dialogo1.setNegativeButton("Registrarse", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogo1, int id) {
+                                Intent intent = new Intent(HomeSinRegistro.this, Registro.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                        dialogo1.show();
                     }
 
                 }
-
                 else {
-
 
                 }
 
@@ -260,4 +282,9 @@ public class HomeSinRegistro  extends AppCompatActivity {
         }
 
     }
+
+
+
+
+
 }

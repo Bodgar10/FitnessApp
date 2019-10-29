@@ -79,10 +79,10 @@ public class Registro extends AppCompatActivity {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String correo = Objects.requireNonNull(edtCorreo.getText()).toString();
-                String contrasena = Objects.requireNonNull(edtContrasena.getText()).toString();
-                String nombre = Objects.requireNonNull(edtNombre.getText()).toString();
-                String telefono = Objects.requireNonNull(edtTelefono.getText()).toString();
+                String correo = Objects.requireNonNull(edtCorreo.getText()).toString().trim();
+                String contrasena = Objects.requireNonNull(edtContrasena.getText()).toString().trim()   ;
+                String nombre = Objects.requireNonNull(edtNombre.getText()).toString().trim();
+                String telefono = Objects.requireNonNull(edtTelefono.getText()).toString().trim();
 
                 if (!correo.isEmpty() && !contrasena.isEmpty() && !nombre.isEmpty() && !telefono.isEmpty()) {
                     progressDialog.setMessage("Creando cuenta...");

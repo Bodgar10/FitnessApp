@@ -169,6 +169,7 @@ public class UsuarioHome  extends AppCompatActivity {
         //poner orden inverso el recycler
         linearLayout.setReverseLayout(true);
         linearLayout.setStackFromEnd(true);
+        recyclerView.setHasFixedSize(true);
 
         feeds=new ArrayList<>();
         adapterFeed=new AdapterFeed(feeds);
@@ -210,6 +211,7 @@ public class UsuarioHome  extends AppCompatActivity {
                     else {
                         Intent intent = new Intent(UsuarioHome.this, DetallePdf.class);
                         Bundle bundle = new Bundle();
+                        bundle.putString("HomeInicio","Pagado");
                         bundle.putString("url",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
                         bundle.putString("descripcion",feeds.get(recyclerView.getChildAdapterPosition(view)).getDescripcion());
                         bundle.putString("precio",feeds.get(recyclerView.getChildAdapterPosition(view)).getCosto_pdf());

@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro.MetodoPagoAsesoria;
 import com.appfitnessapp.app.fitnessapp.prueba;
 import com.appfitnessapp.app.fitnessapp.viewPdf;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,11 +34,11 @@ import java.util.Locale;
 public class DetallePdf extends AppCompatActivity {
 
     LinearLayout btnComprar;
-    TextView txtPrecio,txtTitulo,txtDescripcion;
-    private static final int PDF_CODE = 1000 ;
+    TextView txtPrecio, txtTitulo, txtDescripcion;
+    private static final int PDF_CODE = 1000;
 
 
-    String descripcion,precio,url,id;
+    String descripcion, precio, url, id, inicioSesion;
 
 
     @Override
@@ -45,25 +46,27 @@ public class DetallePdf extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_14_feed_pdf_detalle);
 
-        Toolbar toolbarback=findViewById(R.id.include);
+        Toolbar toolbarback = findViewById(R.id.include);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("PDF");
-        ActionBar actionBar=getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
         Bundle extras = getIntent().getExtras();
-        if (extras != null){
-            descripcion  =extras.getString("descripcion");
-            precio  =extras.getString("precio");
-            url  =extras.getString("url");
+        if (extras != null) {
+            descripcion = extras.getString("descripcion");
+            precio = extras.getString("precio");
+            url = extras.getString("url");
+            inicioSesion = extras.getString("HomeInicio");
+
         }
 
         Dexter.withActivity(this)
-                .withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .withListener(new BaseMultiplePermissionsListener(){
+                .withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new BaseMultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         super.onPermissionsChecked(report);
@@ -76,28 +79,38 @@ public class DetallePdf extends AppCompatActivity {
                 }).check();
 
 
-        btnComprar=findViewById(R.id.linearComprarPDF);
+        btnComprar = findViewById(R.id.linearComprarPDF);
 
-        txtPrecio=findViewById(R.id.txtPrecioPDF);
-        txtTitulo=findViewById(R.id.txtTituloPDF);
-        txtDescripcion=findViewById(R.id.txtDescripcionPDF);
+        txtPrecio = findViewById(R.id.txtPrecioPDF);
+        txtDescripcion = findViewById(R.id.txtDescripcionPDF);
 
 
         txtDescripcion.setText(descripcion);
-        txtPrecio.setText(precio);
+        txtPrecio.setText("$"+precio);
 
 
         btnComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(DetallePdf.this,MetodoPagoPdf.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("costo",precio);
-                bundle.putString("descripcion",descripcion);
-                bundle.putString("meses",txtTitulo.getText().toString());
-                bundle.putString("url",url);
-                intent.putExtras(bundle);
-                startActivity(intent);
+
+                if (inicioSesion.equals("Pagado")) {
+                    Intent intent = new Intent(DetallePdf.this, MetodoPagoPdf.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("costo", precio);
+                    bundle.putString("descripcion", descripcion);
+                    bundle.putString("url", url);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } else if (inicioSesion.equals("Asesoria")) {
+                    Intent intent = new Intent(DetallePdf.this, MetodoPagoAsesoria.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("costo", precio);
+                    bundle.putString("descripcion", descripcion);
+                    bundle.putString("url", url);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+
+                }
 
 
             }
@@ -109,12 +122,12 @@ public class DetallePdf extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==PDF_CODE && resultCode == RESULT_OK && data != null){
+        if (requestCode == PDF_CODE && resultCode == RESULT_OK && data != null) {
 
-            Uri selecPdf=data.getData();
-            Intent intent=new Intent(DetallePdf.this,PantallaPDF.class);
-            intent.putExtra("ViewType","storage");
-            intent.putExtra("FileUri",selecPdf.toString());
+            Uri selecPdf = data.getData();
+            Intent intent = new Intent(DetallePdf.this, PantallaPDF.class);
+            intent.putExtra("ViewType", "storage");
+            intent.putExtra("FileUri", selecPdf.toString());
             startActivity(intent);
 
 

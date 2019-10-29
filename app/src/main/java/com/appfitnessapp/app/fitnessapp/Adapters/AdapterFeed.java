@@ -115,7 +115,7 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
         } else if (feed.getTipo_feed().equals(Contants.PDF) && feed.is_gratis) {
             holder.txtPrecio.setText("GRATIS");
             if (feed.getTipo_feed().equals(Contants.PDF) && !feed.is_gratis) {
-                holder.txtPrecio.setText("12");
+                holder.txtPrecio.setText("");
             }
         }
 
