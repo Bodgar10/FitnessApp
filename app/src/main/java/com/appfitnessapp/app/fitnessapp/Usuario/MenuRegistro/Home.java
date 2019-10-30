@@ -1,5 +1,6 @@
 package com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -42,8 +43,14 @@ import com.appfitnessapp.app.fitnessapp.videoplayer.VideoPlayer;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Home  extends AppCompatActivity {
 
@@ -77,6 +84,19 @@ public class Home  extends AppCompatActivity {
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("");
 
+        Dexter.withActivity(this)
+                .withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new BaseMultiplePermissionsListener(){
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        super.onPermissionsChecked(report);
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        super.onPermissionRationaleShouldBeShown(permissions, token);
+                    }
+                }).check();
 
         bajarFeed();
 

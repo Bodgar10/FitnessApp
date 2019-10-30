@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -141,10 +142,13 @@ public class ListaComprado extends AppCompatActivity {
                             }
                             else {
                                 progressDialog.dismiss();
-
                             }
 
                     }
+                        else {
+                            progressDialog.dismiss();
+                            Toast.makeText(ListaComprado.this, "No tienes articulos comprados.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 } else {
                     Log.e(TAG, "Usuarios 3: ");
@@ -154,6 +158,7 @@ public class ListaComprado extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                progressDialog.dismiss();
                 Log.e(TAG, "ERROR: ");
             }
         });
