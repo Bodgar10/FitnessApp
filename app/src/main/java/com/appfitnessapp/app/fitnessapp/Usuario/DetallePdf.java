@@ -129,11 +129,13 @@ public class DetallePdf extends AppCompatActivity {
             intent.putExtra("ViewType", "storage");
             intent.putExtra("FileUri", selecPdf.toString());
             startActivity(intent);
+            Toast.makeText(this, "Hola a todos", Toast.LENGTH_SHORT).show();
 
 
         }
 
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
