@@ -46,6 +46,7 @@ public class ChatActivityAdmin extends AppCompatActivity {
                         getIntent().getExtras().getString(Contants.ID_SERVICIO)),
                 ChatFragmentAdmin.class.getSimpleName());
         fragmentTransaction.commit();
+
     }
 
 

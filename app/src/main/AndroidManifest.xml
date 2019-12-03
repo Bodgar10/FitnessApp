@@ -22,9 +22,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Usuario.MenuRegistro.DetallesImagen"
-            android:screenOrientation="portrait"
-            />
+        <activity android:name=".menu_nuevo.FragmentsU.QuienAsesoria"></activity>
+        <activity
+            android:name=".menu_nuevo.Menu_Usuario"
+            android:label="@string/title_activity_menu__usuario"
+            android:theme="@style/AppTheme.AppBarOverlay" />
+
+        <activity
+            android:name=".Usuario.MenuRegistro.DetallesImagen"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Login.SplashPantalla"
             android:theme="@style/YourTheme">
@@ -61,15 +67,13 @@
         <activity
             android:name=".Usuario.Video"
             android:theme="@style/TemaVideo" />
-        <activity android:name=".Usuario.ChatActivityUsuario"
-            android:screenOrientation="portrait"
-            />
-
-        <activity android:name=".Login.OlvidarContrasena"
+        <activity
+            android:name=".Usuario.ChatActivityUsuario"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Login.OlvidarContrasena"
             android:parentActivityName=".Login.IniciarSesion"
-            android:screenOrientation="portrait"
-            ></activity>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.FeedSinRegistro.Asesoria"
             android:screenOrientation="portrait" />

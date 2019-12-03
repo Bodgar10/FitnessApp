@@ -12,7 +12,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="Toolbar" parent="@style/ThemeOverlay.AppCompat.ActionBar" >
+    <style name="Toolbar" parent="@style/ThemeOverlay.AppCompat.ActionBar">
         <item name="colorPrimary">@color/blanco</item>
         <item name="android:textColorPrimary">@color/negro</item>
         <item name="colorControlNormal">@color/naranja</item>
@@ -48,5 +48,23 @@
     <style name="YourTheme" parent="AppTheme">
         <item name="android:windowDisablePreview">true</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/azul</item>
+        <item name="colorPrimaryDark">@color/azul</item>
+        <item name="colorAccent">@color/azul</item>
+        <item name="android:textColorPrimary">@color/blanco</item>
+        <item name="colorControlNormal">@color/blanco</item>
+
+
+    </style>
+
+
 
 </resources>

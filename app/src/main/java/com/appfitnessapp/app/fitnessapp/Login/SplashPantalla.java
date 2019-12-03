@@ -53,7 +53,7 @@ public class SplashPantalla extends AppCompatActivity {
 
     private static final String TAG = "Principal: ";
 
-    Button btnIniciarSesion,btnRegistro,btnOmitir;
+    Button btnIniciarSesion,btnRegistro;
 
     BajarInfo bajarInfo;
     DBProvider dbProvider;
@@ -132,7 +132,6 @@ public class SplashPantalla extends AppCompatActivity {
 
         btnIniciarSesion=findViewById(R.id.btnIniciarSesionsplash);
         btnRegistro=findViewById(R.id.btnRegistroSplash);
-        btnOmitir=findViewById(R.id.btnOmitir);
 
 
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
@@ -158,18 +157,6 @@ public class SplashPantalla extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 overridePendingTransition(R.anim.move, R.anim.move_leeft);
-
-
-            }
-        });
-
-
-        btnOmitir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                view.startAnimation(buttonClick);
-                Intent intent = new Intent(SplashPantalla.this, HomeSinRegistro.class);
-                startActivity(intent);
 
 
             }

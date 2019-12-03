@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:background="@drawable/imgsplash"
+    android:backgroundTint="#81000000"
+    android:backgroundTintMode="src_atop"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".menu_nuevo.FragmentsU.Menu_Inicio_U">
+
+
+
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/btnAsesoria"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:background="@color/azul"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:tint="@color/blanco"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_flecha" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Asesorias"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/blanco"
+                android:layout_marginBottom="10dp"
+                android:textAllCaps="true"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnMktPlace"
+            android:gravity="center"
+            android:background="@android:color/holo_red_light"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:tint="@color/blanco"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_flecha" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MKT Place"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/blanco"
+                android:layout_marginBottom="10dp"
+                android:textAllCaps="true"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+</FrameLayout>

@@ -1,5 +1,6 @@
 package com.appfitnessapp.app.fitnessapp.Admin;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,12 +10,14 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,8 +52,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class ChatFragmentAdmin extends Fragment implements ChatContractUsuario.View, TextView.OnEditorActionListener, ChatContractUsuario.Interactor {
-
+public class ChatFragmentAdmin extends Fragment implements ChatContractUsuario.View, TextView.OnEditorActionListener, ChatContractUsuario.Interactor{
 
 
     private static final String TAG = "INGRESAR:";
@@ -71,10 +73,10 @@ public class ChatFragmentAdmin extends Fragment implements ChatContractUsuario.V
     ArrayList<Chats> chats;
     static DBProvider dbProvider;
 
-    private String id_relper, id_usuario, id_servicio ;
+    private String id_relper, id_usuario, id_servicio;
     private FirebaseAuth mAuth;
 
-    String name, uid, id_admin,  token, id_servicio1;
+    String name, uid, id_admin, token, id_servicio1;
 
 
     public static ChatFragmentAdmin newInstance(String name,
@@ -110,7 +112,7 @@ public class ChatFragmentAdmin extends Fragment implements ChatContractUsuario.V
 
         mRecyclerViewChat = fragmentView.findViewById(R.id.recycler_view_chat);
         mRecyclerViewChat.setLayoutManager(new LinearLayoutManager(getContext()));
-        mETxtMessage =  fragmentView.findViewById(R.id.edit_text_message);
+        mETxtMessage = fragmentView.findViewById(R.id.edit_text_message);
 
         txtNombreUsuarioChat = fragmentView.findViewById(R.id.txtNombreUsuarioChat);
         imgAdmin = fragmentView.findViewById(R.id.imgAdmin);
@@ -134,7 +136,7 @@ public class ChatFragmentAdmin extends Fragment implements ChatContractUsuario.V
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
-                        if (dataSnapshot.exists()){
+                        if (dataSnapshot.exists()) {
                             Chats chat = dataSnapshot.getValue(Chats.class);
                             if (chat.getText() != null) {
 
@@ -197,7 +199,7 @@ public class ChatFragmentAdmin extends Fragment implements ChatContractUsuario.V
         String id_admin = id_relper;
         String senderUid = id_admin;
         String token_vendedor = Contants.TOKEN;
-        Chats chat = new Chats(id_admin, senderUid, text,id_admin);
+        Chats chat = new Chats(id_admin, senderUid, text, id_admin);
 
         mChatPresenter.sendMessage(getContext(), chat, token_vendedor, id_usuario, id_admin);
     }
@@ -239,14 +241,14 @@ public class ChatFragmentAdmin extends Fragment implements ChatContractUsuario.V
     @Override
     public void getMessageFromFirebaseUser(String uid_vendedor, String uid_usuario) {
 
-        System.out.println("UIDDDD: "+uid_vendedor+" "+uid_usuario);
+        System.out.println("UIDDDD: " + uid_vendedor + " " + uid_usuario);
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         database.getReference().child(Contants.CHAT)
                 .child(id_servicio)
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        if (dataSnapshot.exists()){
+                        if (dataSnapshot.exists()) {
                             chats.removeAll(chats);
                             Chats chat = dataSnapshot.getValue(Chats.class);
                             System.out.println("SE ENCONTRARON MENSAJES DEL USUARIO.");
@@ -278,20 +280,20 @@ public class ChatFragmentAdmin extends Fragment implements ChatContractUsuario.V
     }
 
 
-    public void bajarUsuarios(){
-        Log.e(TAG,"Usuarios 2: ");
+    public void bajarUsuarios() {
+        Log.e(TAG, "Usuarios 2: ");
         dbProvider = new DBProvider();
 
         dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.e(TAG,"Usuarios 4: ");
-                if (dataSnapshot.exists()){
-                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                Log.e(TAG, "Usuarios 4: ");
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Log.e(TAG, "Usuarios: " + snapshot);
                         Usuarios usuarios = snapshot.getValue(Usuarios.class);
 
-                        if (usuarios.getId_usuario()!=null) {
+                        if (usuarios.getId_usuario() != null) {
 
                             if (usuarios.getId_usuario().equals(id_usuario)) {
 
@@ -316,17 +318,56 @@ public class ChatFragmentAdmin extends Fragment implements ChatContractUsuario.V
                         }
 
                     }
-                }else{
-                    Log.e(TAG,"Usuarios 3: ");
+                } else {
+                    Log.e(TAG, "Usuarios 3: ");
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG,"ERROR: ");
+                Log.e(TAG, "ERROR: ");
             }
         });
     }
 
+
+
+    /*
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    @Override
+    public boolean onBackPressed() {
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext());
+        dialogo1.setTitle("Si regresas perderas el chat donde te encuentras");
+        dialogo1.setPositiveButton("Salir", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+
+
+
+            }
+        });
+        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                dialogo1.cancel();
+
+            }
+        });
+        dialogo1.show();
+
+
+        return true;
+    }
+*/
 
 }
