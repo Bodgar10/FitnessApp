@@ -46,6 +46,11 @@ public class Contants {
     final public static String VIDEO = "video";
     final public static String PDF = "pdf";
     final public static String IMAGEN = "imagen";
+    final public static String RUTINAS = "rutinas";
+    final public static String RECETARIOS = "recetarios";
+    final public static String EBOOKS = "e-books";
+
+
 
 
     //Asesoria
