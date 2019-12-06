@@ -31,6 +31,7 @@ import com.appfitnessapp.app.fitnessapp.Usuario.DetallePdf;
 import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.HomeSinRegistro;
 import com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro.Home;
 import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
+import com.appfitnessapp.app.fitnessapp.menu_nuevo.Menu_Usuario;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -283,7 +284,7 @@ public class SplashPantalla extends AppCompatActivity {
                                 if (usuario.getTipo_usuario().equals(Contants.USUARIO)) {
                                     if (!usuario.getPagado()==false){
                                         progressDialog.dismiss();
-                                        Intent intent = new Intent(SplashPantalla.this, UsuarioHome.class);
+                                        Intent intent = new Intent(SplashPantalla.this, Menu_Usuario.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
                                         finish();
@@ -291,7 +292,7 @@ public class SplashPantalla extends AppCompatActivity {
                                     }
                                     else {
                                         progressDialog.dismiss();
-                                        Intent intent = new Intent(SplashPantalla.this, Home.class);
+                                        Intent intent = new Intent(SplashPantalla.this, Menu_Usuario.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
                                         SplashPantalla.this.finish();

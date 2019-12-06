@@ -39,6 +39,8 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
 import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.menu_nuevo.FragmentsU.MenuPerfilU;
+import com.appfitnessapp.app.fitnessapp.menu_nuevo.Menu_Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -223,7 +225,7 @@ public class EditarPerfil extends AppCompatActivity {
 
                 if (!imagen.equals(imgPersona)&&imgUri!=null){
                     uploadImage(id,imgUri.toString());
-                    Intent intent=new Intent(EditarPerfil.this, UsuarioPerfil.class);
+                    Intent intent=new Intent(EditarPerfil.this, Menu_Usuario.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
@@ -231,7 +233,7 @@ public class EditarPerfil extends AppCompatActivity {
                 if (!name.equals(edtNombre)){
                     dbProvider.updateName(edtNombre, id);
                     Toast.makeText(EditarPerfil.this, "Se actualizo el nombre.", Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(EditarPerfil.this, UsuarioPerfil.class);
+                    Intent intent=new Intent(EditarPerfil.this, Menu_Usuario.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
@@ -252,7 +254,7 @@ public class EditarPerfil extends AppCompatActivity {
                 if (!telefono.equals(editTelefono)){
                     dbProvider.updatePhone(editTelefono, id);
                     Toast.makeText(EditarPerfil.this, "Se actualizo el teléfono.", Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(EditarPerfil.this, UsuarioPerfil.class);
+                    Intent intent=new Intent(EditarPerfil.this, Menu_Usuario.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
@@ -274,7 +276,7 @@ public class EditarPerfil extends AppCompatActivity {
                 if (name.equals(edtNombre)&&email.equals(editCorreo)&&password.equals(edtContra)&&telefono.equals(editTelefono)
                         &&imgUri==null){
 
-                    Intent intent=new Intent(EditarPerfil.this, UsuarioPerfil.class);
+                    Intent intent=new Intent(EditarPerfil.this, Menu_Usuario.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
@@ -542,11 +544,6 @@ public class EditarPerfil extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent;
-        intent = new Intent(this, UsuarioPerfil.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
         finish();
         overridePendingTransition(
                 getIntent().getIntExtra("anim id in", R.anim.move_in),

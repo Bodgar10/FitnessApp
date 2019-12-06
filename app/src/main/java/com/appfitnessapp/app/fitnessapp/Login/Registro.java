@@ -20,6 +20,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro.Home;
 import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
+import com.appfitnessapp.app.fitnessapp.menu_nuevo.Menu_Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -130,7 +131,7 @@ public class Registro extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     FirebaseUser user = task.getResult().getUser();
                     dbProvider.createUser(email,user.getUid(),name,pass,phone,"nil",token,type,"nil","nil","nil",false);
-                    Intent intent = new Intent(Registro.this, Home.class);
+                    Intent intent = new Intent(Registro.this, Menu_Usuario.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();

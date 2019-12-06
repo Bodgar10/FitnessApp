@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.Asesoria;
 import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.HomeSinRegistro;
+import com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro.Home;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,6 +59,9 @@ public class Menu_Inicio_U extends Fragment {
         btnMktPlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), UsuarioHome.class);
+                startActivity(intent);
 
             }
         });

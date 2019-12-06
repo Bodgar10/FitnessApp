@@ -55,7 +55,7 @@ import java.util.Map;
 
 public class UsuarioHome  extends AppCompatActivity {
 
-    ImageButton imgPlan,imgPerfil,imgChat,imgHome;
+    //ImageButton imgPlan,imgPerfil,imgChat,imgHome;
     private static final int PDF_CODE = 1000 ;
 
 
@@ -114,6 +114,7 @@ public class UsuarioHome  extends AppCompatActivity {
         bajarInfo = new BajarInfo();
 
 
+        /*
         imgPlan=findViewById(R.id.imgPlan);
         imgPerfil=findViewById(R.id.imgPerfil);
         imgChat=findViewById(R.id.imgChat);
@@ -161,6 +162,7 @@ public class UsuarioHome  extends AppCompatActivity {
             }
         });
 
+*/
 
         recyclerView=findViewById(R.id.recyclerview);
 

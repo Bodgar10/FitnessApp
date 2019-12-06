@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.appfitnessapp.app.fitnessapp.menu_nuevo.FragmentsU.MenuPerfilU;
 import com.appfitnessapp.app.fitnessapp.menu_nuevo.FragmentsU.Menu_Asesorias_U;
 import com.appfitnessapp.app.fitnessapp.menu_nuevo.FragmentsU.Menu_ConocenosU;
 import com.appfitnessapp.app.fitnessapp.menu_nuevo.FragmentsU.Menu_EbooksU;
@@ -148,7 +149,7 @@ public class Menu_Usuario extends AppCompatActivity
 
             case R.id.nav_perfil:
 
-                fragment=new Menu_RecetariosU();
+                fragment=new MenuPerfilU();
                 fragmentTransaction = true;
 
                 break;

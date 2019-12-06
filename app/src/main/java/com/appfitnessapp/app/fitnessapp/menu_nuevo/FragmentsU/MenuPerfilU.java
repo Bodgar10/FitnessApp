@@ -145,6 +145,8 @@ public class MenuPerfilU extends Fragment {
         View view = inflater.inflate(R.layout.usuario_21_perfil, container, false);
 
 
+        setHasOptionsMenu(true);
+
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setIndeterminate(true);
 
@@ -168,7 +170,7 @@ public class MenuPerfilU extends Fragment {
 
 
         imgPersona = view.findViewById(R.id.imgPersona);
-        linearCerrar = view.findViewById(R.id.linearCerrar);
+        //linearCerrar = view.findViewById(R.id.linearCerrar);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -263,6 +265,7 @@ public class MenuPerfilU extends Fragment {
         });
 
 
+        /*
         linearCerrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -279,6 +282,7 @@ public class MenuPerfilU extends Fragment {
             }
         });
 
+        */
 
         btnRecordatorio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -762,27 +766,26 @@ public class MenuPerfilU extends Fragment {
         super.onCreateOptionsMenu(menu,inflater);
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
             case R.id.editar_U:
-                Abrir();
+                Click();
                 return true;
             default:
                 return super.onOptionsItemSelected(item); }
     }
 
-
-
-
-    private void Abrir() {
-        Intent intent = new Intent(getContext(), EditarPerfil.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    private void Click(){
+        Intent intent = new Intent(getActivity(), EditarPerfil.class);
         startActivity(intent);
         getActivity().overridePendingTransition(R.anim.move, R.anim.move_leeft);
+
     }
+
 
 
     private String getPreviousDate(String inputDate) {

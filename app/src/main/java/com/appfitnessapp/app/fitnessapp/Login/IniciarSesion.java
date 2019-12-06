@@ -25,6 +25,7 @@ import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.DatosUsuario;
 import com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro.Home;
 import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
+import com.appfitnessapp.app.fitnessapp.menu_nuevo.Menu_Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -169,14 +170,14 @@ public class IniciarSesion extends AppCompatActivity {
 
                                     if (!usuario.getPagado()==false){
                                         progressDialog.dismiss();
-                                        Intent intent = new Intent(IniciarSesion.this, UsuarioHome.class);
+                                        Intent intent = new Intent(IniciarSesion.this, Menu_Usuario.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
                                         IniciarSesion.this.finish();
                                     }
                                     else {
                                         progressDialog.dismiss();
-                                        Intent intent = new Intent(IniciarSesion.this, Home.class);
+                                        Intent intent = new Intent(IniciarSesion.this, Menu_Usuario.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
                                         IniciarSesion.this.finish();

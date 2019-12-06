@@ -22,13 +22,13 @@
         layout="@layout/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="49dp"
         >
 
     </include>
 
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_gravity="bottom"
         android:gravity="bottom"
         android:background="@android:color/white"
