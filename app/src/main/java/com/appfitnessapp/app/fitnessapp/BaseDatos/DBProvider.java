@@ -30,6 +30,14 @@ public class DBProvider {
         return dbRef().child(Contants.TABLA_FEED);
     }
 
+    public DatabaseReference tablaEbook() {
+        return dbRef().child(Contants.TABLA_EBOOK);
+    }
+
+     public DatabaseReference tablaRecetario() {
+        return dbRef().child(Contants.TABLA_RECETARIO);
+    }
+
     public DatabaseReference asesoriaInfo() {
         return dbRef().child(Contants.TABLA_ASESORIA_INFO);
     }
@@ -122,6 +130,47 @@ public class DBProvider {
 
 
     }
+
+    public void  subirEbook(String tipo_feed,Boolean is_gratis,String imagen_feed,String costo_pdf,String url_tipo,
+                           String timestamp,String descripcion){
+        Map<String, Object> updates = new HashMap<>();
+
+        String key = tablaEbook().push().getKey();
+
+        updates.put(Contants.TIPO_FEED, tipo_feed);
+        updates.put(Contants.IS_GRATIS, is_gratis);
+        updates.put(Contants.IMAGEN_FEED, imagen_feed);
+        updates.put(Contants.COSTO_PDF, costo_pdf);
+        updates.put(Contants.URL_TIPO, url_tipo);
+        updates.put(Contants.TIMESTAMP, timestamp);
+        updates.put(Contants.DESCRIPCION, descripcion);
+
+        tablaFeed().child(key).updateChildren(updates);
+
+
+
+    }
+
+    public void  subirRecetario(String tipo_feed,Boolean is_gratis,String imagen_feed,String costo_pdf,String url_tipo,
+                            String timestamp,String descripcion){
+        Map<String, Object> updates = new HashMap<>();
+
+        String key = tablaRecetario().push().getKey();
+
+        updates.put(Contants.TIPO_FEED, tipo_feed);
+        updates.put(Contants.IS_GRATIS, is_gratis);
+        updates.put(Contants.IMAGEN_FEED, imagen_feed);
+        updates.put(Contants.COSTO_PDF, costo_pdf);
+        updates.put(Contants.URL_TIPO, url_tipo);
+        updates.put(Contants.TIMESTAMP, timestamp);
+        updates.put(Contants.DESCRIPCION, descripcion);
+
+        tablaFeed().child(key).updateChildren(updates);
+
+
+
+    }
+
 
     public void updatePhoto(String photo, String id){
         Map<String, Object> updates = new HashMap<>();

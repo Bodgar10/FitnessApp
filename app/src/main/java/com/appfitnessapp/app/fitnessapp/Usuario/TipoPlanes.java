@@ -188,11 +188,6 @@ public class TipoPlanes extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent;
-        intent = new Intent(this, AsesoriaRegistro.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
         finish();
         overridePendingTransition(
                 getIntent().getIntExtra("anim id in", R.anim.move_in),

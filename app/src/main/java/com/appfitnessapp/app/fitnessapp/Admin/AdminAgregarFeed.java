@@ -14,7 +14,7 @@ import com.appfitnessapp.app.fitnessapp.R;
 
 public class AdminAgregarFeed extends AppCompatActivity {
 
-    LinearLayout btnVideo,btnImagen,btnPdf;
+    LinearLayout btnVideo,btnImagen,btnPdf,btnRecetarios,btnEbooks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,9 @@ public class AdminAgregarFeed extends AppCompatActivity {
         btnImagen=findViewById(R.id.btnImagen);
         btnPdf=findViewById(R.id.btnPdf);
         btnVideo=findViewById(R.id.btnVideo);
+
+        btnRecetarios=findViewById(R.id.btnRecetarios);
+        btnEbooks=findViewById(R.id.btnEbooks);
 
 
         btnVideo.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +69,27 @@ public class AdminAgregarFeed extends AppCompatActivity {
             }
         });
 
+        btnRecetarios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(AdminAgregarFeed.this, AgregarRecetarios.class);
+                startActivity(intent);
+
+            }
+        });
+
+        btnEbooks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(AdminAgregarFeed.this, AgregarEbooks.class);
+                startActivity(intent);
+
+            }
+        });
     }
 
 

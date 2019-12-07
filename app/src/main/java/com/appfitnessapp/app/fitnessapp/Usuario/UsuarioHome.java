@@ -80,6 +80,7 @@ public class UsuarioHome  extends AppCompatActivity {
         setContentView(R.layout.usuario_14_feed);
 
         Toolbar toolbarback=findViewById(R.id.toolbar);
+        toolbarback.setVisibility(View.VISIBLE);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("");
         Dexter.withActivity(this)

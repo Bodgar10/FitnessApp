@@ -21,6 +21,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -29,12 +30,16 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Menu_Usuario extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static FirebaseAuth mAuth;
+
+    CircularImageView imgUsuarioMenu;
+    TextView txtNombreUsuario;
 
 
     @Override
@@ -45,6 +50,9 @@ public class Menu_Usuario extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         mAuth = FirebaseAuth.getInstance();
+
+        imgUsuarioMenu=findViewById(R.id.imgUsuarioMenu);
+        txtNombreUsuario=findViewById(R.id.txtNombreMenu);
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -64,6 +72,8 @@ public class Menu_Usuario extends AppCompatActivity
         navigationView.getMenu().getItem(5).setActionView(R.layout.menu_imagen);
         navigationView.getMenu().getItem(6).setActionView(R.layout.menu_imagen);
         navigationView.getMenu().getItem(7).setActionView(R.layout.menu_imagen);
+
+
 
 
     }

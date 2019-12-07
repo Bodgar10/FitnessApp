@@ -51,6 +51,10 @@ public class Contants {
     final public static String EBOOKS = "e-books";
 
 
+    final public static String TABLA_RECETARIO = "tabla_recetario";
+    final public static String TABLA_EBOOK= "tabla_ebook";
+
+
 
 
     //Asesoria

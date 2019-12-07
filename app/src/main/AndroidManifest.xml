@@ -118,7 +118,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.TipoPlanes"
-            android:parentActivityName=".Usuario.MenuRegistro.AsesoriaRegistro"
             android:screenOrientation="portrait"
             android:theme="@style/YourTheme" />
         <activity
@@ -283,6 +282,12 @@
         <activity
             android:name=".Admin.EditarPregunta"
             android:screenOrientation="portrait" />
+        <activity android:name=".Admin.AgregarRecetarios"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Admin.AgregarEbooks"
+            android:screenOrientation="portrait"
+            />
 
         <service android:name=".Notificaciones.FirebaseInstanceService">
             <intent-filter>
