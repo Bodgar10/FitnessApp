@@ -229,41 +229,6 @@ public class MenuPerfilU extends Fragment {
         });
 
 
-        imgPlan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(getContext(), UsuarioPlan.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
-
-
-            }
-        });
-
-        imgHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), UsuarioHome.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
-
-            }
-        });
-
-        imgChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ChatActivityUsuario.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.move, R.anim.move_leeft);
-
-            }
-        });
-
 
         /*
         linearCerrar.setOnClickListener(new View.OnClickListener() {

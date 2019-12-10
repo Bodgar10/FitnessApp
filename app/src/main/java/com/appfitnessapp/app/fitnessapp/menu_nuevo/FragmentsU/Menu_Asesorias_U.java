@@ -219,8 +219,6 @@ public class Menu_Asesorias_U extends Fragment {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getContext(), QuienAsesoria.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.move, R.anim.move_leeft);
 

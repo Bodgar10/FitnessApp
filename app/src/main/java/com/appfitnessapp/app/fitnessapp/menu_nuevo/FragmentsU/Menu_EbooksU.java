@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.appfitnessapp.app.fitnessapp.Adapters.AdapterEbook;
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterFeed;
 import com.appfitnessapp.app.fitnessapp.Arrays.Feed;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
@@ -57,7 +58,7 @@ public class Menu_EbooksU extends Fragment {
     BajarInfo bajarInfo;
     private static final String TAG = "BAJARINFO:";
 
-    AdapterFeed adapterFeed;
+    AdapterEbook adapterFeed;
     ArrayList<Feed> feeds;
 
     RecyclerView recyclerView;
@@ -121,7 +122,7 @@ public class Menu_EbooksU extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         feeds=new ArrayList<>();
-        adapterFeed=new AdapterFeed(feeds);
+        adapterFeed=new AdapterEbook(feeds);
         recyclerView.setAdapter(adapterFeed);
 
 
@@ -191,7 +192,7 @@ public class Menu_EbooksU extends Fragment {
         //  feeds.removeAll(feeds);
 
         dbProvider = new DBProvider();
-        dbProvider.tablaFeed().addValueEventListener(new ValueEventListener() {
+        dbProvider.tablaEbook().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 feeds.clear();

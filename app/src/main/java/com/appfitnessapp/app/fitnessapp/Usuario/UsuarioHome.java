@@ -83,6 +83,8 @@ public class UsuarioHome  extends AppCompatActivity {
         toolbarback.setVisibility(View.VISIBLE);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         Dexter.withActivity(this)
                 .withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .withListener(new BaseMultiplePermissionsListener(){
@@ -342,10 +344,7 @@ public class UsuarioHome  extends AppCompatActivity {
         ezzeearnRef.addValueEventListener(eventListener);
 
     }
-    private void saveTime() {
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        rootRef.child(Contants.TABLA_FEED).child("timestamp").setValue(ServerValue.TIMESTAMP);
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -360,9 +359,10 @@ public class UsuarioHome  extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
+        /*
         Intent intent = new Intent();
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
         finish();
         overridePendingTransition(
                 getIntent().getIntExtra("anim id in", R.anim.move_in),

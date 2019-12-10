@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_inicio"
+            android:title="Inicio" />
+        <item
+            android:id="@+id/nav_conocenos"
+            android:title="Conocenos" />
+        <item
+            android:id="@+id/nav_asesorias"
+            android:title="Asesorias" />
+        <item
+            android:id="@+id/nav_rutinas"
+            android:title="Rutinas" />
+
+        <item
+            android:id="@+id/nav_pdfs"
+            android:title="PDF's" />
+
+        <item
+            android:id="@+id/nav_ebooks"
+            android:title="E-books" />
+
+        <item
+            android:id="@+id/nav_recetarios"
+            android:title="Recetarios" />
+
+        <item
+            android:id="@+id/nav_perfil"
+            android:title="Perfil" />
+
+
+        <item
+            android:id="@+id/nav_cerrarsesion"
+            android:title="Cerrar Sesión" />
+
+    </group>
+</menu>

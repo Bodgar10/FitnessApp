@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterFeed;
+import com.appfitnessapp.app.fitnessapp.Adapters.AdapterRecetario;
 import com.appfitnessapp.app.fitnessapp.Arrays.Feed;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
@@ -66,7 +67,7 @@ public class Menu_RecetariosU extends Fragment {
     BajarInfo bajarInfo;
     private static final String TAG = "BAJARINFO:";
 
-    AdapterFeed adapterFeed;
+    AdapterRecetario adapterFeed;
     ArrayList<Feed> feeds;
 
     RecyclerView recyclerView;
@@ -132,7 +133,7 @@ public class Menu_RecetariosU extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         feeds=new ArrayList<>();
-        adapterFeed=new AdapterFeed(feeds);
+        adapterFeed=new AdapterRecetario(feeds);
         recyclerView.setAdapter(adapterFeed);
 
 
@@ -202,7 +203,7 @@ public class Menu_RecetariosU extends Fragment {
         //  feeds.removeAll(feeds);
 
         dbProvider = new DBProvider();
-        dbProvider.tablaFeed().addValueEventListener(new ValueEventListener() {
+        dbProvider.tablaRecetario().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 feeds.clear();

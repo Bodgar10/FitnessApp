@@ -22,11 +22,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".menu_nuevo.FragmentsU.QuienAsesoria"></activity>
+        <activity
+            android:name=".menu_nuevo.Menu_UPago.Menu_UsuarioPago"
+            android:label="@string/title_activity_menu__usuario"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+
+        </activity>
+
+
+
+        <activity android:name=".menu_nuevo.FragmentsU.QuienAsesoria" />
+
+
         <activity
             android:name=".menu_nuevo.Menu_Usuario"
             android:label="@string/title_activity_menu__usuario"
             android:theme="@style/AppTheme.AppBarOverlay" />
+
+
+
 
         <activity
             android:name=".Usuario.MenuRegistro.DetallesImagen"
@@ -88,8 +103,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.MetodoPago"
-            android:screenOrientation="portrait"
-            android:theme="@style/YourTheme" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.Calificar"
             android:parentActivityName=".Usuario.UsuarioPerfil"
@@ -102,7 +116,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.DetalleRecetas"
-            android:parentActivityName=".Usuario.UsuarioPlan"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.EditarPerfil"
@@ -118,8 +131,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.TipoPlanes"
-            android:screenOrientation="portrait"
-            android:theme="@style/YourTheme" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Usuario.UsuarioPlan"
             android:screenOrientation="portrait" />
@@ -282,12 +294,12 @@
         <activity
             android:name=".Admin.EditarPregunta"
             android:screenOrientation="portrait" />
-        <activity android:name=".Admin.AgregarRecetarios"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".Admin.AgregarEbooks"
-            android:screenOrientation="portrait"
-            />
+        <activity
+            android:name=".Admin.AgregarRecetarios"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Admin.AgregarEbooks"
+            android:screenOrientation="portrait" />
 
         <service android:name=".Notificaciones.FirebaseInstanceService">
             <intent-filter>

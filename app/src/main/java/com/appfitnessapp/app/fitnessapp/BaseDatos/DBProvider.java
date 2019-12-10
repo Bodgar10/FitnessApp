@@ -145,7 +145,7 @@ public class DBProvider {
         updates.put(Contants.TIMESTAMP, timestamp);
         updates.put(Contants.DESCRIPCION, descripcion);
 
-        tablaFeed().child(key).updateChildren(updates);
+        tablaEbook().child(key).updateChildren(updates);
 
 
 
@@ -165,7 +165,7 @@ public class DBProvider {
         updates.put(Contants.TIMESTAMP, timestamp);
         updates.put(Contants.DESCRIPCION, descripcion);
 
-        tablaFeed().child(key).updateChildren(updates);
+        tablaRecetario().child(key).updateChildren(updates);
 
 
 

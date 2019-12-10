@@ -13,6 +13,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.MenuRegistro.Home;
 import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
+import com.appfitnessapp.app.fitnessapp.menu_nuevo.Menu_UPago.Menu_UsuarioPago;
 import com.appfitnessapp.app.fitnessapp.menu_nuevo.Menu_Usuario;
 
 import org.json.JSONException;
@@ -77,7 +78,7 @@ public class PaymentAsesoria extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    Intent intent =new Intent(PaymentAsesoria.this, Menu_Usuario.class);
+                    Intent intent =new Intent(PaymentAsesoria.this, Menu_UsuarioPago.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     startActivity(intent);

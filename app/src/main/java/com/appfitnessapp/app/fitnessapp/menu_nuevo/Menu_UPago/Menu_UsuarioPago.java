@@ -1,4 +1,4 @@
-package com.appfitnessapp.app.fitnessapp.menu_nuevo;
+package com.appfitnessapp.app.fitnessapp.menu_nuevo.Menu_UPago;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -6,11 +6,9 @@ import android.os.Bundle;
 
 import com.appfitnessapp.app.fitnessapp.Arrays.Inscritos;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
-import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
 import com.appfitnessapp.app.fitnessapp.R;
-import com.appfitnessapp.app.fitnessapp.Usuario.PantallaPDF;
 import com.appfitnessapp.app.fitnessapp.Usuario.RutinaUsuario;
 import com.appfitnessapp.app.fitnessapp.menu_nuevo.FragmentsU.MenuPerfilU;
 import com.appfitnessapp.app.fitnessapp.menu_nuevo.FragmentsU.Menu_Asesorias_U;
@@ -20,12 +18,17 @@ import com.appfitnessapp.app.fitnessapp.menu_nuevo.FragmentsU.Menu_Inicio_U;
 import com.appfitnessapp.app.fitnessapp.menu_nuevo.FragmentsU.Menu_PdfsU;
 import com.appfitnessapp.app.fitnessapp.menu_nuevo.FragmentsU.Menu_RecetariosU;
 import com.appfitnessapp.app.fitnessapp.menu_nuevo.FragmentsU.Menu_RutinasU;
+import com.appfitnessapp.app.fitnessapp.menu_nuevo.Menu_Usuario;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
+import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
@@ -33,9 +36,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
@@ -47,18 +47,10 @@ import androidx.fragment.app.Fragment;
 
 import android.view.Menu;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 import static com.androidquery.util.AQUtility.getContext;
 
-public class Menu_Usuario extends AppCompatActivity
+public class Menu_UsuarioPago extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static FirebaseAuth mAuth;
@@ -78,14 +70,12 @@ public class Menu_Usuario extends AppCompatActivity
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu__usuario);
+        setContentView(R.layout.activity_menu__usuario_pago);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
 
         progressDialog = new ProgressDialog(this);
@@ -103,8 +93,8 @@ public class Menu_Usuario extends AppCompatActivity
         txtNombreUsuario=findViewById(R.id.txtNombreMenu);
 
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_pago);
+        NavigationView navigationView = findViewById(R.id.nav_view_pago);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -123,12 +113,11 @@ public class Menu_Usuario extends AppCompatActivity
 
 
 
-
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_pago);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -161,7 +150,7 @@ public class Menu_Usuario extends AppCompatActivity
         switch (item.getItemId()) {
 
             case R.id.nav_inicio:
-                fragment= new Menu_Inicio_U();
+                fragment= new MenuInicioPago();
                 fragmentTransaction = true;
 
                 break;
@@ -174,7 +163,7 @@ public class Menu_Usuario extends AppCompatActivity
                 break;
 
             case R.id.nav_asesorias:
-                fragment= new Menu_Asesorias_U();
+                fragment= new MenuAsesoriaPago();
                 fragmentTransaction = true;
 
                 break;
@@ -215,7 +204,7 @@ public class Menu_Usuario extends AppCompatActivity
 
             case R.id.nav_cerrarsesion:
                 mAuth.signOut();
-                Intent intent=new Intent(Menu_Usuario.this, IniciarSesion.class);
+                Intent intent=new Intent(Menu_UsuarioPago.this, IniciarSesion.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
@@ -225,26 +214,25 @@ public class Menu_Usuario extends AppCompatActivity
 
         if (fragmentTransaction){
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_usuario,fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_usuario_pago,fragment).commit();
             getSupportActionBar().setTitle(item.getTitle()); }
 
 
 
-        DrawerLayout drawer =findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =findViewById(R.id.drawer_layout_pago);
         drawer.closeDrawer(GravityCompat.START);
         return true;
 
     }
 
     private void getSupportDefaultUsuario(){
-        NavigationView navigationView=findViewById(R.id.nav_view);
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_usuario,new Menu_Inicio_U()).commit();
+        NavigationView navigationView=findViewById(R.id.nav_view_pago);
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_usuario_pago,new MenuInicioPago()).commit();
 
         MenuItem item =navigationView.getMenu().getItem(0);
         item.setChecked(true);
         getSupportActionBar().setTitle(item.getTitle());
 
     }
-
 
 }
