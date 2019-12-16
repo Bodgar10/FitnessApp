@@ -193,18 +193,6 @@ public class AdminPerfil extends AppCompatActivity {
                 Abrir();
                 return true;
 
-            case R.id.verChat:
-                Intent intent=new Intent(AdminPerfil.this,ListaChat.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                return true;
-
-            case R.id.addFeed:
-                Intent intent1=new Intent(AdminPerfil.this,AdminAgregarFeed.class);
-                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent1);
-                return true;
-
             case android.R.id.home:
                 onBackPressed();
                 return true;

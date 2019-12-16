@@ -10,15 +10,21 @@ public class Inscritos {
 
     public String id_usuario;
 
+    public String admin;
 
-    public Inscritos(String fecha_limite, String id_inscrito, Boolean id_pendiente, String id_usuario) {
+
+
+
+    public Inscritos(){}
+
+    public Inscritos(String fecha_limite, String id_inscrito, Boolean id_pendiente, String id_usuario, String admin) {
         this.fecha_limite = fecha_limite;
         this.id_inscrito = id_inscrito;
         this.id_pendiente = id_pendiente;
         this.id_usuario = id_usuario;
+        this.admin = admin;
     }
 
-    public Inscritos(){}
 
     public String getFecha_limite() {
         return fecha_limite;
@@ -50,5 +56,13 @@ public class Inscritos {
 
     public void setId_usuario(String id_usuario) {
         this.id_usuario = id_usuario;
+    }
+
+    public String getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(String admin) {
+        this.admin = admin;
     }
 }

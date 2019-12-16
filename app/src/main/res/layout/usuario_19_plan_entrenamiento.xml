@@ -37,11 +37,10 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_alignStart="@+id/imgPrincipal"
-        android:layout_alignTop="@+id/linearBoton"
         android:layout_alignEnd="@+id/imgPrincipal"
-        android:layout_marginStart="300dp"
+        android:layout_marginStart="288dp"
         android:layout_marginTop="493dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="22dp"
         android:layout_marginBottom="530dp"
         android:scaleType="centerInside"
         app:srcCompat="@drawable/ic_play_icono" />
@@ -107,49 +106,6 @@
 
 
 
-    <LinearLayout
-        android:id="@+id/linearBoton"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/tag_menu_btnderecho"
-            android:layout_marginBottom="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-            <TextView
-                android:id="@+id/btnRecetas"
-                android:padding="10dp"
-                android:gravity="center"
-                android:textColor="@color/blanco"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_weight="1"
-                android:text="Recetas" />
-
-
-            <TextView
-                android:padding="10dp"
-                android:gravity="center"
-                android:textColor="@color/blanco"
-                android:layout_marginEnd="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Workouts" />
-
-
-        </LinearLayout>
-
-    </LinearLayout>
 
     <LinearLayout
         android:visibility="gone"

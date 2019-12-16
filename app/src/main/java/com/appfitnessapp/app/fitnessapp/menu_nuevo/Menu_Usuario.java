@@ -182,7 +182,7 @@ public class Menu_Usuario extends AppCompatActivity
 
             case R.id.nav_rutinas:
 
-                fragment=new Menu_RutinasU();
+                fragment=new Menu_Asesorias_U();
                 fragmentTransaction = true;
 
                 break;

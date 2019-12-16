@@ -6,19 +6,23 @@ public class Planes {
     public String meses_plan;
     public String descripcion_plan;
     public String costo_plan;
-    public Boolean isVendid;
+    public Boolean isVendida;
     public String nombre_plan;
+    public String admin;
 
-    public Planes(String id_plan, String meses_plan, String descripcion_plan, String costo_plan, Boolean isVendid, String nombre_plan) {
+
+    public Planes(String id_plan, String meses_plan, String descripcion_plan, String costo_plan, Boolean isVendida, String nombre_plan, String admin) {
         this.id_plan = id_plan;
         this.meses_plan = meses_plan;
         this.descripcion_plan = descripcion_plan;
         this.costo_plan = costo_plan;
-        this.isVendid = isVendid;
+        this.isVendida = isVendida;
         this.nombre_plan = nombre_plan;
+        this.admin = admin;
     }
 
     public Planes(){}
+
 
     public String getId_plan() {
         return id_plan;
@@ -52,12 +56,12 @@ public class Planes {
         this.costo_plan = costo_plan;
     }
 
-    public Boolean getVendid() {
-        return isVendid;
+    public Boolean getVendida() {
+        return isVendida;
     }
 
-    public void setVendid(Boolean vendid) {
-        isVendid = vendid;
+    public void setVendida(Boolean vendida) {
+        isVendida = vendida;
     }
 
     public String getNombre_plan() {
@@ -66,5 +70,13 @@ public class Planes {
 
     public void setNombre_plan(String nombre_plan) {
         this.nombre_plan = nombre_plan;
+    }
+
+    public String getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(String admin) {
+        this.admin = admin;
     }
 }

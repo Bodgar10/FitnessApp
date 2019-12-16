@@ -43,7 +43,7 @@ public class TipoPlanes extends AppCompatActivity {
     private static final String TAG = "BAJARINFO:";
     static DBProvider dbProvider;
 
-    String costo;
+    String id_admin;
 
 
 
@@ -60,6 +60,12 @@ public class TipoPlanes extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         bajarInfo = new BajarInfo();
         dbProvider = new DBProvider();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            id_admin = extras.getString("id");
+        }
+
 
         bajarPlanes();
 
@@ -88,6 +94,8 @@ public class TipoPlanes extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("costo",plan.get(recyclerView.getChildAdapterPosition(v)).getCosto_plan());
                 bundle.putString("meses",plan.get(recyclerView.getChildAdapterPosition(v)).getMeses_plan());
+                bundle.putString("admin",id_admin);
+
                 intent.putExtras(bundle);
                 startActivity(intent);
                 overridePendingTransition(R.anim.move, R.anim.move_leeft);
@@ -113,8 +121,11 @@ public class TipoPlanes extends AppCompatActivity {
                         Planes planes = snapshot.getValue(Planes.class);
 
                         if (planes.getId_plan()!=null){
-                            plan.add(planes);
-                            adapter.notifyDataSetChanged();
+                            if (planes.getAdmin().equals(id_admin)){
+                                plan.add(planes);
+                                adapter.notifyDataSetChanged();
+                            }
+
                         }
                        // costo =String.valueOf(planes.getCosto_plan());
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,10 @@ public class ListaChat extends AppCompatActivity {
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
 
+
+    LinearLayout btnAsesoria,btnFormulario,btnFeed;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +60,11 @@ public class ListaChat extends AppCompatActivity {
         Toolbar toolbarback=findViewById(R.id.include);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Chats");
-        ActionBar actionBar=getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        bajarUsuarios();
+        bajarInscritos();
         dbProvider = new DBProvider();
         bajarInfo = new BajarInfo();
         progressDialog = new ProgressDialog(this);
@@ -75,6 +79,10 @@ public class ListaChat extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
+        btnFormulario=findViewById(R.id.btnFormulario);
+        btnAsesoria=findViewById(R.id.btnAsesoria);
+        btnFeed=findViewById(R.id.btnFeed);
+
 
 
         adapter.setOnClickListener(new View.OnClickListener() {
@@ -88,10 +96,77 @@ public class ListaChat extends AppCompatActivity {
         });
 
 
+        btnFormulario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListaChat.this, FormularioLista.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+            }
+        });
+
+        btnFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListaChat.this, AdminAgregarFeed.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+            }
+        });
+
+
+        btnAsesoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListaChat.this, AsesoriasAdmin.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+                overridePendingTransition(
+                        getIntent().getIntExtra("anim id in", R.anim.move_in),
+                        getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
+            }
+        });
+
 
     }
 
-    public void bajarUsuarios(){
+    public void bajarInscritos(){
+        dbProvider = new DBProvider();
+
+        dbProvider.tablaInscritos().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                        Log.e(TAG, "INSCRITOS: " + snapshot);
+                        Inscritos inscritos = snapshot.getValue(Inscritos.class);
+
+                        if(inscritos.getId_usuario()!=null) {
+                            if (inscritos.getAdmin().equals(id)){
+                                if (inscritos.getId_pendiente().equals(true)) {
+                                    Log.e(TAG, "INSCRITOS true: " + inscritos);
+                                    bajarUsuarios(inscritos.getId_usuario());
+                                }
+
+                        }
+                        }
+                    }
+                }else{
+                    Log.e(TAG,"Usuarios 3: ");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG,"ERROR: ");
+            }
+        });
+    }
+
+    public void bajarUsuarios(final String id_usuario){
         dbProvider = new DBProvider();
         dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
             @Override
@@ -105,9 +180,14 @@ public class ListaChat extends AppCompatActivity {
 
                         if (usuarios.getId_usuario() != null){
                             if (usuarios.getTipo_usuario().equals(Contants.USUARIO)) {
-                                asesorias.add(usuarios);
-                                adapter.notifyDataSetChanged();
-                                progressDialog.dismiss();
+
+                                if (usuarios.getId_usuario().equals(id_usuario)) {
+                                    asesorias.add(usuarios);
+                                    adapter.notifyDataSetChanged();
+                                    progressDialog.dismiss();
+                                }
+
+
                             }
 
 
@@ -140,11 +220,6 @@ public class ListaChat extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent;
-        intent = new Intent(this, AdminPerfil.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
         finish();
         overridePendingTransition(
                 getIntent().getIntExtra("anim id in", R.anim.move_in),

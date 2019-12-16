@@ -52,7 +52,7 @@ public class MetodoPago extends AppCompatActivity {
 
     String amount="";
 
-    String pago,meses,id;
+    String pago,meses,id,admin;
 
     @Override
     protected void onDestroy() {
@@ -89,6 +89,8 @@ public class MetodoPago extends AppCompatActivity {
         if (extras != null) {
             pago =extras.getString("costo");
             meses =extras.getString("meses");
+            admin =extras.getString("admin");
+
         }
 
 
@@ -201,7 +203,9 @@ public class MetodoPago extends AppCompatActivity {
                         .putExtra("PaymentDetails",paymentDetails)
                         .putExtra("PaymentAmount",amount)
                                 .putExtra("id_usuario",id)
-                                .putExtra("meses",meses));
+                                .putExtra("meses",meses)
+                        .putExtra("admin",admin));
+
                         finish();
 
 

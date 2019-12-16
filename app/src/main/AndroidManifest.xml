@@ -22,27 +22,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Admin.AgregarPlanes"></activity>
+        <activity android:name=".Admin.AdminPlanes" />
         <activity
             android:name=".menu_nuevo.Menu_UPago.Menu_UsuarioPago"
             android:label="@string/title_activity_menu__usuario"
-            android:theme="@style/AppTheme.AppBarOverlay">
-
-
-        </activity>
-
-
-
+            android:theme="@style/AppTheme.AppBarOverlay" />
         <activity android:name=".menu_nuevo.FragmentsU.QuienAsesoria" />
-
-
         <activity
             android:name=".menu_nuevo.Menu_Usuario"
             android:label="@string/title_activity_menu__usuario"
             android:theme="@style/AppTheme.AppBarOverlay" />
-
-
-
-
         <activity
             android:name=".Usuario.MenuRegistro.DetallesImagen"
             android:screenOrientation="portrait" />

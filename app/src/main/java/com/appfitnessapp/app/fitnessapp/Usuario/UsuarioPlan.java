@@ -250,15 +250,6 @@ public class UsuarioPlan  extends AppCompatActivity {
             }
         });
 
-        btnWorkouts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(UsuarioPlan.this, UsuarioPlanWorkouts.class);
-                startActivity(intent);
-
-            }
-        });
 
     }
 

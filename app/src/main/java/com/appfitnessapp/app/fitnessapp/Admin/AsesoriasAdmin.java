@@ -55,8 +55,7 @@ public class AsesoriasAdmin extends AppCompatActivity {
     RecyclerView recyclerReciente,recyclerFinalizar;
     TextView txtPendientes;
     CircularImageView imgPostPersona;
-    LinearLayout btnFormulario;
-    ImageButton  imgFormulario;
+    LinearLayout btnFormulario,btnChat,btnFeed;
 
     private ProgressDialog progressDialog;
     private static final String TAG = "BAJARINFO:";
@@ -105,6 +104,9 @@ public class AsesoriasAdmin extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
 
         btnFormulario=findViewById(R.id.btnFormulario);
+        btnChat=findViewById(R.id.btnChat);
+        btnFeed=findViewById(R.id.btnFeed);
+
 
 
         recyclerFinalizar=findViewById(R.id.recyclerFinalizar);
@@ -112,7 +114,6 @@ public class AsesoriasAdmin extends AppCompatActivity {
         txtPendientes=findViewById(R.id.txtPendientes);
 
         imgPostPersona=findViewById(R.id.imgPostPersona);
-        imgFormulario=findViewById(R.id.imgFormulario);
 
 
 
@@ -197,15 +198,26 @@ public class AsesoriasAdmin extends AppCompatActivity {
             }
         });
 
-        imgFormulario.setOnClickListener(new View.OnClickListener() {
+        btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AsesoriasAdmin.this, FormularioLista.class);
+                Intent intent = new Intent(AsesoriasAdmin.this, ListaChat.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
             }
         });
+
+        btnFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AsesoriasAdmin.this, AdminAgregarFeed.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+            }
+        });
+
 
         bajarInscritos();
 
@@ -237,7 +249,7 @@ public class AsesoriasAdmin extends AppCompatActivity {
                         String fechaBase =inscritos.getFecha_limite();
                         DateFormat dateFormattt = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
                         try {
-                            Date convertedDate=dateFormattt.parse(fechaBase);
+                            Date convertedDate = dateFormattt.parse(fechaBase);
                             Calendar c = Calendar.getInstance();
                             c.setTime(convertedDate);
                             //sacar mes y anio base
@@ -246,24 +258,26 @@ public class AsesoriasAdmin extends AppCompatActivity {
                             int mesBase = c.get(Calendar.MONTH) + 1;
                             int diaBase = c.get(Calendar.DAY_OF_MONTH);
 
-                            if (inscritos.getId_pendiente().equals(false)){
-                                Log.e(TAG, "INSCRITOS AÑO Y MES DEL USUARIO: " + anioBase + " " + mesBase + " " + diaBase + " " + fechaBase);
-                                Log.e(TAG, "INSCRITOS AÑO Y MES DEL HOY: " + anioActual + " " + mesActual);
+                            if (inscritos.getAdmin().equals(id)){
+                                if (inscritos.getId_pendiente().equals(false)) {
+                                    Log.e(TAG, "INSCRITOS AÑO Y MES DEL USUARIO: " + anioBase + " " + mesBase + " " + diaBase + " " + fechaBase);
+                                    Log.e(TAG, "INSCRITOS AÑO Y MES DEL HOY: " + anioActual + " " + mesActual);
 
-                                if (anioBase == anioActual) {
-                                    if (mesBase == mesActual) {
-                                        Log.e(TAG, "INSCRITOS BIEN: " + snapshot);
-                                        bajarUsuarios2(inscritos.getId_usuario());
-                                    }else if (mesBase > mesActual) {
+                                    if (anioBase == anioActual) {
+                                        if (mesBase == mesActual) {
+                                            Log.e(TAG, "INSCRITOS BIEN: " + snapshot);
+                                            bajarUsuarios2(inscritos.getId_usuario());
+                                        } else if (mesBase > mesActual) {
+                                            Log.e(TAG, "INSCRITOS BIEN 2: " + snapshot);
+                                            bajarUsuarios(inscritos.getId_usuario());
+                                        }
+                                    } else if (anioBase > anioActual) {
                                         Log.e(TAG, "INSCRITOS BIEN 2: " + snapshot);
                                         bajarUsuarios(inscritos.getId_usuario());
                                     }
-                                }else if (anioBase > anioActual) {
-                                    Log.e(TAG, "INSCRITOS BIEN 2: " + snapshot);
-                                    bajarUsuarios(inscritos.getId_usuario());
                                 }
-                            }
 
+                        }
 
 
                         } catch (ParseException e) {

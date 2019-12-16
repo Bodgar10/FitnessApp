@@ -31,6 +31,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -53,6 +54,8 @@ public class AgregarEbooks extends AppCompatActivity {
     ProgressDialog progressDialog;
     TextView txtSeleccionar,txtQueTipo;
 
+    String id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +65,12 @@ public class AgregarEbooks extends AppCompatActivity {
 
         Toolbar toolbarback = findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
-        getSupportActionBar().setTitle("Agregar PDF");
+        getSupportActionBar().setTitle("Agregar Ebook");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
         mStorage= FirebaseStorage.getInstance().getReference();
         dbProvider = new DBProvider();
@@ -287,7 +293,7 @@ public class AgregarEbooks extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             dbProvider.subirEbook(Contants.EBOOKS,gratis,uri.toString(),costo,pdf,timestamp,
-                                    descripcion);
+                                    descripcion,id);
 
                         }
                     });

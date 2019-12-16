@@ -31,6 +31,7 @@ import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.subirArchivos;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -51,6 +52,7 @@ public class AgregarImagen extends AppCompatActivity {
     ProgressDialog progressDialog;
     TextView txtSubir,txtSiguiente;
 
+    String id;
 
 
     @Override
@@ -64,6 +66,9 @@ public class AgregarImagen extends AppCompatActivity {
         getSupportActionBar().setTitle("Agregar Imagen");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
 
         mStorage= FirebaseStorage.getInstance().getReference();
@@ -160,7 +165,7 @@ public class AgregarImagen extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             dbProvider.subirFeed(Contants.IMAGEN,false,uri.toString(),"0",uri.toString(),timestamp,
-                                    descripcion);
+                                    descripcion,id);
                             progressDialog.dismiss();
                             Toast.makeText(AgregarImagen.this, "Se ha subido la imagen correctamente.", Toast.LENGTH_SHORT).show();
 

@@ -31,9 +31,12 @@ import java.util.ArrayList;
 public class FormularioLista extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    LinearLayout btnAsesoria;
     AdapterPreguntas adapter;
     ArrayList<Preguntas> preguntas;
+
+
+    LinearLayout btnAsesoria,btnChat,btnFeed;
+
 
     TextView txtAgregar;
 
@@ -50,20 +53,18 @@ public class FormularioLista extends AppCompatActivity {
         Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Formulario");
-        ActionBar actionBar=getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
+        btnAsesoria=findViewById(R.id.btnAsesoria);
+        btnChat=findViewById(R.id.btnChat);
+        btnFeed=findViewById(R.id.btnFeed);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
 
-        btnAsesoria=findViewById(R.id.btnAesoria);
         txtAgregar=findViewById(R.id.txtAgregar);
 
         bajarPreguntas();
-
-
-
-
 
 
 
@@ -75,6 +76,26 @@ public class FormularioLista extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
+
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FormularioLista.this, ListaChat.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+            }
+        });
+
+        btnFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FormularioLista.this, AdminAgregarFeed.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+            }
+        });
 
 
         btnAsesoria.setOnClickListener(new View.OnClickListener() {

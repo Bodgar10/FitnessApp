@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_gravity="center"
-    tools:context=".menu_nuevo.FragmentsU.QuienAsesoria">
+    android:layout_height="match_parent"
+    tools:context=".Admin.AdminPlanes">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -21,34 +19,26 @@
         app:titleTextAppearance="@style/Toolbar.TitleText"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
+        <ImageButton
+            android:id="@+id/btnAgregarPlan"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
+            android:gravity="end"
+            android:padding="5dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_agregrar_iconocua" />
+
 
     </androidx.appcompat.widget.Toolbar>
 
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:gravity="center"
-        android:text="¿Con quien quieres la asesoria?"
-        android:textAllCaps="false"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="18sp" />
-
-
     <include
         layout="@layout/recyclerview"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </include>
-
-
-
 
 
 </LinearLayout>

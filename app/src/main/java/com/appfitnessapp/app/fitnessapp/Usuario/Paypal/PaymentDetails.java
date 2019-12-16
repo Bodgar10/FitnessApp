@@ -28,7 +28,7 @@ public class PaymentDetails extends AppCompatActivity {
     TextView txtId,txtAmount,txtStatus;
     DBProvider dbProvider;
 
-    String id,idUsuario,meses;
+    String admin,idUsuario,meses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,8 @@ public class PaymentDetails extends AppCompatActivity {
         if (extras != null) {
             idUsuario =extras.getString("id_usuario");
             meses =extras.getString("meses");
+            admin =extras.getString("admin");
+
 
 
         }
@@ -141,7 +143,7 @@ public class PaymentDetails extends AppCompatActivity {
 
             Toast.makeText(this, "La compra se realizo", Toast.LENGTH_SHORT).show();
             String key = dbProvider.tablaInscritos().push().getKey();
-            dbProvider.subirIncritos(diaHoy+"-"+mesHoy+"-"+anioHoy,key,true,idUsuario);
+            dbProvider.subirIncritos(diaHoy+"-"+mesHoy+"-"+anioHoy,key,true,idUsuario,admin);
             dbProvider.updateIsPagado(idUsuario,true);
             new CountDownTimer(2000,1){
 

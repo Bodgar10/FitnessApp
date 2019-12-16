@@ -31,6 +31,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -52,6 +53,9 @@ public class AgregarPdf extends AppCompatActivity {
     Uri imgUri,pdfUri;
     ProgressDialog progressDialog;
 
+
+    String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +67,9 @@ public class AgregarPdf extends AppCompatActivity {
         getSupportActionBar().setTitle("Agregar PDF");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
         mStorage= FirebaseStorage.getInstance().getReference();
         dbProvider = new DBProvider();
@@ -277,7 +284,7 @@ public class AgregarPdf extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             dbProvider.subirFeed(Contants.PDF,gratis,uri.toString(),costo,pdf,timestamp,
-                                    descripcion);
+                                    descripcion,id);
 
                         }
                     });

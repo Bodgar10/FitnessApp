@@ -48,8 +48,8 @@ public class AsesoriasPendientes extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView txtActivos;
     CircularImageView imgPostPersona;
-    LinearLayout btnFormulario;
-    ImageButton imgFormulario;
+
+    LinearLayout btnFormulario,btnChat,btnFeed;
 
 
     String id;
@@ -72,6 +72,10 @@ public class AsesoriasPendientes extends AppCompatActivity {
 
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        btnFormulario=findViewById(R.id.btnFormulario);
+        btnChat=findViewById(R.id.btnChat);
+        btnFeed=findViewById(R.id.btnFeed);
+
 
         bajarInscritos();
 
@@ -93,7 +97,6 @@ public class AsesoriasPendientes extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         btnFormulario=findViewById(R.id.btnFormulario);
-        imgFormulario=findViewById(R.id.imgFormulario);
 
 
 
@@ -133,6 +136,7 @@ public class AsesoriasPendientes extends AppCompatActivity {
             }
         });
 
+
         btnFormulario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,15 +147,26 @@ public class AsesoriasPendientes extends AppCompatActivity {
             }
         });
 
-        imgFormulario.setOnClickListener(new View.OnClickListener() {
+        btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AsesoriasPendientes.this, FormularioLista.class);
+                Intent intent = new Intent(AsesoriasPendientes.this, ListaChat.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
             }
         });
+
+        btnFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AsesoriasPendientes.this, AdminAgregarFeed.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+            }
+        });
+
     }
 
 
@@ -167,9 +182,12 @@ public class AsesoriasPendientes extends AppCompatActivity {
                         Inscritos inscritos = snapshot.getValue(Inscritos.class);
 
                         if(inscritos.getId_usuario()!=null) {
-                            if (inscritos.getId_pendiente().equals(true)) {
-                                Log.e(TAG, "INSCRITOS true: " + inscritos);
-                                bajarUsuarios(inscritos.getId_usuario());
+                            if (inscritos.getAdmin().equals(id)) {
+                                if (inscritos.getId_pendiente().equals(true)) {
+                                    Log.e(TAG, "INSCRITOS true: " + inscritos);
+                                    bajarUsuarios(inscritos.getId_usuario());
+                                }
+
                             }
                         }
                     }

@@ -31,6 +31,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -54,6 +55,8 @@ public class AgregarVideo extends AppCompatActivity {
     ProgressDialog progressDialog;
     TextView txtSubir;
 
+    String id;
+
 
 
     @Override
@@ -67,6 +70,9 @@ public class AgregarVideo extends AppCompatActivity {
         getSupportActionBar().setTitle("Agregar Video");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
         mStorage= FirebaseStorage.getInstance().getReference();
         dbProvider = new DBProvider();
@@ -233,7 +239,7 @@ public class AgregarVideo extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             dbProvider.subirFeed(Contants.VIDEO,false,uri.toString(),"0",video,timestamp,
-                                    descripcion);
+                                    descripcion,id);
 
                         }
                     });

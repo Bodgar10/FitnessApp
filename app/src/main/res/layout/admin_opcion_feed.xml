@@ -1,201 +1,370 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_marginBottom="55dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/white"
-        android:elevation="10dp"
-        android:theme="@style/Toolbar"
-        app:titleTextAppearance="@style/Toolbar.TitleText"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
-    </androidx.appcompat.widget.Toolbar>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/white"
+                android:elevation="10dp"
+                android:theme="@style/Toolbar"
+                app:titleTextAppearance="@style/Toolbar.TitleText"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+            </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp"
-        android:padding="8dp"
-        android:gravity="start"
-        android:background="@android:color/darker_gray"
-        android:text="Elige la opcion a subir"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        android:textSize="13sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:padding="8dp"
+                android:gravity="start"
+                android:background="@android:color/darker_gray"
+                android:text="Elige la opcion a subir"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
 
-    <LinearLayout
-        android:id="@+id/btnImagen"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:background="@drawable/boton_naranja"
-        android:elevation="10dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_imgnull" />
 
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/btnImagen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/boton_naranja_completo"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="Añadir Imagen"
+                    android:textColor="@color/blanco"
+                    android:textSize="14sp"
+                    android:textAllCaps="true" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/btnVideo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/boton_naranja_completo"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="Añadir Video"
+                    android:textColor="@color/blanco"
+                    android:textSize="14sp"
+                    android:textAllCaps="true" />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/btnPdf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/boton_naranja_completo"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="Añadir PDF"
+                    android:textColor="@color/blanco"
+                    android:textSize="14sp"
+                    android:textAllCaps="true" />
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:id="@+id/btnRecetarios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/boton_naranja_completo"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="Añadir Recetarios"
+                    android:textColor="@color/blanco"
+                    android:textSize="14sp"
+                    android:textAllCaps="true" />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/btnEbooks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/boton_naranja_completo"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="Añadir Ebooks"
+                    android:textColor="@color/blanco"
+                    android:textSize="14sp"
+                    android:textAllCaps="true" />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/btnPlanes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/boton_naranja_completo"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="Añadir/Cambiar mis planes"
+                    android:textColor="@color/blanco"
+                    android:textSize="14sp"
+                    android:textAllCaps="true" />
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="IMAGEN"
-            android:textSize="18sp"
-            android:textColor="@color/negro"
-            />
-    </LinearLayout>
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/btnPdf"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:background="@drawable/boton_naranja"
-        android:elevation="10dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/pdf" />
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="PDF"
-            android:textSize="18sp"
-            android:textColor="@color/negro"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/btnVideo"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:orientation="vertical"
-        android:background="@drawable/boton_naranja"
-        android:elevation="10dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_play_icono" />
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="VIDEO"
-            android:textSize="18sp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/negro"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/btnRecetarios"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:background="@drawable/boton_naranja"
-        android:elevation="10dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/pdf" />
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="RECETARIOS"
-            android:textSize="18sp"
-            android:textColor="@color/negro"
-            />
-    </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="3dp"
+                android:background="#77a9a9a9" />
 
 
-    <LinearLayout
-        android:id="@+id/btnEbooks"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:background="@drawable/boton_naranja"
-        android:elevation="10dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/pdf" />
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="E-BOOKS"
-            android:textSize="18sp"
-            android:textColor="@color/negro"
-            />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
 
-    </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/btnAsesoria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@null"
+                        android:scaleType="centerInside"
+                        android:tint="@android:color/darker_gray"
+                        app:srcCompat="@drawable/ic_miplan_icono" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Asesorias"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnChat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@null"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_chatn" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chats"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/btnFormulario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@null"
+                        android:tint="@android:color/darker_gray"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/ic_formulario" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Formulario"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/btnFeed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@null"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_homenuevo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Feed"
+                        android:textColor="@color/naranja"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
 
 
 
-</ScrollView>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+</FrameLayout>
+

@@ -14,7 +14,10 @@ import com.appfitnessapp.app.fitnessapp.R;
 
 public class AdminAgregarFeed extends AppCompatActivity {
 
-    LinearLayout btnVideo,btnImagen,btnPdf,btnRecetarios,btnEbooks;
+    LinearLayout btnVideo,btnImagen,btnPdf,btnRecetarios,btnEbooks,btnPlanes;
+
+    LinearLayout btnAsesoria,btnFormulario,btnChat;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +27,7 @@ public class AdminAgregarFeed extends AppCompatActivity {
         Toolbar toolbarback = findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
         getSupportActionBar().setTitle("Feed");
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
 
         btnImagen=findViewById(R.id.btnImagen);
@@ -34,6 +36,11 @@ public class AdminAgregarFeed extends AppCompatActivity {
 
         btnRecetarios=findViewById(R.id.btnRecetarios);
         btnEbooks=findViewById(R.id.btnEbooks);
+
+        btnFormulario=findViewById(R.id.btnFormulario);
+        btnAsesoria=findViewById(R.id.btnAsesoria);
+        btnChat=findViewById(R.id.btnChat);
+        btnPlanes=findViewById(R.id.btnPlanes);
 
 
         btnVideo.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +53,16 @@ public class AdminAgregarFeed extends AppCompatActivity {
             }
         });
 
+
+        btnPlanes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(AdminAgregarFeed.this, AdminPlanes.class);
+                startActivity(intent);
+
+            }
+        });
 
         btnPdf.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +107,42 @@ public class AdminAgregarFeed extends AppCompatActivity {
 
             }
         });
+
+        btnFormulario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminAgregarFeed.this, FormularioLista.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+            }
+        });
+
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminAgregarFeed.this, ListaChat.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+            }
+        });
+
+
+        btnAsesoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminAgregarFeed.this, AsesoriasAdmin.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+                overridePendingTransition(
+                        getIntent().getIntExtra("anim id in", R.anim.move_in),
+                        getIntent().getIntExtra("anim id out", R.anim.move_leeft_in));
+            }
+        });
+
+
     }
 
 

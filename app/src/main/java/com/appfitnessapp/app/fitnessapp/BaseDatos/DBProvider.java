@@ -112,7 +112,7 @@ public class DBProvider {
 
 
     public void  subirFeed(String tipo_feed,Boolean is_gratis,String imagen_feed,String costo_pdf,String url_tipo,
-                           String timestamp,String descripcion){
+                           String timestamp,String descripcion,String admin){
         Map<String, Object> updates = new HashMap<>();
 
         String key = tablaFeed().push().getKey();
@@ -124,6 +124,8 @@ public class DBProvider {
         updates.put(Contants.URL_TIPO, url_tipo);
         updates.put(Contants.TIMESTAMP, timestamp);
         updates.put(Contants.DESCRIPCION, descripcion);
+        updates.put(Contants.ADMIN, admin);
+
 
         tablaFeed().child(key).updateChildren(updates);
 
@@ -132,7 +134,7 @@ public class DBProvider {
     }
 
     public void  subirEbook(String tipo_feed,Boolean is_gratis,String imagen_feed,String costo_pdf,String url_tipo,
-                           String timestamp,String descripcion){
+                           String timestamp,String descripcion,String admin){
         Map<String, Object> updates = new HashMap<>();
 
         String key = tablaEbook().push().getKey();
@@ -144,6 +146,8 @@ public class DBProvider {
         updates.put(Contants.URL_TIPO, url_tipo);
         updates.put(Contants.TIMESTAMP, timestamp);
         updates.put(Contants.DESCRIPCION, descripcion);
+        updates.put(Contants.ADMIN, admin);
+
 
         tablaEbook().child(key).updateChildren(updates);
 
@@ -152,7 +156,7 @@ public class DBProvider {
     }
 
     public void  subirRecetario(String tipo_feed,Boolean is_gratis,String imagen_feed,String costo_pdf,String url_tipo,
-                            String timestamp,String descripcion){
+                            String timestamp,String descripcion,String admin){
         Map<String, Object> updates = new HashMap<>();
 
         String key = tablaRecetario().push().getKey();
@@ -164,6 +168,8 @@ public class DBProvider {
         updates.put(Contants.URL_TIPO, url_tipo);
         updates.put(Contants.TIMESTAMP, timestamp);
         updates.put(Contants.DESCRIPCION, descripcion);
+        updates.put(Contants.ADMIN, admin);
+
 
         tablaRecetario().child(key).updateChildren(updates);
 
@@ -303,7 +309,7 @@ public class DBProvider {
 
     //Planes
     public void subirPlanes(String costo_plan,String descripcion_plan, String id_plan, Boolean isVendida, String meses_plan,
-                            String nombre_plan){
+                            String nombre_plan,String admin){
         Map<String, Object> updates = new HashMap<>();
 
         updates.put(Contants.COSTO_PLAN , costo_plan);
@@ -312,6 +318,8 @@ public class DBProvider {
         updates.put(Contants.IS_VENDIDA , isVendida );
         updates.put(Contants.MESES_PLAN , meses_plan);
         updates.put(Contants.NOMBRE_PLAN , nombre_plan);
+        updates.put(Contants.ADMIN , admin);
+
 
         planes().child(id_plan).updateChildren(updates);
     }
@@ -616,12 +624,14 @@ public class DBProvider {
     }
 
 
-    public void subirIncritos(String fecha_limite, String id_inscrito, Boolean id_pendiente,String id_usuario){
+    public void subirIncritos(String fecha_limite, String id_inscrito, Boolean id_pendiente,String id_usuario,String admin){
         Map<String, Object> data = new HashMap<>();
         data.put(Contants.FECHA_LIMITE, fecha_limite);
         data.put(Contants.ID_INSCRITO, id_inscrito);
         data.put(Contants.ID_PENDIENTE, id_pendiente);
         data.put(Contants.ID_USUARIO, id_usuario);
+        data.put(Contants.ADMIN, admin);
+
         tablaInscritos().child(id_inscrito).updateChildren(data);
     }
 

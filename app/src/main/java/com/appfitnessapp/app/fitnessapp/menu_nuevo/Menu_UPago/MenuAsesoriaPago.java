@@ -60,7 +60,7 @@ public class MenuAsesoriaPago extends Fragment {
     RecyclerView recyclerView,recyclerView2,recyclerView3;
     AdapterRecetas adapter,adapter2,adapter3;
     ArrayList<PlanAlimenticio> recetas,recetas2,recetas3;
-    TextView btnWorkouts,txtAlmuerzo,txtCena,txtDesayuno,txtNada;
+    TextView txtAlmuerzo,txtCena,txtDesayuno,txtNada;
 
 
     String id;
@@ -89,7 +89,6 @@ public class MenuAsesoriaPago extends Fragment {
 
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        btnWorkouts=view.findViewById(R.id.btnWorkouts);
 
         recyclerView=view.findViewById(R.id.recycler1);
         recyclerView2=view.findViewById(R.id.recycler2);
@@ -222,18 +221,6 @@ public class MenuAsesoriaPago extends Fragment {
                 bundle.putString("porciones",recetas3.get(recyclerView3.getChildAdapterPosition(v)).getPorciones());
                 bundle.putString("id_usuario",id);
                 intent.putExtras(bundle);
-                startActivity(intent);
-
-            }
-        });
-
-
-
-        btnWorkouts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getContext(), UsuarioPlanWorkouts.class);
                 startActivity(intent);
 
             }
