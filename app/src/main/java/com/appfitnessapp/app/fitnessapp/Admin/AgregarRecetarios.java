@@ -291,7 +291,7 @@ public class AgregarRecetarios extends AppCompatActivity {
                     storageReference1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            dbProvider.subirRecetario(Contants.RECETARIOS,gratis,uri.toString(),costo,pdf,timestamp,
+                            dbProvider.subirFeed(Contants.RECETARIOS,gratis,uri.toString(),costo,pdf,timestamp,
                                     descripcion,id);
 
                         }

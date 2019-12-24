@@ -9,7 +9,7 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/white"
+        android:background="@color/azul"
         android:elevation="10dp"
         android:theme="@style/Toolbar"
         app:titleTextAppearance="@style/Toolbar.TitleText"
@@ -19,6 +19,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <include
+        android:layout_marginTop="55dp"
         layout="@layout/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -199,8 +199,11 @@ public class Menu_PdfsU extends Fragment {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Feed feed = snapshot.getValue(Feed.class);
 
-                        feeds.add(feed);
-                        adapterFeed.notifyDataSetChanged();
+                        if (feed.tipo_feed.equals(Contants.PDF)) {
+                            feeds.add(feed);
+                            adapterFeed.notifyDataSetChanged();
+
+                        }
 
                     }
                 }

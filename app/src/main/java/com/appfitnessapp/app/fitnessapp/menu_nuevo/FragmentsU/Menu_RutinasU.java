@@ -29,6 +29,7 @@ import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.DetallePdf;
 import com.appfitnessapp.app.fitnessapp.Usuario.Imagen;
 import com.appfitnessapp.app.fitnessapp.Usuario.PantallaPDF;
+import com.appfitnessapp.app.fitnessapp.Usuario.UsuarioHome;
 import com.appfitnessapp.app.fitnessapp.videoplayer.VideoPlayer;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -157,6 +158,56 @@ public class Menu_RutinasU extends Fragment {
                 }
 
                 else if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.PDF)){
+
+                    if (feeds.get(recyclerView.getChildAdapterPosition(view)).getIs_gratis()){
+                        Intent intent = new Intent(getContext(), PantallaPDF.class);
+                        intent.putExtra("ViewType","internet");
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pdf",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                    else {
+                        Intent intent = new Intent(getContext(), DetallePdf.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("HomeInicio","Pagado");
+                        bundle.putString("url",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
+                        bundle.putString("descripcion",feeds.get(recyclerView.getChildAdapterPosition(view)).getDescripcion());
+                        bundle.putString("precio",feeds.get(recyclerView.getChildAdapterPosition(view)).getCosto_pdf());
+
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+
+                    }
+
+                }
+
+                else if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.EBOOKS)){
+
+                    if (feeds.get(recyclerView.getChildAdapterPosition(view)).getIs_gratis()){
+                        Intent intent = new Intent(getContext(), PantallaPDF.class);
+                        intent.putExtra("ViewType","internet");
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pdf",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                    else {
+                        Intent intent = new Intent(getContext(), DetallePdf.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("HomeInicio","Pagado");
+                        bundle.putString("url",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
+                        bundle.putString("descripcion",feeds.get(recyclerView.getChildAdapterPosition(view)).getDescripcion());
+                        bundle.putString("precio",feeds.get(recyclerView.getChildAdapterPosition(view)).getCosto_pdf());
+
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+
+                    }
+
+                }
+
+                else if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.RECETARIOS)){
 
                     if (feeds.get(recyclerView.getChildAdapterPosition(view)).getIs_gratis()){
                         Intent intent = new Intent(getContext(), PantallaPDF.class);

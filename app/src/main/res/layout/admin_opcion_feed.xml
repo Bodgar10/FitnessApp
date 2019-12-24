@@ -19,9 +19,9 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@android:color/white"
+                android:background="@color/azul"
                 android:elevation="10dp"
-                android:theme="@style/Toolbar"
+                android:theme="@style/ToolbarAdmin"
                 app:titleTextAppearance="@style/Toolbar.TitleText"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
             </androidx.appcompat.widget.Toolbar>

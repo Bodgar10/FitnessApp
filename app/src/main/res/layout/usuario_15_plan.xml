@@ -16,7 +16,7 @@
         android:visibility="gone"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:background="@android:color/white"
+        android:background="@color/azul"
         android:elevation="10dp"
         android:theme="@style/Toolbar"
         app:popupTheme="@style/AppTheme.PopupOverlay"

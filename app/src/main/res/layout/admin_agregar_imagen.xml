@@ -12,9 +12,9 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/white"
+        android:background="@color/azul"
         android:elevation="10dp"
-        android:theme="@style/Toolbar"
+        android:theme="@style/ToolbarAdmin"
         app:titleTextAppearance="@style/Toolbar.TitleText"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
@@ -29,7 +29,7 @@
             android:textStyle="bold"
             android:text="SUBIR"
             android:textAllCaps="true"
-            android:textColor="@color/naranja"
+            android:textColor="@color/blanco"
             android:textSize="15sp" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:textStyle="bold"
             android:text="Finalizar"
             android:textAllCaps="true"
-            android:textColor="@color/azul"
+            android:textColor="@color/blanco"
             android:textSize="15sp" />
 
     </androidx.appcompat.widget.Toolbar>

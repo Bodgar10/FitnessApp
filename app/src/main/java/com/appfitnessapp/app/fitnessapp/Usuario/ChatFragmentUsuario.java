@@ -156,42 +156,6 @@ public class ChatFragmentUsuario extends AppCompatActivity implements ChatContra
 
 
 
-        imgPlan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(ChatFragmentUsuario.this, UsuarioPlan.class);
-                startActivity(intent);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
-                finish();
-
-            }
-        });
-
-        imgPerfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ChatFragmentUsuario.this, UsuarioPerfil.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
-                finish();
-            }
-        });
-
-        imgHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ChatFragmentUsuario.this, UsuarioHome.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
-                finish();
-
-            }
-        });
-
 
 
     }

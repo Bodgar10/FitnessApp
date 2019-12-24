@@ -3,19 +3,28 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">#000000</item>
+        <item name="colorPrimary">@color/azul</item>
+        <item name="colorPrimaryDark">@color/azul</item>
+        <item name="colorAccent">@color/azul</item>
+        <item name="android:statusBarColor">@color/azul</item>
 
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+
+
     <style name="Toolbar" parent="@style/ThemeOverlay.AppCompat.ActionBar">
-        <item name="colorPrimary">@color/blanco</item>
-        <item name="android:textColorPrimary">@color/negro</item>
-        <item name="colorControlNormal">@color/naranja</item>
+        <item name="colorPrimary">@color/azul</item>
+        <item name="android:textColorPrimary">@color/blanco</item>
+        <item name="colorControlNormal">@color/blanco</item>
+
+    </style>
+
+    <style name="ToolbarAdmin" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorPrimary">@color/azul</item>
+        <item name="android:textColorPrimary">@color/blanco</item>
+        <item name="colorControlNormal">@color/blanco</item>
 
     </style>
 

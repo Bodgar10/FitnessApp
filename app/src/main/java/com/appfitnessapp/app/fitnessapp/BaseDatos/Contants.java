@@ -48,7 +48,7 @@ public class Contants {
     final public static String IMAGEN = "imagen";
     final public static String RUTINAS = "rutinas";
     final public static String RECETARIOS = "recetarios";
-    final public static String EBOOKS = "ebooks";
+    final public static String EBOOKS = "ebook";
 
 
     final public static String TABLA_RECETARIO = "tabla_recetario";

@@ -228,6 +228,56 @@ public class UsuarioHome  extends AppCompatActivity {
 
                 }
 
+                else if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.EBOOKS)){
+
+                    if (feeds.get(recyclerView.getChildAdapterPosition(view)).getIs_gratis()){
+                        Intent intent = new Intent(UsuarioHome.this, PantallaPDF.class);
+                        intent.putExtra("ViewType","internet");
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pdf",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                    else {
+                        Intent intent = new Intent(UsuarioHome.this, DetallePdf.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("HomeInicio","Pagado");
+                        bundle.putString("url",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
+                        bundle.putString("descripcion",feeds.get(recyclerView.getChildAdapterPosition(view)).getDescripcion());
+                        bundle.putString("precio",feeds.get(recyclerView.getChildAdapterPosition(view)).getCosto_pdf());
+
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+
+                    }
+
+                }
+
+                else if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.RECETARIOS)){
+
+                    if (feeds.get(recyclerView.getChildAdapterPosition(view)).getIs_gratis()){
+                        Intent intent = new Intent(UsuarioHome.this, PantallaPDF.class);
+                        intent.putExtra("ViewType","internet");
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pdf",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                    else {
+                        Intent intent = new Intent(UsuarioHome.this, DetallePdf.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("HomeInicio","Pagado");
+                        bundle.putString("url",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
+                        bundle.putString("descripcion",feeds.get(recyclerView.getChildAdapterPosition(view)).getDescripcion());
+                        bundle.putString("precio",feeds.get(recyclerView.getChildAdapterPosition(view)).getCosto_pdf());
+
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+
+                    }
+
+                }
+
                 else {
 
                     Toast.makeText(UsuarioHome.this, "hola", Toast.LENGTH_SHORT).show();

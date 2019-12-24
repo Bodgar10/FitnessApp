@@ -13,9 +13,9 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/white"
+        android:background="@color/azul"
         android:elevation="10dp"
-        android:theme="@style/Toolbar"
+        android:theme="@style/ToolbarAdmin"
         app:titleTextAppearance="@style/Toolbar.TitleText"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
@@ -27,8 +27,9 @@
             android:layout_marginEnd="10dp"
             android:gravity="end"
             android:padding="5dp"
+            android:background="@null"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_agregrar_iconocua" />
+            android:src="@drawable/ic_agregrar_plan" />
 
 
     </androidx.appcompat.widget.Toolbar>

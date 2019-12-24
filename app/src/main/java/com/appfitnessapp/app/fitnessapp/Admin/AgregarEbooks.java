@@ -292,7 +292,7 @@ public class AgregarEbooks extends AppCompatActivity {
                     storageReference1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            dbProvider.subirEbook(Contants.EBOOKS,gratis,uri.toString(),costo,pdf,timestamp,
+                            dbProvider.subirFeed(Contants.EBOOKS,gratis,uri.toString(),costo,pdf,timestamp,
                                     descripcion,id);
 
                         }

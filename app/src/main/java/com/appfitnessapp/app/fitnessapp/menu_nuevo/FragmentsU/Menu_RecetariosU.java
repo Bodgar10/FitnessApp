@@ -141,25 +141,8 @@ public class Menu_RecetariosU extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.VIDEO)){
 
-                    Intent intent = new Intent(getContext(), VideoPlayer.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("video",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-
-                else if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.IMAGEN)){
-
-                    Intent intent = new Intent(getContext(), Imagen.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("imagen",feeds.get(recyclerView.getChildAdapterPosition(view)).getUrl_tipo());
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-
-                else if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.PDF)){
+                 if(feeds.get(recyclerView.getChildAdapterPosition(view)).getTipo_feed().equals(Contants.RECETARIOS)){
 
                     if (feeds.get(recyclerView.getChildAdapterPosition(view)).getIs_gratis()){
                         Intent intent = new Intent(getContext(), PantallaPDF.class);
@@ -203,7 +186,7 @@ public class Menu_RecetariosU extends Fragment {
         //  feeds.removeAll(feeds);
 
         dbProvider = new DBProvider();
-        dbProvider.tablaRecetario().addValueEventListener(new ValueEventListener() {
+        dbProvider.tablaFeed().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 feeds.clear();
@@ -213,9 +196,11 @@ public class Menu_RecetariosU extends Fragment {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         Feed feed = snapshot.getValue(Feed.class);
 
-                        feeds.add(feed);
-                        adapterFeed.notifyDataSetChanged();
+                        if (feed.tipo_feed.equals(Contants.RECETARIOS)) {
+                            feeds.add(feed);
+                            adapterFeed.notifyDataSetChanged();
 
+                        }
                     }
                 }
                 else {

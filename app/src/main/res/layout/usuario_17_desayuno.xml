@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/white"
+            android:background="@color/azul"
             android:elevation="10dp"
             android:theme="@style/Toolbar"
             app:titleTextAppearance="@style/Toolbar.TitleText"
@@ -34,7 +34,7 @@
                 android:textStyle="bold"
                 android:text="@string/editar"
                 android:textAllCaps="true"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="15sp" />
 
             <Switch

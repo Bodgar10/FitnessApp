@@ -15,9 +15,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/white"
+            android:background="@color/azul"
             android:elevation="10dp"
-            android:theme="@style/Toolbar"
+            android:theme="@style/ToolbarAdmin"
             app:titleTextAppearance="@style/Toolbar.TitleText"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
@@ -31,7 +31,7 @@
                 android:padding="5dp"
                 android:text="Subir"
                 android:textAllCaps="true"
-                android:textColor="@color/naranja"
+                android:textColor="@color/blanco"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -47,7 +47,7 @@
                 android:textStyle="bold"
                 android:text="Siguiente"
                 android:textAllCaps="true"
-                android:textColor="@color/azul"
+                android:textColor="@color/blanco"
                 android:textSize="15sp" />
 
 

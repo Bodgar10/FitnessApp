@@ -112,9 +112,25 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.FeedViewHolder
         } else if (feed.getTipo_feed().equals(Contants.IMAGEN)) {
             holder.txtPrecio.setVisibility(View.GONE);
             holder.txtTipoFeed.setVisibility(View.GONE);
-        } else if (feed.getTipo_feed().equals(Contants.PDF) && feed.is_gratis) {
+        }
+
+        else if (feed.getTipo_feed().equals(Contants.PDF) && feed.is_gratis) {
             holder.txtPrecio.setText("GRATIS");
             if (feed.getTipo_feed().equals(Contants.PDF) && !feed.is_gratis) {
+                holder.txtPrecio.setText("");
+            }
+        }
+
+        else if (feed.getTipo_feed().equals(Contants.EBOOKS) && feed.is_gratis) {
+            holder.txtPrecio.setText("GRATIS");
+            if (feed.getTipo_feed().equals(Contants.EBOOKS) && !feed.is_gratis) {
+                holder.txtPrecio.setText("");
+            }
+        }
+
+        else if (feed.getTipo_feed().equals(Contants.RECETARIOS) && feed.is_gratis) {
+            holder.txtPrecio.setText("GRATIS");
+            if (feed.getTipo_feed().equals(Contants.RECETARIOS) && !feed.is_gratis) {
                 holder.txtPrecio.setText("");
             }
         }
