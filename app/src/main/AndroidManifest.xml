@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Admin.AgregarPlanes"></activity>
+        <activity android:name=".Admin.EditarAsesoria"></activity>
+        <activity android:name=".Admin.AgregarPlanes" />
         <activity android:name=".Admin.AdminPlanes" />
         <activity
             android:name=".menu_nuevo.Menu_UPago.Menu_UsuarioPago"

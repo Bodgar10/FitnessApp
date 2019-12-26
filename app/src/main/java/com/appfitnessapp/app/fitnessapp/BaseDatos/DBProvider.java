@@ -391,6 +391,42 @@ public class DBProvider {
         tablaPlanAlimenticio().child(id).updateChildren(updates);
     }
 
+
+    //actualizar Asesoria
+
+    public void updateCostoAsesoria(String id, String costo) {
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.COSTO_ASESORIA, costo);
+        asesoriaInfo().child(id).updateChildren(updates);
+    }
+
+    public void updateDescripcionAsesoria(String id, String costo) {
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.DESCRIPCION_ASESORIA, costo);
+        asesoriaInfo().child(id).updateChildren(updates);
+    }
+
+    public void updateDescripcionAlimentosAsesoria(String id, String costo) {
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.ALIMENTOS_DESCRIPCION, costo);
+        asesoriaInfo().child(id).updateChildren(updates);
+    }
+
+    public void updateDescripcionRutinaAsesoria(String id, String costo) {
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.RUTINAS_DESCRIPCION, costo);
+        asesoriaInfo().child(id).updateChildren(updates);
+    }
+
+
     //Respuestas
     public void subirRespuestas(String id_pregunta,String id_respuesta, String id_usuario, String respuesta){
         Map<String, Object> updates = new HashMap<>();

@@ -629,8 +629,7 @@
 
 
                     <LinearLayout
-                        android:visibility="gone"
-                        android:id="@+id/linearCerrar"
+                        android:id="@+id/linearChat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -648,7 +647,7 @@
                             android:gravity="center"
                             android:layout_marginTop="15dp"
                             android:layout_marginBottom="15dp"
-                            android:text="@string/cerrar_sesi_n"
+                            android:text="Chatear con mi asesor"
                             android:textColor="@color/blanco"
                             android:textSize="14sp"
                             android:textAllCaps="true" />

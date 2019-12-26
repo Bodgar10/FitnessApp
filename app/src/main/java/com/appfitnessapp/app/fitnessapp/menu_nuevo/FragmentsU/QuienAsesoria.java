@@ -56,7 +56,7 @@ public class QuienAsesoria extends AppCompatActivity {
 
         Toolbar toolbarback=findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
-        getSupportActionBar().setTitle("gfdg");
+        getSupportActionBar().setTitle("");
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -75,6 +75,8 @@ public class QuienAsesoria extends AppCompatActivity {
         asesorias=new ArrayList<>();
         adapter = new AdapterAdmin(asesorias);
         recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+
 
 
 
@@ -153,6 +155,10 @@ public class QuienAsesoria extends AppCompatActivity {
                                  asesorias.add(usuarios);
                                  adapter.notifyDataSetChanged();
                                  progressDialog.dismiss();
+
+
+
+
                             }
 
                         }

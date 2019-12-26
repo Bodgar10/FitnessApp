@@ -16,7 +16,7 @@ public class AdminAgregarFeed extends AppCompatActivity {
 
     LinearLayout btnVideo,btnImagen,btnPdf,btnRecetarios,btnEbooks,btnPlanes;
 
-    LinearLayout btnAsesoria,btnFormulario,btnChat;
+    LinearLayout btnAsesoria,btnFormulario,btnChat,btnCambiarAsesoria;
 
 
     @Override
@@ -41,6 +41,7 @@ public class AdminAgregarFeed extends AppCompatActivity {
         btnAsesoria=findViewById(R.id.btnAsesoria);
         btnChat=findViewById(R.id.btnChat);
         btnPlanes=findViewById(R.id.btnPlanes);
+        btnCambiarAsesoria=findViewById(R.id.btnCambiarAsesoria);
 
 
         btnVideo.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +104,17 @@ public class AdminAgregarFeed extends AppCompatActivity {
 
 
                 Intent intent = new Intent(AdminAgregarFeed.this, AgregarEbooks.class);
+                startActivity(intent);
+
+            }
+        });
+
+        btnCambiarAsesoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(AdminAgregarFeed.this, EditarAsesoria.class);
                 startActivity(intent);
 
             }

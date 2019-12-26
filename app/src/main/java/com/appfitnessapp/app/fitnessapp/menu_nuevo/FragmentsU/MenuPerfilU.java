@@ -75,7 +75,7 @@ public class MenuPerfilU extends Fragment {
     ImageButton imgHome, imgPlan, imgChat, btnDerecha, btnIzquierda;
     CircularImageView imgPersona;
     TextView txtNombre, txtPeso, txtAltura, txtObjetivo, txtDiasSemana;
-    LinearLayout btnCalificar, btnRecordatorio;
+    LinearLayout btnCalificar, btnRecordatorio,btnChatear;
 
     private ProgressDialog progressDialog;
     private static final String TAG = "BAJARINFO:";
@@ -168,6 +168,8 @@ public class MenuPerfilU extends Fragment {
 
         btnRecordatorio = view.findViewById(R.id.btnRecordatorio);
 
+        btnChatear=view.findViewById(R.id.linearChat);
+
 
         imgPersona = view.findViewById(R.id.imgPersona);
         //linearCerrar = view.findViewById(R.id.linearCerrar);
@@ -228,6 +230,19 @@ public class MenuPerfilU extends Fragment {
             }
         });
 
+
+        btnChatear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getContext(), ChatActivityUsuario.class);
+                intent.putExtra("anim id in", R.anim.move_in);
+                intent.putExtra("anim id out", R.anim.move_leeft_in);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.move, R.anim.move_leeft);
+            }
+        });
 
 
         /*
