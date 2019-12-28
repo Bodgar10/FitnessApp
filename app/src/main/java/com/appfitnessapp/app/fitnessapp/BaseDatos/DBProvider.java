@@ -426,6 +426,14 @@ public class DBProvider {
         asesoriaInfo().child(id).updateChildren(updates);
     }
 
+    public void updateVideoAsesoria(String id, String video) {
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.VIDEO_EXPLICATIVO, video);
+        asesoriaInfo().child(id).updateChildren(updates);
+    }
+
 
     //Respuestas
     public void subirRespuestas(String id_pregunta,String id_respuesta, String id_usuario, String respuesta){

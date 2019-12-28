@@ -1,33 +1,51 @@
 package com.appfitnessapp.app.fitnessapp.Admin;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appfitnessapp.app.fitnessapp.Arrays.AsesoriasInfo;
+import com.appfitnessapp.app.fitnessapp.BaseDatos.Contants;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 public class EditarAsesoria extends AppCompatActivity {
 
     EditText edtDescripcionAsesoria,edtDescripcionAlimentos,edtDescripcionRutina,edtCosto;
-    ImageView imgAsesoria,imgRutina,imgAlimentos;
+    ImageView imgAsesoria,imgRutina,imgAlimentos,imgVideo;
 
     LinearLayout btnGuardarAsesoria;
 
@@ -37,6 +55,12 @@ public class EditarAsesoria extends AppCompatActivity {
     static DBProvider dbProvider;
 
     String videoUrl,costoE,alimentosE,rutinaE,asesoriaE,idAsesoria;
+
+
+    StorageReference mStorage;
+    Uri videoUri;
+    TextView txtVideo,txtVideoExplicativo;
+
 
 
     @Override
@@ -55,12 +79,15 @@ public class EditarAsesoria extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
 
 
+        mStorage= FirebaseStorage.getInstance().getReference();
         dbProvider = new DBProvider();
 
         bajarAsesoria();
 
         btnGuardarAsesoria=findViewById(R.id.btnGuardarAsesoria);
 
+        txtVideo=findViewById(R.id.txtVideo);
+        txtVideoExplicativo=findViewById(R.id.txtVideoExplicativo);
 
 
         edtDescripcionAsesoria=findViewById(R.id.edtDescripcion);
@@ -73,6 +100,21 @@ public class EditarAsesoria extends AppCompatActivity {
         imgAlimentos=findViewById(R.id.imgAlimentos);
         imgRutina=findViewById(R.id.imgRutina);
 
+        imgVideo=findViewById(R.id.imgVideo);
+
+
+
+        imgVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(EditarAsesoria.this, Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED){
+                    selectVideo();
+                }
+                else {
+                    ActivityCompat.requestPermissions(EditarAsesoria.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},10);
+                }
+            }
+        });
 
 
         btnGuardarAsesoria.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +135,12 @@ public class EditarAsesoria extends AppCompatActivity {
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
+
+                }
+
+                if (!videoUrl.equals(txtVideo.getText().toString())&&videoUri!=null){
+                    uploadVideo();
+
 
                 }
 
@@ -130,7 +178,8 @@ public class EditarAsesoria extends AppCompatActivity {
                     Toast.makeText(EditarAsesoria.this, "Necesitas rellenar los campos ", Toast.LENGTH_SHORT).show();
                 }
 
-                if (costo.equals(costoE)&&rutina.equals(rutinaE)&&alimentos.equals(alimentosE)&&asesoria.equals(asesoriaE)){
+                if (costo.equals(costoE)&&rutina.equals(rutinaE)&&alimentos.equals(alimentosE)&&asesoria.equals(asesoriaE)&&
+                        videoUri==null){
                     Intent intent=new Intent(EditarAsesoria.this, AdminAgregarFeed.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -172,6 +221,7 @@ public class EditarAsesoria extends AppCompatActivity {
 
 
                             videoUrl=asesorias.getVideo_explicativo();
+                            txtVideo.setText(asesorias.getVideo_explicativo());
                             costoE=asesorias.getCosto_asesoria();
                             alimentosE=asesorias.getAlimentos_descripcion();
                             rutinaE=asesorias.getRutinas_descripcion();
@@ -207,6 +257,101 @@ public class EditarAsesoria extends AppCompatActivity {
             }
         });
     }
+
+    private void uploadVideo() {
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setTitle("Subiendo...");
+        progressDialog.setProgress(0);
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+
+        final String fileName =System.currentTimeMillis()+"";
+        final StorageReference storageReference1 =  mStorage.child(Contants.TABLA_ASESORIA_INFO).child(fileName);
+
+        storageReference1.putFile(videoUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        storageReference1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+
+                                dbProvider.updateVideoAsesoria(idAsesoria,uri.toString());
+                                progressDialog.dismiss();
+
+                                Toast.makeText(EditarAsesoria.this, "Se subió correctamente la información", Toast.LENGTH_SHORT).show();
+                                Intent intent=new Intent(EditarAsesoria.this, AdminAgregarFeed.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                Toast.makeText(EditarAsesoria.this, "Hubo un error al subir el vídeo.", Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                int currentProgess = (int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                progressDialog.setProgress(currentProgess);
+
+            }
+        });
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+         if (requestCode==10 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            selectVideo();
+        }
+
+        else {
+            Toast.makeText(EditarAsesoria.this, "Permite el acceso a la galeria.", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
+
+    private void selectVideo() {
+
+        Intent intent = new Intent();
+        intent.setType("video/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,87);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+
+
+         if (requestCode==87&& resultCode ==RESULT_OK && data!= null){
+            videoUri=data.getData();
+             txtVideoExplicativo.setText("Tu video esta listo para subirse.");
+             txtVideo.setText("VIDEO: "+data.getData().getLastPathSegment());
+        }
+
+        else {
+            Toast.makeText(EditarAsesoria.this,"Selecciona un archivo", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
