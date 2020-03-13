@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,6 +64,9 @@ public class Menu_EbooksU extends Fragment {
 
     RecyclerView recyclerView;
 
+    Toolbar toolbar;
+
+
 
     private static FirebaseAuth mAuth;
     LinearLayoutManager linearLayout;
@@ -79,6 +83,11 @@ public class Menu_EbooksU extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.usuario_14_feed, container, false);
+
+        toolbar=view.findViewById(R.id.toolbar);
+
+        toolbar.setVisibility(View.GONE);
+
 
         Dexter.withActivity(getActivity())
                 .withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)

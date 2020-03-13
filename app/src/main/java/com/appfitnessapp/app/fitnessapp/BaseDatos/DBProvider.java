@@ -324,6 +324,41 @@ public class DBProvider {
         planes().child(id_plan).updateChildren(updates);
     }
 
+    public void updatePlanNombre(String id, String nombre) {
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.NOMBRE_PLAN, nombre);
+        planes().child(id).updateChildren(updates);
+    }
+
+    public void updatePlanMeses(String id, String meses) {
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.MESES_PLAN, meses);
+        planes().child(id).updateChildren(updates);
+    }
+
+
+    public void updatePlanDescripcion(String id, String descripcion) {
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.DESCRIPCION_PLAN, descripcion);
+        planes().child(id).updateChildren(updates);
+    }
+
+
+    public void updatePlanCosto(String id, String costo) {
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put(Contants.COSTO_PLAN, costo);
+        planes().child(id).updateChildren(updates);
+    }
+
+
     //ALIMENTOS
     public void subirAlimentos(String id_usuario,String fecha_cumplida, String tipo_alimentos){
         Map<String, Object> updates = new HashMap<>();

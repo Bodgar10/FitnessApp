@@ -38,6 +38,7 @@ import com.appfitnessapp.app.fitnessapp.BaseDatos.DBProvider;
 import com.appfitnessapp.app.fitnessapp.Login.SplashPantalla;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.FeedSinRegistro.Asesoria;
+import com.appfitnessapp.app.fitnessapp.menu_nuevo.Menu_UPago.Menu_UsuarioPago;
 import com.appfitnessapp.app.fitnessapp.subirArchivos;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -240,7 +241,7 @@ public class Calificar extends AppCompatActivity {
                     uploadFile2(key,txtExperiencia,fecha,id_asesoria,key,pdfUri2.toString(),pdfUri.toString(),
                             id,valor);
                     edtExperiencia.getText().clear();
-                    Intent intent=new Intent(Calificar.this, UsuarioPerfil.class);
+                    Intent intent=new Intent(Calificar.this, Menu_UsuarioPago.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
@@ -252,7 +253,7 @@ public class Calificar extends AppCompatActivity {
                             "nil",id,valor);
                     Toast.makeText(Calificar.this, "Se  ha calificado la asesoría.", Toast.LENGTH_SHORT).show();
                     edtExperiencia.getText().clear();
-                    Intent intent=new Intent(Calificar.this, UsuarioPerfil.class);
+                    Intent intent=new Intent(Calificar.this, Menu_UsuarioPago.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();

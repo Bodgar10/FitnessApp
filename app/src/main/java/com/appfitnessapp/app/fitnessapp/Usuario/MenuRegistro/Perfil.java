@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.appfitnessapp.app.fitnessapp.Arrays.EstadisticaAlimentos;
 import com.appfitnessapp.app.fitnessapp.Arrays.EstadisticaEjercicio;
@@ -85,11 +84,6 @@ public class Perfil  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_perfil_asesoria);
-
-        Toolbar toolbarback=findViewById(R.id.toolbarU);
-        setSupportActionBar(toolbarback);
-        getSupportActionBar().setTitle("");
-
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);

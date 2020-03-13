@@ -291,6 +291,7 @@
         <activity
             android:name=".Admin.AgregarEbooks"
             android:screenOrientation="portrait" />
+        <activity android:name=".Admin.EditarPlanes" />
 
         <service android:name=".Notificaciones.FirebaseInstanceService">
             <intent-filter>

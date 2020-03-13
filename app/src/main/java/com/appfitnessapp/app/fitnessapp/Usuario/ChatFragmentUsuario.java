@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.appfitnessapp.app.fitnessapp.Adapters.ChatRecyclerAdapter;
 import com.appfitnessapp.app.fitnessapp.Arrays.Chat;
 import com.appfitnessapp.app.fitnessapp.Arrays.Chats;
+import com.appfitnessapp.app.fitnessapp.Arrays.Inscritos;
 import com.appfitnessapp.app.fitnessapp.Arrays.PushNotificationEvent;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.ChatContractUsuario;
@@ -55,6 +57,9 @@ public class ChatFragmentUsuario extends AppCompatActivity implements ChatContra
     private ChatRecyclerAdapter mChatRecyclerAdapter;
 
     private ChatPresenterUsuario mChatPresenter;
+
+    private static final String TAG = "BAJARINFO:";
+
 
 
     ImageButton imgHome,imgPlan,imgPerfil;
@@ -111,8 +116,7 @@ public class ChatFragmentUsuario extends AppCompatActivity implements ChatContra
 
         mRecyclerViewChat.setAdapter(mChatRecyclerAdapter);
 
-        bajarUsuarios();
-
+        bajarInscritos();
 
 
         //chats.removeAll(chats);
@@ -241,7 +245,41 @@ public class ChatFragmentUsuario extends AppCompatActivity implements ChatContra
 
     }
 
-    public void bajarUsuarios(){
+
+    public void bajarInscritos(){
+        dbProvider = new DBProvider();
+
+        dbProvider.tablaInscritos().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                        Log.e(TAG, "INSCRITOS: " + snapshot);
+                        Inscritos inscritos = snapshot.getValue(Inscritos.class);
+
+                        if(inscritos.getId_usuario()!=null) {
+                            if (inscritos.getId_usuario().equals(id_usuario)){
+                                if (inscritos.getId_pendiente().equals(true)) {
+                                    Log.e(TAG, "INSCRITOS true: " + inscritos);
+                                    bajarUsuarios(inscritos.getAdmin());
+                                }
+
+                            }
+                        }
+                    }
+                }else{
+                    Log.e(TAG,"Usuarios 3: ");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG,"ERROR: ");
+            }
+        });
+    }
+
+    public void bajarUsuarios(final String idAdmin){
         dbProvider = new DBProvider();
 
         dbProvider.usersRef().addValueEventListener(new ValueEventListener() {
@@ -253,9 +291,9 @@ public class ChatFragmentUsuario extends AppCompatActivity implements ChatContra
 
                         if (usuarios.getId_usuario()!=null) {
 
-                            if (usuarios.getTipo_usuario().equals(Contants.ADMIN)) {
+                            if (usuarios.getId_usuario().equals(idAdmin)) {
 
-                                id_admin = usuarios.getId_usuario();
+                                id_admin = idAdmin;
                                 txtNombreAdmin.setText(usuarios.getNombre_usuario());
 
                                 if (!usuarios.getFoto_usuario().equals("nil")) {

@@ -12,6 +12,7 @@ import com.appfitnessapp.app.fitnessapp.Login.IniciarSesion;
 import com.appfitnessapp.app.fitnessapp.R;
 import com.appfitnessapp.app.fitnessapp.Usuario.PantallaPDF;
 import com.appfitnessapp.app.fitnessapp.Usuario.RutinaUsuario;
+import com.appfitnessapp.app.fitnessapp.menu_nuevo.FragmentsU.MenuPerfilSinPago;
 import com.appfitnessapp.app.fitnessapp.menu_nuevo.FragmentsU.MenuPerfilU;
 import com.appfitnessapp.app.fitnessapp.menu_nuevo.FragmentsU.Menu_Asesorias_U;
 import com.appfitnessapp.app.fitnessapp.menu_nuevo.FragmentsU.Menu_ConocenosU;
@@ -208,7 +209,7 @@ public class Menu_Usuario extends AppCompatActivity
 
             case R.id.nav_perfil:
 
-                fragment=new MenuPerfilU();
+                fragment=new MenuPerfilSinPago();
                 fragmentTransaction = true;
 
                 break;

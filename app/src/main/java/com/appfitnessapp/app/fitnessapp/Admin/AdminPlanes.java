@@ -88,6 +88,27 @@ public class AdminPlanes extends AppCompatActivity {
         });
 
 
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(AdminPlanes.this, EditarPlanes.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Bundle bundle = new Bundle();
+
+                bundle.putString("id",plan.get(recyclerView.getChildAdapterPosition(v)).getId_plan());
+                bundle.putString("nombre",plan.get(recyclerView.getChildAdapterPosition(v)).getNombre_plan());
+                bundle.putString("costo",plan.get(recyclerView.getChildAdapterPosition(v)).getCosto_plan());
+                bundle.putString("descripcion",plan.get(recyclerView.getChildAdapterPosition(v)).getDescripcion_plan());
+                bundle.putString("meses",plan.get(recyclerView.getChildAdapterPosition(v)).getMeses_plan());
+
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+
+
+            }
+        });
 
 
     }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -36,7 +37,7 @@ public class AgregarPlanes extends AppCompatActivity {
 
         Toolbar toolbarback = findViewById(R.id.toolbar);
         setSupportActionBar(toolbarback);
-        getSupportActionBar().setTitle("Plan Alimenticio");
+        getSupportActionBar().setTitle("Planes");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -79,5 +80,22 @@ public class AgregarPlanes extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

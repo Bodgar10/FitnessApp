@@ -374,7 +374,7 @@ public class EditarPerfil extends AppCompatActivity {
 
 
         final String fileName =System.currentTimeMillis()+"";
-        final StorageReference storageReference1 = mStorage.child(Contants.TABLA_USUARIOS).child(edtNombreUsuario.getText().toString());
+        final StorageReference storageReference1 = mStorage.child(Contants.TABLA_USUARIOS).child(edtNombreUsuario.getText().toString()+fileName);
 
         try {
             Bitmap bmp;
