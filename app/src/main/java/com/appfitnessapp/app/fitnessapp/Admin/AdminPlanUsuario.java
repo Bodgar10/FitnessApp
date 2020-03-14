@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,9 @@ public class AdminPlanUsuario extends AppCompatActivity {
     AdapterRecetas adapter,adapter2,adapter3;
     ArrayList<PlanAlimenticio> recetas,recetas2,recetas3;
 
+    ImageButton btnAgregarPlan;
+
+
     private ProgressDialog progressDialog;
     private static final String TAG = "BAJARINFO:";
     static DBProvider dbProvider;
@@ -70,6 +74,23 @@ public class AdminPlanUsuario extends AppCompatActivity {
         bajarPlan();
 
         btnWorkouts=findViewById(R.id.btnWorkouts);
+
+        btnAgregarPlan=findViewById(R.id.btnAgregarPlan);
+
+        btnAgregarPlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(AdminPlanUsuario.this, AgregarRecetas.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id",id);
+                intent.putExtras(bundle);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+            }
+        });
+
 
 
         recyclerView=findViewById(R.id.recycler1);

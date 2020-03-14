@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.appfitnessapp.app.fitnessapp.Arrays.PlanEntrenamiento;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
@@ -37,15 +38,15 @@ import java.util.Date;
 
 public class MenuRutinasPago extends Fragment {
 
-    ImageButton imgHome,imgPerfil,imgChat;
-    TextView txtTiempo,txtIntensidad,txtEjericios;
-    ImageView imgVideo,imgPrincipal;
+    ImageButton imgHome, imgPerfil, imgChat;
+    TextView txtTiempo, txtIntensidad, txtEjericios;
+    ImageView imgVideo, imgPrincipal;
 
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
     private static final String TAG = "BAJARINFO:";
 
-    String descripcion,idEjercicio;
+    String descripcion, idEjercicio;
 
     String id;
 
@@ -55,15 +56,12 @@ public class MenuRutinasPago extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view=inflater.inflate(R.layout.usuario_19_plan_entrenamiento, container, false);
-
-
+        View view = inflater.inflate(R.layout.usuario_19_plan_entrenamiento, container, false);
 
 
         dbProvider = new DBProvider();
@@ -73,34 +71,30 @@ public class MenuRutinasPago extends Fragment {
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
-        imgHome=view.findViewById(R.id.imgHome);
-        imgPerfil=view.findViewById(R.id.imgPerfil);
-        imgChat=view.findViewById(R.id.imgChat);
+        imgHome = view.findViewById(R.id.imgHome);
+        imgPerfil = view.findViewById(R.id.imgPerfil);
+        imgChat = view.findViewById(R.id.imgChat);
 
-        imgVideo=view.findViewById(R.id.imgVideo);
-        imgPrincipal=view.findViewById(R.id.imgPrincipal);
-
-
-
-        txtTiempo=view.findViewById(R.id.txtTiempo);
-        txtIntensidad=view.findViewById(R.id.txtIntensidad);
-        txtEjericios=view.findViewById(R.id.txtEjericicios);
+        imgVideo = view.findViewById(R.id.imgVideo);
+        imgPrincipal = view.findViewById(R.id.imgPrincipal);
 
 
+        txtTiempo = view.findViewById(R.id.txtTiempo);
+        txtIntensidad = view.findViewById(R.id.txtIntensidad);
+        txtEjericios = view.findViewById(R.id.txtEjericicios);
 
 
         imgVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getContext(), RutinaUsuario.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("descripcion",descripcion);
-                bundle.putString("id",idEjercicio);
-                intent.putExtras(bundle);
-                startActivity(intent);
+
+            mandarPantalla();
+
 
             }
+
+
         });
 
 
@@ -109,6 +103,16 @@ public class MenuRutinasPago extends Fragment {
 
     }
 
+    public void mandarPantalla() {
+
+        Intent intent = new Intent(getContext(), RutinaUsuario.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("descripcion", descripcion);
+        bundle.putString("id", idEjercicio);
+        intent.putExtras(bundle);
+        startActivity(intent);
+
+    }
 
     public void bajarPlanEjercicios(){
 
@@ -130,141 +134,97 @@ public class MenuRutinasPago extends Fragment {
                         int fechaAc = calendar.get(Calendar.DAY_OF_WEEK);
 
                         if (planEntrenamiento.getId_plan_ejercicio()!=null) {
-                            if (fechaAc == 1) {
-                                if (dia.equals("1")) {
-                                    if (planEntrenamiento.getId_usuario().equals(id)) {
-                                        idEjercicio = planEntrenamiento.getId_plan_ejercicio();
-                                        descripcion = planEntrenamiento.getDescripcion_ejercicios();
-                                        txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
-                                        txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
-                                        txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
-                                        imgVideo.setVisibility(View.VISIBLE);
-                                    }
-                                }
-                                else{
-                                    imgVideo.setVisibility(View.GONE);
 
-                                }
+                            if (planEntrenamiento.getId_usuario().equals(id)){
+                                if (fechaAc == 1&&dia.equals("1")) {
+                                            idEjercicio = planEntrenamiento.getId_plan_ejercicio();
+                                            descripcion = planEntrenamiento.getDescripcion_ejercicios();
+                                            txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
+                                            txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
+                                            txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
+                                            imgVideo.setVisibility(View.VISIBLE);
 
-                            }
 
-                            else if (fechaAc == 2) {
-                                if (dia.equals("2")) {
-                                    if (planEntrenamiento.getId_usuario().equals(id)) {
-                                        idEjercicio = planEntrenamiento.getId_plan_ejercicio();
-                                        descripcion = planEntrenamiento.getDescripcion_ejercicios();
-                                        txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
-                                        txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
-                                        txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
-                                        imgVideo.setVisibility(View.VISIBLE);
-
-                                    }
-                                }
-                                else{
-                                    imgVideo.setVisibility(View.GONE);
 
                                 }
 
 
-                            }
+                                else if (fechaAc == 2&&dia.equals("2")) {
 
-                            else if (fechaAc == 3) {
-                                if (dia.equals("3")) {
-                                    if (planEntrenamiento.getId_usuario().equals(id)) {
-                                        idEjercicio = planEntrenamiento.getId_plan_ejercicio();
-                                        descripcion = planEntrenamiento.getDescripcion_ejercicios();
-                                        txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
-                                        txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
-                                        txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
-                                        imgVideo.setVisibility(View.VISIBLE);
+                                            idEjercicio = planEntrenamiento.getId_plan_ejercicio();
+                                            descripcion = planEntrenamiento.getDescripcion_ejercicios();
+                                            txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
+                                            txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
+                                            txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
+                                            imgVideo.setVisibility(View.VISIBLE);
 
-                                    }
-                                }
-
-                                else{
-                                    imgVideo.setVisibility(View.GONE);
 
 
                                 }
 
-                            }
-                            else if (fechaAc == 4) {
-                                if (dia.equals("4")) {
-                                    if (planEntrenamiento.getId_usuario().equals(id)) {
-                                        idEjercicio = planEntrenamiento.getId_plan_ejercicio();
-                                        descripcion = planEntrenamiento.getDescripcion_ejercicios();
-                                        txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
-                                        txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
-                                        txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
-                                        imgVideo.setVisibility(View.VISIBLE);
-
-                                    }
-                                }
-                                else{
-                                    imgVideo.setVisibility(View.GONE);
+                                else if (fechaAc == 3&&dia.equals("3")) {
+                                            idEjercicio = planEntrenamiento.getId_plan_ejercicio();
+                                            descripcion = planEntrenamiento.getDescripcion_ejercicios();
+                                            txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
+                                            txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
+                                            txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
+                                            imgVideo.setVisibility(View.VISIBLE);
 
 
                                 }
-                            }
-
-                            else if (fechaAc == 5) {
-                                if (dia.equals("5")) {
-                                    if (planEntrenamiento.getId_usuario().equals(id)) {
-                                        idEjercicio = planEntrenamiento.getId_plan_ejercicio();
-                                        descripcion = planEntrenamiento.getDescripcion_ejercicios();
-                                        txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
-                                        txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
-                                        txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
-                                        imgVideo.setVisibility(View.VISIBLE);
-
-                                    }
+                                else if (fechaAc == 4&&dia.equals("4")) {
+                                            idEjercicio = planEntrenamiento.getId_plan_ejercicio();
+                                            descripcion = planEntrenamiento.getDescripcion_ejercicios();
+                                            txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
+                                            txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
+                                            txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
+                                            imgVideo.setVisibility(View.VISIBLE);
 
                                 }
-                                else{
-                                    imgVideo.setVisibility(View.GONE);
+
+                                else if (fechaAc == 5&&dia.equals("5")) {
+
+                                            idEjercicio = planEntrenamiento.getId_plan_ejercicio();
+                                            descripcion = planEntrenamiento.getDescripcion_ejercicios();
+                                            txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
+                                            txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
+                                            txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
+                                            imgVideo.setVisibility(View.VISIBLE);
+
+                                }
+
+
+                                else if (fechaAc == 6&&dia.equals("6")) {
+                                            idEjercicio = planEntrenamiento.getId_plan_ejercicio();
+                                            descripcion = planEntrenamiento.getDescripcion_ejercicios();
+                                            txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
+                                            txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
+                                            txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
+                                            imgVideo.setVisibility(View.VISIBLE);
+
+                                }
+
+
+                                else if (fechaAc == 7&&dia.equals("7")) {
+
+                                            idEjercicio = planEntrenamiento.getId_plan_ejercicio();
+                                            descripcion = planEntrenamiento.getDescripcion_ejercicios();
+                                            txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
+                                            txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
+                                            txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
+                                            imgVideo.setVisibility(View.VISIBLE);
+
+
+
 
 
                                 }
-                            }
 
-
-                            else if (fechaAc == 6) {
-                                if (dia.equals("6")) {
-                                    if (planEntrenamiento.getId_usuario().equals(id)) {
-                                        idEjercicio = planEntrenamiento.getId_plan_ejercicio();
-                                        descripcion = planEntrenamiento.getDescripcion_ejercicios();
-                                        txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
-                                        txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
-                                        txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
-                                        imgVideo.setVisibility(View.VISIBLE);
-                                    }
-                                }
-                                else{
-                                    imgVideo.setVisibility(View.GONE);
-
-                                }
-                            }
-
-
-                            else if (fechaAc == 7) {
-                                if (dia.equals("7")) {
-                                    if (planEntrenamiento.getId_usuario().equals(id)) {
-                                        idEjercicio = planEntrenamiento.getId_plan_ejercicio();
-                                        descripcion = planEntrenamiento.getDescripcion_ejercicios();
-                                        txtTiempo.setText(planEntrenamiento.getMin_ejercicio() + " min");
-                                        txtEjericios.setText(planEntrenamiento.getNum_ejercicios() + " ejercicios");
-                                        txtIntensidad.setText(planEntrenamiento.getNivel_ejercicio() + " Intensidad");
-                                        imgVideo.setVisibility(View.VISIBLE);
-
-                                    }
-                                }
                                 else{
                                     imgVideo.setVisibility(View.GONE);
                                 }
 
                             }
-
-
 
                         }
 
@@ -282,6 +242,8 @@ public class MenuRutinasPago extends Fragment {
         });
 
     }
+
+
 
 
 }

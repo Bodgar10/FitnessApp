@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/include"
         android:layout_width="match_parent"
@@ -16,9 +17,20 @@
         app:titleTextAppearance="@style/Toolbar.TitleText"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
+        <ImageButton
+            android:id="@+id/btnAgregarPlan"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
+            android:gravity="end"
+            android:padding="5dp"
+            android:background="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_agregrar_plan" />
+
 
     </androidx.appcompat.widget.Toolbar>
-
 
 
     <LinearLayout

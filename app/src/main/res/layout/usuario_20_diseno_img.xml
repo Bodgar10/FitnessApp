@@ -11,20 +11,24 @@
 
     <TextView
         android:id="@+id/txtNombre"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="nombre"
-        android:textAllCaps="false"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+        android:text="nfff"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
 
 
     <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -33,43 +37,65 @@
             android:layout_width="100dp"
             android:layout_height="110dp"
             android:layout_marginStart="15dp"
-            android:layout_marginEnd="1dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="1dp"
             android:layout_weight="1"
-            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_imgnull"
+            android:layout_marginEnd="5dp"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/ic_imgnull" />
+            android:scaleType="fitXY"
+            android:gravity="center" />
 
         <ImageView
             android:id="@+id/imgEjercicio2"
             android:layout_width="100dp"
             android:layout_height="110dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="1dp"
+            android:layout_marginStart="5dp"
+            app:srcCompat="@drawable/ic_imgnull"
             android:layout_weight="1"
-            android:scaleType="fitXY"
+            android:layout_marginEnd="5dp"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/ic_imgnull" />
+            android:scaleType="fitXY"
+            android:gravity="center" />
 
         <ImageView
             android:id="@+id/imgEjercicio3"
             android:layout_width="100dp"
             android:layout_height="110dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="15dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="1dp"
+            android:layout_marginStart="5dp"
+            app:srcCompat="@drawable/ic_imgnull"
             android:layout_weight="1"
-            android:scaleType="fitXY"
+            android:layout_marginEnd="15dp"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/ic_imgnull" />
-
+            android:scaleType="fitXY"
+            android:gravity="center" />
 
     </LinearLayout>
 
+
+    <LinearLayout
+        android:id="@+id/btnAceptar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/boton_naranja_completo"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="Aceptar"
+            android:textColor="@color/blanco"
+            android:textSize="13sp"
+            android:textAllCaps="true" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

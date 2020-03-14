@@ -1,6 +1,7 @@
 package com.appfitnessapp.app.fitnessapp.Usuario;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -10,8 +11,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,9 +51,9 @@ import java.util.Objects;
 
 public class RutinaUsuario extends AppCompatActivity {
 
-    ImageView imgRutina,imgVideo,img1,img2,img3;
-    TextView txtDescripcion,txtRutina,txtNombreEjercicio;
-    RecyclerView recyclerView,recyclerViewImg;
+    ImageView imgRutina,imgVideo;
+    TextView txtDescripcion;
+    RecyclerView recyclerView;
     AdapterRutinas adapter;
     ArrayList<Ejercicios>ejercicios;
     AdapterImagenes adapterImg;
@@ -61,7 +64,7 @@ public class RutinaUsuario extends AppCompatActivity {
     Switch switchEjercicio;
 
 
-    String descripcion,idEjercicio,videoUrl,id_usuario;
+    String descripcion,idEjercicio,videoUrl,id_usuario,nombreEjercicio,idEje;
 
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
@@ -100,21 +103,14 @@ public class RutinaUsuario extends AppCompatActivity {
 
         imgRutina=findViewById(R.id.imgRutina);
 
-        img1=findViewById(R.id.img1);
-        img2=findViewById(R.id.img2);
-        img3=findViewById(R.id.img3);
-
-
         switchEjercicio=findViewById(R.id.switchEjercicio);
 
-        txtNombreEjercicio=findViewById(R.id.txtNombreEjercicio);
 
         imgVideo=findViewById(R.id.imgVideo);
 
         txtDescripcion=findViewById(R.id.txtDescripcion);
 
         recyclerView=findViewById(R.id.recyclerview);
-        recyclerViewImg=findViewById(R.id.recycler_viewImg);
 
         txtDescripcion.setText(descripcion);
 
@@ -133,7 +129,6 @@ public class RutinaUsuario extends AppCompatActivity {
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewImg.setLayoutManager(new LinearLayoutManager(this));
 
         ejercicios=new ArrayList<>();
         ejerciciosImg = new ArrayList<>();
@@ -146,12 +141,15 @@ public class RutinaUsuario extends AppCompatActivity {
         adapterImg=new AdapterImagenes(ejerciciosImg);
 
         recyclerView.setAdapter(adapter);
-        recyclerViewImg.setAdapter(adapterImg);
 
 
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                nombreEjercicio= ejercicios.get(recyclerView.getChildAdapterPosition(v)).getNombre_ejercicio();
+                idEje=ejercicios.get(recyclerView.getChildAdapterPosition(v)).getId_ejercicio();
+                showDialog();
 
             }
         });
@@ -201,15 +199,19 @@ public class RutinaUsuario extends AppCompatActivity {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Log.e(TAG, "Ejercicio2: " + snapshot);
 
-                        Ejercicios ejercicio = snapshot.getValue(Ejercicios.class);
+                        final Ejercicios ejercicio = snapshot.getValue(Ejercicios.class);
 
                         if (ejercicio.getId_ejercicio()!=null){
                             //txtNombreEjercicio.setText(ejercicio.getNombre_ejercicio());
                             videoUrl=ejercicio.getVideo_ejercicio();
                             ejercicios.add(ejercicio);
                             adapter.notifyDataSetChanged();
-                            bajarImagenes(ejercicio.getId_ejercicio(),ejercicio.getNombre_ejercicio());
+                            // bajarImagenes(ejercicio.getId_ejercicio(),ejercicio.getNombre_ejercicio());
                             positionView = Objects.requireNonNull(recyclerView.getAdapter()).getItemCount();
+
+
+
+
 
                         }
                     }
@@ -225,9 +227,43 @@ public class RutinaUsuario extends AppCompatActivity {
             }
         });
 
+
+
+
     }
 
-    public void bajarImagenes(String id_ejercicio, final String titulo){
+
+    public void showDialog() {
+
+        final Dialog dialog = new Dialog(RutinaUsuario.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.usuario_20_diseno_img);
+        LinearLayout cancleButton = dialog.findViewById(R.id.btnAceptar);
+        final TextView nombre=dialog.findViewById(R.id.txtNombre);
+        final ImageView img1=dialog.findViewById(R.id.imgEjercicio);
+        final ImageView img2=dialog.findViewById(R.id.imgEjercicio2);
+        final ImageView img3=dialog.findViewById(R.id.imgEjercicio3);
+
+        nombre.setText(nombreEjercicio);
+
+        bajarImagenes(idEje,img1,img2,img3);
+
+
+        cancleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+
+
+
+    public void bajarImagenes(String id_ejercicio, final ImageView img1, final ImageView img2, final ImageView img3){
 
         dbProvider = new DBProvider();
         dbProvider.tablaPlanEntrenamiento().child(idEjercicio).child(Contants.EJERCICIOS).child(id_ejercicio).child(Contants.IMAGENES_EJERCICIO).addValueEventListener(new ValueEventListener() {
@@ -237,12 +273,12 @@ public class RutinaUsuario extends AppCompatActivity {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Log.e(TAG, "Feed: " + dataSnapshot);
                         ImagenesEjercicios ejercicio = dataSnapshot.getValue(ImagenesEjercicios.class);
-                        ejercicio.setNombre(titulo);
-                        //Picasso.get().load(ejercicio.getImagen_1()).fit().centerCrop().into(img1);
-                        //Picasso.get().load(ejercicio.getImagen_2()).fit().centerCrop().into(img2);
-                        //Picasso.get().load(ejercicio.getImagen_3()).fit().centerCrop().into(img3);
-                        ejerciciosImg.add(ejercicio);
-                        adapterImg.notifyDataSetChanged();
+                        //ejercicio.setNombre(titulo);
+                        Picasso.get().load(ejercicio.getImagen_1()).fit().centerCrop().into(img1);
+                        Picasso.get().load(ejercicio.getImagen_2()).fit().centerCrop().into(img2);
+                        Picasso.get().load(ejercicio.getImagen_3()).fit().centerCrop().into(img3);
+                        //ejerciciosImg.add(ejercicio);
+                        //adapterImg.notifyDataSetChanged();
 
                     }
                 }

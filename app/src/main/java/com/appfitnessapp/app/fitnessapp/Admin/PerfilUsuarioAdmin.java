@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -57,10 +58,12 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
     String id,nombre,peso,estatura,correo,imagen;
 
 
+
     private ProgressDialog progressDialog;
     private static final String TAG = "BAJARINFO:";
     static DBProvider dbProvider;
     BajarInfo bajarInfo;
+
 
 
     BarChart chart,chartHorizontal;
@@ -134,6 +137,7 @@ public class PerfilUsuarioAdmin extends AppCompatActivity {
         txtEmail=findViewById(R.id.txtCorreo);
         btnMensaje=findViewById(R.id.btnMensaje);
         btnPlan=findViewById(R.id.btnPlan);
+
 
 
         btnPlan.setOnClickListener(new View.OnClickListener() {
