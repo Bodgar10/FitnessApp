@@ -6,7 +6,7 @@
     <item android:id="@+id/editar"
         android:title="Editar Perfil"
         android:icon="@drawable/ic_edit"
-        app:showAsAction="withText"
+        app:showAsAction="always"
         />
 
 

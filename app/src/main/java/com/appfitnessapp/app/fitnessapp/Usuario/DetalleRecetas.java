@@ -189,7 +189,6 @@ public class DetalleRecetas extends AppCompatActivity {
                 
                 else {
 
-                    Toast.makeText(DetalleRecetas.this, "Mal", Toast.LENGTH_SHORT).show();
                 }
             }
         });

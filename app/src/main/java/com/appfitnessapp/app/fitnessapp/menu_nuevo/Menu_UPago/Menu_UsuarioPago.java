@@ -55,8 +55,7 @@ public class Menu_UsuarioPago extends AppCompatActivity
 
     private static FirebaseAuth mAuth;
 
-    CircularImageView imgUsuarioMenu;
-    TextView txtNombreUsuario;
+
 
 
     BajarInfo bajarInfo;
@@ -89,8 +88,6 @@ public class Menu_UsuarioPago extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
 
 
-        imgUsuarioMenu=findViewById(R.id.imgUsuarioMenu);
-        txtNombreUsuario=findViewById(R.id.txtNombreMenu);
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout_pago);

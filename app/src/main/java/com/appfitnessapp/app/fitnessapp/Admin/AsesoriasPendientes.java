@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -47,7 +50,6 @@ public class AsesoriasPendientes extends AppCompatActivity {
     ArrayList<Usuarios> asesorias;
     RecyclerView recyclerView;
     TextView txtActivos;
-    CircularImageView imgPostPersona;
 
     LinearLayout btnFormulario,btnChat,btnFeed;
 
@@ -87,7 +89,6 @@ public class AsesoriasPendientes extends AppCompatActivity {
         recyclerView=findViewById(R.id.recyclerview);
         txtActivos=findViewById(R.id.txtActivos);
 
-        imgPostPersona=findViewById(R.id.imgPostPersona);
 
 
 
@@ -124,17 +125,7 @@ public class AsesoriasPendientes extends AppCompatActivity {
             }
         });
 
-        imgPostPersona.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent intent = new Intent(AsesoriasPendientes.this, AdminPerfil.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
-        });
 
 
         btnFormulario.setOnClickListener(new View.OnClickListener() {
@@ -169,6 +160,42 @@ public class AsesoriasPendientes extends AppCompatActivity {
 
     }
 
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu__usuario, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Abrir();
+                return true;
+
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void Abrir() {
+
+        Intent intent = new Intent(AsesoriasPendientes.this, AdminPerfil.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+
+    }
 
     public void bajarInscritos(){
         dbProvider = new DBProvider();
@@ -223,29 +250,6 @@ public class AsesoriasPendientes extends AppCompatActivity {
                                 }
                             }
 
-                            else if (usuarios.getTipo_usuario().equals(Contants.ADMIN)) {
-
-                                if (usuarios.getId_usuario().equals(id)) {
-
-                                    if (usuarios.getFoto_usuario().equals("nil")) {
-                                        try {
-                                            URL urlfeed = new URL(usuarios.getFoto_usuario());
-                                            Picasso.get().load(String.valueOf(urlfeed))
-                                                    .error(R.mipmap.ic_launcher)
-                                                    .fit()
-                                                    .noFade()
-                                                    .into(imgPostPersona);
-                                        } catch (MalformedURLException e) {
-                                            e.printStackTrace();
-                                        }
-                                    } else {
-                                        loadImageFromUrl(usuarios.getFoto_usuario());
-                                        progressDialog.dismiss();
-                                    }
-
-                                }
-                            }
-
                         }
                     }
                 }else{
@@ -260,10 +264,6 @@ public class AsesoriasPendientes extends AppCompatActivity {
         });
     }
 
-    private void loadImageFromUrl(String url) {
-
-        Picasso.get().load(url).into(imgPostPersona);
-    }
 
 
     @Override

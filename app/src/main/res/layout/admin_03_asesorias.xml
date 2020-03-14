@@ -21,16 +21,6 @@
         app:titleTextAppearance="@style/Toolbar.TitleText"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/imgPostPersona"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="4dp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_imgnull"
-            app:civ_border_color="@color/blanco"
-            app:civ_border_width="1dp" />
 
 
     </androidx.appcompat.widget.Toolbar>

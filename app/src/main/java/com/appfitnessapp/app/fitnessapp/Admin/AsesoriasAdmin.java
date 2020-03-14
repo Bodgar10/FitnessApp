@@ -6,6 +6,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -18,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appfitnessapp.app.fitnessapp.Adapters.AdapterAsesorias;
+import com.appfitnessapp.app.fitnessapp.Arrays.Asesorias;
 import com.appfitnessapp.app.fitnessapp.Arrays.Inscritos;
 import com.appfitnessapp.app.fitnessapp.Arrays.Usuarios;
 import com.appfitnessapp.app.fitnessapp.BaseDatos.BajarInfo;
@@ -54,7 +58,6 @@ public class AsesoriasAdmin extends AppCompatActivity {
     ArrayList<Usuarios> asesorias,asesorias2;
     RecyclerView recyclerReciente,recyclerFinalizar;
     TextView txtPendientes;
-    CircularImageView imgPostPersona;
     LinearLayout btnFormulario,btnChat,btnFeed;
 
     private ProgressDialog progressDialog;
@@ -113,7 +116,6 @@ public class AsesoriasAdmin extends AppCompatActivity {
         recyclerReciente=findViewById(R.id.recyclerRecientes);
         txtPendientes=findViewById(R.id.txtPendientes);
 
-        imgPostPersona=findViewById(R.id.imgPostPersona);
 
 
 
@@ -173,19 +175,6 @@ public class AsesoriasAdmin extends AppCompatActivity {
             }
         });
 
-        imgPostPersona.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(AsesoriasAdmin.this, AdminPerfil.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-                overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
-
-            }
-        });
 
 
         btnFormulario.setOnClickListener(new View.OnClickListener() {
@@ -223,6 +212,43 @@ public class AsesoriasAdmin extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu__usuario, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Abrir();
+                return true;
+
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void Abrir() {
+
+        Intent intent = new Intent(AsesoriasAdmin.this, AdminPerfil.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.move_in, R.anim.move_leeft_in);
+
+
+    }
 
 
     public void bajarInscritos(){
@@ -321,28 +347,7 @@ public class AsesoriasAdmin extends AppCompatActivity {
                                 }
 
                             }
-                            else if (usuarios.getTipo_usuario().equals(Contants.ADMIN)) {
 
-                                if (usuarios.getId_usuario().equals(id)) {
-
-                                    if (usuarios.getFoto_usuario().equals("nil")) {
-                                        try {
-                                            URL urlfeed = new URL(usuarios.getFoto_usuario());
-                                            Picasso.get().load(String.valueOf(urlfeed))
-                                                    .error(R.mipmap.ic_launcher)
-                                                    .fit()
-                                                    .noFade()
-                                                    .into(imgPostPersona);
-                                        } catch (MalformedURLException e) {
-                                            e.printStackTrace();
-                                        }
-                                    } else {
-                                        loadImageFromUrl(usuarios.getFoto_usuario());
-                                        progressDialog.dismiss();
-                                    }
-
-                                }
-                            }
 
                         }
 
@@ -395,10 +400,6 @@ public class AsesoriasAdmin extends AppCompatActivity {
         });
     }
 
-    private void loadImageFromUrl(String url) {
-
-        Picasso.get().load(url).into(imgPostPersona);
-    }
 
 
 }
